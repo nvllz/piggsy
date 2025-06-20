@@ -24,9 +24,13 @@
         android:theme="@style/Theme.Centsation"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activities.HistoryActivity"
+            android:name=".ui.activities.AboutActivity"
             android:parentActivityName=".ui.activities.MainActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.activities.HistoryActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.activities.MainActivity" />
         <activity
             android:name=".ui.activities.EditActivity"
             android:exported="false"
