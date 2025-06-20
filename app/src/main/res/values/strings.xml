@@ -9,6 +9,7 @@
     <string name="toolbar_edit">Edit saving</string>
     <string name="toolbar_archive">Archive</string>
     <string name="toolbar_settings">Settings</string>
+    <string name="toolbar_history">History</string>
 
     <string name="link_app_source_code">https://github.com/eipna/Centsation</string>
     <string name="link_app_author">https://github.com/eipna</string>
