@@ -159,6 +159,7 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.archive) startActivity(new Intent(this, ArchiveActivity.class));
         if (item.getItemId() == R.id.settings) startActivity(new Intent(this, SettingsActivity.class));
+        if (item.getItemId() == R.id.about) startActivity(new Intent(this, AboutActivity.class));
 
         if (item.getItemId() == R.id.sort_name) {
             sortCriteria = SavingSort.NAME.SORT;
