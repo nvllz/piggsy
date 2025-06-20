@@ -128,7 +128,7 @@ public class SettingsActivity extends BaseActivity {
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            setPreferencesFromResource(R.xml.preferences_main, rootKey);
+            setPreferencesFromResource(R.xml.preferences_settings, rootKey);
             setPreferences();
 
             exportSavings.setOnPreferenceClickListener(preference -> {

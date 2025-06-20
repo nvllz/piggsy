@@ -3,10 +3,12 @@ package com.eipna.centsation.ui.activities;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.preference.PreferenceFragmentCompat;
 
 import com.eipna.centsation.R;
 import com.eipna.centsation.databinding.ActivityAboutBinding;
@@ -36,6 +38,21 @@ public class AboutActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.about_container, new AboutFragment())
+                    .commit();
+        }
+    }
+
+    public static class AboutFragment extends PreferenceFragmentCompat {
+
+        @Override
+        public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+            setPreferencesFromResource(R.xml.preferences_about, rootKey);
         }
     }
 }
