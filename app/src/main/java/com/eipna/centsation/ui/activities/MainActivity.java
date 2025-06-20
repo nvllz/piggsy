@@ -350,6 +350,12 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
         if (operation.equals(SavingOperation.SHARE)) showShareIntent(selectedSaving.getNotes());
         if (operation.equals(SavingOperation.TRANSACTION)) showTransactionDialog(selectedSaving);
         if (operation.equals(SavingOperation.ARCHIVE)) archiveSaving(selectedSaving);
-        if (operation.equals(SavingOperation.HISTORY)) showHistoryDialog(selectedSaving);
+        if (operation.equals(SavingOperation.HISTORY)) showHistoryActivity(selectedSaving);
+    }
+
+    private void showHistoryActivity(Saving saving) {
+        Intent historyIntent = new Intent(this, HistoryActivity.class);
+        historyIntent.putExtra(Database.COLUMN_SAVING_ID, saving.getID());
+        startActivity(historyIntent);
     }
 }

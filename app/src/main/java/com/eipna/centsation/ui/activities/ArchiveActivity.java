@@ -159,6 +159,12 @@ public class ArchiveActivity extends BaseActivity implements SavingAdapter.Liste
         if (operation.equals(SavingOperation.UNARCHIVE)) unarchiveSaving(selectedSaving);
         if (operation.equals(SavingOperation.SHARE)) showShareIntent(selectedSaving.getNotes());
         if (operation.equals(SavingOperation.DELETE)) showDeleteDialog(selectedSaving.getID());
-        if (operation.equals(SavingOperation.HISTORY)) showHistoryDialog(selectedSaving);
+        if (operation.equals(SavingOperation.HISTORY)) showHistoryActivity(selectedSaving);
+    }
+
+    private void showHistoryActivity(Saving saving) {
+        Intent historyIntent = new Intent(this, HistoryActivity.class);
+        historyIntent.putExtra(Database.COLUMN_SAVING_ID, saving.getID());
+        startActivity(historyIntent);
     }
 }
