@@ -102,6 +102,7 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
         public void bind(Saving currentSaving, PreferenceUtil preferences) {
             String deadlineFormat = preferences.getDeadlineFormat();
             int percentValue = (int) ((currentSaving.getCurrentSaving() / currentSaving.getGoal()) * 100);
+            percentValue = Math.max(0, Math.min(100, percentValue));
 
             if (Currency.isRTLCurrency(preferences.getCurrency())) {
                 description.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);

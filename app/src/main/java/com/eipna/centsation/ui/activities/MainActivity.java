@@ -285,6 +285,7 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
 
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.dialog_title_create_transaction)
+                .setIcon(R.drawable.ic_add_circle)
                 .setView(transactionDialogView)
                 .setNegativeButton(R.string.dialog_button_cancel, null)
                 .setPositiveButton(R.string.dialog_button_submit, null);
@@ -313,15 +314,11 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
                 selectedSaving.setCurrentSaving(addedSaving);
                 savingRepository.makeTransaction(selectedSaving, amount, TransactionType.DEPOSIT);
 
-                refreshList();
-                dialog.dismiss();
-            } else if (withdrawOption.isChecked()) {
-                double deductedSaving = selectedSaving.getCurrentSaving() - Double.parseDouble(amountText);
-                double amount = Double.parseDouble(amountText);
-                if (deductedSaving < 0) {
-                    amountLayout.setError(getString(R.string.field_error_negative_saving));
-                    return;
-                }
+                    refreshList();
+                    dialog.dismiss();
+                } else if (withdrawOption.isChecked()) {
+                    double deductedSaving = selectedSaving.getCurrentSaving() - Double.parseDouble(amountText);
+                    double amount = Double.parseDouble(amountText);
 
                 selectedSaving.setCurrentSaving(deductedSaving);
                 savingRepository.makeTransaction(selectedSaving, amount, TransactionType.WITHDRAW);
