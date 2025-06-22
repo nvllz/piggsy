@@ -1,7 +1,6 @@
 package com.eipna.centsation.ui.adapters;
 
 import android.content.Context;
-import android.icu.text.NumberFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,17 +60,17 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         }
 
         public void bind(Transaction currentTransaction, PreferenceUtil preferenceUtil, Context context) {
-            String selectedCurrencySymbol = Currency.getSymbol(preferenceUtil.getCurrency());
+            String selectedCurrencySymbol = preferenceUtil.getCurrency();
 
             type.setText(currentTransaction.getType());
             date.setText(DateUtil.getStringDate(currentTransaction.getDate()));
 
             if (currentTransaction.getType().equals(TransactionType.DEPOSIT.VALUE) || currentTransaction.getType().equals(TransactionType.CREATED.VALUE)) {
                 amount.setTextColor(context.getResources().getColor(R.color.md_theme_secondary, itemView.getContext().getTheme()));
-                amount.setText(String.format("%c%s%s", '+', selectedCurrencySymbol, NumberFormat.getInstance().format(currentTransaction.getAmount())));
+                amount.setText(String.format("%c%s", '+', Currency.formatAmount(selectedCurrencySymbol, currentTransaction.getAmount())));
             } else if (currentTransaction.getType().equals(TransactionType.WITHDRAW.VALUE)) {
                 amount.setTextColor(context.getResources().getColor(R.color.md_theme_error, itemView.getContext().getTheme()));
-                amount.setText(String.format("%c%s%s", '-', selectedCurrencySymbol, NumberFormat.getInstance().format(currentTransaction.getAmount())));
+                amount.setText(String.format("%c%s", '-', Currency.formatAmount(selectedCurrencySymbol, currentTransaction.getAmount())));
             }
         }
     }

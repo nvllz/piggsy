@@ -1,7 +1,6 @@
 package com.eipna.centsation.ui.adapters;
 
 import android.content.Context;
-import android.icu.text.NumberFormat;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.StrikethroughSpan;
@@ -75,7 +74,7 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         MaterialCardView parent;
-        MaterialTextView name, saving, goal, percent, deadline, outOfText;
+        MaterialTextView name, saving, goal, percent, deadline;
         MaterialButton update, history, archive, unarchive, delete, share;
 
         LinearLayout description;
@@ -86,7 +85,6 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
             parent = itemView.findViewById(R.id.saving_parent);
             name = itemView.findViewById(R.id.saving_name);
             saving = itemView.findViewById(R.id.saving_current_saving);
-            outOfText = itemView.findViewById(R.id.saving_out_of_text);
             goal = itemView.findViewById(R.id.saving_goal);
             percent = itemView.findViewById(R.id.saving_percent);
             description = itemView.findViewById(R.id.saving_description);
@@ -102,7 +100,6 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
         }
 
         public void bind(Saving currentSaving, PreferenceUtil preferences) {
-            String currencySymbol = Currency.getSymbol(preferences.getCurrency());
             String deadlineFormat = preferences.getDeadlineFormat();
             int percentValue = (int) ((currentSaving.getCurrentSaving() / currentSaving.getGoal()) * 100);
 
@@ -139,23 +136,20 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
                 percent.setVisibility(View.GONE);
                 outOfText.setVisibility(View.GONE);
                 progress.setVisibility(View.GONE);
-                percentValue = 0;
             } else {
                 goal.setVisibility(View.VISIBLE);
                 percent.setVisibility(View.VISIBLE);
                 outOfText.setVisibility(View.VISIBLE);
                 progress.setVisibility(View.VISIBLE);
+                progress.setProgress(percentValue, true);
                 percent.setText(String.format("%s%c", percentValue, '%'));
-                goal.setText(String.format("%s%s", currencySymbol, NumberFormat.getInstance().format(currentSaving.getGoal())));
+                goal.setText(Currency.formatAmount(preferences.getCurrency(), currentSaving.getGoal()));
             }
 
-            percent.setText(String.format("%s%c", percentValue, '%'));
             if (currentSaving.getGoal() != 0) {
                 parent.setChecked(currentSaving.getCurrentSaving() >= currentSaving.getGoal());
             }
-            saving.setText(String.format("%s%s", currencySymbol, NumberFormat.getInstance().format(currentSaving.getCurrentSaving())));
-            goal.setText(String.format("%s%s", currencySymbol, NumberFormat.getInstance().format(currentSaving.getGoal())));
-            progress.setProgress(percentValue, true);
+            saving.setText(Currency.formatAmount(preferences.getCurrency(), currentSaving.getCurrentSaving()));
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.eipna.centsation.data;
 
+import java.text.NumberFormat;
+
 public enum Currency {
     AFGHANI("Afghan Afghani", "AFN", "؋"),
     LEK("Albanian Lek", "ALL", "L"),
@@ -219,5 +221,29 @@ public enum Currency {
             codes[i] = values()[i].CODE;
         }
         return codes;
+    }
+
+    public static String formatAmount(String currencyCode, double amount) {
+        String symbol = getSymbol(currencyCode);
+        String formattedAmount = NumberFormat.getInstance().format(amount);
+
+        String[] suffixCurrencies = {
+                "EUR", "PLN", "CZK", "HUF", "SEK", "NOK", "DKK", "ISK", "TRY", "RON", "BGN", "HRK",
+                "CHF", "RSD", "UAH", "BYN", "MDL", "GEL", "AMD", "AZN", "KZT", "KGS", "UZS", "TMT",
+                "ALL", "BAM", "MKD", "RUB", "LVL", "LTL", "EEK", "SKK", "SIT",
+                "BRL", "ARS", "CLP", "COP", "PEN", "UYU", "BOB", "PYG", "VES",
+                "CNY", "JPY", "KRW", "VND", "THB", "MYR", "SGD", "IDR", "PHP", "LAK", "MMK", "KHR",
+                "ZAR", "EGP", "MAD", "TND", "DZD", "NGN", "GHS", "KES", "TZS", "UGX", "RWF", "ETB",
+                "TRY", "IRR", "IQD", "JOD", "LBP", "SYP", "QAR", "AED", "OMR", "BHD", "KWD", "SAR",
+                "INR", "PKR", "BDT", "LKR", "NPR", "BTN", "AFN", "MZN", "AOA", "XAF", "XOF"
+        };
+
+        for (String suffixCurrency : suffixCurrencies) {
+            if (suffixCurrency.equals(currencyCode)) {
+                return formattedAmount + " " + symbol;
+            }
+        }
+
+        return symbol + formattedAmount;
     }
 }
