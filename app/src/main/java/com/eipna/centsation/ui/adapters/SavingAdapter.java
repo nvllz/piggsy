@@ -148,7 +148,9 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
             }
 
             percent.setText(String.format("(%s%c)", percentValue, '%'));
-            parent.setChecked(currentSaving.getCurrentSaving() >= currentSaving.getGoal());
+            if (currentSaving.getGoal() != 0) {
+                parent.setChecked(currentSaving.getCurrentSaving() >= currentSaving.getGoal());
+            }
             saving.setText(String.format("%s%s", currencySymbol, NumberFormat.getInstance().format(currentSaving.getCurrentSaving())));
             goal.setText(String.format("%s%s", currencySymbol, NumberFormat.getInstance().format(currentSaving.getGoal())));
             progress.setProgress(percentValue, true);
