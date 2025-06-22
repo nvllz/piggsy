@@ -51,6 +51,7 @@
                 tools:ignore="HardcodedText" />
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/saving_out_of_text"
                 android:text="out of"
                 android:textColor="?attr/colorOnSurface"
                 android:textAppearance="?attr/textAppearanceBodyLarge"
