@@ -285,7 +285,6 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
 
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.dialog_title_create_transaction)
-                .setIcon(R.drawable.ic_add_circle)
                 .setView(transactionDialogView)
                 .setNegativeButton(R.string.dialog_button_cancel, null)
                 .setPositiveButton(R.string.dialog_button_submit, null);
