@@ -74,7 +74,7 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         MaterialCardView parent;
-        MaterialTextView name, saving, goal, percent, deadline;
+        MaterialTextView name, saving, goal, percent, deadline, outOfText;
         MaterialButton update, history, archive, unarchive, delete, share;
 
         LinearLayout description;
@@ -85,6 +85,7 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
             parent = itemView.findViewById(R.id.saving_parent);
             name = itemView.findViewById(R.id.saving_name);
             saving = itemView.findViewById(R.id.saving_current_saving);
+            outOfText = itemView.findViewById(R.id.saving_out_of_text);
             goal = itemView.findViewById(R.id.saving_goal);
             percent = itemView.findViewById(R.id.saving_percent);
             description = itemView.findViewById(R.id.saving_description);
