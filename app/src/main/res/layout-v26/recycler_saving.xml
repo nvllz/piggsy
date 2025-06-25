@@ -3,165 +3,271 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:clickable="true"
-    android:focusable="true"
-    android:checkable="true"
-    app:cardElevation="0dp"
-    app:cardUseCompatPadding="true"
-    app:cardBackgroundColor="?attr/colorSurfaceContainer"
-    style="@style/Widget.Material3.CardView.Filled"
-    android:layout_marginEnd="8dp"
-    android:layout_marginStart="8dp"
     android:id="@+id/saving_parent"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:checkable="true"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    style="@style/Widget.Material3.CardView.Elevated"
+    app:cardBackgroundColor="?attr/colorSurfaceContainer"
+    app:cardCornerRadius="20dp"
+    app:cardUseCompatPadding="true"
+    app:strokeWidth="0dp">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:padding="16dp"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:alpha="0.7" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="6dp">
+
+        <View
+            android:id="@+id/accent_line"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/saving_deadline_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="?attr/colorTertiaryContainer"
+            app:cardCornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/accent_line">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/saving_deadline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:text="2012/12/31"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+                android:textColor="?attr/colorOnTertiaryContainer"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+        </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/saving_name"
-            android:text="Saving Name"
-            android:textAppearance="?attr/textAppearanceTitleLarge"
-            android:ellipsize="end"
-            android:textColor="?attr/colorPrimary"
-            android:maxLines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:shadowColor="?attr/colorPrimary"
+            android:shadowDx="0"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:text="Saving Title"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+            android:textColor="?attr/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/saving_deadline_container"
             tools:ignore="HardcodedText" />
 
         <LinearLayout
             android:id="@+id/saving_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center|center_vertical"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/saving_name">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/saving_current_saving"
-                android:text="1000.0"
-                android:textColor="?attr/colorOnSurface"
-                android:textAppearance="?attr/textAppearanceBodyLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:letterSpacing="0.02"
+                android:text="$1,000"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:textColor="?attr/colorPrimary"
+                android:textStyle="bold"
                 tools:ignore="HardcodedText" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/saving_out_of_text"
-                android:text="out of"
-                android:textColor="?attr/colorOnSurface"
-                android:textAppearance="?attr/textAppearanceBodyLarge"
-                android:layout_marginEnd="4dp"
-                android:layout_marginStart="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:alpha="0.7"
+                android:text=" / "
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:textColor="?attr/colorOnSurfaceVariant"
                 tools:ignore="HardcodedText" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/saving_goal"
-                android:text="1000.0"
-                android:textColor="?attr/colorOnSurface"
-                android:textAppearance="?attr/textAppearanceBodyLarge"
-                android:layout_marginEnd="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:ignore="HardcodedText" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/saving_percent"
-                android:text="(100.0%)"
-                android:textAppearance="?attr/textAppearanceBodyLarge"
+                android:letterSpacing="0.01"
+                android:alpha="0.7"
+                android:text="$1,500"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                 android:textColor="?attr/colorOnSurface"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/saving_deadline"
-            android:text="Deadline: 04/11/2025"
-            android:textColor="?attr/colorOnSurface"
-            android:textAppearance="?attr/textAppearanceBodyLarge"
-            android:layout_marginBottom="12dp"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/progress_container"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:ignore="HardcodedText" />
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/saving_description">
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/saving_progress"
+                android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:layout_weight="1"
+                android:max="100"
+                android:progress="66"
+                app:indicatorColor="?attr/colorPrimary"
+                app:trackColor="?attr/colorSurfaceVariant"
+                app:trackCornerRadius="4dp" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_gravity="center"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/saving_percent_container"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                app:cardBackgroundColor="?attr/colorPrimary"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/saving_update"
-                    style="?attr/materialIconButtonStyle"
-                    app:icon="@drawable/ic_add_circle"
-                    app:iconTint="?attr/colorSecondary"
-                    android:tooltipText="@string/tooltip_update"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/saving_percent"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="2dp"
+                    android:text="66%"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorOnPrimary"
+                    android:textSize="12sp"
+                    tools:ignore="HardcodedText" />
+            </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/saving_history"
-                    style="?attr/materialIconButtonStyle"
-                    app:icon="@drawable/ic_history"
-                    app:iconTint="?attr/colorSecondary"
-                    android:tooltipText="@string/tooltip_history"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+        </LinearLayout>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/saving_share"
-                    style="?attr/materialIconButtonStyle"
-                    app:icon="@drawable/ic_share"
-                    app:iconTint="?attr/colorSecondary"
-                    android:tooltipText="@string/tooltip_share"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:id="@+id/saving_actions"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progress_container">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/saving_archive"
-                    style="?attr/materialIconButtonStyle"
-                    app:icon="@drawable/ic_archive"
-                    app:iconTint="?attr/colorSecondary"
-                    android:tooltipText="@string/tooltip_archive"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/saving_update"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:contentDescription="Update"
+                android:text="Add"
+                app:icon="@drawable/ic_add_circle"
+                app:iconGravity="textStart"
+                tools:ignore="HardcodedText" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/saving_unarchive"
-                    style="?attr/materialIconButtonStyle"
-                    app:icon="@drawable/ic_unarchive"
-                    app:iconTint="?attr/colorSecondary"
-                    android:tooltipText="@string/tooltip_unarchive"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/saving_history"
+                style="?attr/materialIconButtonOutlinedStyle"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:contentDescription="History"
+                app:cornerRadius="32dp"
+                app:icon="@drawable/ic_history"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="20dp"
+                app:strokeColor="?attr/colorPrimary"
+                app:strokeWidth="1dp" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/saving_delete"
-                    style="?attr/materialIconButtonStyle"
-                    app:icon="@drawable/ic_delete"
-                    app:iconTint="?attr/colorTertiary"
-                    android:tooltipText="@string/tooltip_delete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/saving_share"
+                style="?attr/materialIconButtonOutlinedStyle"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:contentDescription="Share"
+                app:cornerRadius="32dp"
+                app:icon="@drawable/ic_share"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="20dp"
+                app:strokeColor="?attr/colorPrimary"
+                app:strokeWidth="1dp" />
 
-    <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/saving_progress"
-        android:layout_gravity="bottom"
-        android:max="100"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/saving_archive"
+                style="?attr/materialIconButtonOutlinedStyle"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:contentDescription="Archive"
+                app:cornerRadius="32dp"
+                app:icon="@drawable/ic_archive"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="20dp"
+                app:strokeColor="?attr/colorPrimary"
+                app:strokeWidth="1dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/saving_unarchive"
+                style="?attr/materialIconButtonOutlinedStyle"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:contentDescription="Unarchive"
+                app:cornerRadius="32dp"
+                app:icon="@drawable/ic_unarchive"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="20dp"
+                app:iconTint="?attr/colorSecondary"
+                app:strokeColor="?attr/colorSecondary"
+                app:strokeWidth="1dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/saving_delete"
+                style="?attr/materialIconButtonOutlinedStyle"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:contentDescription="Delete"
+                app:cornerRadius="32dp"
+                app:icon="@drawable/ic_delete"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="20dp"
+                app:iconTint="?attr/colorError"
+                app:strokeColor="?attr/colorError"
+                app:strokeWidth="1dp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </com.google.android.material.card.MaterialCardView>

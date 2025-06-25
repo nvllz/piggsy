@@ -1,161 +1,250 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:clickable="true"
-    android:focusable="true"
-    android:checkable="true"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
-    app:cardUseCompatPadding="true"
-    app:cardElevation="0dp"
-    app:cardBackgroundColor="?attr/colorSurfaceContainer"
-    style="@style/Widget.Material3.CardView.Filled"
     android:id="@+id/saving_parent"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:checkable="true"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="?attr/colorSurfaceContainer"
+    app:cardCornerRadius="20dp"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="4dp">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:padding="16dp"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:alpha="0.7" />
 
-        <com.google.android.material.textview.MaterialTextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="6dp">
+
+        <View
+            android:id="@+id/accent_line"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/saving_deadline_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="?attr/colorTertiaryContainer"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/accent_line">
+
+            <TextView
+                android:id="@+id/saving_deadline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp"
+                android:text="2012/12/31"
+                android:textSize="14sp"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="?attr/colorOnTertiaryContainer"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
             android:id="@+id/saving_name"
-            android:text="Saving Name"
-            android:textAppearance="?attr/textAppearanceTitleLarge"
-            android:textColor="?attr/colorPrimary"
-            android:ellipsize="end"
-            android:maxLines="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:shadowColor="?attr/colorPrimary"
+            android:shadowDx="0"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:text="Saving Title"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="?attr/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/saving_deadline_container"
             tools:ignore="HardcodedText" />
 
         <LinearLayout
             android:id="@+id/saving_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center|center_vertical"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/saving_name">
 
-            <com.google.android.material.textview.MaterialTextView
+            <TextView
                 android:id="@+id/saving_current_saving"
-                android:text="1000.0"
-                android:textColor="?attr/colorOnSurface"
-                android:textAppearance="?attr/textAppearanceBodyLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:letterSpacing="0.02"
+                android:text="$1,000"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="?attr/colorPrimary"
+                android:textStyle="bold"
                 tools:ignore="HardcodedText" />
 
-            <com.google.android.material.textview.MaterialTextView
+            <TextView
                 android:id="@+id/saving_out_of_text"
-                android:text="out of"
-                android:textColor="?attr/colorOnSurface"
-                android:textAppearance="?attr/textAppearanceBodyLarge"
-                android:layout_marginEnd="4dp"
-                android:layout_marginStart="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:alpha="0.7"
+                android:text=" / "
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="?attr/colorOnSurfaceVariant"
                 tools:ignore="HardcodedText" />
 
-            <com.google.android.material.textview.MaterialTextView
+            <TextView
                 android:id="@+id/saving_goal"
-                android:text="1000.0"
-                android:textColor="?attr/colorOnSurface"
-                android:textAppearance="?attr/textAppearanceBodyLarge"
-                android:layout_marginEnd="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:ignore="HardcodedText" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/saving_percent"
-                android:text="(100.0%)"
+                android:letterSpacing="0.01"
+                android:alpha="0.7"
+                android:text="$1,500"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="?attr/colorOnSurface"
-                android:textAppearance="?attr/textAppearanceBodyLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/saving_deadline"
-            android:text="Deadline: 04/11/2025"
-            android:textColor="?attr/colorOnSurface"
-            android:textAppearance="?attr/textAppearanceBodyLarge"
-            android:layout_marginBottom="12dp"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/progress_container"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:ignore="HardcodedText" />
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/saving_description">
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <ProgressBar
+                android:id="@+id/saving_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="8dp"
+                android:layout_weight="1"
+                android:max="100"
+                android:progress="66"
+                android:progressTint="?attr/colorPrimary"
+                android:progressBackgroundTint="?attr/colorSurfaceVariant" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_gravity="center"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/saving_percent_container"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                app:cardBackgroundColor="?attr/colorPrimary"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/saving_update"
-                    style="?attr/materialIconButtonStyle"
-                    app:icon="@drawable/ic_add_circle"
-                    app:iconTint="?attr/colorSecondary"
+                <TextView
+                    android:id="@+id/saving_percent"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="2dp"
+                    android:text="66%"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorOnPrimary"
+                    android:textSize="12sp"
+                    tools:ignore="HardcodedText" />
+            </androidx.cardview.widget.CardView>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/saving_history"
-                    style="?attr/materialIconButtonStyle"
-                    app:icon="@drawable/ic_history"
-                    app:iconTint="?attr/colorSecondary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+        </LinearLayout>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/saving_share"
-                    style="?attr/materialIconButtonStyle"
-                    app:icon="@drawable/ic_share"
-                    app:iconTint="?attr/colorSecondary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:id="@+id/saving_actions"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progress_container">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/saving_archive"
-                    style="?attr/materialIconButtonStyle"
-                    app:icon="@drawable/ic_archive"
-                    app:iconTint="?attr/colorSecondary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/saving_update"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:contentDescription="Update"
+                android:text="Add"
+                android:background="?attr/selectableItemBackground"
+                android:drawableStart="@drawable/ic_add_circle"
+                android:drawablePadding="8dp"
+                android:gravity="center"
+                tools:ignore="HardcodedText" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/saving_unarchive"
-                    style="?attr/materialIconButtonStyle"
-                    app:icon="@drawable/ic_unarchive"
-                    app:iconTint="?attr/colorSecondary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/saving_history"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:contentDescription="History"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_history"
+                android:scaleType="center" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/saving_delete"
-                    style="?attr/materialIconButtonStyle"
-                    app:icon="@drawable/ic_delete"
-                    app:iconTint="?attr/colorTertiary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
-    </LinearLayout>
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/saving_share"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:contentDescription="Share"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_share"
+                android:scaleType="center" />
 
-    <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/saving_progress"
-        android:layout_gravity="bottom"
-        android:max="100"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</com.google.android.material.card.MaterialCardView>
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/saving_archive"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:contentDescription="Archive"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_archive"
+                android:scaleType="center" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/saving_unarchive"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:contentDescription="Unarchive"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_unarchive"
+                android:scaleType="center"
+                android:tint="?attr/colorSecondary" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/saving_delete"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:contentDescription="Delete"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_delete"
+                android:scaleType="center"
+                android:tint="?attr/colorError" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
