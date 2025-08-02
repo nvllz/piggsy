@@ -54,20 +54,6 @@
         <item name="alertDialogTheme">@style/Theme.Centsation.AlertDialog</item>
     </style>
 
-    <style name="Theme.Centsation.MediumContrast" parent="ThemeOverlay.Centsation.MediumContrast">
-        <item name="materialAlertDialogTheme">@style/ThemeOverlay.Material3.MaterialAlertDialog.Centered</item>
-        <item name="popupTheme">@style/Widget.Material3.PopupMenu</item>
-        <item name="homeAsUpIndicator">@drawable/ic_arrow_back</item>
-        <item name="alertDialogTheme">@style/Theme.Centsation.AlertDialog</item>
-    </style>
-
-    <style name="Theme.Centsation.HighContrast" parent="ThemeOverlay.Centsation.HighContrast">
-        <item name="materialAlertDialogTheme">@style/ThemeOverlay.Material3.MaterialAlertDialog.Centered</item>
-        <item name="popupTheme">@style/Widget.Material3.PopupMenu</item>
-        <item name="homeAsUpIndicator">@drawable/ic_arrow_back</item>
-        <item name="alertDialogTheme">@style/Theme.Centsation.AlertDialog</item>
-    </style>
-
     <style name="Theme.Centsation.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="backgroundTint">?attr/colorSurfaceContainerHigh</item>
         <item name="android:textColor">?attr/colorOnSurface</item>

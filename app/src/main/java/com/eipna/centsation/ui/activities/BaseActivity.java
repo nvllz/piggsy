@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.eipna.centsation.R;
-import com.eipna.centsation.data.Contrast;
 import com.eipna.centsation.data.Theme;
 import com.eipna.centsation.util.NotificationUtil;
 import com.eipna.centsation.util.PreferenceUtil;
@@ -40,10 +39,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (theme.equals(Theme.LIGHT.VALUE)) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         if (theme.equals(Theme.DARK.VALUE)) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
-        String contrast = preferences.getContrast();
-        if (contrast.equals(Contrast.LOW.VALUE)) setTheme(R.style.Theme_Centsation);
-        if (contrast.equals(Contrast.MEDIUM.VALUE)) setTheme(R.style.Theme_Centsation_MediumContrast);
-        if (contrast.equals(Contrast.HIGH.VALUE)) setTheme(R.style.Theme_Centsation_HighContrast);
+        setTheme(R.style.Theme_Centsation);
 
         if (preferences.isDynamicColors()) DynamicColors.applyToActivityIfAvailable(this);
     }

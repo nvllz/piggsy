@@ -21,7 +21,6 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
 
 import com.eipna.centsation.R;
-import com.eipna.centsation.data.Contrast;
 import com.eipna.centsation.data.Currency;
 import com.eipna.centsation.data.Database;
 import com.eipna.centsation.data.DateFormat;
@@ -86,7 +85,6 @@ public class SettingsActivity extends BaseActivity {
         private TransactionRepository transactionRepository;
 
         private ListPreference listDeadlineFormat;
-        private ListPreference listContrast;
         private ListPreference listTheme;
         private ListPreference listCurrency;
 
@@ -138,22 +136,6 @@ public class SettingsActivity extends BaseActivity {
             listDeadlineFormat.setOnPreferenceChangeListener((preference, newValue) -> {
                 preferences.setDeadlineFormat((String) newValue);
                 listDeadlineFormat.setSummary(DateFormat.getNameByPattern((String) newValue));
-                return true;
-            });
-
-            listContrast.setEntries(Contrast.toNameArray());
-            listContrast.setEntryValues(Contrast.toValueArray());
-            listContrast.setValue(preferences.getContrast());
-            listContrast.setSummary(Contrast.getName(preferences.getContrast()));
-            listContrast.setOnPreferenceChangeListener((preference, newValue) -> {
-                String selectedContrast = (String) newValue;
-                if (selectedContrast.equals(Contrast.LOW.VALUE)) requireActivity().setTheme(R.style.Theme_Centsation);
-                if (selectedContrast.equals(Contrast.MEDIUM.VALUE)) requireActivity().setTheme(R.style.Theme_Centsation_MediumContrast);
-                if (selectedContrast.equals(Contrast.HIGH.VALUE)) requireActivity().setTheme(R.style.Theme_Centsation_HighContrast);
-                requireActivity().recreate();
-
-                preferences.setContrast(selectedContrast);
-                listContrast.setSummary(Contrast.getName(selectedContrast));
                 return true;
             });
 
@@ -232,7 +214,6 @@ public class SettingsActivity extends BaseActivity {
             listDeadlineFormat = findPreference("deadline_format");
             listCurrency = findPreference("currency");
             listTheme = findPreference("theme");
-            listContrast = findPreference("contrast");
 
             switchDynamicColors = findPreference("dynamic_colors");
             switchScreenPrivacy = findPreference("screen_privacy");

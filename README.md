@@ -12,7 +12,6 @@ Centsation is the easy-to-use savings tracker that helps you reach your financia
 
 * **Free and Open Source:** Enjoy complete transparency and community-driven development.
 * **Modern Design:** Experience a beautiful and intuitive interface with Material 3 and dynamic color support.
-* **Enhanced Accessibility:** Customize the UI contrast (low, medium, or high) for optimal readability.
 * **Dark Mode:** Save battery and reduce eye strain with a sleek dark theme.
 * **Multi-Currency Support:** Track your savings in a currency of your choice.
 * **Archived Savings:** Keep your active savings organized by archiving completed or paused goals.

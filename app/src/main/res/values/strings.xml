@@ -81,7 +81,6 @@
     <!-- App Preference Category -->
     <string name="preference_category_appearance">Appearance</string>
     <string name="preference_list_theme">Theme</string>
-    <string name="preference_list_contrast">Contrast</string>
     <string name="preference_switch_dynamic_colors_title">Dynamic Colors</string>
     <string name="preference_switch_dynamic_colors_summary">Apply colors from your wallpaper to the application theme</string>
 

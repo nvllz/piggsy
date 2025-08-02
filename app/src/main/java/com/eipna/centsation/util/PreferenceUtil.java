@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 
 import androidx.preference.PreferenceManager;
 
-import com.eipna.centsation.data.Contrast;
 import com.eipna.centsation.data.Currency;
 import com.eipna.centsation.data.DateFormat;
 import com.eipna.centsation.data.Theme;
@@ -57,14 +56,6 @@ public class PreferenceUtil {
 
     public boolean getSortOrder() {
         return sharedPreferences.getBoolean("sort_order", true);
-    }
-
-    public String getContrast() {
-        return sharedPreferences.getString("contrast", Contrast.LOW.VALUE);
-    }
-
-    public void setContrast(String value) {
-        sharedPreferences.edit().putString("contrast", value).apply();
     }
 
     public void setDeadlineFormat(String value) {
