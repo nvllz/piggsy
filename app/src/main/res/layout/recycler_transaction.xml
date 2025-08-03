@@ -4,13 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="?attr/colorSurface"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="16dp">
 
     <LinearLayout
         android:orientation="horizontal"
-        android:padding="16dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:orientation="vertical"
@@ -21,34 +25,50 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/transaction_type"
                 android:text="Transaction Type"
-                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textAppearance="?attr/textAppearanceBodyLarge"
+                android:textSize="18sp"
+                android:textColor="?attr/colorOnSurface"
+                app:fontFamily="@font/open_sans_family"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
                 tools:ignore="HardcodedText" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/transaction_date"
-                android:textAppearance="?attr/textAppearanceBodySmall"
-                android:layout_marginTop="4dp"
                 android:text="02/22/25 4:08 PM"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textSize="12sp"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                app:fontFamily="@font/open_sans_family"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:ignore="HardcodedText" />
+
         </LinearLayout>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/transaction_amount"
-            android:text="+1000.0"
-            android:textAlignment="center"
-            android:layout_gravity="center"
-            android:textAppearance="?attr/textAppearanceBodySmall"
+            android:text="+1000.00"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textSize="20sp"
             android:textColor="?attr/colorPrimary"
+            app:fontFamily="@font/open_sans_family"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:gravity="end"
+            android:fontFamily="sans-serif-medium"
             tools:ignore="HardcodedText" />
+
     </LinearLayout>
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="1dp"
+        app:dividerInsetStart="0dp"
+        app:dividerInsetEnd="0dp"
+        android:alpha="0.5"
+        android:layout_marginTop="18dp" />
+
 </LinearLayout>
