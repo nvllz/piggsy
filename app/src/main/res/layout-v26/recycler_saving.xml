@@ -153,8 +153,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 app:cardBackgroundColor="?attr/colorPrimary"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="4dp">
+                app:cardCornerRadius="20dp">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/saving_percent"
