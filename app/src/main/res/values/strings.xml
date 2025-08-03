@@ -1,31 +1,33 @@
 <resources>
-    <string name="app_name">Centsation</string>
+    <string name="app_name">Piggsy</string>
     <string name="app_easter_egg">You\'ve done this before, haven\'t you?</string>
     <string name="app_license">GNU General Public License v3.0</string>
-    <string name="app_author">eipna</string>
+    <string name="app_author">nvllz</string>
+    <string name="app_og_author">eipna</string>
 
-    <string name="toolbar_main">Savings</string>
-    <string name="toolbar_create">New saving</string>
-    <string name="toolbar_edit">Edit saving</string>
+    <string name="toolbar_main">Piggsy</string>
+    <string name="toolbar_create">New piggy</string>
+    <string name="toolbar_edit">Edit piggy</string>
     <string name="toolbar_archive">Archive</string>
     <string name="toolbar_settings">Settings</string>
     <string name="toolbar_history">History</string>
     <string name="toolbar_about">About</string>
 
-    <string name="link_app_source_code">https://github.com/eipna/Centsation</string>
-    <string name="link_app_author">https://github.com/eipna</string>
+    <string name="link_app_source_code">https://github.com/nvllz/Stepsy</string>
+    <string name="link_app_author">https://github.com/nvllz</string>
+    <string name="link_app_og_author">https://github.com/eipna</string>
 
-    <string name="empty_indicator_main">No savings found</string>
-    <string name="empty_indicator_archive">No archived savings</string>
+    <string name="empty_indicator_main">No piggy banks here yet!</string>
+    <string name="empty_indicator_archive">No archived piggy banks</string>
 
     <string name="radio_button_deposit">Deposit</string>
     <string name="radio_button_withdraw">Withdraw</string>
 
     <string name="field_error_required">This field is required</string>
     <string name="field_error_empty_saving">Please enter a value</string>
-    <string name="field_error_negative_saving">Saving cannot be negative</string>
+    <string name="field_error_negative_saving">Saving value can\'t be negative</string>
 
-    <string name="field_saving_name">Name</string>
+    <string name="field_saving_name">Title</string>
     <string name="field_saving_current_saving">Current Saving</string>
     <string name="field_transaction_amount">Amount</string>
     <string name="field_saving_goal">Goal</string>
@@ -33,14 +35,14 @@
     <string name="field_saving_deadline">Deadline</string>
 
     <string name="dialog_title_request_alarm_permission">Required permission</string>
-    <string name="dialog_title_create_saving">Create saving</string>
-    <string name="dialog_title_edit_saving">Edit saving</string>
-    <string name="dialog_title_delete_saving">Delete saving?</string>
+    <string name="dialog_title_create_saving">Create piggy bank</string>
+    <string name="dialog_title_edit_saving">Edit piggy bank</string>
+    <string name="dialog_title_delete_saving">Delete piggy bank?</string>
     <string name="dialog_title_create_transaction">Create transaction</string>
-    <string name="dialog_title_history_saving">History</string>
+    <string name="dialog_title_history_saving">Transaction log</string>
 
-    <string name="dialog_message_delete_saving">You are about to delete this saving, this action cannot be undone.</string>
-    <string name="dialog_message_request_alarm_permission">Deadlines requires alarms and reminders permission to work properly. Please grant this permission.</string>
+    <string name="dialog_message_delete_saving">Delete this piggy bank? You won\'t be able to get it back.</string>
+    <string name="dialog_message_request_alarm_permission">To set deadlines for your piggy banks, the app needs permission to send reminders.</string>
 
     <string name="dialog_button_grant">Grant</string>
     <string name="dialog_button_cancel">Cancel</string>
@@ -64,12 +66,12 @@
     <string name="menu_item_sort_descending">Descending</string>
 
     <string name="transaction_label_created">Created</string>
-    <string name="transaction_label_deposit">Deposit</string>
-    <string name="transaction_label_withdraw">Withdraw</string>
+    <string name="transaction_label_deposit">Deposited</string>
+    <string name="transaction_label_withdraw">Withdrawn</string>
 
     <string name="toast_import_successful">Import successful</string>
     <string name="toast_export_successful">Export successful</string>
-    <string name="toast_export_no_savings_found">No savings to export</string>
+    <string name="toast_export_no_savings_found">No piggy banks to export</string>
     <string name="toast_notification_permission_denied">Notification permission denied</string>
     <string name="toast_deny_import_notice">Deadlines may not work properly</string>
 
@@ -79,36 +81,35 @@
     <string name="tooltip_unarchive">Unarchive</string>
     <string name="tooltip_delete">Delete</string>
 
-    <string name="snack_bar_permission_notifications">Deadlines requires notification permissions to work.</string>
+    <string name="snack_bar_permission_notifications">To get deadline reminders, enable notification permissions.</string>
 
     <!-- App Preference Category -->
     <string name="preference_category_appearance">Appearance</string>
     <string name="preference_list_theme">Theme</string>
     <string name="preference_switch_dynamic_colors_title">Dynamic Colors</string>
-    <string name="preference_switch_dynamic_colors_summary">Apply colors from your wallpaper to the application theme</string>
+    <string name="preference_switch_dynamic_colors_summary">Match the app\'s theme with your wallpaper colors</string>
 
     <!-- Savings Preference Category -->
-    <string name="preference_category_savings">Savings</string>
+    <string name="preference_category_savings">General</string>
     <string name="preference_list_currency">Currency</string>
     <string name="preference_list_deadline_format">Date Format</string>
 
     <!-- Security Preference Category -->
     <string name="preference_category_security">Security</string>
     <string name="preference_switch_screen_privacy_title">Screen Privacy</string>
-    <string name="preference_switch_screen_privacy_summary">Prevents capturing of screenshots and screen recordings in the app</string>
+    <string name="preference_switch_screen_privacy_summary">Blocks screenshots and screen recordings in the app</string>
 
     <!-- Backup Preference Category -->
     <string name="preference_category_backup">Backup</string>
     <string name="preference_import_title">Import</string>
-    <string name="preference_import_summary">Import back your savings</string>
     <string name="preference_export_title">Export</string>
-    <string name="preference_export_summary">Export your savings</string>
 
     <!--About Preference Category -->
     <string name="preference_category_about">About</string>
     <string name="preference_app_version">Version</string>
     <string name="preference_app_license">License</string>
     <string name="preference_app_source_code_title">Source Code</string>
-    <string name="preference_app_source_code_summary">Check the Github repository and the README</string>
+    <string name="preference_app_source_code_summary">Explore the project on GitHub</string>
     <string name="preference_app_author">Author</string>
+    <string name="preference_app_og_author">Original Author</string>
 </resources>

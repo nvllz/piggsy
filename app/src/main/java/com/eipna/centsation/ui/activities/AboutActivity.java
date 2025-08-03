@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import com.eipna.centsation.R;
 import com.eipna.centsation.databinding.ActivityAboutBinding;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.shape.MaterialShapeDrawable;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -41,6 +43,10 @@ public class AboutActivity extends AppCompatActivity {
         binding = ActivityAboutBinding.inflate(getLayoutInflater());
         EdgeToEdge.enable(this);
         setContentView(binding.getRoot());
+
+        Drawable appBarDrawable = MaterialShapeDrawable.createWithElevationOverlay(this);
+        binding.appBar.setStatusBarForeground(appBarDrawable);
+
         ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, 0, systemBars.right, systemBars.bottom);
@@ -62,17 +68,14 @@ public class AboutActivity extends AppCompatActivity {
 
     public static class AboutFragment extends PreferenceFragmentCompat {
 
-        private Preference appVersion;
-        private Preference appLicense;
-
         private int easterEggCounter;
 
         @Override
         public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
             setPreferencesFromResource(R.xml.preferences_about, rootKey);
 
-            appVersion = findPreference("app_version");
-            appLicense = findPreference("app_license");
+            Preference appVersion = findPreference("app_version");
+            Preference appLicense = findPreference("app_license");
 
             try {
                 PackageManager packageManager = requireContext().getPackageManager();
