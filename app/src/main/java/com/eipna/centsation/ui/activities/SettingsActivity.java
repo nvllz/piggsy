@@ -41,7 +41,10 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class SettingsActivity extends BaseActivity {
 
@@ -188,6 +191,12 @@ public class SettingsActivity extends BaseActivity {
             return false;
         }
 
+        private String generateExportFilename() {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd-HHmmss", Locale.getDefault());
+            String timestamp = dateFormat.format(new Date());
+            return "piggsy_" + timestamp + ".json";
+        }
+
         private void exportData() {
             if (noSavingsFound()) {
                 Toast.makeText(requireContext(), R.string.toast_export_no_savings_found, Toast.LENGTH_SHORT).show();
@@ -195,7 +204,7 @@ public class SettingsActivity extends BaseActivity {
                 Intent exportIntent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
                 exportIntent.addCategory(Intent.CATEGORY_OPENABLE);
                 exportIntent.setType("application/json");
-                exportIntent.putExtra(Intent.EXTRA_TITLE, "exported_savings.json");
+                exportIntent.putExtra(Intent.EXTRA_TITLE, generateExportFilename());
                 exportDataLauncher.launch(exportIntent);
             }
         }
@@ -334,6 +343,10 @@ public class SettingsActivity extends BaseActivity {
 
                     writableDatabase.setTransactionSuccessful();
                     Toast.makeText(requireContext(), R.string.toast_import_successful, Toast.LENGTH_SHORT).show();
+
+                    // Call restartApp() after successful import
+                    restartApp();
+
                 } catch (Exception e) {
                     Log.e("Import", "Something went wrong while importing savings or transactions", e);
                 } finally {
