@@ -28,20 +28,24 @@
         android:id="@+id/scrollView"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:orientation="vertical"
-            android:paddingBottom="16dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingTop="8dp"
+            android:paddingBottom="24dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <!-- Saving Name Field -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/field_saving_name_layout"
                 android:hint="@string/field_saving_name"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -53,44 +57,57 @@
                     android:layout_height="match_parent"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/field_saving_current_saving_layout"
-                android:hint="@string/field_saving_current_saving"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
+            <!-- Financial Fields Group -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/field_saving_current_saving_text"
-                    android:maxLines="1"
-                    android:inputType="numberDecimal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/field_saving_current_saving_layout"
+                    android:hint="@string/field_saving_current_saving"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/field_saving_goal_layout"
-                android:hint="@string/field_saving_goal"
-                android:layout_marginBottom="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/field_saving_current_saving_text"
+                        android:maxLines="1"
+                        android:inputType="numberDecimal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/field_saving_goal_text"
-                    android:maxLines="1"
-                    android:inputType="numberDecimal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/field_saving_goal_layout"
+                    android:hint="@string/field_saving_goal"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
 
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/field_saving_goal_text"
+                        android:maxLines="1"
+                        android:inputType="numberDecimal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <!-- Deadline Field -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/field_saving_deadline_layout"
                 android:hint="@string/field_saving_deadline"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 app:helperText="This field is optional"
                 app:endIconMode="custom"
                 app:endIconDrawable="@drawable/ic_clear"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -104,9 +121,11 @@
                     android:layout_height="match_parent"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Notes Field -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/field_saving_notes_layout"
                 android:hint="@string/field_saving_notes"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 app:helperText="This field is optional"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -114,9 +133,12 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/field_saving_notes_text"
                     android:inputType="textAutoComplete|textMultiLine"
+                    android:minLines="3"
+                    android:gravity="top"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
             </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
     </ScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
