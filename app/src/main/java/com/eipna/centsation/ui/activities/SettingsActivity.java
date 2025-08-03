@@ -344,7 +344,6 @@ public class SettingsActivity extends BaseActivity {
                     writableDatabase.setTransactionSuccessful();
                     Toast.makeText(requireContext(), R.string.toast_import_successful, Toast.LENGTH_SHORT).show();
 
-                    // Call restartApp() after successful import
                     restartApp();
 
                 } catch (Exception e) {
