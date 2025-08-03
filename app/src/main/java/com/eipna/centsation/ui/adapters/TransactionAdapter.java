@@ -79,7 +79,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             }
 
             type.setText(context.getString(typeResId));
-            date.setText(DateUtil.getStringDate(currentTransaction.getDate()));
+            date.setText(DateUtil.getStringDateTime(currentTransaction.getDate(), context));
 
             if (currentTransaction.getType().equals(TransactionType.DEPOSIT.VALUE) || currentTransaction.getType().equals(TransactionType.CREATED.VALUE)) {
                 amount.setTextColor(context.getResources().getColor(R.color.md_theme_secondary, itemView.getContext().getTheme()));

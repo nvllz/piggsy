@@ -104,7 +104,7 @@ public class EditActivity extends BaseActivity {
         binding.fieldSavingDeadlineLayout.setEndIconVisible(false);
 
         if (currentSaving.getDeadline() != AlarmUtil.NO_ALARM) {
-            String deadlineFormat = preferences.getDeadlineFormat();
+            String deadlineFormat = preferences.getDateFormat();
             binding.fieldSavingDeadlineLayout.setEndIconVisible(true);
             binding.fieldSavingDeadlineText.setText(DateUtil.getStringDate(currentSaving.getDeadline(), deadlineFormat));
         }
@@ -219,7 +219,7 @@ public class EditActivity extends BaseActivity {
             calendar.set(java.util.Calendar.MILLISECOND, 0);
 
             currentSaving.setDeadline(calendar.getTimeInMillis());
-            String deadlineFormat = preferences.getDeadlineFormat();
+            String deadlineFormat = preferences.getDateFormat();
 
             binding.fieldSavingDeadlineText.setText(DateUtil.getStringDate(selection, deadlineFormat));
             binding.fieldSavingDeadlineLayout.setEndIconVisible(true);

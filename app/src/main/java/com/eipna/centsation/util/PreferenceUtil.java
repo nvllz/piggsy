@@ -58,12 +58,12 @@ public class PreferenceUtil {
         return sharedPreferences.getBoolean("sort_order", true);
     }
 
-    public void setDeadlineFormat(String value) {
-        sharedPreferences.edit().putString("deadline_format", value).apply();
+    public void setDateFormat(String value) {
+        sharedPreferences.edit().putString("date_format", value).apply();
     }
 
-    public String getDeadlineFormat() {
-        return sharedPreferences.getString("deadline_format", DateFormat.MM_DD_YYYY.PATTERN);
+    public String getDateFormat() {
+        return sharedPreferences.getString("date_format", DateFormat.YYYY_MM_DD_ISO.PATTERN);
     }
 
     public void setScreenPrivacy(boolean value) {

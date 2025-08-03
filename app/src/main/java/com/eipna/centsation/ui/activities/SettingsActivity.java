@@ -131,10 +131,10 @@ public class SettingsActivity extends BaseActivity {
 
             listDeadlineFormat.setEntries(DateFormat.getNames());
             listDeadlineFormat.setEntryValues(DateFormat.getPatterns());
-            listDeadlineFormat.setValue(preferences.getDeadlineFormat());
-            listDeadlineFormat.setSummary(DateFormat.getNameByPattern(preferences.getDeadlineFormat()));
+            listDeadlineFormat.setValue(preferences.getDateFormat());
+            listDeadlineFormat.setSummary(DateFormat.getNameByPattern(preferences.getDateFormat()));
             listDeadlineFormat.setOnPreferenceChangeListener((preference, newValue) -> {
-                preferences.setDeadlineFormat((String) newValue);
+                preferences.setDateFormat((String) newValue);
                 listDeadlineFormat.setSummary(DateFormat.getNameByPattern((String) newValue));
                 return true;
             });

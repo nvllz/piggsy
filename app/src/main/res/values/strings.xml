@@ -63,13 +63,16 @@
     <string name="menu_item_sort_ascending">Ascending</string>
     <string name="menu_item_sort_descending">Descending</string>
 
+    <string name="transaction_label_created">Created</string>
+    <string name="transaction_label_deposit">Deposit</string>
+    <string name="transaction_label_withdraw">Withdraw</string>
+
     <string name="toast_import_successful">Import successful</string>
     <string name="toast_export_successful">Export successful</string>
     <string name="toast_export_no_savings_found">No savings to export</string>
     <string name="toast_notification_permission_denied">Notification permission denied</string>
     <string name="toast_deny_import_notice">Deadlines may not work properly</string>
 
-    <string name="tooltip_share">Share Notes</string>
     <string name="tooltip_update">New Transaction</string>
     <string name="tooltip_history">History</string>
     <string name="tooltip_archive">Archive</string>
@@ -87,7 +90,7 @@
     <!-- Savings Preference Category -->
     <string name="preference_category_savings">Savings</string>
     <string name="preference_list_currency">Currency</string>
-    <string name="preference_list_deadline_format">Deadline Format</string>
+    <string name="preference_list_deadline_format">Date Format</string>
 
     <!-- Security Preference Category -->
     <string name="preference_category_security">Security</string>

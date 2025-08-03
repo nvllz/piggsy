@@ -59,7 +59,6 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
 
         holder.itemView.setOnClickListener(view -> listener.OnClick(position));
         holder.delete.setOnClickListener(view -> listener.OnOperationClick(SavingOperation.DELETE, position));
-        holder.share.setOnClickListener(view -> listener.OnOperationClick(SavingOperation.SHARE, position));
         holder.update.setOnClickListener(view -> listener.OnOperationClick(SavingOperation.TRANSACTION, position));
         holder.archive.setOnClickListener(view -> listener.OnOperationClick(SavingOperation.ARCHIVE, position));
         holder.unarchive.setOnClickListener(view -> listener.OnOperationClick(SavingOperation.UNARCHIVE, position));
@@ -75,7 +74,7 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
 
         MaterialCardView parent;
         MaterialTextView name, saving, goal, percent, deadline, outOfText;
-        MaterialButton update, history, archive, unarchive, delete, share;
+        MaterialButton update, history, archive, unarchive, delete;
 
         LinearLayout description;
         LinearProgressIndicator progress;
@@ -97,11 +96,10 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
             archive = itemView.findViewById(R.id.saving_archive);
             unarchive = itemView.findViewById(R.id.saving_unarchive);
             delete = itemView.findViewById(R.id.saving_delete);
-            share = itemView.findViewById(R.id.saving_share);
         }
 
         public void bind(Saving currentSaving, PreferenceUtil preferences) {
-            String deadlineFormat = preferences.getDeadlineFormat();
+            String deadlineFormat = preferences.getDateFormat();
             int percentValue = (int) ((currentSaving.getCurrentSaving() / currentSaving.getGoal()) * 100);
             percentValue = Math.max(0, Math.min(100, percentValue));
 
@@ -128,7 +126,6 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
                 name.setText(currentSaving.getName());
             }
 
-            share.setVisibility(currentSaving.getNotes().isEmpty() ? View.GONE : View.VISIBLE);
 
             deadline.setVisibility(currentSaving.getDeadline() == AlarmUtil.NO_ALARM ? View.GONE : View.VISIBLE);
             deadline.setText(String.format("%s", DateUtil.getStringDate(currentSaving.getDeadline(), deadlineFormat)));

@@ -249,7 +249,7 @@ public class CreateActivity extends BaseActivity {
             calendar.set(Calendar.MILLISECOND, 0);
 
             selectedDeadline = calendar.getTimeInMillis();
-            String deadlineFormat = preferences.getDeadlineFormat();
+            String deadlineFormat = preferences.getDateFormat();
 
             binding.fieldSavingDeadlineText.setText(DateUtil.getStringDate(selection, deadlineFormat));
             binding.fieldSavingDeadlineLayout.setEndIconVisible(true);
