@@ -10,6 +10,8 @@ import com.eipna.centsation.data.DateFormat;
 import com.eipna.centsation.data.Theme;
 import com.eipna.centsation.data.saving.SavingSort;
 
+import java.util.Locale;
+
 public class PreferenceUtil {
 
     private final SharedPreferences sharedPreferences;
@@ -35,11 +37,37 @@ public class PreferenceUtil {
     }
 
     public String getCurrency() {
-        return sharedPreferences.getString("currency", Currency.PHILIPPINE_PESO.CODE);
+        return sharedPreferences.getString("currency", getDefaultCurrencyByLocale());
     }
 
     public void setCurrency(String value) {
         sharedPreferences.edit().putString("currency", value).apply();
+    }
+
+    private String getDefaultCurrencyByLocale() {
+        try {
+            Locale currentLocale = Locale.getDefault();
+
+            java.util.Currency localeCurrency = java.util.Currency.getInstance(currentLocale);
+            String currencyCode = localeCurrency.getCurrencyCode();
+
+            if (isCurrencySupported(currencyCode)) {
+                return currencyCode;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return Currency.UNITED_STATES_DOLLAR.CODE;
+    }
+
+    private boolean isCurrencySupported(String currencyCode) {
+        for (Currency currency : Currency.values()) {
+            if (currency.CODE.equals(currencyCode)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void setSortCriteria(String value) {
