@@ -84,5 +84,5 @@
     <color name="widgetSecondary_default">#BCBCBC</color>
     <color name="widgetBackground_default">#80000000</color>
 
-    <color name="ic_launcher_background">#000000</color>
+    <color name="ic_launcher_background">#FFFFFF</color>
 </resources>

@@ -43,7 +43,7 @@ public class NotificationUtil {
         String notificationBody = "The deadline for your " + savingName + " is today.";
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_DEADLINE_ID)
-                .setSmallIcon(R.drawable.ic_stat_centsation)
+                .setSmallIcon(R.drawable.ic_notification)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setContentTitle(notificationTitle)
                 .setContentText(notificationBody)
