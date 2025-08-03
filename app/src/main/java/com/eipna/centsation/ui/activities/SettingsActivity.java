@@ -139,6 +139,7 @@ public class SettingsActivity extends BaseActivity {
             listDeadlineFormat.setOnPreferenceChangeListener((preference, newValue) -> {
                 preferences.setDateFormat((String) newValue);
                 listDeadlineFormat.setSummary(DateFormat.getNameByPattern((String) newValue));
+                restartApp();
                 return true;
             });
 
@@ -252,7 +253,7 @@ public class SettingsActivity extends BaseActivity {
                     savingJsonArray.put(savingObject);
                 }
             } catch (Exception e) {
-                Log.e("Export", "Something went wrong when collecting savings", e);
+                Log.e("Export", "Something went wrong while collecting savings", e);
             }
 
             try {
@@ -266,7 +267,7 @@ public class SettingsActivity extends BaseActivity {
                     transactionJsonArray.put(transactionObject);
                 }
             } catch (Exception e) {
-                Log.e("Export", "Something went wrong when collecting saving transactions", e);
+                Log.e("Export", "Something went wrong while collecting saving transactions", e);
             }
 
             try {
@@ -282,7 +283,7 @@ public class SettingsActivity extends BaseActivity {
 
                 Toast.makeText(requireContext(), R.string.toast_export_successful, Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
-                Log.e("Export", "Something went wrong when exporting", e);
+                Log.e("Export", "Something went wrong while exporting", e);
             }
         }
 

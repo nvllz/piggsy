@@ -2,35 +2,39 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:title="@string/preference_category_appearance"
-        app:iconSpaceReserved="false">
-
-        <ListPreference
-            android:key="theme"
-            app:iconSpaceReserved="false"
-            android:title="@string/preference_list_theme"/>
-
-        <SwitchPreferenceCompat
-            android:key="dynamic_colors"
-            android:widgetLayout="@layout/view_preference_switch"
-            app:iconSpaceReserved="false"
-            android:title="@string/preference_switch_dynamic_colors_title"
-            android:summary="@string/preference_switch_dynamic_colors_summary"/>
-    </PreferenceCategory>
-
-    <PreferenceCategory
         android:title="@string/preference_category_savings"
         app:iconSpaceReserved="false">
 
         <ListPreference
             android:key="currency"
-            app:iconSpaceReserved="false"
+            app:iconSpaceReserved="true"
+            android:icon="@drawable/ic_currency"
             android:title="@string/preference_list_currency"/>
 
         <ListPreference
             android:key="deadline_format"
-            app:iconSpaceReserved="false"
+            app:iconSpaceReserved="true"
+            android:icon="@drawable/ic_dateformat"
             android:title="@string/preference_list_deadline_format"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/preference_category_appearance"
+        app:iconSpaceReserved="false">
+
+        <ListPreference
+            android:key="theme"
+            app:iconSpaceReserved="true"
+            android:icon="@drawable/ic_theme"
+            android:title="@string/preference_list_theme"/>
+
+        <SwitchPreferenceCompat
+            android:key="dynamic_colors"
+            android:widgetLayout="@layout/view_preference_switch"
+            app:iconSpaceReserved="true"
+            android:icon="@drawable/ic_colors"
+            android:title="@string/preference_switch_dynamic_colors_title"
+            android:summary="@string/preference_switch_dynamic_colors_summary"/>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -38,8 +42,9 @@
         app:iconSpaceReserved="false">
 
         <SwitchPreferenceCompat
-            app:iconSpaceReserved="false"
+            app:iconSpaceReserved="true"
             android:key="screen_privacy"
+            android:icon="@drawable/ic_shield"
             android:title="@string/preference_switch_screen_privacy_title"
             android:summary="@string/preference_switch_screen_privacy_summary"
             android:widgetLayout="@layout/view_preference_switch"/>
@@ -51,12 +56,14 @@
 
         <Preference
             android:key="import"
-            app:iconSpaceReserved="false"
+            app:iconSpaceReserved="true"
+            android:icon="@drawable/ic_import"
             android:title="@string/preference_import_title"/>
 
         <Preference
             android:key="export"
-            app:iconSpaceReserved="false"
+            app:iconSpaceReserved="true"
+            android:icon="@drawable/ic_export"
             android:title="@string/preference_export_title"/>
     </PreferenceCategory>
 </PreferenceScreen>

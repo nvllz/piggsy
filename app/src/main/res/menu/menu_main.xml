@@ -61,14 +61,17 @@
         <menu>
             <item
                 android:id="@+id/archive"
+                android:icon="@drawable/ic_small_archive"
                 android:title="@string/menu_item_archive"/>
 
             <item
                 android:id="@+id/settings"
+                android:icon="@drawable/ic_small_settings"
                 android:title="@string/menu_item_settings"/>
 
             <item
                 android:id="@+id/about"
+                android:icon="@drawable/ic_small_info"
                 android:title="@string/menu_item_about"/>
         </menu>
     </item>
