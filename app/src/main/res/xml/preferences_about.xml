@@ -31,6 +31,17 @@
     </Preference>
 
     <Preference
+        android:key="app_og_author"
+        app:iconSpaceReserved="false"
+        android:title="@string/preference_app_og_author"
+        android:summary="@string/app_og_author">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="@string/link_app_og_author"/>
+    </Preference>
+
+    <Preference
         android:key="app_version"
         app:iconSpaceReserved="false"
         android:title="@string/preference_app_version"/>

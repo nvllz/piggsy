@@ -28,10 +28,9 @@
                 android:textAppearance="?attr/textAppearanceBodyLarge"
                 android:textSize="18sp"
                 android:textColor="?attr/colorOnSurface"
-                app:fontFamily="@font/open_sans_family"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="@font/open_sans_family"
                 tools:ignore="HardcodedText" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -40,7 +39,7 @@
                 android:textAppearance="?attr/textAppearanceBodyMedium"
                 android:textSize="12sp"
                 android:textColor="?attr/colorOnSurfaceVariant"
-                app:fontFamily="@font/open_sans_family"
+                android:fontFamily="@font/open_sans_family"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:ignore="HardcodedText" />
@@ -53,12 +52,11 @@
             android:textAppearance="?attr/textAppearanceTitleMedium"
             android:textSize="20sp"
             android:textColor="?attr/colorPrimary"
-            app:fontFamily="@font/open_sans_family"
+            android:fontFamily="@font/open_sans_family"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:gravity="end"
-            android:fontFamily="sans-serif-medium"
             tools:ignore="HardcodedText" />
 
     </LinearLayout>

@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -66,15 +67,18 @@ public class CreateActivity extends BaseActivity {
         EdgeToEdge.enable(this);
         setContentView(binding.getRoot());
 
-        // KEYBOARD FIX - Only handle keyboard insets, leave system bars alone
+        binding.fieldSavingNameText.requestFocus();
+
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(binding.fieldSavingNameText, InputMethodManager.SHOW_IMPLICIT);
+
+
         ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             Insets imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime());
 
-            // Keep original padding for system bars
             v.setPadding(systemBars.left, 0, systemBars.right, systemBars.bottom);
 
-            // Only adjust scroll view bottom margin for keyboard
             ViewGroup.MarginLayoutParams scrollParams =
                     (ViewGroup.MarginLayoutParams) binding.scrollView.getLayoutParams();
             scrollParams.bottomMargin = imeInsets.bottom;
@@ -103,7 +107,6 @@ public class CreateActivity extends BaseActivity {
             binding.fieldSavingDeadlineLayout.setEndIconVisible(false);
         });
 
-        // Add focus listeners to auto-scroll to focused fields
         setupAutoScroll();
     }
 
@@ -111,21 +114,16 @@ public class CreateActivity extends BaseActivity {
         View.OnFocusChangeListener scrollToFocused = (v, hasFocus) -> {
             if (hasFocus) {
                 v.postDelayed(() -> {
-                    // Get the parent TextInputLayout instead of the EditText
                     View parentLayout = (View) v.getParent().getParent();
 
-                    // Calculate scroll position more precisely
                     int[] location = new int[2];
                     parentLayout.getLocationInWindow(location);
 
-                    // Get toolbar height to avoid scrolling past it
                     int toolbarHeight = binding.toolbar.getHeight();
 
-                    // For Notes field, scroll less aggressively to avoid jump
                     int scrollOffset = v.getId() == R.id.field_saving_notes_text ? 50 : 100;
                     int targetY = Math.max(0, location[1] - toolbarHeight - scrollOffset);
 
-                    // Don't scroll if we're already at the top or would scroll past it
                     if (targetY <= 0 && v.getId() == R.id.field_saving_name_text) {
                         binding.scrollView.smoothScrollTo(0, 0);
                     } else {

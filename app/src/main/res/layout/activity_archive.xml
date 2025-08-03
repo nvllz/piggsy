@@ -46,6 +46,7 @@
             android:textColor="?attr/colorOnSurfaceVariant"
             android:textAlignment="center"
             android:layout_gravity="center"
+            android:fontFamily="@font/open_sans_family"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>

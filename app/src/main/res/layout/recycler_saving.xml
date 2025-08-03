@@ -58,6 +58,7 @@
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="?attr/colorOnTertiaryContainer"
+                android:fontFamily="@font/open_sans_family"
                 android:textStyle="bold"
                 tools:ignore="HardcodedText" />
         </androidx.cardview.widget.CardView>
@@ -77,6 +78,7 @@
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="?attr/colorPrimary"
+            android:fontFamily="@font/open_sans_semibold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/saving_deadline_container"
             tools:ignore="HardcodedText" />
@@ -100,6 +102,7 @@
                 android:text="$1,000"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="?attr/colorPrimary"
+                android:fontFamily="@font/open_sans_semibold"
                 android:textStyle="bold"
                 tools:ignore="HardcodedText" />
 
@@ -111,6 +114,7 @@
                 android:text=" / "
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="?attr/colorOnSurfaceVariant"
+                android:fontFamily="@font/open_sans_family"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -122,6 +126,7 @@
                 android:text="$1,500"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="?attr/colorOnSurface"
+                android:fontFamily="@font/open_sans_family"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
 
@@ -165,6 +170,7 @@
                     android:text="66%"
                     android:textAlignment="center"
                     android:textColor="?attr/colorOnPrimary"
+                    android:fontFamily="@font/open_sans_semibold"
                     android:textSize="12sp"
                     tools:ignore="HardcodedText" />
             </androidx.cardview.widget.CardView>
@@ -190,7 +196,7 @@
                 android:layout_weight="1"
                 android:contentDescription="Update"
                 android:text="Add"
-                android:background="?attr/selectableItemBackground"
+                android:fontFamily="@font/open_sans_family"
                 android:drawableStart="@drawable/ic_add_circle"
                 android:drawablePadding="8dp"
                 android:gravity="center"

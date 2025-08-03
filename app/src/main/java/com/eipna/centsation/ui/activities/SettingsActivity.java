@@ -146,6 +146,7 @@ public class SettingsActivity extends BaseActivity {
             listCurrency.setOnPreferenceChangeListener((preference, currency) -> {
                 preferences.setCurrency((String) currency);
                 listCurrency.setSummary(Currency.getName((String) currency));
+                restartApp();
                 return true;
             });
 
@@ -154,6 +155,7 @@ public class SettingsActivity extends BaseActivity {
             switchDynamicColors.setOnPreferenceChangeListener((preference, isChecked) -> {
                 preferences.setDynamicColors((boolean) isChecked);
                 requireActivity().recreate();
+                restartApp();
                 return true;
             });
 
@@ -171,7 +173,6 @@ public class SettingsActivity extends BaseActivity {
             listTheme.setOnPreferenceChangeListener((preference, newValue) -> {
                 String selectedTheme = (String) newValue;
                 if (selectedTheme.equals(Theme.SYSTEM.VALUE)) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-                if (selectedTheme.equals(Theme.BATTERY.VALUE)) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY);
                 if (selectedTheme.equals(Theme.LIGHT.VALUE)) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 if (selectedTheme.equals(Theme.DARK.VALUE)) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                 preferences.setTheme(selectedTheme);
@@ -340,6 +341,15 @@ public class SettingsActivity extends BaseActivity {
                 }
             } catch (Exception e) {
                 Log.e("Import", "Something went wrong while importing", e);
+            }
+        }
+
+        private void restartApp() {
+            Intent intent = new Intent(requireContext(), MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            if (getActivity() != null) {
+                getActivity().finishAffinity();
             }
         }
     }

@@ -52,13 +52,11 @@
         <Preference
             android:key="import"
             app:iconSpaceReserved="false"
-            android:title="@string/preference_import_title"
-            android:summary="@string/preference_import_summary"/>
+            android:title="@string/preference_import_title"/>
 
         <Preference
             android:key="export"
             app:iconSpaceReserved="false"
-            android:title="@string/preference_export_title"
-            android:summary="@string/preference_export_summary"/>
+            android:title="@string/preference_export_title"/>
     </PreferenceCategory>
 </PreferenceScreen>

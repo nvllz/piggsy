@@ -38,8 +38,8 @@ import com.eipna.centsation.databinding.ActivityMainBinding;
 import com.eipna.centsation.ui.adapters.SavingAdapter;
 import com.eipna.centsation.ui.adapters.TransactionAdapter;
 import com.eipna.centsation.util.AlarmUtil;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.android.material.shape.MaterialShapeDrawable;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -226,26 +226,6 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
         preferences.setSortOrder(isSortAscending);
     }
 
-    private void showHistoryDialog(Saving selectedSaving) {
-        View historyDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_saving_history, null, false);
-
-        ArrayList<Transaction> transactions = transactionRepository.get(selectedSaving.getID());
-        TransactionAdapter transactionAdapter = new TransactionAdapter(this, transactions);
-
-        RecyclerView historyList = historyDialogView.findViewById(R.id.transaction_list);
-        historyList.setLayoutManager(new LinearLayoutManager(this));
-        historyList.setAdapter(transactionAdapter);
-
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.dialog_title_history_saving)
-                .setIcon(R.drawable.ic_history)
-                .setView(historyDialogView)
-                .setPositiveButton(R.string.dialog_button_close, null);
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
     private void showDeleteDialog(Saving saving) {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.dialog_title_delete_saving)
@@ -279,8 +259,10 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
         TextInputLayout amountLayout = transactionDialogView.findViewById(R.id.field_saving_amount_layout);
         TextInputEditText amountInput = transactionDialogView.findViewById(R.id.field_saving_amount_text);
 
-        MaterialRadioButton depositOption = transactionDialogView.findViewById(R.id.radio_button_deposit);
-        MaterialRadioButton withdrawOption = transactionDialogView.findViewById(R.id.radio_button_withdraw);
+        MaterialButton depositOption = transactionDialogView.findViewById(R.id.button_deposit);
+        MaterialButton withdrawOption = transactionDialogView.findViewById(R.id.button_withdraw);
+
+        depositOption.setChecked(true);
 
         amountLayout.setPrefixText(currentCurrencySymbol);
 
@@ -295,8 +277,8 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
         amountInput.requestFocus();
         amountInput.postDelayed(() -> {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.showSoftInput(amountInput, InputMethodManager.SHOW_FORCED);
-        }, 100);
+            imm.showSoftInput(amountInput, InputMethodManager.SHOW_IMPLICIT);
+        }, 300);
 
         dialog.setOnShowListener(dialogInterface ->
                 dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {

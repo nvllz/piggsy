@@ -3,8 +3,7 @@ package com.eipna.centsation.data;
 public enum Theme {
     LIGHT("Light"),
     DARK("Dark"),
-    BATTERY("Battery Saving"),
-    SYSTEM("System Default");
+    SYSTEM("System");
 
     public static final Theme[] themes;
     public final String VALUE;

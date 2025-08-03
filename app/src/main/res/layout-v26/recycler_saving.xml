@@ -41,7 +41,7 @@
             android:id="@+id/saving_deadline_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="?attr/colorTertiaryContainer"
+            app:cardBackgroundColor="?attr/colorSecondaryContainer"
             app:cardCornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -56,8 +56,8 @@
                 android:text="2012/12/31"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
-                android:textColor="?attr/colorOnTertiaryContainer"
-                android:textStyle="bold"
+                android:textColor="?attr/colorOnSecondaryContainer"
+                android:fontFamily="@font/open_sans_semibold"
                 tools:ignore="HardcodedText" />
         </com.google.android.material.card.MaterialCardView>
 
@@ -70,12 +70,11 @@
             android:maxLines="1"
             android:shadowColor="?attr/colorPrimary"
             android:shadowDx="0"
-            android:shadowDy="1"
-            android:shadowRadius="2"
             android:text="Saving Title"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+            android:textSize="20sp"
             android:textColor="?attr/colorPrimary"
+            android:fontFamily="@font/open_sans_semibold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/saving_deadline_container"
             tools:ignore="HardcodedText" />
@@ -99,6 +98,7 @@
                 android:text="$1,000"
                 android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                 android:textColor="?attr/colorPrimary"
+                android:fontFamily="@font/open_sans_semibold"
                 android:textStyle="bold"
                 tools:ignore="HardcodedText" />
 
@@ -110,6 +110,7 @@
                 android:text=" / "
                 android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                 android:textColor="?attr/colorOnSurfaceVariant"
+                android:fontFamily="@font/open_sans_family"
                 tools:ignore="HardcodedText" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -121,6 +122,7 @@
                 android:text="$1,500"
                 android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                 android:textColor="?attr/colorOnSurface"
+                android:fontFamily="@font/open_sans_family"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
 
@@ -144,7 +146,7 @@
                 android:max="100"
                 android:progress="66"
                 app:indicatorColor="?attr/colorPrimary"
-                app:trackColor="?attr/colorSurfaceVariant"
+                app:trackColor="?attr/colorOutlineVariant"
                 app:trackCornerRadius="4dp" />
 
             <com.google.android.material.card.MaterialCardView
@@ -164,6 +166,7 @@
                     android:text="66%"
                     android:textAlignment="center"
                     android:textColor="?attr/colorOnPrimary"
+                    android:fontFamily="@font/open_sans_semibold"
                     android:textSize="12sp"
                     tools:ignore="HardcodedText" />
             </com.google.android.material.card.MaterialCardView>
@@ -183,13 +186,13 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/saving_update"
-                style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:contentDescription="Update"
                 android:text="Add"
+                android:fontFamily="@font/open_sans_family"
                 app:icon="@drawable/ic_add_circle"
                 app:iconGravity="textStart"
                 tools:ignore="HardcodedText" />
