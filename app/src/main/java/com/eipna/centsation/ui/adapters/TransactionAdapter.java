@@ -62,7 +62,23 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         public void bind(Transaction currentTransaction, PreferenceUtil preferenceUtil, Context context) {
             String selectedCurrencySymbol = preferenceUtil.getCurrency();
 
-            type.setText(currentTransaction.getType());
+            int typeResId;
+            switch (currentTransaction.getType()) {
+                case "Created":
+                    typeResId = R.string.transaction_label_created;
+                    break;
+                case "Deposit":
+                    typeResId = R.string.transaction_label_deposit;
+                    break;
+                case "Withdraw":
+                    typeResId = R.string.transaction_label_withdraw;
+                    break;
+                default:
+                    typeResId = R.string.transaction_label_created; // fallback
+                    break;
+            }
+
+            type.setText(context.getString(typeResId));
             date.setText(DateUtil.getStringDate(currentTransaction.getDate()));
 
             if (currentTransaction.getType().equals(TransactionType.DEPOSIT.VALUE) || currentTransaction.getType().equals(TransactionType.CREATED.VALUE)) {
