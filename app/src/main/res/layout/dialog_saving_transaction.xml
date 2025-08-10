@@ -54,14 +54,14 @@
             android:text="@string/radio_button_deposit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Widget.Centsation.Button.ToggleButton" />
+            style="@style/Widget.Piggsy.Button.ToggleButton" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_withdraw"
             android:text="@string/radio_button_withdraw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Widget.Centsation.Button.ToggleButton" />
+            style="@style/Widget.Piggsy.Button.ToggleButton" />
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
 

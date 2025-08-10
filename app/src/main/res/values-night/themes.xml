@@ -1,5 +1,5 @@
 <resources>
-    <style name="Theme.Centsation" parent="Theme.Material3.Dark.NoActionBar">
+    <style name="Theme.Piggsy" parent="Theme.Material3.Dark.NoActionBar">
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
@@ -48,10 +48,10 @@
         <item name="colorSurfaceContainerHighest">@color/md_theme_surfaceContainerHighest</item>
 
         <!-- Styles -->
-        <item name="materialAlertDialogTheme">@style/Theme.Centsation.AlertDialog</item>
+        <item name="materialAlertDialogTheme">@style/Theme.Piggsy.AlertDialog</item>
         <item name="popupTheme">@style/Widget.Material3.PopupMenu</item>
         <item name="homeAsUpIndicator">@drawable/ic_arrow_back</item>
-        <item name="alertDialogTheme">@style/Theme.Centsation.AlertDialog</item>
+        <item name="alertDialogTheme">@style/Theme.Piggsy.AlertDialog</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
 
         <!-- Status bar and navigation bar for dark theme -->
@@ -62,13 +62,13 @@
     </style>
 
     <!-- Settings activity theme -->
-    <style name="Theme.CentsationSettings" parent="Theme.Centsation">
+    <style name="Theme.PiggsySettings" parent="Theme.Piggsy">
         <item name="android:statusBarColor">@color/md_theme_background</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>
 
     <!-- Dialog Theme -->
-    <style name="Theme.Centsation.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+    <style name="Theme.Piggsy.AlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="android:textColor">@color/md_theme_onSurface</item>
         <item name="android:background">@color/md_theme_surfaceContainer</item>
         <item name="dialogCornerRadius">28dp</item>
@@ -81,7 +81,7 @@
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
         <item name="android:textColorPrimary">@color/md_theme_onSurface</item>
         <item name="android:textColorSecondary">@color/md_theme_secondary</item>
-        <item name="editTextStyle">@style/Widget.Centsation.EditText</item>
+        <item name="editTextStyle">@style/Widget.Piggsy.EditText</item>
     </style>
 
     <!-- Dialog Button Styles -->
@@ -104,7 +104,7 @@
     </style>
 
     <!-- Custom EditText style for dialogs -->
-    <style name="Widget.Centsation.EditText" parent="Widget.Material3.TextInputEditText.FilledBox">
+    <style name="Widget.Piggsy.EditText" parent="Widget.Material3.TextInputEditText.FilledBox">
         <item name="android:textColor">@color/md_theme_onSurface</item>
         <item name="android:textColorHint">@color/md_theme_secondary</item>
         <item name="backgroundTint">@color/md_theme_surfaceVariant</item>

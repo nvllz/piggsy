@@ -14,7 +14,7 @@ if (keystorePropertiesFile.exists()) {
 
 
 android {
-    namespace = "com.eipna.centsation"
+    namespace = "com.nvllz.piggsy"
     compileSdk = 36
 
     dependenciesInfo {
@@ -23,11 +23,11 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.eipna.centsation"
+        applicationId = "com.nvllz.piggsy"
         minSdk = 24
         targetSdk = 36
-        versionCode = 6
-        versionName = "1.6"
+        versionCode = 1
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
