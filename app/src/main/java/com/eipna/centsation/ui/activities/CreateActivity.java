@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -50,6 +52,7 @@ public class CreateActivity extends BaseActivity {
     private SavingRepository savingRepository;
     private AlarmManager alarmManager;
     private long selectedDeadline;
+    private String selectedCurrency;
 
     private final ActivityResultLauncher<String> requestNotificationPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
@@ -71,7 +74,6 @@ public class CreateActivity extends BaseActivity {
 
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(binding.fieldSavingNameText, InputMethodManager.SHOW_IMPLICIT);
-
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -96,18 +98,47 @@ public class CreateActivity extends BaseActivity {
         savingRepository = new SavingRepository(this);
         selectedDeadline = AlarmUtil.NO_ALARM;
 
-        String selectedCurrencySymbol = Currency.getSymbol(preferences.getCurrency());
-        binding.fieldSavingCurrentSavingLayout.setPrefixText(selectedCurrencySymbol);
-        binding.fieldSavingGoalLayout.setPrefixText(selectedCurrencySymbol);
+        setupCurrencyDropdown();
+        setupDeadlineField();
+        setupAutoScroll();
+    }
 
+    private void setupCurrencyDropdown() {
+        String[] currencyNames = Currency.getNames();
+        String[] currencyCodes = Currency.getCodes();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line, currencyNames);
+
+        AutoCompleteTextView currencyDropdown = binding.fieldSavingCurrencyText;
+        currencyDropdown.setAdapter(adapter);
+
+        String defaultCurrency = preferences.getCurrency();
+        String defaultCurrencyName = Currency.getName(defaultCurrency);
+        currencyDropdown.setText(defaultCurrencyName, false);
+        selectedCurrency = defaultCurrency;
+
+        currencyDropdown.setOnItemClickListener((parent, view, position, id) -> {
+            selectedCurrency = currencyCodes[position];
+            updateCurrencySymbols();
+        });
+
+        updateCurrencySymbols();
+    }
+
+    private void updateCurrencySymbols() {
+        String currencySymbol = Currency.getSymbol(selectedCurrency);
+        binding.fieldSavingCurrentSavingLayout.setPrefixText(currencySymbol);
+        binding.fieldSavingGoalLayout.setPrefixText(currencySymbol);
+    }
+
+    private void setupDeadlineField() {
         binding.fieldSavingDeadlineLayout.setEndIconVisible(false);
         binding.fieldSavingDeadlineText.setOnClickListener(v -> hasNotificationPermission());
         binding.fieldSavingDeadlineLayout.setEndIconOnClickListener(v -> {
             binding.fieldSavingDeadlineText.setText("");
             binding.fieldSavingDeadlineLayout.setEndIconVisible(false);
         });
-
-        setupAutoScroll();
     }
 
     private void setupAutoScroll() {
@@ -153,7 +184,7 @@ public class CreateActivity extends BaseActivity {
         String notesText = Objects.requireNonNull(binding.fieldSavingDescriptionText.getText()).toString();
         String deadlineText = Objects.requireNonNull(binding.fieldSavingDeadlineText.getText()).toString();
 
-        if (!nameText.isEmpty() && !currentSavingText.isEmpty() && !goalText.isEmpty()) {
+        if (!nameText.isEmpty() && !currentSavingText.isEmpty() && !goalText.isEmpty() && selectedCurrency != null) {
             double currentSaving = Double.parseDouble(currentSavingText);
             double goal = Double.parseDouble(goalText);
 
@@ -165,6 +196,7 @@ public class CreateActivity extends BaseActivity {
             createdSaving.setDescription(notesText);
             createdSaving.setIsArchived(Saving.NOT_ARCHIVE);
             createdSaving.setDeadline(selectedDeadline);
+            createdSaving.setCurrency(selectedCurrency);
 
             if (!deadlineText.isEmpty()) {
                 AlarmUtil.set(this, createdSaving);
@@ -178,6 +210,7 @@ public class CreateActivity extends BaseActivity {
         binding.fieldSavingNameLayout.setError(nameText.isEmpty() ? getString(R.string.field_error_required) : null);
         binding.fieldSavingCurrentSavingLayout.setError(currentSavingText.isEmpty() ? getString(R.string.field_error_required) : null);
         binding.fieldSavingGoalLayout.setError(goalText.isEmpty() ? getString(R.string.field_error_required) : null);
+        binding.fieldSavingCurrencyLayout.setError(selectedCurrency == null ? getString(R.string.field_error_required) : null);
     }
 
     private void hasAlarmPermission() {

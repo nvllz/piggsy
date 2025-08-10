@@ -14,7 +14,6 @@ import com.eipna.centsation.data.Currency;
 import com.eipna.centsation.data.transaction.Transaction;
 import com.eipna.centsation.data.transaction.TransactionType;
 import com.eipna.centsation.util.DateUtil;
-import com.eipna.centsation.util.PreferenceUtil;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
@@ -22,13 +21,13 @@ import java.util.ArrayList;
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder> {
 
     private final Context context;
-    private final PreferenceUtil preferenceUtil;
     private final ArrayList<Transaction> transactions;
+    private final String currency;
 
-    public TransactionAdapter(Context context, ArrayList<Transaction> transactions) {
+    public TransactionAdapter(Context context, ArrayList<Transaction> transactions, String currency) {
         this.context = context;
         this.transactions = transactions;
-        this.preferenceUtil = new PreferenceUtil(context);
+        this.currency = currency;
     }
 
     @NonNull
@@ -41,7 +40,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     @Override
     public void onBindViewHolder(@NonNull TransactionAdapter.ViewHolder holder, int position) {
         Transaction currentTransaction = transactions.get(position);
-        holder.bind(currentTransaction, preferenceUtil, context);
+        holder.bind(currentTransaction, currency, context);
     }
 
     @Override
@@ -60,9 +59,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             note = itemView.findViewById(R.id.transaction_note);
         }
 
-        public void bind(Transaction currentTransaction, PreferenceUtil preferenceUtil, Context context) {
-            String selectedCurrencySymbol = preferenceUtil.getCurrency();
-
+        public void bind(Transaction currentTransaction, String selectedCurrencySymbol, Context context) {
             date.setText(DateUtil.getStringDateTime(currentTransaction.getDate(), context));
 
             String transactionNote = currentTransaction.getNote();
@@ -73,13 +70,15 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                 note.setVisibility(View.GONE);
             }
 
-            if (currentTransaction.getType().equals(TransactionType.DEPOSIT.VALUE) || currentTransaction.getType().equals(TransactionType.CREATED.VALUE)) {
+            if (currentTransaction.getType().equals(TransactionType.DEPOSIT.VALUE) ||
+                    currentTransaction.getType().equals(TransactionType.CREATED.VALUE)) {
                 amount.setTextColor(context.getResources().getColor(R.color.md_theme_secondary, itemView.getContext().getTheme()));
-                amount.setText(String.format("%c%s", '+', Currency.formatAmount(selectedCurrencySymbol, currentTransaction.getAmount())));
+                amount.setText(String.format("+%s", Currency.formatAmount(selectedCurrencySymbol, currentTransaction.getAmount())));
             } else if (currentTransaction.getType().equals(TransactionType.WITHDRAW.VALUE)) {
                 amount.setTextColor(context.getResources().getColor(R.color.md_theme_error, itemView.getContext().getTheme()));
-                amount.setText(String.format("%c%s", '-', Currency.formatAmount(selectedCurrencySymbol, currentTransaction.getAmount())));
+                amount.setText(String.format("-%s", Currency.formatAmount(selectedCurrencySymbol, currentTransaction.getAmount())));
             }
         }
+
     }
 }

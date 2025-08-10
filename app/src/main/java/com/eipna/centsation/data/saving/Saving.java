@@ -12,6 +12,7 @@ public class Saving {
     private String description;
     private int isArchived;
     private long deadline;
+    private String currency;
 
     public static int IS_ARCHIVE = 1;
     public static int NOT_ARCHIVE = 0;
@@ -88,5 +89,13 @@ public class Saving {
 
     public void setDeadline(long deadline) {
         this.deadline = deadline;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 }

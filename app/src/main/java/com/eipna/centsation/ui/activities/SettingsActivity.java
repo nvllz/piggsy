@@ -21,7 +21,6 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
 
 import com.eipna.centsation.R;
-import com.eipna.centsation.data.Currency;
 import com.eipna.centsation.data.Database;
 import com.eipna.centsation.data.DateFormat;
 import com.eipna.centsation.data.Theme;
@@ -89,7 +88,6 @@ public class SettingsActivity extends BaseActivity {
 
         private ListPreference listDeadlineFormat;
         private ListPreference listTheme;
-        private ListPreference listCurrency;
 
         private SwitchPreferenceCompat switchDynamicColors;
         private SwitchPreferenceCompat switchScreenPrivacy;
@@ -139,17 +137,6 @@ public class SettingsActivity extends BaseActivity {
             listDeadlineFormat.setOnPreferenceChangeListener((preference, newValue) -> {
                 preferences.setDateFormat((String) newValue);
                 listDeadlineFormat.setSummary(DateFormat.getNameByPattern((String) newValue));
-                restartApp();
-                return true;
-            });
-
-            listCurrency.setEntries(Currency.getNames());
-            listCurrency.setEntryValues(Currency.getCodes());
-            listCurrency.setValue(preferences.getCurrency());
-            listCurrency.setSummary(Currency.getName(preferences.getCurrency()));
-            listCurrency.setOnPreferenceChangeListener((preference, currency) -> {
-                preferences.setCurrency((String) currency);
-                listCurrency.setSummary(Currency.getName((String) currency));
                 restartApp();
                 return true;
             });
@@ -223,7 +210,6 @@ public class SettingsActivity extends BaseActivity {
             transactionRepository = new TransactionRepository(requireContext());
 
             listDeadlineFormat = findPreference("deadline_format");
-            listCurrency = findPreference("currency");
             listTheme = findPreference("theme");
 
             switchDynamicColors = findPreference("dynamic_colors");
@@ -250,6 +236,7 @@ public class SettingsActivity extends BaseActivity {
                     savingObject.put(Database.COLUMN_SAVING_DESCRIPTION, saving.getDescription());
                     savingObject.put(Database.COLUMN_SAVING_IS_ARCHIVED, saving.getIsArchived());
                     savingObject.put(Database.COLUMN_SAVING_DEADLINE, saving.getDeadline());
+                    savingObject.put(Database.COLUMN_SAVING_CURRENCY, saving.getCurrency());
                     savingJsonArray.put(savingObject);
                 }
             } catch (Exception e) {
@@ -314,6 +301,8 @@ public class SettingsActivity extends BaseActivity {
                         ContentValues savingValues = new ContentValues();
 
                         long savingDeadline = savingObject.getLong(Database.COLUMN_SAVING_DEADLINE);
+                        String currency = savingObject.optString(Database.COLUMN_SAVING_CURRENCY, "USD");
+
                         if (savingDeadline != AlarmUtil.NO_ALARM) {
                             Saving rescheduledSaving = new Saving();
                             rescheduledSaving.setID(savingObject.getString(Database.COLUMN_SAVING_ID));
@@ -326,6 +315,7 @@ public class SettingsActivity extends BaseActivity {
                         savingValues.put(Database.COLUMN_SAVING_NAME, savingObject.getString(Database.COLUMN_SAVING_NAME));
                         savingValues.put(Database.COLUMN_SAVING_CURRENT_SAVING, savingObject.getDouble(Database.COLUMN_SAVING_CURRENT_SAVING));
                         savingValues.put(Database.COLUMN_SAVING_GOAL, savingObject.getDouble(Database.COLUMN_SAVING_GOAL));
+                        savingValues.put(Database.COLUMN_SAVING_CURRENCY, currency);
 
                         String description = savingObject.optString(Database.COLUMN_SAVING_DESCRIPTION,
                                 savingObject.optString("notes", ""));

@@ -5,11 +5,7 @@
         android:title="@string/preference_category_savings"
         app:iconSpaceReserved="false">
 
-        <ListPreference
-            android:key="currency"
-            app:iconSpaceReserved="true"
-            android:icon="@drawable/ic_currency"
-            android:title="@string/preference_list_currency"/>
+        <!-- Removed currency preference - now per piggy -->
 
         <ListPreference
             android:key="deadline_format"

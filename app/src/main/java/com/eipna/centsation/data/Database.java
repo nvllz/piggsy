@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 public class Database extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "centsation.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     public static final String TABLE_SAVING = "savings";
     public static final String COLUMN_SAVING_ID = "id";
@@ -19,6 +19,7 @@ public class Database extends SQLiteOpenHelper {
     public static final String COLUMN_SAVING_DESCRIPTION = "description";
     public static final String COLUMN_SAVING_IS_ARCHIVED = "is_archived";
     public static final String COLUMN_SAVING_DEADLINE = "deadline";
+    public static final String COLUMN_SAVING_CURRENCY = "currency";
 
     public static final String TABLE_TRANSACTION = "transactions";
     public static final String COLUMN_TRANSACTION_ID = "id";
@@ -41,7 +42,8 @@ public class Database extends SQLiteOpenHelper {
                 COLUMN_SAVING_GOAL + " REAL NOT NULL, " +
                 COLUMN_SAVING_DESCRIPTION + " TEXT, " +
                 COLUMN_SAVING_IS_ARCHIVED + " INTEGER NOT NULL, " +
-                COLUMN_SAVING_DEADLINE + " INTEGER);";
+                COLUMN_SAVING_DEADLINE + " INTEGER, " +
+                COLUMN_SAVING_CURRENCY + " TEXT NOT NULL DEFAULT 'USD');";
 
         String createTransactionTable = "CREATE TABLE IF NOT EXISTS " + TABLE_TRANSACTION + "(" +
                 COLUMN_TRANSACTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -66,6 +68,9 @@ public class Database extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         if (oldVersion < 2) {
             sqLiteDatabase.execSQL("ALTER TABLE " + TABLE_TRANSACTION + " ADD COLUMN " + COLUMN_TRANSACTION_NOTE + " TEXT");
+        }
+        if (oldVersion < 3) {
+            sqLiteDatabase.execSQL("ALTER TABLE " + TABLE_SAVING + " ADD COLUMN " + COLUMN_SAVING_CURRENCY + " TEXT NOT NULL DEFAULT 'USD'");
         }
     }
 }

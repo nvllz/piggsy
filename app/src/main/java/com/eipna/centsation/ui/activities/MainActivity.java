@@ -31,7 +31,6 @@ import com.eipna.centsation.data.saving.Saving;
 import com.eipna.centsation.data.saving.SavingOperation;
 import com.eipna.centsation.data.saving.SavingRepository;
 import com.eipna.centsation.data.saving.SavingSort;
-import com.eipna.centsation.data.transaction.TransactionRepository;
 import com.eipna.centsation.data.transaction.TransactionType;
 import com.eipna.centsation.databinding.ActivityMainBinding;
 import com.eipna.centsation.ui.adapters.SavingAdapter;
@@ -50,7 +49,6 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
 
     private ActivityMainBinding binding;
     private SavingRepository savingRepository;
-    private TransactionRepository transactionRepository;
     private SavingAdapter savingAdapter;
     private ArrayList<Saving> savings;
 
@@ -89,7 +87,6 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
 
         savings = new ArrayList<>();
         savingRepository = new SavingRepository(this);
-        transactionRepository = new TransactionRepository(this);
 
         sortCriteria = preferences.getSortCriteria();
         isSortAscending = preferences.getSortOrder();
@@ -249,7 +246,7 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
 
     private void showTransactionDialog(Saving selectedSaving) {
         View transactionDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_saving_transaction, null, false);
-        String currentCurrencySymbol = Currency.getSymbol(preferences.getCurrency());
+        String currentCurrencySymbol = Currency.getSymbol(selectedSaving.getCurrency());
 
         TextInputLayout amountLayout = transactionDialogView.findViewById(R.id.field_saving_amount_layout);
         TextInputEditText amountInput = transactionDialogView.findViewById(R.id.field_saving_amount_text);

@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -50,6 +52,7 @@ public class EditActivity extends BaseActivity {
     private SavingRepository savingRepository;
     private AlarmManager alarmManager;
     private Saving currentSaving;
+    private String selectedCurrency;
 
     private final ActivityResultLauncher<String> requestNotificationPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
@@ -92,8 +95,7 @@ public class EditActivity extends BaseActivity {
         savingRepository = new SavingRepository(this);
         currentSaving = savingRepository.getSaving(savingIDExtra);
 
-        String selectedCurrencySymbol = Currency.getSymbol(preferences.getCurrency());
-        binding.fieldSavingGoalLayout.setPrefixText(selectedCurrencySymbol);
+        setupCurrencyDropdown();
 
         binding.fieldSavingNameText.setText(currentSaving.getName());
         binding.fieldSavingGoalText.setText(String.format(Locale.getDefault(), "%.2f", currentSaving.getGoal()));
@@ -113,6 +115,33 @@ public class EditActivity extends BaseActivity {
         });
 
         setupAutoScroll();
+    }
+
+    private void setupCurrencyDropdown() {
+        String[] currencyNames = Currency.getNames();
+        String[] currencyCodes = Currency.getCodes();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line, currencyNames);
+
+        AutoCompleteTextView currencyDropdown = binding.fieldSavingCurrencyText;
+        currencyDropdown.setAdapter(adapter);
+
+        selectedCurrency = currentSaving.getCurrency();
+        String currentCurrencyName = Currency.getName(selectedCurrency);
+        currencyDropdown.setText(currentCurrencyName, false);
+
+        currencyDropdown.setOnItemClickListener((parent, view, position, id) -> {
+            selectedCurrency = currencyCodes[position];
+            updateCurrencySymbols();
+        });
+
+        updateCurrencySymbols();
+    }
+
+    private void updateCurrencySymbols() {
+        String currencySymbol = Currency.getSymbol(selectedCurrency);
+        binding.fieldSavingGoalLayout.setPrefixText(currencySymbol + "  ");
     }
 
     private void setupAutoScroll() {
@@ -231,7 +260,7 @@ public class EditActivity extends BaseActivity {
         String descriptionText = Objects.requireNonNull(binding.fieldSavingDescriptionText.getText()).toString();
         String deadlineText = Objects.requireNonNull(binding.fieldSavingDeadlineText.getText()).toString();
 
-        if (!nameText.isEmpty() && !goalText.isEmpty()) {
+        if (!nameText.isEmpty() && !goalText.isEmpty() && selectedCurrency != null) {
             double goal = Double.parseDouble(goalText);
 
             Saving editedSaving = new Saving();
@@ -242,6 +271,7 @@ public class EditActivity extends BaseActivity {
             editedSaving.setDescription(descriptionText);
             editedSaving.setIsArchived(currentSaving.getIsArchived());
             editedSaving.setDeadline(currentSaving.getDeadline());
+            editedSaving.setCurrency(selectedCurrency);
 
             if (deadlineText.isEmpty()) {
                 AlarmUtil.cancel(this, editedSaving);
@@ -257,6 +287,7 @@ public class EditActivity extends BaseActivity {
 
         binding.fieldSavingNameLayout.setError(nameText.isEmpty() ? getString(R.string.field_error_required) : null);
         binding.fieldSavingGoalLayout.setError(goalText.isEmpty() ? getString(R.string.field_error_required) : null);
+        binding.fieldSavingCurrencyLayout.setError(selectedCurrency == null ? getString(R.string.field_error_required) : null);
     }
 
     @Override

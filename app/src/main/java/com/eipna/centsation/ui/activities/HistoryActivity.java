@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.eipna.centsation.data.Database;
+import com.eipna.centsation.data.saving.SavingRepository;
 import com.eipna.centsation.data.transaction.Transaction;
 import com.eipna.centsation.data.transaction.TransactionRepository;
 import com.eipna.centsation.databinding.ActivityHistoryBinding;
@@ -47,6 +48,7 @@ public class HistoryActivity extends BaseActivity {
         }
 
         String selectedSavingID = getIntent().getStringExtra(Database.COLUMN_SAVING_ID);
+        String currency;
 
         ArrayList<Transaction> transactions;
         try (TransactionRepository transactionRepository = new TransactionRepository(this)) {
@@ -54,7 +56,11 @@ public class HistoryActivity extends BaseActivity {
             Collections.reverse(transactions);
         }
 
-        TransactionAdapter transactionAdapter = new TransactionAdapter(this, transactions);
+        try (SavingRepository savingRepository = new SavingRepository(this)) {
+            currency = savingRepository.getSaving(selectedSavingID).getCurrency();
+        }
+
+        TransactionAdapter transactionAdapter = new TransactionAdapter(this, transactions, currency);
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(transactionAdapter);

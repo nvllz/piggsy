@@ -102,27 +102,18 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
         }
 
         public void bind(Saving currentSaving, PreferenceUtil preferences) {
-            // Calculate progress percentage
             int percentValue = (int) ((currentSaving.getCurrentSaving() / currentSaving.getGoal()) * 100);
             percentValue = Math.max(0, Math.min(100, percentValue));
 
-            // Configure text direction based on currency
-            configureTextDirection(preferences.getCurrency());
-
-            // Handle archived state
+            configureTextDirection(currentSaving.getCurrency());
             configureArchivedState(currentSaving);
 
-            // Configure deadline display and state
             boolean isDeadlineDue = configureDeadline(currentSaving, preferences.getDateFormat(), percentValue);
+            configureGoalAndProgress(currentSaving, percentValue);
 
-            // Configure goal and progress display
-            configureGoalAndProgress(currentSaving, preferences, percentValue);
-
-            // Set parent card state (checked/unchecked with appropriate icon)
             configureParentCardState(currentSaving, isDeadlineDue);
 
-            // Set current saving amount
-            saving.setText(Currency.formatAmount(preferences.getCurrency(), currentSaving.getCurrentSaving()));
+            saving.setText(Currency.formatAmount(currentSaving.getCurrency(), currentSaving.getCurrentSaving()));
         }
 
         private void configureTextDirection(String currency) {
@@ -136,14 +127,12 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
         }
 
         private void configureArchivedState(Saving currentSaving) {
-            // Always set the name regardless of archive status
             name.setText(currentSaving.getName());
 
             if (currentSaving.getIsArchived() == Saving.IS_ARCHIVE) {
                 archive.setVisibility(View.GONE);
                 update.setVisibility(View.GONE);
 
-                // Set alpha for all archived elements
                 View[] archivedElements = {name, saving, goal, percent, progress, outOfText};
                 for (View element : archivedElements) {
                     element.setAlpha(0.6f);
@@ -166,7 +155,6 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
                 Date deadlineDate = DateUtil.getDateWithoutTime(currentSaving.getDeadline());
 
                 if (!deadlineDate.after(today)) {
-                    // Deadline is due or overdue
                     int errorBg = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_errorContainer);
                     int errorText = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_onErrorContainer);
                     deadlineContainer.setCardBackgroundColor(errorBg);
@@ -179,7 +167,6 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
                     }
                     isDeadlineDue = true;
                 } else {
-                    // Deadline is in the future
                     int defaultBg = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_secondaryContainer);
                     int defaultText = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_onSecondaryContainer);
                     deadlineContainer.setCardBackgroundColor(defaultBg);
@@ -190,11 +177,10 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
             return isDeadlineDue;
         }
 
-        private void configureGoalAndProgress(Saving currentSaving, PreferenceUtil preferences, int percentValue) {
+        private void configureGoalAndProgress(Saving currentSaving, int percentValue) {
             boolean hasGoal = currentSaving.getGoal() > 0;
             int visibility = hasGoal ? View.VISIBLE : View.GONE;
 
-            // Set visibility for all goal-related elements
             View[] goalElements = {goal, percent, outOfText, progress};
             for (View element : goalElements) {
                 element.setVisibility(visibility);
@@ -203,7 +189,7 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
             if (hasGoal) {
                 progress.setProgress(percentValue, true);
                 percent.setText(String.format("%s%c", percentValue, '%'));
-                goal.setText(Currency.formatAmount(preferences.getCurrency(), currentSaving.getGoal()));
+                goal.setText(Currency.formatAmount(currentSaving.getCurrency(), currentSaving.getGoal()));
             }
         }
 
