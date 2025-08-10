@@ -1,0 +1,5 @@
+Piggsy is your straightforward, no-nonsense piggy bank app designed to help you save money and reach your financial goals with ease. Create multiple piggy banks tailored to your needs, whether it’s for a vacation, a new gadget, or an emergency fund. Customize each piggy bank with your preferred real-world currency, set optional deadlines to keep you motivated, and add detailed descriptions so you never forget why you’re saving. Track every transaction by adding or deducting amounts, along with notes to remind yourself of the details.
+
+This app offers a clean and modern interface with dynamic color themes and a dark mode to make saving comfortable day or night. Stay organized by archiving completed or paused piggy banks, and keep full control over your data with easy export and import options via JSON.
+
+Whether you’re a casual saver or someone who likes to keep detailed records, Piggsy makes managing your goals simple, flexible, and transparent.
