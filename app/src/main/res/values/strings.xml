@@ -3,7 +3,7 @@
     <string name="app_easter_egg">You\'ve done this before, haven\'t you?</string>
     <string name="app_license">GNU General Public License v3.0</string>
     <string name="app_author">nvllz</string>
-    <string name="app_og_author">eipna</string>
+    <string name="app_og_creator">eipna</string>
 
     <string name="toolbar_main">Piggsy</string>
     <string name="toolbar_create">New piggy</string>
@@ -13,9 +13,9 @@
     <string name="toolbar_history">History</string>
     <string name="toolbar_about">About</string>
 
-    <string name="link_app_source_code">https://github.com/nvllz/Stepsy</string>
+    <string name="link_app_source_code">https://github.com/nvllz/Piggsy</string>
     <string name="link_app_author">https://github.com/nvllz</string>
-    <string name="link_app_og_author">https://github.com/eipna</string>
+    <string name="link_app_og_creator">https://github.com/eipna</string>
 
     <string name="empty_indicator_main">No piggy banks here yet!</string>
     <string name="empty_indicator_archive">No archived piggy banks</string>
@@ -112,7 +112,7 @@
     <string name="preference_app_source_code_title">Source Code</string>
     <string name="preference_app_source_code_summary">Explore the project on GitHub</string>
     <string name="preference_app_author">Author</string>
-    <string name="preference_app_og_author">Original Author</string>
+    <string name="preference_app_og_creator">Original Creator</string>
 
     <!-- Deadline Notification -->
     <string name="deadline_notification_title">Piggy bank deadline!</string>

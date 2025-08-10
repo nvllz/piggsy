@@ -31,14 +31,14 @@
     </Preference>
 
     <Preference
-        android:key="app_og_author"
+        android:key="app_og_creator"
         app:iconSpaceReserved="false"
-        android:title="@string/preference_app_og_author"
-        android:summary="@string/app_og_author">
+        android:title="@string/preference_app_og_creator"
+        android:summary="@string/app_og_creator">
 
         <intent
             android:action="android.intent.action.VIEW"
-            android:data="@string/link_app_og_author"/>
+            android:data="@string/link_app_og_creator"/>
     </Preference>
 
     <Preference
