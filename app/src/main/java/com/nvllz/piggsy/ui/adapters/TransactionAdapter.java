@@ -70,10 +70,12 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                 note.setVisibility(View.GONE);
             }
 
-            if (currentTransaction.getType().equals(TransactionType.DEPOSIT.VALUE) ||
-                    currentTransaction.getType().equals(TransactionType.CREATED.VALUE)) {
+            if (currentTransaction.getType().equals(TransactionType.DEPOSIT.VALUE)) {
                 amount.setTextColor(context.getResources().getColor(R.color.md_theme_secondary, itemView.getContext().getTheme()));
                 amount.setText(String.format("+%s", Currency.formatAmount(selectedCurrencySymbol, currentTransaction.getAmount())));
+            } else if (currentTransaction.getType().equals(TransactionType.CREATED.VALUE)) {
+                amount.setTextColor(context.getResources().getColor(R.color.md_theme_secondary, itemView.getContext().getTheme()));
+                amount.setText(Currency.formatAmount(selectedCurrencySymbol, currentTransaction.getAmount()));
             } else if (currentTransaction.getType().equals(TransactionType.WITHDRAW.VALUE)) {
                 amount.setTextColor(context.getResources().getColor(R.color.md_theme_error, itemView.getContext().getTheme()));
                 amount.setText(String.format("-%s", Currency.formatAmount(selectedCurrencySymbol, currentTransaction.getAmount())));
