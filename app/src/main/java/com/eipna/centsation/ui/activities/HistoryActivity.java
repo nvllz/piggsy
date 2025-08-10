@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.eipna.centsation.data.Database;
+import com.eipna.centsation.data.saving.Saving;
 import com.eipna.centsation.data.saving.SavingRepository;
 import com.eipna.centsation.data.transaction.Transaction;
 import com.eipna.centsation.data.transaction.TransactionRepository;
@@ -49,6 +50,7 @@ public class HistoryActivity extends BaseActivity {
 
         String selectedSavingID = getIntent().getStringExtra(Database.COLUMN_SAVING_ID);
         String currency;
+        String piggyBankName;
 
         ArrayList<Transaction> transactions;
         try (TransactionRepository transactionRepository = new TransactionRepository(this)) {
@@ -57,7 +59,13 @@ public class HistoryActivity extends BaseActivity {
         }
 
         try (SavingRepository savingRepository = new SavingRepository(this)) {
-            currency = savingRepository.getSaving(selectedSavingID).getCurrency();
+            Saving saving = savingRepository.getSaving(selectedSavingID);
+            currency = saving.getCurrency();
+            piggyBankName = saving.getName();
+        }
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(piggyBankName);
         }
 
         TransactionAdapter transactionAdapter = new TransactionAdapter(this, transactions, currency);

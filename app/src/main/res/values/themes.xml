@@ -116,4 +116,10 @@
         <item name="strokeColor">@color/md_theme_outline</item>
         <item name="strokeWidth">1dp</item>
     </style>
+
+    <style name="ToolbarTitleStyle" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+    </style>
 </resources>
