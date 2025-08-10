@@ -1,15 +1,14 @@
 package com.eipna.centsation.ui.adapters;
 
 import android.content.Context;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.StrikethroughSpan;
+import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.eipna.centsation.R;
@@ -25,6 +24,7 @@ import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder> {
 
@@ -75,6 +75,7 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
         MaterialCardView parent;
         MaterialTextView name, saving, goal, percent, deadline, outOfText;
         MaterialButton update, history, archive, unarchive, delete;
+        MaterialCardView percentContainer, deadlineContainer;
 
         LinearLayout description;
         LinearProgressIndicator progress;
@@ -87,9 +88,11 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
             outOfText = itemView.findViewById(R.id.saving_out_of_text);
             goal = itemView.findViewById(R.id.saving_goal);
             percent = itemView.findViewById(R.id.saving_percent);
+            percentContainer = itemView.findViewById(R.id.saving_percent_container);
             description = itemView.findViewById(R.id.saving_description);
             progress = itemView.findViewById(R.id.saving_progress);
             deadline = itemView.findViewById(R.id.saving_deadline);
+            deadlineContainer = itemView.findViewById(R.id.saving_deadline_container);
 
             update = itemView.findViewById(R.id.saving_update);
             history = itemView.findViewById(R.id.saving_history);
@@ -99,56 +102,122 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
         }
 
         public void bind(Saving currentSaving, PreferenceUtil preferences) {
-            String deadlineFormat = preferences.getDateFormat();
+            // Calculate progress percentage
             int percentValue = (int) ((currentSaving.getCurrentSaving() / currentSaving.getGoal()) * 100);
             percentValue = Math.max(0, Math.min(100, percentValue));
 
-            if (Currency.isRTLCurrency(preferences.getCurrency())) {
-                description.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
-                saving.setTextDirection(View.TEXT_DIRECTION_RTL);
-                goal.setTextDirection(View.TEXT_DIRECTION_RTL);
-            } else {
-                description.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
-                saving.setTextDirection(View.TEXT_DIRECTION_LTR);
-                goal.setTextDirection(View.TEXT_DIRECTION_LTR);
-            }
+            // Configure text direction based on currency
+            configureTextDirection(preferences.getCurrency());
+
+            // Handle archived state
+            configureArchivedState(currentSaving);
+
+            // Configure deadline display and state
+            boolean isDeadlineDue = configureDeadline(currentSaving, preferences.getDateFormat(), percentValue);
+
+            // Configure goal and progress display
+            configureGoalAndProgress(currentSaving, preferences, percentValue);
+
+            // Set parent card state (checked/unchecked with appropriate icon)
+            configureParentCardState(currentSaving, isDeadlineDue);
+
+            // Set current saving amount
+            saving.setText(Currency.formatAmount(preferences.getCurrency(), currentSaving.getCurrentSaving()));
+        }
+
+        private void configureTextDirection(String currency) {
+            boolean isRTL = Currency.isRTLCurrency(currency);
+            int layoutDirection = isRTL ? View.LAYOUT_DIRECTION_RTL : View.LAYOUT_DIRECTION_LTR;
+            int textDirection = isRTL ? View.TEXT_DIRECTION_RTL : View.TEXT_DIRECTION_LTR;
+
+            description.setLayoutDirection(layoutDirection);
+            saving.setTextDirection(textDirection);
+            goal.setTextDirection(textDirection);
+        }
+
+        private void configureArchivedState(Saving currentSaving) {
+            // Always set the name regardless of archive status
+            name.setText(currentSaving.getName());
 
             if (currentSaving.getIsArchived() == Saving.IS_ARCHIVE) {
                 archive.setVisibility(View.GONE);
                 update.setVisibility(View.GONE);
-                name.setAlpha(0.6f);
 
-                SpannableString spannableString = new SpannableString(currentSaving.getName());
-                spannableString.setSpan(new StrikethroughSpan(), 0, currentSaving.getName().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                name.setText(spannableString);
+                // Set alpha for all archived elements
+                View[] archivedElements = {name, saving, goal, percent, progress, outOfText};
+                for (View element : archivedElements) {
+                    element.setAlpha(0.6f);
+                }
             } else {
                 unarchive.setVisibility(View.GONE);
-                name.setText(currentSaving.getName());
+            }
+        }
+
+        private boolean configureDeadline(Saving currentSaving, String deadlineFormat, Integer percentValue) {
+            boolean isDeadlineDue = false;
+
+            if (currentSaving.getDeadline() == AlarmUtil.NO_ALARM) {
+                deadline.setVisibility(View.GONE);
+            } else {
+                deadline.setVisibility(View.VISIBLE);
+                deadline.setText(String.format("%s", DateUtil.getStringDate(currentSaving.getDeadline(), deadlineFormat)));
+
+                Date today = DateUtil.getTodayWithoutTime();
+                Date deadlineDate = DateUtil.getDateWithoutTime(currentSaving.getDeadline());
+
+                if (!deadlineDate.after(today)) {
+                    // Deadline is due or overdue
+                    int errorBg = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_errorContainer);
+                    int errorText = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_onErrorContainer);
+                    deadlineContainer.setCardBackgroundColor(errorBg);
+                    deadline.setTextColor(errorText);
+
+                    if (percentValue < 100) {
+                        progress.setIndicatorColor(errorBg);
+                        percentContainer.setCardBackgroundColor(errorBg);
+                        percent.setTextColor(errorText);
+                    }
+                    isDeadlineDue = true;
+                } else {
+                    // Deadline is in the future
+                    int defaultBg = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_secondaryContainer);
+                    int defaultText = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_onSecondaryContainer);
+                    deadlineContainer.setCardBackgroundColor(defaultBg);
+                    deadline.setTextColor(defaultText);
+                }
             }
 
+            return isDeadlineDue;
+        }
 
-            deadline.setVisibility(currentSaving.getDeadline() == AlarmUtil.NO_ALARM ? View.GONE : View.VISIBLE);
-            deadline.setText(String.format("%s", DateUtil.getStringDate(currentSaving.getDeadline(), deadlineFormat)));
+        private void configureGoalAndProgress(Saving currentSaving, PreferenceUtil preferences, int percentValue) {
+            boolean hasGoal = currentSaving.getGoal() > 0;
+            int visibility = hasGoal ? View.VISIBLE : View.GONE;
 
-            if (currentSaving.getGoal() <= 0) {
-                goal.setVisibility(View.GONE);
-                percent.setVisibility(View.GONE);
-                outOfText.setVisibility(View.GONE);
-                progress.setVisibility(View.GONE);
-            } else {
-                goal.setVisibility(View.VISIBLE);
-                percent.setVisibility(View.VISIBLE);
-                outOfText.setVisibility(View.VISIBLE);
-                progress.setVisibility(View.VISIBLE);
+            // Set visibility for all goal-related elements
+            View[] goalElements = {goal, percent, outOfText, progress};
+            for (View element : goalElements) {
+                element.setVisibility(visibility);
+            }
+
+            if (hasGoal) {
                 progress.setProgress(percentValue, true);
                 percent.setText(String.format("%s%c", percentValue, '%'));
                 goal.setText(Currency.formatAmount(preferences.getCurrency(), currentSaving.getGoal()));
             }
+        }
 
-            if (currentSaving.getGoal() != 0) {
-                parent.setChecked(currentSaving.getCurrentSaving() >= currentSaving.getGoal());
+        private void configureParentCardState(Saving currentSaving, boolean isDeadlineDue) {
+            if (currentSaving.getCurrentSaving() >= currentSaving.getGoal()) {
+                parent.setChecked(true);
+                parent.setCheckedIcon(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_check));
+            } else if (isDeadlineDue) {
+                parent.setChecked(true);
+                parent.setCheckedIcon(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_warning));
+                parent.setCheckedIconTint(ColorStateList.valueOf(ContextCompat.getColor(itemView.getContext(), R.color.md_theme_error)));
+            } else {
+                parent.setChecked(false);
             }
-            saving.setText(Currency.formatAmount(preferences.getCurrency(), currentSaving.getCurrentSaving()));
         }
     }
 }

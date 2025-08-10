@@ -4,8 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
@@ -15,18 +15,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.eipna.centsation.R;
 import com.eipna.centsation.data.Database;
 import com.eipna.centsation.data.saving.Saving;
 import com.eipna.centsation.data.saving.SavingOperation;
 import com.eipna.centsation.data.saving.SavingRepository;
-import com.eipna.centsation.data.transaction.Transaction;
 import com.eipna.centsation.data.transaction.TransactionRepository;
 import com.eipna.centsation.databinding.ActivityArchiveBinding;
 import com.eipna.centsation.ui.adapters.SavingAdapter;
-import com.eipna.centsation.ui.adapters.TransactionAdapter;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.shape.MaterialShapeDrawable;
 
@@ -82,6 +79,7 @@ public class ArchiveActivity extends BaseActivity implements SavingAdapter.Liste
     private void unarchiveSaving(Saving selectedSaving) {
         selectedSaving.setIsArchived(Saving.NOT_ARCHIVE);
         savingRepository.edit(selectedSaving);
+        Toast.makeText(this, R.string.toast_piggy_bank_unarchived, Toast.LENGTH_SHORT).show();
         refreshList();
     }
 
@@ -105,26 +103,6 @@ public class ArchiveActivity extends BaseActivity implements SavingAdapter.Liste
                     savingRepository.delete(savingID);
                     refreshList();
                 });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
-    private void showHistoryDialog(Saving selectedSaving) {
-        View transactionDialog = LayoutInflater.from(this).inflate(R.layout.dialog_saving_history, null, false);
-
-        ArrayList<Transaction> transactions = transactionRepository.get(selectedSaving.getID());
-        TransactionAdapter adapter = new TransactionAdapter(this, transactions);
-
-        RecyclerView transactionList = transactionDialog.findViewById(R.id.transaction_list);
-        transactionList.setLayoutManager(new LinearLayoutManager(this));
-        transactionList.setAdapter(adapter);
-
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.dialog_title_history_saving)
-                .setIcon(R.drawable.ic_history)
-                .setView(transactionDialog)
-                .setPositiveButton(R.string.dialog_button_close, null);
 
         AlertDialog dialog = builder.create();
         dialog.show();

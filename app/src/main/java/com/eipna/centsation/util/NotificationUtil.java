@@ -18,7 +18,7 @@ import java.util.Objects;
 public class NotificationUtil {
 
     public static String CHANNEL_DEADLINE_ID = "channel_deadline";
-    public static String CHANNEL_DEADLINE_NAME = "Deadlines";
+    public static String CHANNEL_DEADLINE_NAME = "Piggy bank deadline";
     public static int CHANNEL_DEADLINE_IMPORTANCE = NotificationManager.IMPORTANCE_HIGH;
 
     public static void createChannels(Context context) {
@@ -39,8 +39,8 @@ public class NotificationUtil {
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, savingRequestCode, notificationIntent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
 
-        String notificationTitle = savingName + " Deadline!";
-        String notificationBody = "The deadline for your " + savingName + " is today.";
+        String notificationTitle = context.getString(R.string.deadline_notification_title);
+        String notificationBody = context.getString(R.string.deadline_notification_content, savingName);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_DEADLINE_ID)
                 .setSmallIcon(R.drawable.ic_notification)

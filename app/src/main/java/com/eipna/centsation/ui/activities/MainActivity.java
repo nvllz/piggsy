@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
@@ -22,7 +23,6 @@ import androidx.core.view.MenuCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.eipna.centsation.R;
 import com.eipna.centsation.data.Currency;
@@ -31,12 +31,10 @@ import com.eipna.centsation.data.saving.Saving;
 import com.eipna.centsation.data.saving.SavingOperation;
 import com.eipna.centsation.data.saving.SavingRepository;
 import com.eipna.centsation.data.saving.SavingSort;
-import com.eipna.centsation.data.transaction.Transaction;
 import com.eipna.centsation.data.transaction.TransactionRepository;
 import com.eipna.centsation.data.transaction.TransactionType;
 import com.eipna.centsation.databinding.ActivityMainBinding;
 import com.eipna.centsation.ui.adapters.SavingAdapter;
-import com.eipna.centsation.ui.adapters.TransactionAdapter;
 import com.eipna.centsation.util.AlarmUtil;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -107,6 +105,12 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
         binding.savingList.setAdapter(savingAdapter);
 
         binding.createSaving.setOnClickListener(v -> createSavingLauncher.launch(new Intent(MainActivity.this, CreateActivity.class)));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshList();
     }
 
     @Override
@@ -235,6 +239,7 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
                 .setPositiveButton(R.string.dialog_button_delete, (dialogInterface, i) -> {
                     AlarmUtil.cancel(this, saving);
                     savingRepository.delete(saving.getID());
+                    Toast.makeText(getApplicationContext(), R.string.toast_piggy_bank_deleted, Toast.LENGTH_SHORT).show();
                     refreshList();
                 });
 
@@ -315,6 +320,7 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
     private void archiveSaving(Saving selectedSaving) {
         selectedSaving.setIsArchived(Saving.IS_ARCHIVE);
         savingRepository.edit(selectedSaving);
+        Toast.makeText(this, R.string.toast_piggy_bank_archived, Toast.LENGTH_SHORT).show();
         refreshList();
     }
 

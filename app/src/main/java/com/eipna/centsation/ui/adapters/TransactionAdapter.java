@@ -65,16 +65,16 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             int typeResId;
             switch (currentTransaction.getType()) {
                 case "Created":
-                    typeResId = R.string.transaction_label_created;
+                    typeResId = R.string.transaction_label_initial;
                     break;
                 case "Deposit":
                     typeResId = R.string.transaction_label_deposit;
                     break;
                 case "Withdraw":
-                    typeResId = R.string.transaction_label_withdraw;
+                    typeResId = R.string.transaction_label_withdrawal;
                     break;
                 default:
-                    typeResId = R.string.transaction_label_created; // fallback
+                    typeResId = R.string.transaction_label_initial; // fallback
                     break;
             }
 

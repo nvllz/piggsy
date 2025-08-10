@@ -65,15 +65,18 @@
     <string name="menu_item_sort_ascending">Ascending</string>
     <string name="menu_item_sort_descending">Descending</string>
 
-    <string name="transaction_label_created">Created</string>
-    <string name="transaction_label_deposit">Deposited</string>
-    <string name="transaction_label_withdraw">Withdrawn</string>
+    <string name="transaction_label_initial">Initial balance</string>
+    <string name="transaction_label_deposit">Deposit</string>
+    <string name="transaction_label_withdrawal">Withdrawal</string>
 
     <string name="toast_import_successful">Import successful</string>
     <string name="toast_export_successful">Export successful</string>
     <string name="toast_export_no_savings_found">No piggy banks to export</string>
     <string name="toast_notification_permission_denied">Notification permission denied</string>
     <string name="toast_deny_import_notice">Deadlines may not work properly</string>
+    <string name="toast_piggy_bank_archived">Piggy bank moved to archive</string>
+    <string name="toast_piggy_bank_unarchived">Piggy bank restored</string>
+    <string name="toast_piggy_bank_deleted">Piggy bank deleted</string>
 
     <string name="tooltip_update">New Transaction</string>
     <string name="tooltip_history">History</string>
@@ -112,4 +115,8 @@
     <string name="preference_app_source_code_summary">Explore the project on GitHub</string>
     <string name="preference_app_author">Author</string>
     <string name="preference_app_og_author">Original Author</string>
+
+    <!-- Deadline Notification -->
+    <string name="deadline_notification_title">Piggy bank deadline!</string>
+    <string name="deadline_notification_content">Goal deadline reached for \"%1$s\". Check your progress!</string>
 </resources>

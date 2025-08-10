@@ -15,7 +15,11 @@
     app:cardBackgroundColor="?attr/colorSurfaceContainer"
     app:cardCornerRadius="20dp"
     app:cardUseCompatPadding="true"
-    app:strokeWidth="0dp">
+    app:strokeWidth="0dp"
+    app:checkedIconGravity="TOP_END"
+    app:checkedIconMargin="12dp"
+    app:checkedIconSize="28dp"
+    app:checkedIconTint="?attr/colorAccent">
 
     <View
         android:layout_width="match_parent"
@@ -43,9 +47,11 @@
             android:layout_height="wrap_content"
             app:cardBackgroundColor="?attr/colorSecondaryContainer"
             app:cardCornerRadius="12dp"
+            app:strokeWidth="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/accent_line">
+            app:layout_constraintTop_toBottomOf="@id/accent_line"
+            app:checkedIconTint="?attr/colorPrimary">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/saving_deadline"
@@ -154,6 +160,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                app:strokeWidth="0dp"
                 app:cardBackgroundColor="?attr/colorPrimary"
                 app:cardCornerRadius="20dp">
 
@@ -191,10 +198,14 @@
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:contentDescription="Update"
-                android:text="Add"
                 android:fontFamily="@font/open_sans_family"
+                android:text="Add"
+                android:backgroundTint="?attr/colorPrimaryContainer"
+                android:textColor="?attr/colorOnPrimaryContainer"
                 app:icon="@drawable/ic_add_circle"
+                app:iconTint="?attr/colorOnPrimaryContainer"
                 app:iconGravity="textStart"
+                app:strokeWidth="0dp"
                 tools:ignore="HardcodedText" />
 
             <com.google.android.material.button.MaterialButton
