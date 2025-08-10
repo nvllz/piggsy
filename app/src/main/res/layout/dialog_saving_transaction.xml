@@ -34,6 +34,7 @@
             android:id="@+id/field_transaction_note_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:hint="@string/field_transaction_notes"
             android:inputType="textMultiLine"
             android:maxLines="3" />
     </com.google.android.material.textfield.TextInputLayout>

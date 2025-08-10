@@ -47,7 +47,8 @@
             android:layout_height="wrap_content"
             app:cardBackgroundColor="?attr/colorSecondaryContainer"
             app:cardCornerRadius="12dp"
-            app:strokeWidth="0dp"
+            app:strokeColor="?attr/colorOutlineVariant"
+            app:strokeWidth="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/accent_line"
@@ -78,7 +79,7 @@
             android:shadowDx="0"
             android:text="Saving Title"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:textColor="?attr/colorPrimary"
             android:fontFamily="@font/open_sans_semibold"
             app:layout_constraintStart_toStartOf="parent"
@@ -204,8 +205,9 @@
                 android:textColor="?attr/colorOnPrimaryContainer"
                 app:icon="@drawable/ic_add_circle"
                 app:iconTint="?attr/colorOnPrimaryContainer"
+                app:strokeColor="?attr/colorPrimary"
+                app:strokeWidth="1dp"
                 app:iconGravity="textStart"
-                app:strokeWidth="0dp"
                 tools:ignore="HardcodedText" />
 
             <com.google.android.material.button.MaterialButton

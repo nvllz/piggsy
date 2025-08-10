@@ -261,7 +261,7 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
 
         depositOption.setChecked(true);
 
-        amountLayout.setPrefixText(currentCurrencySymbol);
+        amountLayout.setPrefixText(currentCurrencySymbol + "  ");
 
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.dialog_title_create_transaction)

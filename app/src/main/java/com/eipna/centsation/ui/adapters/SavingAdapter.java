@@ -208,7 +208,7 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
         }
 
         private void configureParentCardState(Saving currentSaving, boolean isDeadlineDue) {
-            if (currentSaving.getCurrentSaving() >= currentSaving.getGoal()) {
+            if (currentSaving.getCurrentSaving() >= currentSaving.getGoal() && !(currentSaving.getGoal() == 0)) {
                 parent.setChecked(true);
                 parent.setCheckedIcon(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_check));
             } else if (isDeadlineDue) {

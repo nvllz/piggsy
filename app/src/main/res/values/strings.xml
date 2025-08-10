@@ -31,15 +31,16 @@
     <string name="field_saving_current_saving">Current Saving</string>
     <string name="field_transaction_amount">Amount</string>
     <string name="field_saving_goal">Goal</string>
-    <string name="field_saving_notes">Note (optional)</string>
     <string name="field_saving_description">Description</string>
     <string name="field_saving_deadline">Deadline</string>
+
+    <string name="field_transaction_notes">Note (optional)</string>
 
     <string name="dialog_title_request_alarm_permission">Required permission</string>
     <string name="dialog_title_create_saving">Create piggy bank</string>
     <string name="dialog_title_edit_saving">Edit piggy bank</string>
     <string name="dialog_title_delete_saving">Delete piggy bank?</string>
-    <string name="dialog_title_create_transaction">Create transaction</string>
+    <string name="dialog_title_create_transaction">New transaction</string>
     <string name="dialog_title_history_saving">Transaction log</string>
 
     <string name="dialog_message_delete_saving">Delete this piggy bank? You won\'t be able to get it back.</string>
