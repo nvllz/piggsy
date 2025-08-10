@@ -7,6 +7,7 @@ public class Transaction {
     private double amount;
     private String type;
     private long date;
+    private String note;
 
     public Transaction() {
         this.ID = -1;
@@ -14,6 +15,7 @@ public class Transaction {
         this.amount = -1;
         this.type = null;
         this.date = -1;
+        this.note = null;
     }
 
     public int getID() {
@@ -54,5 +56,13 @@ public class Transaction {
 
     public void setDate(long date) {
         this.date = date;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }

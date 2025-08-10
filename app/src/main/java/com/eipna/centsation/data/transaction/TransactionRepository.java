@@ -23,6 +23,7 @@ public class TransactionRepository extends Database {
         values.put(COLUMN_TRANSACTION_AMOUNT, createdTransaction.getAmount());
         values.put(COLUMN_TRANSACTION_TYPE, createdTransaction.getType());
         values.put(COLUMN_TRANSACTION_DATE, System.currentTimeMillis());
+        values.put(COLUMN_TRANSACTION_NOTE, createdTransaction.getNote()); // Add note
         database.insert(TABLE_TRANSACTION, null, values);
         database.close();
     }
@@ -41,6 +42,14 @@ public class TransactionRepository extends Database {
                 queriedTransaction.setAmount(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_AMOUNT)));
                 queriedTransaction.setType(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_TYPE)));
                 queriedTransaction.setDate(cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_DATE)));
+
+                int noteIndex = cursor.getColumnIndex(COLUMN_TRANSACTION_NOTE);
+                String note = "";
+                if (noteIndex != -1 && !cursor.isNull(noteIndex)) {
+                    note = cursor.getString(noteIndex);
+                }
+                queriedTransaction.setNote(note);
+
                 list.add(queriedTransaction);
             } while (cursor.moveToNext());
         }
@@ -62,6 +71,14 @@ public class TransactionRepository extends Database {
                 queriedTransaction.setAmount(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_AMOUNT)));
                 queriedTransaction.setType(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_TYPE)));
                 queriedTransaction.setDate(cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_TRANSACTION_DATE)));
+
+                int noteIndex = cursor.getColumnIndex(COLUMN_TRANSACTION_NOTE);
+                String note = "";
+                if (noteIndex != -1 && !cursor.isNull(noteIndex)) {
+                    note = cursor.getString(noteIndex);
+                }
+                queriedTransaction.setNote(note);
+
                 list.add(queriedTransaction);
             } while (cursor.moveToNext());
         }

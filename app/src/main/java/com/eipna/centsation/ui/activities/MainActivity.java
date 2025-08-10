@@ -264,6 +264,8 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
         TextInputLayout amountLayout = transactionDialogView.findViewById(R.id.field_saving_amount_layout);
         TextInputEditText amountInput = transactionDialogView.findViewById(R.id.field_saving_amount_text);
 
+        TextInputEditText noteInput = transactionDialogView.findViewById(R.id.field_transaction_note_text);
+
         MaterialButton depositOption = transactionDialogView.findViewById(R.id.button_deposit);
         MaterialButton withdrawOption = transactionDialogView.findViewById(R.id.button_withdraw);
 
@@ -287,33 +289,36 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
 
         dialog.setOnShowListener(dialogInterface ->
                 dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
-            String amountText = Objects.requireNonNull(amountInput.getText()).toString();
+                    String amountText = Objects.requireNonNull(amountInput.getText()).toString();
+                    String noteText = Objects.requireNonNull(noteInput.getText()).toString().trim();
 
-            if (amountText.isEmpty()) {
-                amountLayout.setError(getString(R.string.field_error_required));
-                return;
-            }
+                    if (amountText.isEmpty()) {
+                        amountLayout.setError(getString(R.string.field_error_required));
+                        return;
+                    }
 
-            if (depositOption.isChecked()) {
-                double addedSaving = selectedSaving.getCurrentSaving() + Double.parseDouble(amountText);
-                double amount = Double.parseDouble(amountText);
+                    try {
+                        double amount = Double.parseDouble(amountText);
 
-                selectedSaving.setCurrentSaving(addedSaving);
-                savingRepository.makeTransaction(selectedSaving, amount, TransactionType.DEPOSIT);
+                        if (depositOption.isChecked()) {
+                            double addedSaving = selectedSaving.getCurrentSaving() + amount;
+                            selectedSaving.setCurrentSaving(addedSaving);
+                            savingRepository.makeTransaction(selectedSaving, amount, TransactionType.DEPOSIT, noteText);
 
-                    refreshList();
-                    dialog.dismiss();
-                } else if (withdrawOption.isChecked()) {
-                    double deductedSaving = selectedSaving.getCurrentSaving() - Double.parseDouble(amountText);
-                    double amount = Double.parseDouble(amountText);
+                            refreshList();
+                            dialog.dismiss();
+                        } else if (withdrawOption.isChecked()) {
+                            double deductedSaving = selectedSaving.getCurrentSaving() - amount;
+                            selectedSaving.setCurrentSaving(deductedSaving);
+                            savingRepository.makeTransaction(selectedSaving, amount, TransactionType.WITHDRAW, noteText);
 
-                selectedSaving.setCurrentSaving(deductedSaving);
-                savingRepository.makeTransaction(selectedSaving, amount, TransactionType.WITHDRAW);
-
-                refreshList();
-                dialog.dismiss();
-            }
-        }));
+                            refreshList();
+                            dialog.dismiss();
+                        }
+                    } catch (NumberFormatException e) {
+                        amountLayout.setError("Invalid amount");
+                    }
+                }));
         dialog.show();
     }
 

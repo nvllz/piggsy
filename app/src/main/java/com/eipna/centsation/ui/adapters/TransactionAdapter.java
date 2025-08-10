@@ -1,6 +1,7 @@
 package com.eipna.centsation.ui.adapters;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,36 +51,27 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        MaterialTextView type, amount, date;
+        MaterialTextView amount, date, note;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            type = itemView.findViewById(R.id.transaction_type);
             amount = itemView.findViewById(R.id.transaction_amount);
             date = itemView.findViewById(R.id.transaction_date);
+            note = itemView.findViewById(R.id.transaction_note);
         }
 
         public void bind(Transaction currentTransaction, PreferenceUtil preferenceUtil, Context context) {
             String selectedCurrencySymbol = preferenceUtil.getCurrency();
 
-            int typeResId;
-            switch (currentTransaction.getType()) {
-                case "Created":
-                    typeResId = R.string.transaction_label_initial;
-                    break;
-                case "Deposit":
-                    typeResId = R.string.transaction_label_deposit;
-                    break;
-                case "Withdraw":
-                    typeResId = R.string.transaction_label_withdrawal;
-                    break;
-                default:
-                    typeResId = R.string.transaction_label_initial; // fallback
-                    break;
-            }
-
-            type.setText(context.getString(typeResId));
             date.setText(DateUtil.getStringDateTime(currentTransaction.getDate(), context));
+
+            String transactionNote = currentTransaction.getNote();
+            if (!TextUtils.isEmpty(transactionNote) && !transactionNote.trim().isEmpty()) {
+                note.setText(transactionNote);
+                note.setVisibility(View.VISIBLE);
+            } else {
+                note.setVisibility(View.GONE);
+            }
 
             if (currentTransaction.getType().equals(TransactionType.DEPOSIT.VALUE) || currentTransaction.getType().equals(TransactionType.CREATED.VALUE)) {
                 amount.setTextColor(context.getResources().getColor(R.color.md_theme_secondary, itemView.getContext().getTheme()));

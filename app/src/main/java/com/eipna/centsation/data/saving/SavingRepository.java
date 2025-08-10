@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.eipna.centsation.data.Database;
@@ -25,6 +26,19 @@ public class SavingRepository extends Database {
 
     public void create(Saving createdSaving) {
         SQLiteDatabase database = getWritableDatabase();
+        ContentValues values = getContentValues(createdSaving);
+        database.insert(TABLE_SAVING, null, values);
+
+        Transaction initialTransaction = new Transaction();
+        initialTransaction.setSavingID(createdSaving.getID());
+        initialTransaction.setAmount(createdSaving.getCurrentSaving());
+        initialTransaction.setType(TransactionType.CREATED.VALUE);
+        transactionRepository.create(initialTransaction);
+        database.close();
+    }
+
+    @NonNull
+    private static ContentValues getContentValues(Saving createdSaving) {
         ContentValues values = new ContentValues();
 
         values.put(COLUMN_SAVING_ID, createdSaving.getID());
@@ -34,14 +48,7 @@ public class SavingRepository extends Database {
         values.put(COLUMN_SAVING_NOTES, createdSaving.getNotes());
         values.put(COLUMN_SAVING_IS_ARCHIVED, createdSaving.getIsArchived());
         values.put(COLUMN_SAVING_DEADLINE, createdSaving.getDeadline());
-        database.insert(TABLE_SAVING, null, values);
-
-        Transaction initialTransaction = new Transaction();
-        initialTransaction.setSavingID(createdSaving.getID());
-        initialTransaction.setAmount(createdSaving.getCurrentSaving());
-        initialTransaction.setType(TransactionType.CREATED.VALUE);
-        transactionRepository.create(initialTransaction);
-        database.close();
+        return values;
     }
 
     public void edit(Saving editedSaving) {
@@ -65,7 +72,7 @@ public class SavingRepository extends Database {
         database.close();
     }
 
-    public void makeTransaction(Saving updatedSaving, double amount, TransactionType type) {
+    public void makeTransaction(Saving updatedSaving, double amount, TransactionType type, String note) {
         SQLiteDatabase database = getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -77,6 +84,7 @@ public class SavingRepository extends Database {
         transaction.setAmount(Math.abs(amount));
         transaction.setType(type.VALUE);
         transaction.setDate(System.currentTimeMillis());
+        transaction.setNote(note);
         transactionRepository.create(transaction);
         database.close();
     }
