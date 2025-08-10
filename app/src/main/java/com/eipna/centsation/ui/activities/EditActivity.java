@@ -97,7 +97,7 @@ public class EditActivity extends BaseActivity {
 
         binding.fieldSavingNameText.setText(currentSaving.getName());
         binding.fieldSavingGoalText.setText(String.format(Locale.getDefault(), "%.2f", currentSaving.getGoal()));
-        binding.fieldSavingNotesText.setText(currentSaving.getNotes());
+        binding.fieldSavingDescriptionText.setText(currentSaving.getDescription());
         binding.fieldSavingDeadlineLayout.setEndIconVisible(false);
 
         if (currentSaving.getDeadline() != AlarmUtil.NO_ALARM) {
@@ -126,7 +126,7 @@ public class EditActivity extends BaseActivity {
 
                     int toolbarHeight = binding.toolbar.getHeight();
 
-                    int scrollOffset = v.getId() == R.id.field_saving_notes_text ? 50 : 100;
+                    int scrollOffset = v.getId() == R.id.field_saving_description_text ? 50 : 100;
                     int targetY = Math.max(0, location[1] - toolbarHeight - scrollOffset);
 
                     if (targetY <= 0 && v.getId() == R.id.field_saving_name_text) {
@@ -140,7 +140,7 @@ public class EditActivity extends BaseActivity {
 
         binding.fieldSavingNameText.setOnFocusChangeListener(scrollToFocused);
         binding.fieldSavingGoalText.setOnFocusChangeListener(scrollToFocused);
-        binding.fieldSavingNotesText.setOnFocusChangeListener(scrollToFocused);
+        binding.fieldSavingDescriptionText.setOnFocusChangeListener(scrollToFocused);
     }
 
     private void hasAlarmPermission() {
@@ -228,7 +228,7 @@ public class EditActivity extends BaseActivity {
     private void editSaving() {
         String nameText = Objects.requireNonNull(binding.fieldSavingNameText.getText()).toString();
         String goalText = Objects.requireNonNull(binding.fieldSavingGoalText.getText()).toString();
-        String notesText = Objects.requireNonNull(binding.fieldSavingNotesText.getText()).toString();
+        String descriptionText = Objects.requireNonNull(binding.fieldSavingDescriptionText.getText()).toString();
         String deadlineText = Objects.requireNonNull(binding.fieldSavingDeadlineText.getText()).toString();
 
         if (!nameText.isEmpty() && !goalText.isEmpty()) {
@@ -239,7 +239,7 @@ public class EditActivity extends BaseActivity {
             editedSaving.setName(nameText);
             editedSaving.setCurrentSaving(currentSaving.getCurrentSaving());
             editedSaving.setGoal(goal);
-            editedSaving.setNotes(notesText);
+            editedSaving.setDescription(descriptionText);
             editedSaving.setIsArchived(currentSaving.getIsArchived());
             editedSaving.setDeadline(currentSaving.getDeadline());
 

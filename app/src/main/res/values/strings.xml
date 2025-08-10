@@ -31,7 +31,8 @@
     <string name="field_saving_current_saving">Current Saving</string>
     <string name="field_transaction_amount">Amount</string>
     <string name="field_saving_goal">Goal</string>
-    <string name="field_saving_notes">Notes</string>
+    <string name="field_saving_notes">Note (optional)</string>
+    <string name="field_saving_description">Description</string>
     <string name="field_saving_deadline">Deadline</string>
 
     <string name="dialog_title_request_alarm_permission">Required permission</string>
@@ -64,10 +65,6 @@
     <string name="menu_item_sort_deadline">Deadline</string>
     <string name="menu_item_sort_ascending">Ascending</string>
     <string name="menu_item_sort_descending">Descending</string>
-
-    <string name="transaction_label_initial">Initial balance</string>
-    <string name="transaction_label_deposit">Deposit</string>
-    <string name="transaction_label_withdrawal">Withdrawal</string>
 
     <string name="toast_import_successful">Import successful</string>
     <string name="toast_export_successful">Export successful</string>

@@ -9,7 +9,7 @@ public class Saving {
     private String name;
     private double currentSaving;
     private double goal;
-    private String notes;
+    private String description;
     private int isArchived;
     private long deadline;
 
@@ -21,7 +21,7 @@ public class Saving {
         this.name = null;
         this.currentSaving = 0.0;
         this.goal = 0.0;
-        this.notes = null;
+        this.description = null;
         this.isArchived = 0;
         this.deadline = 0;
     }
@@ -74,12 +74,12 @@ public class Saving {
         this.isArchived = isArchived;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getNotes() {
-        return notes;
+    public String getDescription() {
+        return description;
     }
 
     public long getDeadline() {

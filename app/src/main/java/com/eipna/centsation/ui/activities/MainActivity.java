@@ -247,16 +247,6 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
         dialog.show();
     }
 
-    private void showShareIntent(String notes) {
-        Intent sendIntent = new Intent();
-        sendIntent.setType("text/plain");
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, notes);
-
-        Intent shareIntent = Intent.createChooser(sendIntent, null);
-        startActivity(shareIntent);
-    }
-
     private void showTransactionDialog(Saving selectedSaving) {
         View transactionDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_saving_transaction, null, false);
         String currentCurrencySymbol = Currency.getSymbol(preferences.getCurrency());
@@ -341,7 +331,6 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
     public void OnOperationClick(SavingOperation operation, int position) {
         Saving selectedSaving = savings.get(position);
         if (operation.equals(SavingOperation.DELETE)) showDeleteDialog(selectedSaving);
-        if (operation.equals(SavingOperation.SHARE)) showShareIntent(selectedSaving.getNotes());
         if (operation.equals(SavingOperation.TRANSACTION)) showTransactionDialog(selectedSaving);
         if (operation.equals(SavingOperation.ARCHIVE)) archiveSaving(selectedSaving);
         if (operation.equals(SavingOperation.HISTORY)) showHistoryActivity(selectedSaving);

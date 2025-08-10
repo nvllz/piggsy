@@ -121,7 +121,7 @@ public class CreateActivity extends BaseActivity {
 
                     int toolbarHeight = binding.toolbar.getHeight();
 
-                    int scrollOffset = v.getId() == R.id.field_saving_notes_text ? 50 : 100;
+                    int scrollOffset = v.getId() == R.id.field_saving_description_text ? 50 : 100;
                     int targetY = Math.max(0, location[1] - toolbarHeight - scrollOffset);
 
                     if (targetY <= 0 && v.getId() == R.id.field_saving_name_text) {
@@ -136,7 +136,7 @@ public class CreateActivity extends BaseActivity {
         binding.fieldSavingNameText.setOnFocusChangeListener(scrollToFocused);
         binding.fieldSavingCurrentSavingText.setOnFocusChangeListener(scrollToFocused);
         binding.fieldSavingGoalText.setOnFocusChangeListener(scrollToFocused);
-        binding.fieldSavingNotesText.setOnFocusChangeListener(scrollToFocused);
+        binding.fieldSavingDescriptionText.setOnFocusChangeListener(scrollToFocused);
     }
 
     @Override
@@ -150,7 +150,7 @@ public class CreateActivity extends BaseActivity {
         String nameText = Objects.requireNonNull(binding.fieldSavingNameText.getText()).toString();
         String currentSavingText = Objects.requireNonNull(binding.fieldSavingCurrentSavingText.getText()).toString();
         String goalText = Objects.requireNonNull(binding.fieldSavingGoalText.getText()).toString();
-        String notesText = Objects.requireNonNull(binding.fieldSavingNotesText.getText()).toString();
+        String notesText = Objects.requireNonNull(binding.fieldSavingDescriptionText.getText()).toString();
         String deadlineText = Objects.requireNonNull(binding.fieldSavingDeadlineText.getText()).toString();
 
         if (!nameText.isEmpty() && !currentSavingText.isEmpty() && !goalText.isEmpty()) {
@@ -162,7 +162,7 @@ public class CreateActivity extends BaseActivity {
             createdSaving.setName(nameText);
             createdSaving.setCurrentSaving(currentSaving);
             createdSaving.setGoal(goal);
-            createdSaving.setNotes(notesText);
+            createdSaving.setDescription(notesText);
             createdSaving.setIsArchived(Saving.NOT_ARCHIVE);
             createdSaving.setDeadline(selectedDeadline);
 

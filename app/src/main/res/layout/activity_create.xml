@@ -127,10 +127,10 @@
                     android:layout_height="match_parent"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Notes Field -->
+            <!-- Description Field -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/field_saving_notes_layout"
-                android:hint="@string/field_saving_notes"
+                android:id="@+id/field_saving_description_layout"
+                android:hint="@string/field_saving_description"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 app:helperText="This field is optional"
                 android:fontFamily="@font/open_sans_family"
@@ -138,7 +138,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/field_saving_notes_text"
+                    android:id="@+id/field_saving_description_text"
                     android:inputType="textAutoComplete|textMultiLine"
                     android:minLines="3"
                     android:gravity="top"

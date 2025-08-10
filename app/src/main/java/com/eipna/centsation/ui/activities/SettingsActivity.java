@@ -247,7 +247,7 @@ public class SettingsActivity extends BaseActivity {
                     savingObject.put(Database.COLUMN_SAVING_NAME, saving.getName());
                     savingObject.put(Database.COLUMN_SAVING_CURRENT_SAVING, saving.getCurrentSaving());
                     savingObject.put(Database.COLUMN_SAVING_GOAL, saving.getGoal());
-                    savingObject.put(Database.COLUMN_SAVING_NOTES, saving.getNotes());
+                    savingObject.put(Database.COLUMN_SAVING_DESCRIPTION, saving.getDescription());
                     savingObject.put(Database.COLUMN_SAVING_IS_ARCHIVED, saving.getIsArchived());
                     savingObject.put(Database.COLUMN_SAVING_DEADLINE, saving.getDeadline());
                     savingJsonArray.put(savingObject);
@@ -327,9 +327,9 @@ public class SettingsActivity extends BaseActivity {
                         savingValues.put(Database.COLUMN_SAVING_CURRENT_SAVING, savingObject.getDouble(Database.COLUMN_SAVING_CURRENT_SAVING));
                         savingValues.put(Database.COLUMN_SAVING_GOAL, savingObject.getDouble(Database.COLUMN_SAVING_GOAL));
 
-                        // Handle missing notes field for older JSON versions
-                        String notes = savingObject.optString(Database.COLUMN_SAVING_NOTES, "");
-                        savingValues.put(Database.COLUMN_SAVING_NOTES, notes);
+                        String description = savingObject.optString(Database.COLUMN_SAVING_DESCRIPTION,
+                                savingObject.optString("notes", ""));
+                        savingValues.put(Database.COLUMN_SAVING_DESCRIPTION, description);
 
                         savingValues.put(Database.COLUMN_SAVING_IS_ARCHIVED, savingObject.getInt(Database.COLUMN_SAVING_IS_ARCHIVED));
                         savingValues.put(Database.COLUMN_SAVING_DEADLINE, savingObject.getLong(Database.COLUMN_SAVING_DEADLINE));
@@ -345,7 +345,6 @@ public class SettingsActivity extends BaseActivity {
                         transactionValues.put(Database.COLUMN_TRANSACTION_TYPE, transactionObject.getString(Database.COLUMN_TRANSACTION_TYPE));
                         transactionValues.put(Database.COLUMN_TRANSACTION_DATE, transactionObject.getLong(Database.COLUMN_TRANSACTION_DATE));
 
-                        // Handle missing note field for older JSON versions
                         String note = transactionObject.optString(Database.COLUMN_TRANSACTION_NOTE, "");
                         transactionValues.put(Database.COLUMN_TRANSACTION_NOTE, note);
 

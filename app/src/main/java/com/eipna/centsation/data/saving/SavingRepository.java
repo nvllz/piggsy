@@ -45,7 +45,7 @@ public class SavingRepository extends Database {
         values.put(COLUMN_SAVING_NAME, createdSaving.getName());
         values.put(COLUMN_SAVING_CURRENT_SAVING, createdSaving.getCurrentSaving());
         values.put(COLUMN_SAVING_GOAL, createdSaving.getGoal());
-        values.put(COLUMN_SAVING_NOTES, createdSaving.getNotes());
+        values.put(COLUMN_SAVING_DESCRIPTION, createdSaving.getDescription());
         values.put(COLUMN_SAVING_IS_ARCHIVED, createdSaving.getIsArchived());
         values.put(COLUMN_SAVING_DEADLINE, createdSaving.getDeadline());
         return values;
@@ -58,7 +58,7 @@ public class SavingRepository extends Database {
         values.put(COLUMN_SAVING_NAME, editedSaving.getName());
         values.put(COLUMN_SAVING_CURRENT_SAVING, editedSaving.getCurrentSaving());
         values.put(COLUMN_SAVING_GOAL, editedSaving.getGoal());
-        values.put(COLUMN_SAVING_NOTES, editedSaving.getNotes());
+        values.put(COLUMN_SAVING_DESCRIPTION, editedSaving.getDescription());
         values.put(COLUMN_SAVING_IS_ARCHIVED, editedSaving.getIsArchived());
         values.put(COLUMN_SAVING_DEADLINE, editedSaving.getDeadline());
 
@@ -102,7 +102,7 @@ public class SavingRepository extends Database {
                 queriedSaving.setName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SAVING_NAME)));
                 queriedSaving.setCurrentSaving(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_SAVING_CURRENT_SAVING)));
                 queriedSaving.setGoal(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_SAVING_GOAL)));
-                queriedSaving.setNotes(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SAVING_NOTES)));
+                queriedSaving.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SAVING_DESCRIPTION)));
                 queriedSaving.setIsArchived(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_SAVING_IS_ARCHIVED)));
                 queriedSaving.setDeadline(cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_SAVING_DEADLINE)));
                 list.add(queriedSaving);
@@ -125,7 +125,7 @@ public class SavingRepository extends Database {
                 queriedSaving.setName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SAVING_NAME)));
                 queriedSaving.setCurrentSaving(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_SAVING_CURRENT_SAVING)));
                 queriedSaving.setGoal(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_SAVING_GOAL)));
-                queriedSaving.setNotes(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SAVING_NOTES)));
+                queriedSaving.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SAVING_DESCRIPTION)));
                 queriedSaving.setIsArchived(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_SAVING_IS_ARCHIVED)));
                 queriedSaving.setDeadline(cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_SAVING_DEADLINE)));
                 list.add(queriedSaving);
@@ -146,7 +146,7 @@ public class SavingRepository extends Database {
             queriedSaving.setName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SAVING_NAME)));
             queriedSaving.setCurrentSaving(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_SAVING_CURRENT_SAVING)));
             queriedSaving.setGoal(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_SAVING_GOAL)));
-            queriedSaving.setNotes(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SAVING_NOTES)));
+            queriedSaving.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SAVING_DESCRIPTION)));
             queriedSaving.setIsArchived(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_SAVING_IS_ARCHIVED)));
             queriedSaving.setDeadline(cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_SAVING_DEADLINE)));
 

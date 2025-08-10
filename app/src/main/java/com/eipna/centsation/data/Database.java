@@ -16,7 +16,7 @@ public class Database extends SQLiteOpenHelper {
     public static final String COLUMN_SAVING_NAME = "name";
     public static final String COLUMN_SAVING_CURRENT_SAVING = "current_saving";
     public static final String COLUMN_SAVING_GOAL = "goal";
-    public static final String COLUMN_SAVING_NOTES = "notes";
+    public static final String COLUMN_SAVING_DESCRIPTION = "description";
     public static final String COLUMN_SAVING_IS_ARCHIVED = "is_archived";
     public static final String COLUMN_SAVING_DEADLINE = "deadline";
 
@@ -39,7 +39,7 @@ public class Database extends SQLiteOpenHelper {
                 COLUMN_SAVING_NAME + " TEXT NOT NULL, " +
                 COLUMN_SAVING_CURRENT_SAVING+ " REAL NOT NULL, " +
                 COLUMN_SAVING_GOAL + " REAL NOT NULL, " +
-                COLUMN_SAVING_NOTES + " TEXT, " +
+                COLUMN_SAVING_DESCRIPTION + " TEXT, " +
                 COLUMN_SAVING_IS_ARCHIVED + " INTEGER NOT NULL, " +
                 COLUMN_SAVING_DEADLINE + " INTEGER);";
 

@@ -83,16 +83,6 @@ public class ArchiveActivity extends BaseActivity implements SavingAdapter.Liste
         refreshList();
     }
 
-    private void showShareIntent(String notes) {
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.setType("text/plain");
-        sendIntent.putExtra(Intent.EXTRA_TEXT, notes);
-
-        Intent shareIntent = Intent.createChooser(sendIntent, null);
-        startActivity(shareIntent);
-    }
-
     private void showDeleteDialog(String savingID) {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.dialog_title_delete_saving)
@@ -135,7 +125,6 @@ public class ArchiveActivity extends BaseActivity implements SavingAdapter.Liste
     public void OnOperationClick(SavingOperation operation, int position) {
         Saving selectedSaving = savings.get(position);
         if (operation.equals(SavingOperation.UNARCHIVE)) unarchiveSaving(selectedSaving);
-        if (operation.equals(SavingOperation.SHARE)) showShareIntent(selectedSaving.getNotes());
         if (operation.equals(SavingOperation.DELETE)) showDeleteDialog(selectedSaving.getID());
         if (operation.equals(SavingOperation.HISTORY)) showHistoryActivity(selectedSaving);
     }
