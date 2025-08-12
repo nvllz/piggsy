@@ -260,8 +260,8 @@ public class EditActivity extends BaseActivity {
         String descriptionText = Objects.requireNonNull(binding.fieldSavingDescriptionText.getText()).toString();
         String deadlineText = Objects.requireNonNull(binding.fieldSavingDeadlineText.getText()).toString();
 
-        if (!nameText.isEmpty() && !goalText.isEmpty() && selectedCurrency != null) {
-            double goal = Double.parseDouble(goalText);
+        if (!nameText.isEmpty() && selectedCurrency != null) {
+            double goal = goalText.isEmpty() ? 0.0 : Double.parseDouble(goalText);
 
             Saving editedSaving = new Saving();
             editedSaving.setID(currentSaving.getID());
@@ -286,7 +286,6 @@ public class EditActivity extends BaseActivity {
         }
 
         binding.fieldSavingNameLayout.setError(nameText.isEmpty() ? getString(R.string.field_error_required) : null);
-        binding.fieldSavingGoalLayout.setError(goalText.isEmpty() ? getString(R.string.field_error_required) : null);
         binding.fieldSavingCurrencyLayout.setError(selectedCurrency == null ? getString(R.string.field_error_required) : null);
     }
 
