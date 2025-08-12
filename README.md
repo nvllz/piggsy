@@ -41,7 +41,8 @@ With a sleek, modern design and a user-friendly interface, Piggsy turns saving i
 ## Download
 
 <div align=center>
-  <a href="https://intradeus.github.io/http-protocol-redirector?r=obtainium://add/github.com/nvllz/piggsy"><img src="https://raw.githubusercontent.com/ImranR98/Obtainium/b1c8ac6f2ab08497189721a788a5763e28ff64cd/assets/graphics/badge_obtainium.png" alt="Obtainium" width="31%"></a>
+  <a href="https://apt.izzysoft.de/packages/com.nvllz.piggsy"><img src="images/badge_izzyondroid.png" width="47%" alt="IzzyOnDroid" /></a>
+  <a href="https://intradeus.github.io/http-protocol-redirector?r=obtainium://add/github.com/nvllz/piggsy"><img src="https://raw.githubusercontent.com/ImranR98/Obtainium/b1c8ac6f2ab08497189721a788a5763e28ff64cd/assets/graphics/badge_obtainium.png" alt="Obtainium" width="47%"></a>
 </div>
 
 ## License
