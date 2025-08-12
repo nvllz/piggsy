@@ -26,6 +26,7 @@
     <string name="field_error_required">This field is required</string>
     <string name="field_error_empty_saving">Please enter a value</string>
     <string name="field_error_negative_saving">Saving value can\'t be negative</string>
+    <string name="field_optional">This field is optional</string>
 
     <string name="field_saving_name">Title</string>
     <string name="field_saving_current_saving">Current Saving</string>

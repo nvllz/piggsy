@@ -125,7 +125,7 @@
                 android:id="@+id/field_saving_deadline_layout"
                 android:hint="@string/field_saving_deadline"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                app:helperText="This field is optional"
+                app:helperText="@string/field_optional"
                 app:endIconMode="custom"
                 app:endIconDrawable="@drawable/ic_clear"
                 android:layout_marginBottom="20dp"
@@ -149,7 +149,7 @@
                 android:id="@+id/field_saving_description_layout"
                 android:hint="@string/field_saving_description"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                app:helperText="This field is optional"
+                app:helperText="@string/field_optional"
                 android:fontFamily="@font/open_sans_family"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
