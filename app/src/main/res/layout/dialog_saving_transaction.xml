@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:paddingEnd="24dp"
     android:paddingStart="24dp"
-    android:paddingTop="16dp"
+    android:paddingTop="14dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -28,7 +28,7 @@
         android:hint=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="4dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/field_transaction_note_text"
@@ -41,7 +41,7 @@
 
     <com.google.android.material.button.MaterialButtonToggleGroup
         android:id="@+id/toggle_group_transaction_type"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
