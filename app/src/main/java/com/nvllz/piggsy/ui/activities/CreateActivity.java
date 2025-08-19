@@ -128,8 +128,8 @@ public class CreateActivity extends BaseActivity {
 
     private void updateCurrencySymbols() {
         String currencySymbol = Currency.getSymbol(selectedCurrency);
-        binding.fieldSavingCurrentSavingLayout.setPrefixText(currencySymbol);
-        binding.fieldSavingGoalLayout.setPrefixText(currencySymbol);
+        binding.fieldSavingCurrentSavingLayout.setPrefixText(currencySymbol + "  ");
+        binding.fieldSavingGoalLayout.setPrefixText(currencySymbol + "  ");
     }
 
     private void setupDeadlineField() {
