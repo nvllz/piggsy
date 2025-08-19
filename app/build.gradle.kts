@@ -56,10 +56,11 @@ android {
             )
         }
         debug {
+            manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher_debug"
             isMinifyEnabled = false
             isShrinkResources = false
-            versionNameSuffix = ".debug"
             applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
         }
     }
 
