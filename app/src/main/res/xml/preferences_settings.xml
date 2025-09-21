@@ -11,7 +11,7 @@
             android:key="deadline_format"
             app:iconSpaceReserved="true"
             android:icon="@drawable/ic_dateformat"
-            android:title="@string/preference_list_deadline_format"/>
+            android:title="@string/preference_list_date_format"/>
     </PreferenceCategory>
 
     <PreferenceCategory

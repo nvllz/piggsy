@@ -94,7 +94,7 @@
     <!-- Savings Preference Category -->
     <string name="preference_category_savings">General</string>
     <string name="preference_list_currency">Currency</string>
-    <string name="preference_list_deadline_format">Date Format</string>
+    <string name="preference_list_date_format">Date Format</string>
 
     <!-- Security Preference Category -->
     <string name="preference_category_security">Security</string>

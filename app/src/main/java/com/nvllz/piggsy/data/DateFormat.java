@@ -6,7 +6,8 @@ public enum DateFormat {
     DD_MM_YYYY("31/12/2012", "dd/MM/yyyy"),
     YYYY_DD_MM("2012/31/12", "yyyy/dd/MM"),
     YYYY_MM_DD("2012/12/31", "yyyy/MM/dd"),
-    YYYY_MM_DD_ISO("2012-12-31", "yyyy-MM-dd");
+    YYYY_MM_DD_ISO("2012-12-31", "yyyy-MM-dd"),
+    EEE_COMMA_YYYY_MM_DD("Mon, 2012-12-31", "EEE, yyyy-MM-dd");
 
     private static final DateFormat[] dateFormats;
 
