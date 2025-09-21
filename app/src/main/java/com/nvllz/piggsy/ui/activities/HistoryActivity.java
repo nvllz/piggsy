@@ -329,4 +329,10 @@ public class HistoryActivity extends BaseActivity implements SwipeToActionCallba
         if (item.getItemId() == android.R.id.home) finish();
         return true;
     }
+
+    @Override
+    public boolean isSavingArchived(int position) {
+        Saving saving = savingRepository.getSaving(selectedSavingID);
+        return saving != null && saving.getIsArchived() == Saving.IS_ARCHIVE;
+    }
 }

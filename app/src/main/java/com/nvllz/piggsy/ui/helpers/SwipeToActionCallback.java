@@ -21,6 +21,7 @@ public class SwipeToActionCallback extends ItemTouchHelper.SimpleCallback {
         void onSwipeLeft(int position);
         void onSwipeRight(int position);
         boolean isTransactionDeletable(int position);
+        boolean isSavingArchived(int position);
     }
 
     public SwipeToActionCallback(Context context, SwipeActionListener listener) {
@@ -32,6 +33,10 @@ public class SwipeToActionCallback extends ItemTouchHelper.SimpleCallback {
     @Override
     public int getSwipeDirs(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
         int position = viewHolder.getAdapterPosition();
+
+        if (listener.isSavingArchived(position)) {
+            return 0;
+        }
 
         boolean canDelete = listener.isTransactionDeletable(position);
 
