@@ -33,7 +33,6 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Objects;
 
 public class HistoryActivity extends BaseActivity implements SwipeToActionCallback.SwipeActionListener {
@@ -93,7 +92,6 @@ public class HistoryActivity extends BaseActivity implements SwipeToActionCallba
 
     private void loadData() {
         ArrayList<Transaction> transactions = transactionRepository.get(selectedSavingID);
-        Collections.reverse(transactions);
 
         Saving saving = savingRepository.getSaving(selectedSavingID);
         currency = saving.getCurrency();
