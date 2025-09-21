@@ -118,4 +118,28 @@
     <!-- Deadline Notification -->
     <string name="deadline_notification_title">Piggy bank deadline!</string>
     <string name="deadline_notification_content">Goal deadline reached for \"%1$s\". Check your progress!</string>
+
+    <!-- Dialog strings -->
+    <string name="dialog_delete_transaction_title">Delete Transaction</string>
+    <string name="dialog_delete_transaction_message">Are you sure you want to delete this transaction? This action cannot be undone.</string>
+    <string name="dialog_edit_transaction_title">Edit Transaction</string>
+
+    <!-- Button strings -->
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="undo">Undo</string>
+
+    <!-- Feedback -->
+    <string name="transaction_deleted">Transaction deleted</string>
+    <string name="transaction_updated">Transaction updated successfully</string>
+    <string name="error_deleting_transaction">Error deleting transaction</string>
+    <string name="error_restoring_transaction">Error restoring transaction</string>
+    <string name="error_updating_transaction">Error updating transaction</string>
+
+    <!-- Validation -->
+    <string name="error_amount_required">Amount is required</string>
+    <string name="error_amount_positive">Amount must be positive</string>
+    <string name="error_amount_non_negative">Amount cannot be negative</string>
+    <string name="error_invalid_amount">Invalid amount format</string>
 </resources>

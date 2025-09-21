@@ -68,6 +68,20 @@ public class SavingRepository extends Database {
         database.close();
     }
 
+    public void updateCurrentSaving(String savingId, double newAmount) {
+        SQLiteDatabase database = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_SAVING_CURRENT_SAVING, newAmount);
+
+        database.update(
+                TABLE_SAVING,
+                values,
+                COLUMN_SAVING_ID + " = ?",
+                new String[]{savingId}
+        );
+        database.close();
+    }
+
     public void delete(String savingID) {
         SQLiteDatabase database = getWritableDatabase();
         database.delete(TABLE_SAVING, COLUMN_SAVING_ID + " = ?", new String[]{savingID});

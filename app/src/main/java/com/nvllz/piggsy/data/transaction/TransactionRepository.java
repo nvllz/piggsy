@@ -23,9 +23,51 @@ public class TransactionRepository extends Database {
         values.put(COLUMN_TRANSACTION_AMOUNT, createdTransaction.getAmount());
         values.put(COLUMN_TRANSACTION_TYPE, createdTransaction.getType());
         values.put(COLUMN_TRANSACTION_DATE, System.currentTimeMillis());
-        values.put(COLUMN_TRANSACTION_NOTE, createdTransaction.getNote()); // Add note
+        values.put(COLUMN_TRANSACTION_NOTE, createdTransaction.getNote());
         database.insert(TABLE_TRANSACTION, null, values);
         database.close();
+    }
+
+    public long insert(String savingId, double amount, String type, long date, String note) {
+        SQLiteDatabase database = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_TRANSACTION_SAVING_ID, savingId);
+        values.put(COLUMN_TRANSACTION_AMOUNT, amount);
+        values.put(COLUMN_TRANSACTION_TYPE, type);
+        values.put(COLUMN_TRANSACTION_DATE, date);
+        values.put(COLUMN_TRANSACTION_NOTE, note);
+
+        long newId = database.insert(TABLE_TRANSACTION, null, values);
+        database.close();
+        return newId;
+    }
+
+    public boolean update(int transactionId, double amount, String type, String note) {
+        SQLiteDatabase database = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_TRANSACTION_AMOUNT, amount);
+        values.put(COLUMN_TRANSACTION_TYPE, type);
+        values.put(COLUMN_TRANSACTION_NOTE, note);
+
+        int rowsAffected = database.update(
+                TABLE_TRANSACTION,
+                values,
+                COLUMN_TRANSACTION_ID + " = ?",
+                new String[]{String.valueOf(transactionId)}
+        );
+        database.close();
+        return rowsAffected > 0;
+    }
+
+    public boolean delete(int transactionId) {
+        SQLiteDatabase database = getWritableDatabase();
+        int rowsDeleted = database.delete(
+                TABLE_TRANSACTION,
+                COLUMN_TRANSACTION_ID + " = ?",
+                new String[]{String.valueOf(transactionId)}
+        );
+        database.close();
+        return rowsDeleted > 0;
     }
 
     public ArrayList<Transaction> get(String savingID) {

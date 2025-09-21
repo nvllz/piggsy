@@ -287,6 +287,11 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
                     try {
                         double amount = Double.parseDouble(amountText);
 
+                        if (amount <= 0) {
+                            amountInput.setError(getString(R.string.error_amount_positive));
+                            return;
+                        }
+
                         if (depositOption.isChecked()) {
                             double addedSaving = selectedSaving.getCurrentSaving() + amount;
                             selectedSaving.setCurrentSaving(addedSaving);

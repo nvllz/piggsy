@@ -48,6 +48,32 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         return transactions.size();
     }
 
+    public void removeItem(int position) {
+        if (position >= 0 && position < transactions.size()) {
+            transactions.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
+    public void updateItem(int position, Transaction updatedTransaction) {
+        if (position >= 0 && position < transactions.size()) {
+            transactions.set(position, updatedTransaction);
+            notifyItemChanged(position);
+        }
+    }
+
+    public Transaction getTransactionAt(int position) {
+        if (position >= 0 && position < transactions.size()) {
+            return transactions.get(position);
+        }
+        return null;
+    }
+
+    public void restoreItem(int position, Transaction transaction) {
+        transactions.add(position, transaction);
+        notifyItemInserted(position);
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         MaterialTextView amount, date, note;
@@ -81,6 +107,5 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                 amount.setText(String.format("-%s", Currency.formatAmount(selectedCurrencySymbol, currentTransaction.getAmount())));
             }
         }
-
     }
 }
