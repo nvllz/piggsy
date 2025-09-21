@@ -40,10 +40,12 @@
     <string name="dialog_title_request_alarm_permission">Required permission</string>
     <string name="dialog_title_create_saving">Create piggy bank</string>
     <string name="dialog_title_edit_saving">Edit piggy bank</string>
+    <string name="dialog_title_archive_saving">Archive piggy bank?</string>
     <string name="dialog_title_delete_saving">Delete piggy bank?</string>
     <string name="dialog_title_create_transaction">New transaction</string>
     <string name="dialog_title_history_saving">Transaction log</string>
 
+    <string name="dialog_message_archive_saving">Are you sure you want to move this piggy bank to archive?</string>
     <string name="dialog_message_delete_saving">Delete this piggy bank? You won\'t be able to get it back.</string>
     <string name="dialog_message_request_alarm_permission">To set deadlines for your piggy banks, the app needs permission to send reminders.</string>
 
@@ -52,6 +54,7 @@
     <string name="dialog_button_create">Create</string>
     <string name="dialog_button_close">Close</string>
     <string name="dialog_button_edit">Save</string>
+    <string name="dialog_button_archive">Archive</string>
     <string name="dialog_button_delete">Delete</string>
     <string name="dialog_button_submit">Submit</string>
 

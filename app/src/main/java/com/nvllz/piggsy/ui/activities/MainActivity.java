@@ -227,6 +227,23 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
         preferences.setSortOrder(isSortAscending);
     }
 
+    private void showArchiveDialog(Saving saving) {
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.dialog_title_archive_saving)
+                .setMessage(R.string.dialog_message_archive_saving)
+                .setNegativeButton(R.string.dialog_button_cancel, null)
+                .setPositiveButton(R.string.dialog_button_archive, (dialogInterface, i) -> {
+                    AlarmUtil.cancel(this, saving);
+                    saving.setIsArchived(Saving.IS_ARCHIVE);
+                    savingRepository.edit(saving);
+                    Toast.makeText(getApplicationContext(), R.string.toast_piggy_bank_archived, Toast.LENGTH_SHORT).show();
+                    refreshList();
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
     private void showDeleteDialog(Saving saving) {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.dialog_title_delete_saving)
@@ -314,13 +331,6 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
         dialog.show();
     }
 
-    private void archiveSaving(Saving selectedSaving) {
-        selectedSaving.setIsArchived(Saving.IS_ARCHIVE);
-        savingRepository.edit(selectedSaving);
-        Toast.makeText(this, R.string.toast_piggy_bank_archived, Toast.LENGTH_SHORT).show();
-        refreshList();
-    }
-
     @Override
     public void OnClick(int position) {
         Saving selectedSaving = savings.get(position);
@@ -334,7 +344,7 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
         Saving selectedSaving = savings.get(position);
         if (operation.equals(SavingOperation.DELETE)) showDeleteDialog(selectedSaving);
         if (operation.equals(SavingOperation.TRANSACTION)) showTransactionDialog(selectedSaving);
-        if (operation.equals(SavingOperation.ARCHIVE)) archiveSaving(selectedSaving);
+        if (operation.equals(SavingOperation.ARCHIVE)) showArchiveDialog(selectedSaving);
         if (operation.equals(SavingOperation.HISTORY)) showHistoryActivity(selectedSaving);
     }
 
