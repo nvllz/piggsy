@@ -1,0 +1,15 @@
+Don't forget to star the github repo if you like this app!
+
+New:
+- Edit individual transactions
+- Allow for negative initial balance
+- Date format: "Mon, 2012-12-31"
+- Ask for confirmation before archiving
+
+Changes:
+- New icon for debug build
+- Transaction history order from newest to oldest
+
+Fixes:
+- Corrected currency spacing in input fields
+- Fixed padding in transaction dialog
