@@ -195,7 +195,7 @@ public class HistoryActivity extends BaseActivity implements SwipeToActionCallba
         String currencySymbol = com.nvllz.piggsy.data.Currency.getSymbol(currency);
         amountLayout.setPrefixText(currencySymbol + "  ");
 
-        double transaction_amount = Math.abs(transaction.getAmount());
+        double transaction_amount = transaction.getAmount();
         String formattedAmount;
         if (transaction_amount == (long) transaction_amount) {
             formattedAmount = String.valueOf((long) transaction_amount);
@@ -240,14 +240,13 @@ public class HistoryActivity extends BaseActivity implements SwipeToActionCallba
 
             try {
                 double amount = Double.parseDouble(amountStr);
-                if (amount < 0) {
+                if (amount < 0 && !transaction.getType().equals(TransactionType.CREATED.VALUE)) {
                     amountField.setError(getString(R.string.error_amount_non_negative));
                     return;
                 } else if (amount == 0 && !transaction.getType().equals(TransactionType.CREATED.VALUE)) {
                     amountField.setError(getString(R.string.error_amount_positive));
                     return;
                 }
-
 
                 String transactionType;
                 if (transaction.getType().equals(TransactionType.CREATED.VALUE)) {

@@ -95,7 +95,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/field_saving_current_saving_text"
                         android:maxLines="1"
-                        android:inputType="numberDecimal"
+                        android:inputType="numberDecimal|numberSigned"
                         android:fontFamily="@font/open_sans_family"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
