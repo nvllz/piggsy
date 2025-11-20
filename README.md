@@ -52,5 +52,5 @@ This project is licensed under the GNU General Public License v3.0. See the
 
 ## Credits
 
-Piggsy is a fork of [Centsation](https://github.com/eipna/centsation) by [eipna](https://github.com/eipna).
+Piggsy is a fork of [Centsation](https://github.com/mowtiie/centsation) by [mowtiie](https://github.com/mowtiie).
 
