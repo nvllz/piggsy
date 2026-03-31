@@ -147,14 +147,17 @@ public class HistoryActivity extends BaseActivity implements SwipeToActionCallba
 
         if (success) {
             transactionAdapter.removeItem(position);
+            transactionAdapter.refreshSubtotals();
 
             updateSavingAmount(transaction, true);
 
             Snackbar.make(binding.recyclerView,
                             getString(R.string.transaction_deleted),
                             Snackbar.LENGTH_LONG)
-                    .setAction(getString(R.string.undo), v ->
-                            restoreTransaction(position, transaction))
+                    .setAction(getString(R.string.undo), v -> {
+                        restoreTransaction(position, transaction);
+                        transactionAdapter.refreshSubtotals();
+                    })
                     .show();
         } else {
             Toast.makeText(this, getString(R.string.error_deleting_transaction), Toast.LENGTH_SHORT).show();
@@ -171,6 +174,7 @@ public class HistoryActivity extends BaseActivity implements SwipeToActionCallba
             transaction.setID((int) newId);
 
             transactionAdapter.restoreItem(position, transaction);
+            transactionAdapter.refreshSubtotals();
 
             updateSavingAmount(transaction, false);
         } else {
@@ -293,6 +297,7 @@ public class HistoryActivity extends BaseActivity implements SwipeToActionCallba
             }
 
             transactionAdapter.updateItem(position, updatedTransaction);
+            transactionAdapter.refreshSubtotals();
 
             Snackbar.make(binding.recyclerView, getString(R.string.transaction_updated), Snackbar.LENGTH_LONG)
                     .setAction(getString(R.string.undo), v -> {
@@ -306,6 +311,7 @@ public class HistoryActivity extends BaseActivity implements SwipeToActionCallba
                         }
 
                         transactionAdapter.updateItem(position, originalTransaction);
+                        transactionAdapter.refreshSubtotals();
                     })
                     .show();
         } else {
