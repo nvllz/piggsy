@@ -294,7 +294,20 @@ public class HistoryActivity extends BaseActivity implements SwipeToActionCallba
 
             transactionAdapter.updateItem(position, updatedTransaction);
 
-            Toast.makeText(this, getString(R.string.transaction_updated), Toast.LENGTH_SHORT).show();
+            Snackbar.make(binding.recyclerView, getString(R.string.transaction_updated), Snackbar.LENGTH_LONG)
+                    .setAction(getString(R.string.undo), v -> {
+                        transactionRepository.update(originalTransaction.getID(),
+                                originalTransaction.getAmount(),
+                                originalTransaction.getType(),
+                                originalTransaction.getNote() != null ? originalTransaction.getNote() : "");
+
+                        if (difference != 0) {
+                            updateSavingAmountByDifference(-difference);
+                        }
+
+                        transactionAdapter.updateItem(position, originalTransaction);
+                    })
+                    .show();
         } else {
             Toast.makeText(this, getString(R.string.error_updating_transaction), Toast.LENGTH_SHORT).show();
             transactionAdapter.notifyItemChanged(position);

@@ -6,8 +6,8 @@
     <string name="app_og_creator">mowtiie</string>
 
     <string name="toolbar_main">Piggsy</string>
-    <string name="toolbar_create">New piggy</string>
-    <string name="toolbar_edit">Edit piggy</string>
+    <string name="toolbar_create">New piggy bank</string>
+    <string name="toolbar_edit">Edit piggy bank</string>
     <string name="toolbar_archive">Archive</string>
     <string name="toolbar_settings">Settings</string>
     <string name="toolbar_history">History</string>
@@ -17,19 +17,17 @@
     <string name="link_app_author">https://github.com/nvllz</string>
     <string name="link_app_og_creator">https://github.com/mowtiie</string>
 
-    <string name="empty_indicator_main">No piggy banks here yet!</string>
+    <string name="empty_indicator_main">No piggy banks yet</string>
     <string name="empty_indicator_archive">No archived piggy banks</string>
 
     <string name="radio_button_deposit">Deposit</string>
     <string name="radio_button_withdraw">Withdraw</string>
 
-    <string name="field_error_required">This field is required</string>
-    <string name="field_error_empty_saving">Please enter a value</string>
-    <string name="field_error_negative_saving">Saving value can\'t be negative</string>
     <string name="field_optional">This field is optional</string>
+    <string name="field_error_required">This field is required</string>
 
     <string name="field_saving_name">Title</string>
-    <string name="field_saving_current_saving">Current Saving</string>
+    <string name="field_saving_current_saving">Balance</string>
     <string name="field_transaction_amount">Amount</string>
     <string name="field_saving_goal">Goal</string>
     <string name="field_saving_description">Description</string>
@@ -38,23 +36,15 @@
     <string name="field_transaction_notes">Note (optional)</string>
 
     <string name="dialog_title_request_alarm_permission">Required permission</string>
-    <string name="dialog_title_create_saving">Create piggy bank</string>
-    <string name="dialog_title_edit_saving">Edit piggy bank</string>
-    <string name="dialog_title_archive_saving">Archive piggy bank?</string>
-    <string name="dialog_title_delete_saving">Delete piggy bank?</string>
+    <string name="dialog_title_delete_saving">Delete piggy bank</string>
     <string name="dialog_title_create_transaction">New transaction</string>
-    <string name="dialog_title_history_saving">Transaction log</string>
 
-    <string name="dialog_message_archive_saving">Are you sure you want to move this piggy bank to archive?</string>
-    <string name="dialog_message_delete_saving">Delete this piggy bank? You won\'t be able to get it back.</string>
-    <string name="dialog_message_request_alarm_permission">To set deadlines for your piggy banks, the app needs permission to send reminders.</string>
+    <string name="dialog_message_delete_saving">Delete this piggy bank? This can’t be undone.</string>
+    <string name="dialog_message_request_alarm_permission">Allow notifications to receive deadline reminders</string>
 
     <string name="dialog_button_grant">Grant</string>
     <string name="dialog_button_cancel">Cancel</string>
-    <string name="dialog_button_create">Create</string>
     <string name="dialog_button_close">Close</string>
-    <string name="dialog_button_edit">Save</string>
-    <string name="dialog_button_archive">Archive</string>
     <string name="dialog_button_delete">Delete</string>
     <string name="dialog_button_submit">Submit</string>
 
@@ -63,7 +53,7 @@
     <string name="menu_item_settings">Settings</string>
     <string name="menu_item_about">About</string>
     <string name="menu_item_overflow">More Options</string>
-    <string name="menu_item_sort">Sort By</string>
+    <string name="menu_item_sort">Sort</string>
     <string name="menu_item_sort_name">Name</string>
     <string name="menu_item_sort_current_saving">Saving</string>
     <string name="menu_item_sort_goal">Goal</string>
@@ -71,28 +61,21 @@
     <string name="menu_item_sort_ascending">Ascending</string>
     <string name="menu_item_sort_descending">Descending</string>
 
-    <string name="toast_import_successful">Import successful</string>
-    <string name="toast_export_successful">Export successful</string>
     <string name="toast_export_no_savings_found">No piggy banks to export</string>
     <string name="toast_notification_permission_denied">Notification permission denied</string>
-    <string name="toast_deny_import_notice">Deadlines may not work properly</string>
-    <string name="toast_piggy_bank_archived">Piggy bank moved to archive</string>
-    <string name="toast_piggy_bank_unarchived">Piggy bank restored</string>
-    <string name="toast_piggy_bank_deleted">Piggy bank deleted</string>
+    <string name="snackbar_export_successful">Export successful</string>
+    <string name="snackbar_import_successful">Import successful</string>
+    <string name="snackbar_piggy_bank_archived">Piggy bank archived</string>
+    <string name="snackbar_piggy_bank_unarchived">Piggy bank restored</string>
+    <string name="snackbar_piggy_bank_deleted">Piggy bank deleted</string>
 
-    <string name="tooltip_update">New Transaction</string>
-    <string name="tooltip_history">History</string>
-    <string name="tooltip_archive">Archive</string>
-    <string name="tooltip_unarchive">Unarchive</string>
-    <string name="tooltip_delete">Delete</string>
-
-    <string name="snack_bar_permission_notifications">To get deadline reminders, enable notification permissions.</string>
+    <string name="snack_bar_permission_notifications">Allow notifications to get deadline reminders</string>
 
     <!-- App Preference Category -->
     <string name="preference_category_appearance">Appearance</string>
     <string name="preference_list_theme">Theme</string>
     <string name="preference_switch_dynamic_colors_title">Dynamic Colors</string>
-    <string name="preference_switch_dynamic_colors_summary">Match the app\'s theme with your wallpaper colors</string>
+    <string name="preference_switch_dynamic_colors_summary">Match the app theme to your wallpaper colors</string>
 
     <!-- Savings Preference Category -->
     <string name="preference_category_savings">General</string>
@@ -102,7 +85,7 @@
     <!-- Security Preference Category -->
     <string name="preference_category_security">Security</string>
     <string name="preference_switch_screen_privacy_title">Screen Privacy</string>
-    <string name="preference_switch_screen_privacy_summary">Blocks screenshots and screen recordings in the app</string>
+    <string name="preference_switch_screen_privacy_summary">Hide app content in recent apps and block screenshots</string>
 
     <!-- Backup Preference Category -->
     <string name="preference_category_backup">Backup</string>
@@ -110,7 +93,6 @@
     <string name="preference_export_title">Export</string>
 
     <!--About Preference Category -->
-    <string name="preference_category_about">About</string>
     <string name="preference_app_version">Version</string>
     <string name="preference_app_license">License</string>
     <string name="preference_app_source_code_title">Source Code</string>
@@ -119,12 +101,12 @@
     <string name="preference_app_og_creator">Original Creator</string>
 
     <!-- Deadline Notification -->
-    <string name="deadline_notification_title">Piggy bank deadline!</string>
-    <string name="deadline_notification_content">Goal deadline reached for \"%1$s\". Check your progress!</string>
+    <string name="deadline_notification_title">Goal deadline</string>
+    <string name="deadline_notification_content">Deadline reached for \"%1$s\"</string>
 
     <!-- Dialog strings -->
-    <string name="dialog_delete_transaction_title">Delete Transaction</string>
-    <string name="dialog_delete_transaction_message">Are you sure you want to delete this transaction? This action cannot be undone.</string>
+    <string name="dialog_delete_transaction_title">Delete transaction</string>
+    <string name="dialog_delete_transaction_message">Delete this transaction? This can\'t be undone.</string>
     <string name="dialog_edit_transaction_title">Edit Transaction</string>
 
     <!-- Button strings -->
@@ -135,13 +117,13 @@
 
     <!-- Feedback -->
     <string name="transaction_deleted">Transaction deleted</string>
-    <string name="transaction_updated">Transaction updated successfully</string>
-    <string name="error_deleting_transaction">Error deleting transaction</string>
-    <string name="error_restoring_transaction">Error restoring transaction</string>
-    <string name="error_updating_transaction">Error updating transaction</string>
+    <string name="transaction_updated">Transaction updated</string>
+    <string name="error_deleting_transaction">Failed to delete transaction</string>
+    <string name="error_restoring_transaction">Failed to restore transaction</string>
+    <string name="error_updating_transaction">Failed to update transaction</string>
 
     <!-- Validation -->
-    <string name="error_amount_required">Amount is required</string>
+    <string name="error_amount_required">Amount field is required</string>
     <string name="error_amount_positive">Amount must be positive</string>
     <string name="error_amount_non_negative">Amount cannot be negative</string>
     <string name="error_invalid_amount">Invalid amount format</string>

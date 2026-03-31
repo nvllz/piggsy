@@ -11,7 +11,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
@@ -24,6 +23,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.nvllz.piggsy.R;
 import com.nvllz.piggsy.data.Currency;
 import com.nvllz.piggsy.data.Database;
@@ -227,34 +227,62 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
         preferences.setSortOrder(isSortAscending);
     }
 
-    private void showArchiveDialog(Saving saving) {
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.dialog_title_archive_saving)
-                .setMessage(R.string.dialog_message_archive_saving)
-                .setNegativeButton(R.string.dialog_button_cancel, null)
-                .setPositiveButton(R.string.dialog_button_archive, (dialogInterface, i) -> {
-                    AlarmUtil.cancel(this, saving);
-                    saving.setIsArchived(Saving.IS_ARCHIVE);
-                    savingRepository.edit(saving);
-                    Toast.makeText(getApplicationContext(), R.string.toast_piggy_bank_archived, Toast.LENGTH_SHORT).show();
-                    refreshList();
-                });
+    private void archiveSaving(Saving saving) {
+        AlarmUtil.cancel(this, saving);
 
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        savings.remove(saving);
+        savingAdapter.notifyDataSetChanged();
+        binding.emptyIndicator.setVisibility(savings.isEmpty() ? View.VISIBLE : View.GONE);
+        binding.savingList.setVisibility(savings.isEmpty() ? View.GONE : View.VISIBLE);
+
+        Snackbar.make(binding.getRoot(), getString(R.string.snackbar_piggy_bank_archived), Snackbar.LENGTH_LONG)
+                .setAction(getString(R.string.undo), v -> {
+                    savings.add(saving);
+                    sortSavings(sortCriteria);
+                    binding.emptyIndicator.setVisibility(View.GONE);
+                    binding.savingList.setVisibility(View.VISIBLE);
+                })
+                .addCallback(new Snackbar.Callback() {
+                    @Override
+                    public void onDismissed(Snackbar snackbar, int event) {
+                        if (event != DISMISS_EVENT_ACTION) {
+                            saving.setIsArchived(Saving.IS_ARCHIVE);
+                            savingRepository.edit(saving);
+                        }
+                    }
+                })
+                .show();
     }
 
     private void showDeleteDialog(Saving saving) {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.dialog_title_delete_saving)
-                .setIcon(R.drawable.ic_delete_forever)
                 .setMessage(R.string.dialog_message_delete_saving)
                 .setNegativeButton(R.string.dialog_button_cancel, null)
                 .setPositiveButton(R.string.dialog_button_delete, (dialogInterface, i) -> {
                     AlarmUtil.cancel(this, saving);
-                    savingRepository.delete(saving.getID());
-                    Toast.makeText(getApplicationContext(), R.string.toast_piggy_bank_deleted, Toast.LENGTH_SHORT).show();
-                    refreshList();
+
+                    savings.remove(saving);
+                    savingAdapter.notifyDataSetChanged();
+                    binding.emptyIndicator.setVisibility(savings.isEmpty() ? View.VISIBLE : View.GONE);
+                    binding.savingList.setVisibility(savings.isEmpty() ? View.GONE : View.VISIBLE);
+
+                    Snackbar.make(binding.getRoot(), getString(R.string.snackbar_piggy_bank_deleted), Snackbar.LENGTH_LONG)
+                            .setAction(getString(R.string.undo), v -> {
+                                savings.add(saving);
+                                sortSavings(sortCriteria);
+                                binding.emptyIndicator.setVisibility(View.GONE);
+                                binding.savingList.setVisibility(View.VISIBLE);
+                            })
+                            .addCallback(new Snackbar.Callback() {
+                                @Override
+                                public void onDismissed(Snackbar snackbar, int event) {
+                                    if (event != DISMISS_EVENT_ACTION) {
+                                        savingRepository.delete(saving.getID());
+                                    }
+                                }
+                            })
+                            .show();
                 });
 
         AlertDialog dialog = builder.create();
@@ -344,7 +372,7 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
         Saving selectedSaving = savings.get(position);
         if (operation.equals(SavingOperation.DELETE)) showDeleteDialog(selectedSaving);
         if (operation.equals(SavingOperation.TRANSACTION)) showTransactionDialog(selectedSaving);
-        if (operation.equals(SavingOperation.ARCHIVE)) showArchiveDialog(selectedSaving);
+        if (operation.equals(SavingOperation.ARCHIVE)) archiveSaving(selectedSaving);
         if (operation.equals(SavingOperation.HISTORY)) showHistoryActivity(selectedSaving);
     }
 

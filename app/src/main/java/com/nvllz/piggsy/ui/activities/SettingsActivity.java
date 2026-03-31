@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
@@ -20,6 +19,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.nvllz.piggsy.R;
 import com.nvllz.piggsy.data.Database;
 import com.nvllz.piggsy.data.DateFormat;
@@ -187,7 +187,7 @@ public class SettingsActivity extends BaseActivity {
 
         private void exportData() {
             if (noSavingsFound()) {
-                Toast.makeText(requireContext(), R.string.toast_export_no_savings_found, Toast.LENGTH_SHORT).show();
+                Snackbar.make(requireView(), R.string.toast_export_no_savings_found, Snackbar.LENGTH_SHORT).show();
             } else {
                 Intent exportIntent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
                 exportIntent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -269,7 +269,7 @@ public class SettingsActivity extends BaseActivity {
                     outputStream.close();
                 }
 
-                Toast.makeText(requireContext(), R.string.toast_export_successful, Toast.LENGTH_SHORT).show();
+                Snackbar.make(requireView(), R.string.snackbar_export_successful, Snackbar.LENGTH_SHORT).show();
             } catch (Exception e) {
                 Log.e("Export", "Something went wrong while exporting", e);
             }
@@ -342,7 +342,7 @@ public class SettingsActivity extends BaseActivity {
                     }
 
                     writableDatabase.setTransactionSuccessful();
-                    Toast.makeText(requireContext(), R.string.toast_import_successful, Toast.LENGTH_SHORT).show();
+                    Snackbar.make(requireView(), R.string.snackbar_import_successful, Snackbar.LENGTH_SHORT).show();
 
                     restartApp();
 
