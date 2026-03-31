@@ -146,9 +146,9 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
             boolean isDeadlineDue = false;
 
             if (currentSaving.getDeadline() == AlarmUtil.NO_ALARM) {
-                deadline.setVisibility(View.GONE);
+                deadlineContainer.setVisibility(View.GONE);
             } else {
-                deadline.setVisibility(View.VISIBLE);
+                deadlineContainer.setVisibility(View.VISIBLE);
                 deadline.setText(String.format("%s", DateUtil.getStringDate(currentSaving.getDeadline(), deadlineFormat)));
 
                 Date today = DateUtil.getTodayWithoutTime();
