@@ -3,7 +3,7 @@
     <string name="app_easter_egg">You\'ve done this before, haven\'t you?</string>
     <string name="app_license">GNU General Public License v3.0</string>
     <string name="app_author">nvllz</string>
-    <string name="app_og_creator">eipna</string>
+    <string name="app_og_creator">mowtiie</string>
 
     <string name="toolbar_main">Piggsy</string>
     <string name="toolbar_create">New piggy</string>
@@ -15,7 +15,7 @@
 
     <string name="link_app_source_code">https://github.com/nvllz/Piggsy</string>
     <string name="link_app_author">https://github.com/nvllz</string>
-    <string name="link_app_og_creator">https://github.com/eipna</string>
+    <string name="link_app_og_creator">https://github.com/mowtiie</string>
 
     <string name="empty_indicator_main">No piggy banks here yet!</string>
     <string name="empty_indicator_archive">No archived piggy banks</string>
