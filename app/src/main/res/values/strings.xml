@@ -115,6 +115,13 @@
     <string name="save">Save</string>
     <string name="undo">Undo</string>
 
+    <!-- Button descriptions -->
+    <string name="desc_add">Add transaction</string>
+    <string name="desc_history">History</string>
+    <string name="desc_archive">Archive</string>
+    <string name="desc_unarchive">Unarchive</string>
+    <string name="desc_delete">Delete</string>
+
     <!-- Feedback -->
     <string name="transaction_deleted">Transaction deleted</string>
     <string name="transaction_updated">Transaction updated</string>

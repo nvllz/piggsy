@@ -6,8 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/colorSurface"
-    android:paddingHorizontal="20dp"
-    android:paddingTop="16dp">
+    android:paddingHorizontal="12dp"
+    android:paddingBottom="18dp">
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:dividerInsetStart="0dp"
+        app:dividerInsetEnd="0dp"
+        android:alpha="0.5"
+        android:layout_marginBottom="16dp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -25,12 +33,24 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/transaction_date"
                 android:text="02/22/25 4:08 PM"
-                android:textAppearance="?attr/textAppearanceTitleMedium"
                 android:textSize="17sp"
+                android:letterSpacing="-0.07"
                 android:textColor="?attr/colorOnSurface"
-                android:fontFamily="@font/open_sans_family"
+                app:fontFamily="@font/chivomono_family"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                tools:ignore="HardcodedText" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/transaction_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                app:fontFamily="@font/chivo_extralight_italic"
+                android:text="Transaction Note"
+                android:textAppearance="?attr/textAppearanceTitleSmall"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textSize="15sp"
                 tools:ignore="HardcodedText" />
 
             </LinearLayout>
@@ -46,9 +66,9 @@
                 android:id="@+id/transaction_amount"
                 android:text="+1000.00"
                 android:textAppearance="?attr/textAppearanceBodyLarge"
-                android:textSize="20sp"
+                android:textSize="19sp"
                 android:textColor="?attr/colorPrimary"
-                android:fontFamily="@font/open_sans_family"
+                app:fontFamily="@font/chivo_family"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="end"
@@ -59,8 +79,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
+                android:textFontWeight="300"
                 android:textColor="?attr/colorOnSurfaceVariant"
-                android:fontFamily="@font/open_sans_family"
+                app:fontFamily="@font/chivo_family"
                 android:gravity="end"
                 android:visibility="gone"
                 tools:ignore="HardcodedText" />
@@ -68,27 +89,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/transaction_note"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Transaction Note"
-        android:textAppearance="?attr/textAppearanceTitleMedium"
-        android:textSize="16sp"
-        android:textColor="?attr/colorOnSurfaceVariant"
-        android:fontFamily="@font/open_sans_family"
-        android:textStyle="italic"
-        android:visibility="gone"
-        tools:ignore="HardcodedText" />
-
-    <com.google.android.material.divider.MaterialDivider
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        app:dividerInsetStart="0dp"
-        app:dividerInsetEnd="0dp"
-        android:alpha="0.5"
-        android:layout_marginTop="18dp" />
 
 </LinearLayout>

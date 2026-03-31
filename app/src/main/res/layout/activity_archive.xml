@@ -46,7 +46,7 @@
                     android:layout_gravity="center"
                     android:src="@drawable/ic_archive"
                     tools:ignore="ContentDescription"
-                    app:tint="?attr/colorTertiary" />
+                    app:tint="?attr/colorOnSurfaceVariant" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
                     android:textAlignment="center"
                     android:textAppearance="?attr/textAppearanceTitleSmall"
                     android:textColor="?attr/colorOnSurfaceVariant"
-                    android:fontFamily="@font/open_sans_family" />
+                    app:fontFamily="@font/chivo_family" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView

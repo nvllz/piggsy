@@ -6,6 +6,7 @@
     android:id="@+id/saving_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginVertical="8dp"
     android:layout_marginHorizontal="8dp"
     android:checkable="true"
     android:clickable="true"
@@ -13,8 +14,8 @@
     android:foreground="?android:attr/selectableItemBackground"
     style="@style/Widget.Material3.CardView.Elevated"
     app:cardBackgroundColor="?attr/colorSurfaceContainer"
-    app:cardCornerRadius="20dp"
-    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="32dp"
+    app:contentPadding="4dp"
     app:strokeWidth="0dp"
     app:checkedIconGravity="TOP_END"
     app:checkedIconMargin="12dp"
@@ -22,24 +23,17 @@
     app:checkedIconTint="?attr/colorAccent">
 
     <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:alpha="0.7" />
+        android:id="@+id/anchor_top"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="14dp"
         android:paddingVertical="6dp">
-
-        <View
-            android:id="@+id/accent_line"
-            android:layout_width="0dp"
-            android:layout_height="3dp"
-            android:layout_marginBottom="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/saving_deadline_container"
@@ -60,11 +54,12 @@
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="4dp"
+                android:textSize="12sp"
                 android:text="2012/12/31"
+                android:textFontWeight="600"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
                 android:textColor="?attr/colorOnSecondaryContainer"
-                android:fontFamily="@font/open_sans_semibold"
+                app:fontFamily="@font/chivo_family"
                 tools:ignore="HardcodedText" />
         </com.google.android.material.card.MaterialCardView>
 
@@ -72,18 +67,19 @@
             android:id="@+id/saving_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:shadowColor="?attr/colorPrimary"
-            android:shadowDx="0"
+            app:layout_constraintVertical_bias="0"
             android:text="Saving Title"
             android:textAlignment="center"
-            android:textSize="22sp"
+            android:textSize="25sp"
             android:textColor="?attr/colorPrimary"
-            android:fontFamily="@font/open_sans_semibold"
+            app:fontFamily="@font/chivo_family"
+            android:textFontWeight="600"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="12dp"
             app:layout_constraintTop_toBottomOf="@id/saving_deadline_container"
+            app:layout_goneMarginTop="0dp"
             tools:ignore="HardcodedText" />
 
         <LinearLayout
@@ -102,11 +98,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:letterSpacing="0.02"
+                android:textSize="22sp"
                 android:text="$1,000"
-                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                 android:textColor="?attr/colorPrimary"
-                android:fontFamily="@font/open_sans_semibold"
-                android:textStyle="bold"
+                app:fontFamily="@font/chivo_family"
+                android:textFontWeight="300"
                 tools:ignore="HardcodedText" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -114,10 +110,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.7"
+                android:textSize="22sp"
                 android:text=" / "
-                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:textFontWeight="300"
                 android:textColor="?attr/colorOnSurfaceVariant"
-                android:fontFamily="@font/open_sans_family"
+                app:fontFamily="@font/chivo_family"
                 tools:ignore="HardcodedText" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -126,10 +123,11 @@
                 android:layout_height="wrap_content"
                 android:letterSpacing="0.01"
                 android:alpha="0.7"
+                android:textSize="22sp"
                 android:text="$1,500"
-                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
                 android:textColor="?attr/colorOnSurface"
-                android:fontFamily="@font/open_sans_family"
+                app:fontFamily="@font/chivo_family"
+                android:textFontWeight="300"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
 
@@ -174,7 +172,8 @@
                     android:text="66%"
                     android:textAlignment="center"
                     android:textColor="?attr/colorOnPrimary"
-                    android:fontFamily="@font/open_sans_semibold"
+                    app:fontFamily="@font/chivo_family"
+                    android:textFontWeight="600"
                     android:textSize="12sp"
                     tools:ignore="HardcodedText" />
             </com.google.android.material.card.MaterialCardView>
@@ -194,28 +193,26 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/saving_update"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                android:contentDescription="Update"
-                android:fontFamily="@font/open_sans_family"
-                android:text="Add"
+                style="?attr/materialIconButtonOutlinedStyle"
+                android:layout_width="100dp"
+                android:layout_height="42dp"
+                android:contentDescription="@string/desc_add"
+                android:tooltipText="@string/desc_add"
+                app:fontFamily="@font/chivo_family"
                 android:backgroundTint="?attr/colorPrimaryContainer"
-                android:textColor="?attr/colorOnPrimaryContainer"
                 app:icon="@drawable/ic_add_circle"
                 app:iconTint="?attr/colorOnPrimaryContainer"
                 app:strokeColor="?attr/colorPrimary"
                 app:strokeWidth="1dp"
-                app:iconGravity="textStart"
-                tools:ignore="HardcodedText" />
+                app:iconGravity="textStart" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/saving_history"
                 style="?attr/materialIconButtonOutlinedStyle"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
-                android:contentDescription="History"
+                android:contentDescription="@string/desc_history"
+                android:tooltipText="@string/desc_history"
                 app:cornerRadius="32dp"
                 app:icon="@drawable/ic_history"
                 app:iconGravity="textStart"
@@ -229,7 +226,8 @@
                 style="?attr/materialIconButtonOutlinedStyle"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
-                android:contentDescription="Archive"
+                android:contentDescription="@string/desc_archive"
+                android:tooltipText="@string/desc_archive"
                 app:cornerRadius="32dp"
                 app:icon="@drawable/ic_archive"
                 app:iconGravity="textStart"
@@ -243,14 +241,14 @@
                 style="?attr/materialIconButtonOutlinedStyle"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
-                android:contentDescription="Unarchive"
+                android:contentDescription="@string/desc_unarchive"
+                android:tooltipText="@string/desc_unarchive"
                 app:cornerRadius="32dp"
                 app:icon="@drawable/ic_unarchive"
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
                 app:iconSize="20dp"
-                app:iconTint="?attr/colorSecondary"
-                app:strokeColor="?attr/colorSecondary"
+                app:strokeColor="?attr/colorPrimary"
                 app:strokeWidth="1dp" />
 
             <com.google.android.material.button.MaterialButton
@@ -258,7 +256,8 @@
                 style="?attr/materialIconButtonOutlinedStyle"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
-                android:contentDescription="Delete"
+                android:contentDescription="@string/desc_delete"
+                android:tooltipText="@string/desc_delete"
                 app:cornerRadius="32dp"
                 app:icon="@drawable/ic_delete"
                 app:iconGravity="textStart"

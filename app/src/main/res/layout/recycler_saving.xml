@@ -12,14 +12,10 @@
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
     app:cardBackgroundColor="?attr/colorSurfaceContainer"
-    app:cardCornerRadius="20dp"
+    app:cardCornerRadius="30dp"
+    app:contentPadding="4dp"
     app:cardUseCompatPadding="true"
     app:cardElevation="4dp">
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:alpha="0.7" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -56,10 +52,9 @@
                 android:text="2012/12/31"
                 android:textSize="14sp"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="?attr/colorOnTertiaryContainer"
-                android:fontFamily="@font/open_sans_family"
-                android:textStyle="bold"
+                app:fontFamily="@font/chivo_family"
+                android:textFontWeight="600"
                 tools:ignore="HardcodedText" />
         </androidx.cardview.widget.CardView>
 
@@ -70,15 +65,12 @@
             android:layout_marginTop="6dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:shadowColor="?attr/colorPrimary"
-            android:shadowDx="0"
-            android:shadowDy="1"
-            android:shadowRadius="2"
             android:text="Saving Title"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="22sp"
             android:textColor="?attr/colorPrimary"
-            android:fontFamily="@font/open_sans_semibold"
+            app:fontFamily="@font/chivo_family"
+            android:textFontWeight="600"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/saving_deadline_container"
             tools:ignore="HardcodedText" />
@@ -100,10 +92,10 @@
                 android:layout_height="wrap_content"
                 android:letterSpacing="0.02"
                 android:text="$1,000"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="22sp"
                 android:textColor="?attr/colorPrimary"
-                android:fontFamily="@font/open_sans_semibold"
-                android:textStyle="bold"
+                app:fontFamily="@font/chivo_family"
+                android:textFontWeight="400"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -112,9 +104,10 @@
                 android:layout_height="wrap_content"
                 android:alpha="0.7"
                 android:text=" / "
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="22sp"
                 android:textColor="?attr/colorOnSurfaceVariant"
-                android:fontFamily="@font/open_sans_family"
+                app:fontFamily="@font/chivo_family"
+                android:textFontWeight="300"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -124,9 +117,10 @@
                 android:letterSpacing="0.01"
                 android:alpha="0.7"
                 android:text="$1,500"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="22sp"
                 android:textColor="?attr/colorOnSurface"
-                android:fontFamily="@font/open_sans_family"
+                app:fontFamily="@font/chivo_family"
+                android:textFontWeight="300"
                 tools:ignore="HardcodedText" />
         </LinearLayout>
 
@@ -170,7 +164,8 @@
                     android:text="66%"
                     android:textAlignment="center"
                     android:textColor="?attr/colorOnPrimary"
-                    android:fontFamily="@font/open_sans_semibold"
+                    app:fontFamily="@font/chivo_family"
+                    android:textFontWeight="200"
                     android:textSize="12sp"
                     tools:ignore="HardcodedText" />
             </androidx.cardview.widget.CardView>
@@ -194,9 +189,11 @@
                 android:layout_height="match_parent"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                android:contentDescription="Update"
+                android:contentDescription="@string/desc_add"
+                android:tooltipText="@string/desc_add"
                 android:text="Add"
-                android:fontFamily="@font/open_sans_family"
+                app:fontFamily="@font/chivo_family"
+                android:textFontWeight="600"
                 android:drawableStart="@drawable/ic_add_circle"
                 android:drawablePadding="8dp"
                 android:gravity="center"
@@ -206,7 +203,8 @@
                 android:id="@+id/saving_history"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
-                android:contentDescription="History"
+                android:contentDescription="@string/desc_history"
+                android:tooltipText="@string/desc_history"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_history"
                 android:scaleType="center" />
@@ -215,7 +213,8 @@
                 android:id="@+id/saving_archive"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
-                android:contentDescription="Archive"
+                android:contentDescription="@string/desc_archive"
+                android:tooltipText="@string/desc_archive"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_archive"
                 android:scaleType="center" />
@@ -224,7 +223,8 @@
                 android:id="@+id/saving_unarchive"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
-                android:contentDescription="Unarchive"
+                android:contentDescription="@string/desc_unarchive"
+                android:tooltipText="@string/desc_unarchive"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_unarchive"
                 android:scaleType="center"
@@ -234,7 +234,8 @@
                 android:id="@+id/saving_delete"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
-                android:contentDescription="Delete"
+                android:contentDescription="@string/desc_delete"
+                android:tooltipText="@string/desc_delete"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_delete"
                 android:scaleType="center"
