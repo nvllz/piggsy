@@ -2,6 +2,7 @@ package com.nvllz.piggsy.ui.adapters;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -155,29 +156,29 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
 
         private boolean configureDeadline(Saving currentSaving, String deadlineFormat, Integer percentValue) {
             boolean isDeadlineDue = false;
+            Context ctx = itemView.getContext();
+
+            int defaultProgressColor = getThemeColor(ctx, android.R.attr.colorPrimary);
+            int defaultPercentBg = getThemeColor(ctx, com.google.android.material.R.attr.colorPrimaryContainer);
+            int defaultPercentText = getThemeColor(ctx, com.google.android.material.R.attr.colorOnPrimaryContainer);
 
             if (currentSaving.getDeadline() == AlarmUtil.NO_ALARM) {
                 deadlineContainer.setVisibility(View.GONE);
-
-                int defaultProgressColor = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_primary);
-                int defaultPercentBg = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_primaryContainer);
-                int defaultPercentText = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_onPrimaryContainer);
                 progress.setIndicatorColor(defaultProgressColor);
                 percentContainer.setCardBackgroundColor(defaultPercentBg);
                 percent.setTextColor(defaultPercentText);
             } else {
                 deadlineContainer.setVisibility(View.VISIBLE);
-                deadline.setText(String.format("%s", DateUtil.getStringDate(currentSaving.getDeadline(), deadlineFormat)));
+                deadline.setText(DateUtil.getStringDate(currentSaving.getDeadline(), deadlineFormat));
 
                 Date today = DateUtil.getTodayWithoutTime();
                 Date deadlineDate = DateUtil.getDateWithoutTime(currentSaving.getDeadline());
 
                 if (!deadlineDate.after(today)) {
-                    int errorBg = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_errorContainer);
-                    int errorText = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_onErrorContainer);
+                    int errorBg = getThemeColor(ctx, com.google.android.material.R.attr.colorErrorContainer);
+                    int errorText = getThemeColor(ctx, com.google.android.material.R.attr.colorOnErrorContainer);
                     deadlineContainer.setCardBackgroundColor(errorBg);
                     deadline.setTextColor(errorText);
-
                     if (percentValue < 100) {
                         progress.setIndicatorColor(errorBg);
                         percentContainer.setCardBackgroundColor(errorBg);
@@ -185,18 +186,17 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
                     }
                     isDeadlineDue = true;
                 } else {
-                    int defaultBg = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_secondaryContainer);
-                    int defaultText = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_onSecondaryContainer);
-                    deadlineContainer.setCardBackgroundColor(defaultBg);
-                    deadline.setTextColor(defaultText);
-
-                    int defaultProgressColor = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_primary);
-                    int defaultPercentBg = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_primaryContainer);
-                    int defaultPercentText = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_onPrimaryContainer);
+                    deadlineContainer.setCardBackgroundColor(getThemeColor(ctx, com.google.android.material.R.attr.colorSecondaryContainer));
+                    deadline.setTextColor(getThemeColor(ctx, com.google.android.material.R.attr.colorOnSecondaryContainer));
                     progress.setIndicatorColor(defaultProgressColor);
                     percentContainer.setCardBackgroundColor(defaultPercentBg);
                     percent.setTextColor(defaultPercentText);
                 }
+            }
+
+            if (percentValue >= 100) {
+                percentContainer.setCardBackgroundColor(getThemeColor(ctx, android.R.attr.colorPrimary));
+                percent.setTextColor(getThemeColor(ctx, com.google.android.material.R.attr.colorOnPrimary));
             }
 
             return isDeadlineDue;
@@ -220,15 +220,21 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
 
         private void configureParentCardState(Saving currentSaving, boolean isDeadlineDue) {
             if (currentSaving.getCurrentSaving() >= currentSaving.getGoal() && !(currentSaving.getGoal() == 0)) {
-                parent.setChecked(true);
-                parent.setCheckedIcon(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_check_circle_hero));
+                parent.setStrokeWidth((int) (2 * itemView.getContext().getResources().getDisplayMetrics().density));
+                parent.setStrokeColor(ColorStateList.valueOf(getThemeColor(itemView.getContext(), android.R.attr.colorPrimary)));
             } else if (isDeadlineDue) {
-                parent.setChecked(true);
-                parent.setCheckedIcon(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_warning_hero));
-                parent.setCheckedIconTint(ColorStateList.valueOf(ContextCompat.getColor(itemView.getContext(), R.color.md_theme_error)));
+                parent.setStrokeWidth((int) (2 * itemView.getContext().getResources().getDisplayMetrics().density));
+                parent.setStrokeColor(ColorStateList.valueOf(getThemeColor(itemView.getContext(), android.R.attr.colorError)));
             } else {
-                parent.setChecked(false);
+                parent.setStrokeWidth(0);
+                parent.setStrokeColor(ColorStateList.valueOf(0));
             }
+        }
+
+        private static int getThemeColor(Context context, int attrResId) {
+            TypedValue typedValue = new TypedValue();
+            context.getTheme().resolveAttribute(attrResId, typedValue, true);
+            return typedValue.data;
         }
     }
 }

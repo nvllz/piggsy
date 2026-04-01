@@ -39,10 +39,8 @@
             android:id="@+id/saving_deadline_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="?attr/colorSecondaryContainer"
+            app:cardBackgroundColor="?attr/colorPrimaryContainer"
             app:cardCornerRadius="12dp"
-            app:strokeColor="?attr/colorOutlineVariant"
-            app:strokeWidth="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/accent_line"
@@ -173,7 +171,7 @@
                     android:textAlignment="center"
                     android:textColor="?attr/colorOnPrimary"
                     app:fontFamily="@font/chivo_family"
-                    android:textFontWeight="900"
+                    android:textFontWeight="600"
                     android:textSize="12sp"
                     tools:ignore="HardcodedText" />
             </com.google.android.material.card.MaterialCardView>
