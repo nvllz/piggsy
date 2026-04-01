@@ -130,7 +130,6 @@
     <string name="error_updating_transaction">Failed to update transaction</string>
 
     <!-- Validation -->
-    <string name="error_amount_required">Amount field is required</string>
     <string name="error_amount_positive">Amount must be positive</string>
     <string name="error_amount_non_negative">Amount cannot be negative</string>
     <string name="error_invalid_amount">Invalid amount format</string>

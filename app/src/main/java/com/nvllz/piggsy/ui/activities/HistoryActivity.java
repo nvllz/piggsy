@@ -236,7 +236,7 @@ public class HistoryActivity extends BaseActivity implements SwipeToActionCallba
             String note = Objects.requireNonNull(noteField.getText()).toString().trim();
 
             if (amountStr.isEmpty()) {
-                amountField.setError(getString(R.string.error_amount_required));
+                amountField.setError(getString(R.string.field_error_required));
                 return;
             }
 
