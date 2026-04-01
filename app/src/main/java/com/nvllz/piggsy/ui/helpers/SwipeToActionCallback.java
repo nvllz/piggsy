@@ -84,7 +84,7 @@ public class SwipeToActionCallback extends ItemTouchHelper.SimpleCallback {
                 itemView.getLeft() + dX, itemView.getBottom(),
                 createPaint(backgroundColor));
 
-        Drawable editIcon = ContextCompat.getDrawable(context, R.drawable.ic_edit);
+        Drawable editIcon = ContextCompat.getDrawable(context, R.drawable.ic_pencil_hero);
         if (editIcon != null) {
             int iconMargin = (itemView.getHeight() - editIcon.getIntrinsicHeight()) / 2;
             int iconLeft = itemView.getLeft() + iconMargin;
@@ -104,7 +104,7 @@ public class SwipeToActionCallback extends ItemTouchHelper.SimpleCallback {
                 itemView.getRight(), itemView.getBottom(),
                 createPaint(backgroundColor));
 
-        Drawable deleteIcon = ContextCompat.getDrawable(context, R.drawable.ic_delete);
+        Drawable deleteIcon = ContextCompat.getDrawable(context, R.drawable.ic_trash_hero);
         if (deleteIcon != null) {
             int iconMargin = (itemView.getHeight() - deleteIcon.getIntrinsicHeight()) / 2;
             int iconRight = itemView.getRight() - iconMargin;

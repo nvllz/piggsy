@@ -170,6 +170,7 @@ public class EditActivity extends BaseActivity {
         binding.fieldSavingNameText.setOnFocusChangeListener(scrollToFocused);
         binding.fieldSavingGoalText.setOnFocusChangeListener(scrollToFocused);
         binding.fieldSavingDescriptionText.setOnFocusChangeListener(scrollToFocused);
+        binding.buttonSave.setOnClickListener(v -> editSaving());
     }
 
     private void hasAlarmPermission() {
@@ -188,7 +189,7 @@ public class EditActivity extends BaseActivity {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.dialog_title_request_alarm_permission)
                 .setMessage(R.string.dialog_message_request_alarm_permission)
-                .setIcon(R.drawable.ic_alarm)
+                .setIcon(R.drawable.ic_bell_hero)
                 .setNegativeButton(R.string.dialog_button_cancel, null)
                 .setPositiveButton(R.string.dialog_button_grant, (dialog, which) -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -247,13 +248,6 @@ public class EditActivity extends BaseActivity {
         datePicker.show(getSupportFragmentManager(), null);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) finish();
-        if (item.getItemId() == R.id.save) editSaving();
-        return true;
-    }
-
     private void editSaving() {
         String nameText = Objects.requireNonNull(binding.fieldSavingNameText.getText()).toString();
         String goalText = Objects.requireNonNull(binding.fieldSavingGoalText.getText()).toString();
@@ -289,9 +283,35 @@ public class EditActivity extends BaseActivity {
         binding.fieldSavingCurrencyLayout.setError(selectedCurrency == null ? getString(R.string.field_error_required) : null);
     }
 
+    private void showDeleteDialog() {
+        new MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.dialog_title_delete_saving)
+                .setMessage(R.string.dialog_message_delete_saving)
+                .setNegativeButton(R.string.dialog_button_cancel, null)
+                .setPositiveButton(R.string.dialog_button_delete, (dialog, which) -> {
+                    AlarmUtil.cancel(this, currentSaving);
+                    Intent result = new Intent();
+                    result.putExtra("action", "delete");
+                    result.putExtra(Database.COLUMN_SAVING_ID, currentSaving.getID());
+                    setResult(RESULT_OK, result);
+                    finish();
+                })
+                .create()
+                .show();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_saving, menu);
+        getMenuInflater().inflate(R.menu.menu_delete, menu);
+        MenuItem deleteItem = menu.findItem(R.id.delete);
+        deleteItem.setVisible(currentSaving.getIsArchived() == Saving.NOT_ARCHIVE);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) finish();
+        if (item.getItemId() == R.id.delete) showDeleteDialog();
         return true;
     }
 

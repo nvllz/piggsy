@@ -194,7 +194,7 @@
                 android:text="Add"
                 app:fontFamily="@font/chivo_family"
                 android:textFontWeight="600"
-                android:drawableStart="@drawable/ic_add_circle"
+                android:drawableStart="@drawable/ic_add_hero"
                 android:drawablePadding="8dp"
                 android:gravity="center"
                 tools:ignore="HardcodedText" />
@@ -206,7 +206,7 @@
                 android:contentDescription="@string/desc_history"
                 android:tooltipText="@string/desc_history"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_history"
+                android:src="@drawable/ic_list_hero"
                 android:scaleType="center" />
 
             <androidx.appcompat.widget.AppCompatImageButton
@@ -216,7 +216,7 @@
                 android:contentDescription="@string/desc_archive"
                 android:tooltipText="@string/desc_archive"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_archive"
+                android:src="@drawable/ic_archive_hero"
                 android:scaleType="center" />
 
             <androidx.appcompat.widget.AppCompatImageButton
@@ -226,7 +226,7 @@
                 android:contentDescription="@string/desc_unarchive"
                 android:tooltipText="@string/desc_unarchive"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_unarchive"
+                android:src="@drawable/ic_unarchive_hero"
                 android:scaleType="center"
                 android:tint="?attr/colorSecondary" />
 
@@ -237,7 +237,7 @@
                 android:contentDescription="@string/desc_delete"
                 android:tooltipText="@string/desc_delete"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_delete"
+                android:src="@drawable/ic_trash_hero"
                 android:scaleType="center"
                 android:tint="?attr/colorError" />
         </LinearLayout>

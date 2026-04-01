@@ -54,6 +54,7 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
 
     private String sortCriteria;
     private boolean isSortAscending;
+    private boolean skipNextRefresh = false;
 
     private final ActivityResultLauncher<Intent> createSavingLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -65,7 +66,41 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
     private final ActivityResultLauncher<Intent> editSavingLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == RESULT_OK) {
-                    refreshList();
+                    Intent data = result.getData();
+                    if (data != null && "delete".equals(data.getStringExtra("action"))) {
+                        String deletedId = data.getStringExtra(Database.COLUMN_SAVING_ID);
+                        Saving deletedSaving = savings.stream()
+                                .filter(s -> s.getID().equals(deletedId))
+                                .findFirst().orElse(null);
+
+                        if (deletedSaving != null) {
+                            skipNextRefresh = true;
+                            savings.remove(deletedSaving);
+                            savingAdapter.notifyDataSetChanged();
+                            binding.emptyIndicator.setVisibility(savings.isEmpty() ? View.VISIBLE : View.GONE);
+                            binding.savingList.setVisibility(savings.isEmpty() ? View.GONE : View.VISIBLE);
+
+                            Snackbar.make(binding.getRoot(), getString(R.string.snackbar_piggy_bank_deleted), Snackbar.LENGTH_LONG)
+                                    .setAction(getString(R.string.undo), v -> {
+                                        savings.add(deletedSaving);
+                                        sortSavings(sortCriteria);
+                                        binding.emptyIndicator.setVisibility(View.GONE);
+                                        binding.savingList.setVisibility(View.VISIBLE);
+                                    })
+                                    .addCallback(new Snackbar.Callback() {
+                                        @Override
+                                        public void onDismissed(Snackbar snackbar, int event) {
+                                            if (event != DISMISS_EVENT_ACTION) {
+                                                savingRepository.delete(deletedSaving.getID());
+                                            }
+                                            skipNextRefresh = false;
+                                        }
+                                    })
+                                    .show();
+                        }
+                    } else {
+                        refreshList();
+                    }
                 }
             });
 
@@ -107,7 +142,9 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
     @Override
     protected void onResume() {
         super.onResume();
-        refreshList();
+        if (!skipNextRefresh) {
+            refreshList();
+        }
     }
 
     @Override
@@ -230,6 +267,9 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
     private void archiveSaving(Saving saving) {
         AlarmUtil.cancel(this, saving);
 
+        saving.setIsArchived(Saving.IS_ARCHIVE);
+        savingRepository.edit(saving);
+
         savings.remove(saving);
         savingAdapter.notifyDataSetChanged();
         binding.emptyIndicator.setVisibility(savings.isEmpty() ? View.VISIBLE : View.GONE);
@@ -237,19 +277,12 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
 
         Snackbar.make(binding.getRoot(), getString(R.string.snackbar_piggy_bank_archived), Snackbar.LENGTH_LONG)
                 .setAction(getString(R.string.undo), v -> {
+                    saving.setIsArchived(Saving.NOT_ARCHIVE);
+                    savingRepository.edit(saving);
                     savings.add(saving);
                     sortSavings(sortCriteria);
                     binding.emptyIndicator.setVisibility(View.GONE);
                     binding.savingList.setVisibility(View.VISIBLE);
-                })
-                .addCallback(new Snackbar.Callback() {
-                    @Override
-                    public void onDismissed(Snackbar snackbar, int event) {
-                        if (event != DISMISS_EVENT_ACTION) {
-                            saving.setIsArchived(Saving.IS_ARCHIVE);
-                            savingRepository.edit(saving);
-                        }
-                    }
                 })
                 .show();
     }

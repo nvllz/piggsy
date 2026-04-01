@@ -168,13 +168,7 @@ public class CreateActivity extends BaseActivity {
         binding.fieldSavingCurrentSavingText.setOnFocusChangeListener(scrollToFocused);
         binding.fieldSavingGoalText.setOnFocusChangeListener(scrollToFocused);
         binding.fieldSavingDescriptionText.setOnFocusChangeListener(scrollToFocused);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) finish();
-        if (item.getItemId() == R.id.save) createSaving();
-        return true;
+        binding.buttonSave.setOnClickListener(v -> createSaving());
     }
 
     private void createSaving() {
@@ -227,7 +221,7 @@ public class CreateActivity extends BaseActivity {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.dialog_title_request_alarm_permission)
                 .setMessage(R.string.dialog_message_request_alarm_permission)
-                .setIcon(R.drawable.ic_alarm)
+                .setIcon(R.drawable.ic_bell_hero)
                 .setNegativeButton(R.string.dialog_button_cancel, null)
                 .setPositiveButton(R.string.dialog_button_grant, (dialog, which) -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -289,6 +283,12 @@ public class CreateActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_saving, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) finish();
         return true;
     }
 

@@ -44,8 +44,10 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/field_saving_name_layout"
                 android:hint="@string/field_saving_name"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                android:layout_marginBottom="20dp"
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                android:layout_marginBottom="12dp"
+                app:boxCornerRadiusTopStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -62,8 +64,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/field_saving_currency_layout"
                 android:hint="@string/preference_list_currency"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_marginBottom="20dp"
+                style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                app:endIconDrawable="@drawable/ic_chevron_down_hero"
+                android:layout_marginBottom="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -78,7 +81,7 @@
             <!-- Financial Fields Group -->
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:baselineAligned="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -86,7 +89,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/field_saving_current_saving_layout"
                     android:hint="@string/field_saving_current_saving"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    style="@style/Widget.Material3.TextInputLayout.FilledBox"
                     android:layout_weight="1"
                     android:layout_marginEnd="8dp"
                     android:layout_width="0dp"
@@ -104,7 +107,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/field_saving_goal_layout"
                     android:hint="@string/field_saving_goal"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    style="@style/Widget.Material3.TextInputLayout.FilledBox"
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
                     android:layout_width="0dp"
@@ -125,10 +128,9 @@
                 android:id="@+id/field_saving_deadline_layout"
                 android:hint="@string/field_saving_deadline"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                app:helperText="@string/field_optional"
+                android:layout_marginBottom="10dp"
                 app:endIconMode="custom"
-                app:endIconDrawable="@drawable/ic_clear"
-                android:layout_marginBottom="20dp"
+                app:endIconDrawable="@drawable/ic_x_hero"
                 app:fontFamily="@font/chivo_family"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -149,7 +151,7 @@
                 android:id="@+id/field_saving_description_layout"
                 android:hint="@string/field_saving_description"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                app:helperText="@string/field_optional"
+                android:layout_marginBottom="16dp"
                 app:fontFamily="@font/chivo_family"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -157,12 +159,20 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/field_saving_description_text"
                     android:inputType="textAutoComplete|textMultiLine"
-                    android:minLines="3"
+                    android:minLines="5"
                     android:gravity="top"
                     app:fontFamily="@font/chivo_family"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_save"
+                android:text="@string/save"
+                android:layout_width="match_parent"
+                android:textSize="14sp"
+                android:textFontWeight="600"
+                android:layout_height="56dp"/>
 
         </LinearLayout>
     </ScrollView>

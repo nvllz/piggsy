@@ -50,7 +50,7 @@
         <!-- Styles -->
         <item name="materialAlertDialogTheme">@style/Theme.Piggsy.AlertDialog</item>
         <item name="popupTheme">@style/Widget.Material3.PopupMenu</item>
-        <item name="homeAsUpIndicator">@drawable/ic_arrow_back</item>
+        <item name="homeAsUpIndicator">@drawable/ic_back_hero</item>
         <item name="alertDialogTheme">@style/Theme.Piggsy.AlertDialog</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
 

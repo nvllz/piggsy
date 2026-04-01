@@ -44,7 +44,8 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_archive"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_archive_hero"
                     tools:ignore="ContentDescription"
                     app:tint="?attr/colorOnSurfaceVariant" />
 
@@ -55,7 +56,7 @@
                     android:layout_marginTop="4dp"
                     android:text="@string/empty_indicator_archive"
                     android:textAlignment="center"
-                    android:textAppearance="?attr/textAppearanceTitleSmall"
+                    android:textAppearance="?attr/textAppearanceTitleLarge"
                     android:textColor="?attr/colorOnSurfaceVariant"
                     app:fontFamily="@font/chivo_family" />
             </LinearLayout>

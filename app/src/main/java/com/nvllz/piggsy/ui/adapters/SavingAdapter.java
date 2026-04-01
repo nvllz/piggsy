@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -74,7 +75,7 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
 
         MaterialCardView parent;
         MaterialTextView name, saving, goal, percent, deadline, outOfText;
-        MaterialButton update, history, archive, unarchive, delete;
+        MaterialButton update, history, note, archive, unarchive, delete;
         MaterialCardView percentContainer, deadlineContainer;
 
         LinearLayout description;
@@ -96,6 +97,7 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
 
             update = itemView.findViewById(R.id.saving_update);
             history = itemView.findViewById(R.id.saving_history);
+            note = itemView.findViewById(R.id.saving_note);
             archive = itemView.findViewById(R.id.saving_archive);
             unarchive = itemView.findViewById(R.id.saving_unarchive);
             delete = itemView.findViewById(R.id.saving_delete);
@@ -114,6 +116,12 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
             configureParentCardState(currentSaving, isDeadlineDue);
 
             saving.setText(Currency.formatAmount(currentSaving.getCurrency(), currentSaving.getCurrentSaving()));
+
+            boolean hasDescription = currentSaving.getDescription() != null
+                    && !currentSaving.getDescription().trim().isEmpty();
+            note.setVisibility(hasDescription ? View.VISIBLE : View.GONE);
+            TooltipCompat.setTooltipText(note, hasDescription ? currentSaving.getDescription() : null);
+            note.setOnClickListener(View::performLongClick);
         }
 
         private void configureTextDirection(String currency) {
@@ -133,12 +141,15 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
                 archive.setVisibility(View.GONE);
                 update.setVisibility(View.GONE);
 
-                View[] archivedElements = {name, saving, goal, percent, progress, outOfText};
+                View[] archivedElements = {name, saving, goal, percent, percentContainer,
+                        deadlineContainer, deadline,
+                        progress, outOfText};
                 for (View element : archivedElements) {
                     element.setAlpha(0.6f);
                 }
             } else {
                 unarchive.setVisibility(View.GONE);
+                delete.setVisibility(View.GONE);
             }
         }
 
@@ -147,6 +158,13 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
 
             if (currentSaving.getDeadline() == AlarmUtil.NO_ALARM) {
                 deadlineContainer.setVisibility(View.GONE);
+
+                int defaultProgressColor = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_primary);
+                int defaultPercentBg = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_primaryContainer);
+                int defaultPercentText = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_onPrimaryContainer);
+                progress.setIndicatorColor(defaultProgressColor);
+                percentContainer.setCardBackgroundColor(defaultPercentBg);
+                percent.setTextColor(defaultPercentText);
             } else {
                 deadlineContainer.setVisibility(View.VISIBLE);
                 deadline.setText(String.format("%s", DateUtil.getStringDate(currentSaving.getDeadline(), deadlineFormat)));
@@ -171,6 +189,13 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
                     int defaultText = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_onSecondaryContainer);
                     deadlineContainer.setCardBackgroundColor(defaultBg);
                     deadline.setTextColor(defaultText);
+
+                    int defaultProgressColor = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_primary);
+                    int defaultPercentBg = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_primaryContainer);
+                    int defaultPercentText = ContextCompat.getColor(itemView.getContext(), R.color.md_theme_onPrimaryContainer);
+                    progress.setIndicatorColor(defaultProgressColor);
+                    percentContainer.setCardBackgroundColor(defaultPercentBg);
+                    percent.setTextColor(defaultPercentText);
                 }
             }
 
@@ -196,10 +221,10 @@ public class SavingAdapter extends RecyclerView.Adapter<SavingAdapter.ViewHolder
         private void configureParentCardState(Saving currentSaving, boolean isDeadlineDue) {
             if (currentSaving.getCurrentSaving() >= currentSaving.getGoal() && !(currentSaving.getGoal() == 0)) {
                 parent.setChecked(true);
-                parent.setCheckedIcon(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_check));
+                parent.setCheckedIcon(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_check_circle_hero));
             } else if (isDeadlineDue) {
                 parent.setChecked(true);
-                parent.setCheckedIcon(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_warning));
+                parent.setCheckedIcon(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_warning_hero));
                 parent.setCheckedIconTint(ColorStateList.valueOf(ContextCompat.getColor(itemView.getContext(), R.color.md_theme_error)));
             } else {
                 parent.setChecked(false);

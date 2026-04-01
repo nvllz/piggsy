@@ -7,7 +7,7 @@
         android:id="@+id/sort"
         android:title="@string/menu_item_sort"
         app:showAsAction="always"
-        android:icon="@drawable/ic_sort"
+        android:icon="@drawable/ic_sort_hero"
         tools:ignore="AlwaysShowAction">
 
         <menu>
@@ -55,23 +55,23 @@
     <item
         android:id="@+id/overflow"
         android:title="@string/menu_item_overflow"
-        android:icon="@drawable/ic_more_vertical"
+        android:icon="@drawable/ic_more_hero"
         app:showAsAction="always">
 
         <menu>
             <item
                 android:id="@+id/archive"
-                android:icon="@drawable/ic_small_archive"
+                android:icon="@drawable/ic_archive_hero"
                 android:title="@string/menu_item_archive"/>
 
             <item
                 android:id="@+id/settings"
-                android:icon="@drawable/ic_small_settings"
+                android:icon="@drawable/ic_settings_hero"
                 android:title="@string/menu_item_settings"/>
 
             <item
                 android:id="@+id/about"
-                android:icon="@drawable/ic_small_info"
+                android:icon="@drawable/ic_info_hero"
                 android:title="@string/menu_item_about"/>
         </menu>
     </item>

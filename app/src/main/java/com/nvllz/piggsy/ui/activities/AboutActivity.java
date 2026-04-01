@@ -103,7 +103,6 @@ public class AboutActivity extends AppCompatActivity {
         private void showLicenseDialog() {
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext())
                     .setTitle(R.string.preference_app_license)
-                    .setIcon(R.drawable.ic_license)
                     .setMessage(readLicenseFromAssets())
                     .setPositiveButton(R.string.dialog_button_close, null);
 

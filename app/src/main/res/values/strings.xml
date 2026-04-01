@@ -23,15 +23,15 @@
     <string name="radio_button_deposit">Deposit</string>
     <string name="radio_button_withdraw">Withdraw</string>
 
-    <string name="field_optional">This field is optional</string>
     <string name="field_error_required">This field is required</string>
 
     <string name="field_saving_name">Title</string>
     <string name="field_saving_current_saving">Balance</string>
     <string name="field_transaction_amount">Amount</string>
     <string name="field_saving_goal">Goal</string>
-    <string name="field_saving_description">Description</string>
-    <string name="field_saving_deadline">Deadline</string>
+
+    <string name="field_saving_description">Description (optional)</string>
+    <string name="field_saving_deadline">Deadline (optional)</string>
 
     <string name="field_transaction_notes">Note (optional)</string>
 
@@ -118,6 +118,7 @@
     <!-- Button descriptions -->
     <string name="desc_add">Add transaction</string>
     <string name="desc_history">History</string>
+    <string name="desc_note">Note</string>
     <string name="desc_archive">Archive</string>
     <string name="desc_unarchive">Unarchive</string>
     <string name="desc_delete">Delete</string>
