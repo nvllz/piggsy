@@ -15,6 +15,11 @@ public class AlarmUtil {
     public static int NO_ALARM = 0;
 
     public static void set(Context context, Saving saving) {
+        long deadline = saving.getDeadline();
+        if (deadline < System.currentTimeMillis() || (saving.getIsArchived() == Saving.IS_ARCHIVE)) {
+            return;
+        }
+
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         Intent intent = new Intent(context, DeadlineReceiver.class);
