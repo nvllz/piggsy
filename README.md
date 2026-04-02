@@ -12,22 +12,34 @@
 
 </div>
 
+Welcome to Piggsy – a simple piggy bank manager for tracking your savings goals in one place.
 
-Welcome to Piggsy: your personal piggy bank manager that makes saving money for your goals fun, easy, and totally customizable. Whether you're stashing cash for a dream vacation, a new gadget, or just building an emergency fund, Piggsy lets you create multiple piggy banks with your own currencies, deadlines, and notes to keep you motivated and on track.
+Whether you're saving for a trip, a new gadget, or an emergency fund, Piggsy lets you create multiple piggy banks with your preferred currency, optional deadlines, and notes to help you stay organized.
 
-With a sleek, modern design and a user-friendly interface, Piggsy turns saving into something you actually want to do. No more boring spreadsheets or guessing games. Just clear progress, flexible goals, and everything in one place.
+The app focuses on a clean, straightforward experience with an interface that’s easy to use and visually modern. Instead of spreadsheets or manual tracking, you get a clear view of your progress and all your goals in one place.
 
 ## Features
 
-- **Create Multiple Piggy Banks:** Set up as many savings goals as you want, each with its own target amount, currency, and deadline
-- **Custom Currencies:** Save in any real currency you prefer: dollars, euros, yen, and more
-- **Add and Deduct Transactions:** Easily add or remove money from your piggy banks to keep your balance accurate
-- **Deadline Tracking:** Add optional deadlines to stay motivated and see how close you are to your goal
-- **Modern & Intuitive UI:** Enjoy a clean, attractive interface with dynamic color themes
-- **Organize with Archiving:** Archive piggy banks that you’ve completed or paused to keep your active goals clutter-free
-- **Export & Import Data:** Backup or transfer your savings easily with JSON export/import
-- **Flexible Sorting:** Sort your piggy banks by name, progress, goal amount, or deadline
+- **Create multiple piggy banks**  
+  Set up as many savings goals as you need, each with its own target, currency, and optional deadline.
 
+- **Choose your currency**  
+  Save in the currency that makes sense for you: USD, EUR, JPY, and others.
+
+- **Track deposits and withdrawals**  
+  Add or deduct money anytime to keep your balance up to date. With full transaction history and short notes you have more control over your piggy banks than ever.
+
+- **Optional deadlines**  
+  Add a deadline to stay on track and see how close you are to reaching your goal.
+
+- **Archive completed or paused goals**  
+  Keep your active list focused by archiving piggy banks you’re not using.
+
+- **Sort your piggy banks**  
+  Organize them by name, progress, goal amount, or deadline.
+
+- **Backup and restore your data**  
+  Automatic backups tailored to your needs. Set up once and never lose your data.
 
 ## Screenshots
 
@@ -49,6 +61,9 @@ With a sleek, modern design and a user-friendly interface, Piggsy turns saving i
 
 This project is licensed under the GNU General Public License v3.0. See the
 [LICENSE](LICENSE) file for details.
+
+It also uses [icons](https://composables.com/icons/icon-libraries/heroicons/outline) licensed under the [MIT License](https://opensource.org/license/MIT).
+
 
 ## Credits
 
