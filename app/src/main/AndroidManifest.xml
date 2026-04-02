@@ -50,6 +50,17 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="com.nvllz.piggsy.ui.activities.BackupActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Piggsy"
+            android:label="@string/menu_item_backup"
+            android:parentActivityName="com.nvllz.piggsy.ui.activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.nvllz.piggsy.ui.activities.MainActivity" />
+        </activity>
+
         <receiver
             android:name=".receiver.DeadlineReceiver"
             android:enabled="true"

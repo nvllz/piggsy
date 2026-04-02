@@ -60,6 +60,11 @@
 
         <menu>
             <item
+                android:id="@+id/backup"
+                android:icon="@drawable/ic_backup_hero"
+                android:title="@string/menu_item_backup" />
+
+            <item
                 android:id="@+id/archive"
                 android:icon="@drawable/ic_archive_hero"
                 android:title="@string/menu_item_archive"/>

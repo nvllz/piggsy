@@ -101,4 +101,54 @@ public class PreferenceUtil {
     public boolean isScreenPrivacyEnabled() {
         return sharedPreferences.getBoolean("screen_privacy", false);
     }
+
+    public int getBackupFrequency() {
+        try {
+            String value = sharedPreferences.getString("backup_frequency", "0");
+            return Integer.parseInt(value);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    public void setBackupFrequency(int v) {
+        sharedPreferences.edit().putString("backup_frequency", String.valueOf(v)).apply();
+    }
+
+    public int getBackupRetention() {
+        try {
+            String value = sharedPreferences.getString("backup_retention_count", "5");
+            return Integer.parseInt(value);
+        } catch (Exception e) {
+            return 5;
+        }
+    }
+
+    public void setBackupRetention(int v) {
+        sharedPreferences.edit().putString("backup_retention_count", String.valueOf(v)).apply();
+    }
+
+    public String getBackupLocationUri() {
+        return sharedPreferences.getString("backup_location_uri", null);
+    }
+
+    public void setBackupLocationUri(String v) {
+        sharedPreferences.edit().putString("backup_location_uri", v).apply();
+    }
+
+    public long getLastBackupTime() {
+        return sharedPreferences.getLong("last_backup_time", 0L);
+    }
+
+    public void setLastBackupTime(long time) {
+        sharedPreferences.edit().putLong("last_backup_time", time).apply();
+    }
+
+    public void setBackupPending(boolean pending) {
+        sharedPreferences.edit().putBoolean("backup_pending", pending).apply();
+    }
+
+    public boolean isBackupPending() {
+        return sharedPreferences.getBoolean("backup_pending", false);
+    }
 }

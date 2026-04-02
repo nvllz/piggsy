@@ -40,6 +40,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.shape.MaterialShapeDrawable;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.nvllz.piggsy.util.BackupScheduler;
+import com.nvllz.piggsy.util.PreferenceUtil;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -145,6 +147,8 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
         if (!skipNextRefresh) {
             refreshList();
         }
+        PreferenceUtil prefs = new PreferenceUtil(this);
+        BackupScheduler.checkAndRunIfDue(this, prefs);
     }
 
     @Override
@@ -195,6 +199,7 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.backup) startActivity(new Intent(this, BackupActivity.class));
         if (item.getItemId() == R.id.archive) startActivity(new Intent(this, ArchiveActivity.class));
         if (item.getItemId() == R.id.settings) startActivity(new Intent(this, SettingsActivity.class));
         if (item.getItemId() == R.id.about) startActivity(new Intent(this, AboutActivity.class));
