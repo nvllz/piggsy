@@ -43,7 +43,6 @@
             app:cardCornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/accent_line"
             app:checkedIconTint="?attr/colorPrimary">
 
             <com.google.android.material.textview.MaterialTextView
