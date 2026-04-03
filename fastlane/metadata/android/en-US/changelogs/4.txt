@@ -1,0 +1,13 @@
+Don't forget to star the github repo if you like Piggsy!
+
+New:
+- Automatic backups
+- History list subtotals
+- Piggy bank description preview
+
+Changes:
+- Various interface changes
+
+Fixes:
+- Deadline notifications fixes
+- Performance tweaks
