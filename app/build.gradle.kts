@@ -26,8 +26,8 @@ android {
         applicationId = "com.nvllz.piggsy"
         minSdk = 24
         targetSdk = 36
-        versionCode = 4
-        versionName = "1.11"
+        versionCode = 5
+        versionName = "1.11.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
