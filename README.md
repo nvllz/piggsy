@@ -59,6 +59,8 @@ The app focuses on a clean, straightforward experience with an interface that’
 
 ## License
 
+[![GPL-3.0-only](https://img.shields.io/badge/License-GPL--3.0--only-blue.svg)](https://spdx.org/licenses/GPL-3.0-only.html)
+
 This project is licensed under the GNU General Public License v3.0. See the
 [LICENSE](LICENSE) file for details.
 
