@@ -1,0 +1,12 @@
+New:
+- swipe hint in transaction history screen
+
+Changes:
+- manual backups can now be exported even if the preset location is not set
+- deposits are now tinted green
+- significantly reduced backup size
+
+Fixes:
+- fixed the floating-point precision (always round to two digits after the decimal point)
+- removed unused permissions
+- minor visual adjustments
