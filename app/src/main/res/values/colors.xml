@@ -76,6 +76,9 @@
     <color name="colorBackground">#FFFFFF</color>
     <color name="colorSpecial">#CCAA3F</color>
 
+    <color name="colorDeposit">#146C2E</color>
+    <color name="colorWithdraw">#BA1A1A</color>
+
     <!-- Widget colors -->
     <color name="widgetPrimary">#161616</color>
     <color name="widgetSecondary">#292929</color>
