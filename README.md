@@ -49,8 +49,6 @@ Whether you're saving for a trip, a new gadget, or an emergency fund, this app l
 
 ## License
 
-[![GPL-3.0-only](https://img.shields.io/badge/License-GPL--3.0--only-blue.svg)](https://spdx.org/licenses/GPL-3.0-only.html)
-
 This project is licensed under the GNU General Public License v3.0. See the
 [LICENSE](LICENSE) file for details.
 
