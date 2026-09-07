@@ -6,40 +6,29 @@
 
 <div align="center">
 
-[![GitHub latest ver](https://img.shields.io/github/v/release/nvllz/piggsy.svg?label=latest&logo=GitHub&labelColor=00BDCF&color=01E9BD&style=for-the-badge)](https://github.com/nvllz/piggsy/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/nvllz/piggsy/total?label=downloads&link=https%3A%2F%2Fgithub.com%2Fnvllz%2Fpiggsy%2Freleases&labelColor=00BDCF&color=01E9BD&style=for-the-badge)](https://github.com/nvllz/piggsy/releases)
+[![GitHub latest ver](https://img.shields.io/github/v/release/nvllz/piggsy.svg?label=latest&labelColor=00BDCF&color=01E9BD&style=for-the-badge)](https://github.com/nvllz/piggsy/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/nvllz/piggsy/total?label=downloads&logo=GitHub&link=https%3A%2F%2Fgithub.com%2Fnvllz%2Fpiggsy%2Freleases&labelColor=00BDCF&color=01E9BD&style=for-the-badge)](https://github.com/nvllz/piggsy/releases)
 [![License](https://img.shields.io/github/license/nvllz/piggsy.svg?labelColor=00BDCF&color=01E9BD&style=for-the-badge)](LICENSE)
 
 </div>
 
-Welcome to Piggsy – a simple piggy bank manager for tracking your savings goals in one place.
+Welcome to Piggsy — a simple way to keep track of your savings goals, all in one place.
 
-Whether you're saving for a trip, a new gadget, or an emergency fund, Piggsy lets you create multiple piggy banks with your preferred currency, optional deadlines, and notes to help you stay organized.
-
-The app focuses on a clean, straightforward experience with an interface that’s easy to use and visually modern. Instead of spreadsheets or manual tracking, you get a clear view of your progress and all your goals in one place.
+Whether you're saving for a trip, a new gadget, or an emergency fund, this app lets you create multiple piggy banks with your preferred currency, optional deadlines, and notes to help you stay organized.
 
 ## Features
 
-- **Create multiple piggy banks**  
-  Set up as many savings goals as you need, each with its own target, currency, and optional deadline.
-
-- **Choose your currency**  
-  Save in the currency that makes sense for you: USD, EUR, JPY, and others.
+- **Multiple piggy banks**  
+  Create as many savings goals as you need. Each piggy bank has its own target amount, currency, optional deadline, and notes.
 
 - **Track deposits and withdrawals**  
-  Add or deduct money anytime to keep your balance up to date. With full transaction history and short notes you have more control over your piggy banks than ever.
+  Add or withdraw money whenever you need to keep your balance up to date. Each piggy bank keeps a full transaction history, with optional notes for individual transactions.
 
-- **Optional deadlines**  
-  Add a deadline to stay on track and see how close you are to reaching your goal.
+- **Deadlines**  
+  Assign a specific day in the calendar and get a notification when the deadline is reached.
 
-- **Archive completed or paused goals**  
-  Keep your active list focused by archiving piggy banks you’re not using.
-
-- **Sort your piggy banks**  
-  Organize them by name, progress, goal amount, or deadline.
-
-- **Backup and restore your data**  
-  Automatic backups tailored to your needs. Set up once and never lose your data.
+- **Set up automatic backups**  
+  Back up your data every few days, so your savings goals and transaction history don't get lost. Everything behind the scenes.
 
 ## Screenshots
 
@@ -53,8 +42,9 @@ The app focuses on a clean, straightforward experience with an interface that’
 ## Download
 
 <div align=center>
-  <a href="https://apt.izzysoft.de/packages/com.nvllz.piggsy"><img src="images/badge_izzyondroid.png" width="47%" alt="IzzyOnDroid" /></a>
-  <a href="https://intradeus.github.io/http-protocol-redirector?r=obtainium://add/github.com/nvllz/piggsy"><img src="https://raw.githubusercontent.com/ImranR98/Obtainium/b1c8ac6f2ab08497189721a788a5763e28ff64cd/assets/graphics/badge_obtainium.png" alt="Obtainium" width="47%"></a>
+  <a href="https://apt.izzysoft.de/packages/com.nvllz.piggsy"><img src="images/badge_izzyondroid.png" width="31%" alt="IzzyOnDroid" /></a>
+  <a href="https://f-droid.org/packages/com.nvllz.piggsy/"><img src="images/badge_fdroid.png" width="31%" alt="F-Droid" /></a>
+  <a href="https://intradeus.github.io/http-protocol-redirector?r=obtainium://add/github.com/nvllz/piggsy"><img src="https://raw.githubusercontent.com/ImranR98/Obtainium/b1c8ac6f2ab08497189721a788a5763e28ff64cd/assets/graphics/badge_obtainium.png" alt="Obtainium" width="31%"></a>
 </div>
 
 ## License
