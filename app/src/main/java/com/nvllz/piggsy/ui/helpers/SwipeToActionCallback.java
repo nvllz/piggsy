@@ -123,4 +123,12 @@ public class SwipeToActionCallback extends ItemTouchHelper.SimpleCallback {
         paint.setColor(color);
         return paint;
     }
+
+    public void drawSwipeBackground(Canvas c, View itemView, float dX) {
+        if (dX > 0) {
+            drawEditBackground(c, itemView, dX);
+        } else if (dX < 0) {
+            drawDeleteBackground(c, itemView, dX);
+        }
+    }
 }

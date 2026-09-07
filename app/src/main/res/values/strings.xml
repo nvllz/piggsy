@@ -123,6 +123,7 @@
     <string name="desc_archive">Archive</string>
     <string name="desc_unarchive">Unarchive</string>
     <string name="desc_delete">Delete</string>
+    <string name="desc_swipe_hint">Swipe hint</string>
 
     <!-- Feedback -->
     <string name="transaction_deleted">Transaction deleted</string>

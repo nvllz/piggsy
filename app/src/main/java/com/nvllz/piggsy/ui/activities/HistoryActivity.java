@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -43,10 +44,23 @@ public class HistoryActivity extends BaseActivity implements SwipeToActionCallba
     private String currency;
     private TransactionRepository transactionRepository;
     private SavingRepository savingRepository;
+    private SwipeToActionCallback swipeCallback;
+    private boolean isHintAnimationRunning = false;
+    private android.animation.AnimatorSet hintAnimatorSet;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_history, menu);
+        return true;
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (hintAnimatorSet != null) {
+            hintAnimatorSet.cancel();
+            hintAnimatorSet = null;
+        }
         if (transactionRepository != null) {
             transactionRepository.close();
         }
@@ -85,7 +99,7 @@ public class HistoryActivity extends BaseActivity implements SwipeToActionCallba
     private void setupRecyclerView() {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        SwipeToActionCallback swipeCallback = new SwipeToActionCallback(this, this);
+        swipeCallback = new SwipeToActionCallback(this, this);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(swipeCallback);
         itemTouchHelper.attachToRecyclerView(binding.recyclerView);
     }
@@ -103,6 +117,98 @@ public class HistoryActivity extends BaseActivity implements SwipeToActionCallba
 
         transactionAdapter = new TransactionAdapter(this, transactions, currency);
         binding.recyclerView.setAdapter(transactionAdapter);
+
+        showSwipeHint();
+    }
+
+    private void showSwipeHint() {
+        if (binding == null) return;
+        android.content.SharedPreferences prefs = getSharedPreferences("piggsy_prefs", MODE_PRIVATE);
+        boolean hintShown = prefs.getBoolean("swipe_hint_shown", false);
+
+        if (!hintShown && transactionAdapter.getItemCount() > 0) {
+            binding.recyclerView.postDelayed(this::playSwipeHintAnimation, 500);
+            prefs.edit().putBoolean("swipe_hint_shown", true).apply();
+        }
+    }
+
+    private void playSwipeHintAnimation() {
+        if (binding == null) {
+            isHintAnimationRunning = false;
+            return;
+        }
+
+        androidx.recyclerview.widget.RecyclerView.ViewHolder vh =
+                binding.recyclerView.findViewHolderForAdapterPosition(0);
+        if (vh == null) {
+            isHintAnimationRunning = false;
+            return;
+        }
+
+        View itemView = vh.itemView;
+        boolean canDelete = !TransactionType.CREATED.VALUE.equals(
+                transactionAdapter.getTransactionAt(0).getType());
+        float editPeek = itemView.getWidth() * 0.22f;
+        float deletePeek = -itemView.getWidth() * 0.22f;
+
+        androidx.recyclerview.widget.RecyclerView.ItemDecoration hintDecoration =
+                new androidx.recyclerview.widget.RecyclerView.ItemDecoration() {
+                    @Override
+                    public void onDraw(@NonNull android.graphics.Canvas c,
+                                       @NonNull androidx.recyclerview.widget.RecyclerView parent,
+                                       @NonNull androidx.recyclerview.widget.RecyclerView.State state) {
+                        swipeCallback.drawSwipeBackground(c, itemView, itemView.getTranslationX());
+                    }
+                };
+        binding.recyclerView.addItemDecoration(hintDecoration);
+
+        java.util.ArrayList<android.animation.Animator> sequence = new java.util.ArrayList<>();
+
+        sequence.add(makeSlideAnimator(itemView, 0f, editPeek, 250));
+        sequence.add(makePause(700));
+        sequence.add(makeSlideAnimator(itemView, editPeek, 0f, 250));
+        sequence.add(makePause(100));
+
+        if (canDelete) {
+            sequence.add(makeSlideAnimator(itemView, 0f, deletePeek, 250));
+            sequence.add(makePause(700));
+            sequence.add(makeSlideAnimator(itemView, deletePeek, 0f, 250));
+        }
+
+        android.animation.AnimatorSet fullSequence = new android.animation.AnimatorSet();
+        fullSequence.playSequentially(sequence);
+        fullSequence.addListener(new android.animation.AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(android.animation.Animator animation) {
+                itemView.setTranslationX(0f);
+                if (binding != null) {
+                    binding.recyclerView.removeItemDecoration(hintDecoration);
+                    binding.recyclerView.invalidateItemDecorations();
+                }
+                isHintAnimationRunning = false;
+            }
+        });
+        hintAnimatorSet = fullSequence;
+        fullSequence.start();
+    }
+
+    private android.animation.ValueAnimator makeSlideAnimator(View itemView, float from, float to, long duration) {
+        android.animation.ValueAnimator animator = android.animation.ValueAnimator.ofFloat(from, to);
+        animator.setDuration(duration);
+        animator.setInterpolator(new android.view.animation.DecelerateInterpolator());
+        animator.addUpdateListener(anim -> {
+            itemView.setTranslationX((float) anim.getAnimatedValue());
+            if (binding != null) {
+                binding.recyclerView.invalidateItemDecorations();
+            }
+        });
+        return animator;
+    }
+
+    private android.animation.ValueAnimator makePause(long duration) {
+        android.animation.ValueAnimator pause = android.animation.ValueAnimator.ofFloat(0f, 0f);
+        pause.setDuration(duration);
+        return pause;
     }
 
     @Override
@@ -345,7 +451,13 @@ public class HistoryActivity extends BaseActivity implements SwipeToActionCallba
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) finish();
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        } else if (item.getItemId() == R.id.action_swipe_hint) {
+            triggerSwipeHint();
+            return true;
+        }
         return true;
     }
 
@@ -353,5 +465,15 @@ public class HistoryActivity extends BaseActivity implements SwipeToActionCallba
     public boolean isSavingArchived(int position) {
         Saving saving = savingRepository.getSaving(selectedSavingID);
         return saving != null && saving.getIsArchived() == Saving.IS_ARCHIVE;
+    }
+
+    private void triggerSwipeHint() {
+        if (isHintAnimationRunning) return;
+        if (binding == null || transactionAdapter == null || transactionAdapter.getItemCount() == 0) return;
+
+        isHintAnimationRunning = true;
+        playSwipeHintAnimation();
+
+        binding.recyclerView.postDelayed(() -> isHintAnimationRunning = false, 3000);
     }
 }

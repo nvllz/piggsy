@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_swipe_hint"
+        android:icon="@drawable/ic_info_hero"
+        android:title="@string/desc_swipe_hint"
+        app:showAsAction="always"/>
+</menu>
