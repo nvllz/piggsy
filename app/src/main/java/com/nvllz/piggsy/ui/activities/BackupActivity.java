@@ -28,7 +28,6 @@ import com.nvllz.piggsy.data.saving.SavingRepository;
 import com.nvllz.piggsy.data.transaction.TransactionRepository;
 import com.nvllz.piggsy.util.AlarmUtil;
 import com.nvllz.piggsy.util.BackupJsonExporter;
-import com.nvllz.piggsy.util.BackupScheduler;
 import com.nvllz.piggsy.util.PreferenceUtil;
 
 import org.json.JSONArray;
@@ -217,14 +216,7 @@ public class BackupActivity extends BaseActivity {
             }
 
             findPreference(KEY_MANUAL_BACKUP).setOnPreferenceClickListener(pref -> {
-                String locationUri = preferences.getBackupLocationUri();
-                if (locationUri == null || locationUri.isEmpty()) {
-                    Toast.makeText(requireContext(), R.string.select_backup_location_first, Toast.LENGTH_SHORT).show();
-                    promptForBackupLocation();
-                    return true;
-                }
-                BackupScheduler.scheduleManualExport(requireContext(), preferences);
-                Snackbar.make(requireView(), R.string.snackbar_export_successful, Snackbar.LENGTH_SHORT).show();
+                launchManualExportPicker();
                 return true;
             });
 
@@ -249,6 +241,24 @@ public class BackupActivity extends BaseActivity {
             updateBackupLocationSummary(uri);
 
             updateDependentPreferences();
+        }
+
+        private void launchManualExportPicker() {
+            String fileName = "piggsy_backup_" +
+                    new java.text.SimpleDateFormat("yyyyMMdd-HHmmss", java.util.Locale.getDefault())
+                            .format(new java.util.Date()) + ".json";
+
+            Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setType("application/json");
+            intent.putExtra(Intent.EXTRA_TITLE, fileName);
+
+            String locationUri = preferences.getBackupLocationUri();
+            if (locationUri != null && !locationUri.isEmpty()) {
+                intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, Uri.parse(locationUri));
+            }
+
+            exportDataLauncher.launch(intent);
         }
 
         private void promptForBackupLocation() {
@@ -305,9 +315,6 @@ public class BackupActivity extends BaseActivity {
 
             EditTextPreference retentionPref = findPreference(KEY_RETENTION);
             if (retentionPref != null) retentionPref.setEnabled(backupEnabled);
-
-            Preference manualPref = findPreference(KEY_MANUAL_BACKUP);
-            if (manualPref != null) manualPref.setEnabled(locationSet);
         }
 
         private void exportJSON(Uri uri) {
