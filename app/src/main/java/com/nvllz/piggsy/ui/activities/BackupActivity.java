@@ -350,7 +350,6 @@ public class BackupActivity extends BaseActivity {
 
                 JSONObject jsonImport = new JSONObject(jsonBuilder.toString());
                 JSONArray savingJsonArray = jsonImport.getJSONArray(Database.TABLE_SAVING);
-                JSONArray transactionJsonArray = jsonImport.getJSONArray(Database.TABLE_TRANSACTION);
 
                 try {
                     clearAllData();
@@ -360,18 +359,19 @@ public class BackupActivity extends BaseActivity {
                         JSONObject obj = savingJsonArray.getJSONObject(i);
                         ContentValues values = new ContentValues();
 
+                        String savingId = obj.getString(Database.COLUMN_SAVING_ID);
                         long deadline = obj.getLong(Database.COLUMN_SAVING_DEADLINE);
                         String currency = obj.optString(Database.COLUMN_SAVING_CURRENCY, "USD");
 
                         if (deadline != AlarmUtil.NO_ALARM) {
                             Saving rescheduled = new Saving();
-                            rescheduled.setID(obj.getString(Database.COLUMN_SAVING_ID));
+                            rescheduled.setID(savingId);
                             rescheduled.setName(obj.getString(Database.COLUMN_SAVING_NAME));
                             rescheduled.setDeadline(deadline);
                             AlarmUtil.set(requireContext(), rescheduled);
                         }
 
-                        values.put(Database.COLUMN_SAVING_ID, obj.getString(Database.COLUMN_SAVING_ID));
+                        values.put(Database.COLUMN_SAVING_ID, savingId);
                         values.put(Database.COLUMN_SAVING_NAME, obj.getString(Database.COLUMN_SAVING_NAME));
                         values.put(Database.COLUMN_SAVING_CURRENT_SAVING, obj.getDouble(Database.COLUMN_SAVING_CURRENT_SAVING));
                         values.put(Database.COLUMN_SAVING_GOAL, obj.getDouble(Database.COLUMN_SAVING_GOAL));
@@ -385,19 +385,22 @@ public class BackupActivity extends BaseActivity {
                         values.put(Database.COLUMN_SAVING_DEADLINE, deadline);
 
                         writableDatabase.insert(Database.TABLE_SAVING, null, values);
-                    }
 
-                    for (int i = 0; i < transactionJsonArray.length(); i++) {
-                        JSONObject obj = transactionJsonArray.getJSONObject(i);
-                        ContentValues values = new ContentValues();
+                        JSONArray savingTransactions = obj.optJSONArray(BackupJsonExporter.KEY_TRANSACTIONS);
+                        if (savingTransactions != null) {
+                            for (int j = 0; j < savingTransactions.length(); j++) {
+                                JSONObject tObj = savingTransactions.getJSONObject(j);
+                                ContentValues tValues = new ContentValues();
 
-                        values.put(Database.COLUMN_TRANSACTION_SAVING_ID, obj.getString(Database.COLUMN_TRANSACTION_SAVING_ID));
-                        values.put(Database.COLUMN_TRANSACTION_AMOUNT, obj.getDouble(Database.COLUMN_TRANSACTION_AMOUNT));
-                        values.put(Database.COLUMN_TRANSACTION_TYPE, obj.getString(Database.COLUMN_TRANSACTION_TYPE));
-                        values.put(Database.COLUMN_TRANSACTION_DATE, obj.getLong(Database.COLUMN_TRANSACTION_DATE));
-                        values.put(Database.COLUMN_TRANSACTION_NOTE, obj.optString(Database.COLUMN_TRANSACTION_NOTE, ""));
+                                tValues.put(Database.COLUMN_TRANSACTION_SAVING_ID, savingId);
+                                tValues.put(Database.COLUMN_TRANSACTION_AMOUNT, tObj.getDouble(Database.COLUMN_TRANSACTION_AMOUNT));
+                                tValues.put(Database.COLUMN_TRANSACTION_TYPE, tObj.getString(Database.COLUMN_TRANSACTION_TYPE));
+                                tValues.put(Database.COLUMN_TRANSACTION_DATE, tObj.getLong(Database.COLUMN_TRANSACTION_DATE));
+                                tValues.put(Database.COLUMN_TRANSACTION_NOTE, tObj.optString(Database.COLUMN_TRANSACTION_NOTE, ""));
 
-                        writableDatabase.insert(Database.TABLE_TRANSACTION, null, values);
+                                writableDatabase.insert(Database.TABLE_TRANSACTION, null, tValues);
+                            }
+                        }
                     }
 
                     writableDatabase.setTransactionSuccessful();
