@@ -56,7 +56,7 @@ public class Saving {
     }
 
     public void setCurrentSaving(double currentSaving) {
-        this.currentSaving = currentSaving;
+        this.currentSaving = Math.round(currentSaving * 100.0) / 100.0;
     }
 
     public double getGoal() {
@@ -64,7 +64,7 @@ public class Saving {
     }
 
     public void setGoal(double goal) {
-        this.goal = goal;
+        this.goal = Math.round(goal * 100.0) / 100.0;
     }
 
     public int getIsArchived() {

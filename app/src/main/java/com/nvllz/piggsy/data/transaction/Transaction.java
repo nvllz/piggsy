@@ -39,7 +39,7 @@ public class Transaction {
     }
 
     public void setAmount(double amount) {
-        this.amount = amount;
+        this.amount = Math.round(amount * 100.0) / 100.0;
     }
 
     public String getType() {

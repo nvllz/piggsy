@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 public class Database extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "piggsy.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     public static final String TABLE_SAVING = "savings";
     public static final String COLUMN_SAVING_ID = "id";
@@ -71,6 +71,17 @@ public class Database extends SQLiteOpenHelper {
         }
         if (oldVersion < 3) {
             sqLiteDatabase.execSQL("ALTER TABLE " + TABLE_SAVING + " ADD COLUMN " + COLUMN_SAVING_CURRENCY + " TEXT NOT NULL DEFAULT 'USD'");
+        }
+        if (oldVersion < 4) {
+            sqLiteDatabase.execSQL(
+                    "UPDATE " + TABLE_SAVING + " SET " +
+                            COLUMN_SAVING_CURRENT_SAVING + " = ROUND(" + COLUMN_SAVING_CURRENT_SAVING + ", 2), " +
+                            COLUMN_SAVING_GOAL + " = ROUND(" + COLUMN_SAVING_GOAL + ", 2);"
+            );
+            sqLiteDatabase.execSQL(
+                    "UPDATE " + TABLE_TRANSACTION + " SET " +
+                            COLUMN_TRANSACTION_AMOUNT + " = ROUND(" + COLUMN_TRANSACTION_AMOUNT + ", 2);"
+            );
         }
     }
 }
