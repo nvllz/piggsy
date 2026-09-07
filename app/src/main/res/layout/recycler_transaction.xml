@@ -10,6 +10,7 @@
     android:paddingBottom="18dp">
 
     <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/transaction_divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         app:dividerInsetStart="0dp"

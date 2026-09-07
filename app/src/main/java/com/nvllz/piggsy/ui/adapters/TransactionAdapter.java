@@ -89,6 +89,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         Transaction currentTransaction = transactions.get(position);
         Double subtotal = position < subtotals.size() ? subtotals.get(position) : null;
         holder.bind(currentTransaction, currency, context, subtotal);
+        holder.divider.setVisibility(position == 0 ? View.GONE : View.VISIBLE);
     }
 
     @Override
@@ -130,6 +131,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         MaterialTextView amount, date, note, subtotal;
+        com.google.android.material.divider.MaterialDivider divider;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -137,6 +139,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             date = itemView.findViewById(R.id.transaction_date);
             note = itemView.findViewById(R.id.transaction_note);
             subtotal = itemView.findViewById(R.id.transaction_subtotal);
+            divider = itemView.findViewById(R.id.transaction_divider);
         }
 
         public void bind(Transaction currentTransaction, String selectedCurrencySymbol, Context context, Double subtotalValue) {
