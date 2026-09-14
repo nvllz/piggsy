@@ -11,6 +11,7 @@
         android:id="@+id/app_bar"
         app:liftOnScroll="true"
         app:liftOnScrollColor="?attr/colorSurface"
+        android:background="@android:color/transparent"
         android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -24,9 +25,100 @@
             android:layout_height="?attr/actionBarSize"/>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <FrameLayout
-        android:id="@+id/about_container"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:clipToPadding="false"
+        android:paddingBottom="32dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="24dp"
+                android:paddingBottom="44dp">
+
+                <FrameLayout
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:background="@drawable/bg_about_icon">
+
+                    <ImageView
+                        android:id="@+id/app_icon"
+                        android:layout_width="118dp"
+                        android:layout_height="118dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_launcher_monochrome"
+                        android:tint="?attr/colorOnSurface"
+                        android:contentDescription="@null"/>
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/app_name"
+                    android:textAppearance="?attr/textAppearanceHeadlineSmall"
+                    android:textColor="?attr/colorOnSurface"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/app_version_chip"
+                    style="@style/Widget.Material3.Chip.Suggestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="1.0.0"
+                    tools:text="v1.0.0"/>
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/AboutCardGroup">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include
+                        android:id="@+id/row_license"
+                        layout="@layout/item_about_row"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/AboutCardGroup"
+                android:layout_marginTop="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include
+                        android:id="@+id/row_source_code"
+                        layout="@layout/item_about_row"/>
+
+                    <View style="@style/AboutRowDivider"/>
+
+                    <include
+                        android:id="@+id/row_author"
+                        layout="@layout/item_about_row"/>
+
+                    <View style="@style/AboutRowDivider"/>
+
+                    <include
+                        android:id="@+id/row_og_creator"
+                        layout="@layout/item_about_row"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
