@@ -1,0 +1,3 @@
+- revamped About screen
+- fixed manual backup name inconsistency
+- updated dependencies
