@@ -37,6 +37,9 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class BackupActivity extends BaseActivity {
 
@@ -244,9 +247,7 @@ public class BackupActivity extends BaseActivity {
         }
 
         private void launchManualExportPicker() {
-            String fileName = "piggsy_backup_" +
-                    new java.text.SimpleDateFormat("yyyyMMdd-HHmmss", java.util.Locale.getDefault())
-                            .format(new java.util.Date()) + ".json";
+            String fileName = generateFileName();
 
             Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
             intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -430,6 +431,11 @@ public class BackupActivity extends BaseActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             if (getActivity() != null) getActivity().finishAffinity();
+        }
+
+        private String generateFileName() {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd-HHmmss", Locale.getDefault());
+            return "piggsy_" + sdf.format(new Date()) + ".json";
         }
     }
 }
