@@ -77,6 +77,7 @@ dependencies {
 
     implementation("androidx.appcompat:appcompat:1.8.0")
     implementation("com.google.android.material:material:1.14.0")
+    implementation("androidx.biometric:biometric:1.1.0")
     implementation("androidx.constraintlayout:constraintlayout:2.2.2")
     implementation("androidx.preference:preference:1.2.1")
     implementation("androidx.activity:activity:1.13.0")

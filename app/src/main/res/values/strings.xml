@@ -87,6 +87,11 @@
     <string name="preference_category_security">Security</string>
     <string name="preference_switch_screen_privacy_title">Screen Privacy</string>
     <string name="preference_switch_screen_privacy_summary">Hide app content in recent apps and block screenshots</string>
+    <string name="preference_switch_biometric_title">Biometric Lock</string>
+    <string name="preference_switch_biometric_summary">Require fingerprint or screen lock to open the app</string>
+    <string name="biometric_prompt_title">Unlock Piggsy</string>
+    <string name="biometric_prompt_use_screen_lock">Use screen lock</string>
+    <string name="biometric_toast_unavailable">No fingerprint or screen lock is set up on this device</string>
 
     <!-- Backup Preference Category -->
     <string name="preference_category_backup">Backup</string>

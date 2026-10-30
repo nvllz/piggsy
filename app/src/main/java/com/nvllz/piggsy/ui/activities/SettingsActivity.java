@@ -2,6 +2,7 @@ package com.nvllz.piggsy.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -16,6 +17,7 @@ import com.nvllz.piggsy.R;
 import com.nvllz.piggsy.data.DateFormat;
 import com.nvllz.piggsy.data.Theme;
 import com.nvllz.piggsy.databinding.ActivitySettingsBinding;
+import com.nvllz.piggsy.util.BiometricLockUtil;
 import com.nvllz.piggsy.util.PreferenceUtil;
 import com.google.android.material.color.DynamicColors;
 
@@ -63,6 +65,7 @@ public class SettingsActivity extends BaseActivity {
 
         private SwitchPreferenceCompat switchDynamicColors;
         private SwitchPreferenceCompat switchScreenPrivacy;
+        private SwitchPreferenceCompat switchBiometricLock;
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -96,6 +99,35 @@ public class SettingsActivity extends BaseActivity {
                 return true;
             });
 
+            switchBiometricLock.setChecked(preferences.isBiometricLockEnabled());
+            switchBiometricLock.setOnPreferenceChangeListener((preference, newValue) -> {
+                boolean enabled = (boolean) newValue;
+
+                if (!enabled) {
+                    if (!BiometricLockUtil.isSupported(requireContext())) {
+                        preferences.setBiometricLockEnabled(false);
+                        return true;
+                    }
+
+                    BiometricLockUtil.showPrompt(requireActivity(), false, () -> {
+                        preferences.setBiometricLockEnabled(false);
+                        switchBiometricLock.setChecked(false);
+                    });
+                    return false;
+                }
+
+                if (!BiometricLockUtil.isSupported(requireContext())) {
+                    Toast.makeText(requireContext(), R.string.biometric_toast_unavailable, Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+
+                BiometricLockUtil.showPrompt(requireActivity(), false, () -> {
+                    preferences.setBiometricLockEnabled(true);
+                    switchBiometricLock.setChecked(true);
+                });
+                return false;
+            });
+
             listTheme.setEntries(Theme.getValues());
             listTheme.setEntryValues(Theme.getValues());
             listTheme.setSummary(preferences.getTheme());
@@ -118,6 +150,7 @@ public class SettingsActivity extends BaseActivity {
 
             switchDynamicColors = findPreference("dynamic_colors");
             switchScreenPrivacy = findPreference("screen_privacy");
+            switchBiometricLock = findPreference("biometric_lock");
 
         }
 

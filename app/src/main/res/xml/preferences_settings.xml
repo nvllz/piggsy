@@ -42,6 +42,15 @@
             android:title="@string/preference_switch_screen_privacy_title"
             android:summary="@string/preference_switch_screen_privacy_summary"
             android:widgetLayout="@layout/view_preference_switch"/>
+
+        <SwitchPreferenceCompat
+            app:iconSpaceReserved="true"
+            app:key="biometric_lock"
+            app:icon="@drawable/ic_fingerprint_hero"
+            app:title="@string/preference_switch_biometric_title"
+            app:summary="@string/preference_switch_biometric_summary"
+            app:widgetLayout="@layout/view_preference_switch"
+            app:isPreferenceVisible="true"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

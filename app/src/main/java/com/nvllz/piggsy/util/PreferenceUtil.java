@@ -102,6 +102,14 @@ public class PreferenceUtil {
         return sharedPreferences.getBoolean("screen_privacy", false);
     }
 
+    public void setBiometricLockEnabled(boolean value) {
+        sharedPreferences.edit().putBoolean("biometric_lock", value).apply();
+    }
+
+    public boolean isBiometricLockEnabled() {
+        return sharedPreferences.getBoolean("biometric_lock", false);
+    }
+
     public int getBackupFrequency() {
         try {
             String value = sharedPreferences.getString("backup_frequency", "0");
