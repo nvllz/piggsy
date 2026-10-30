@@ -207,6 +207,26 @@ public enum Currency {
         return null;
     }
 
+    private static final String[] SUFFIX_CURRENCIES = {
+            "EUR", "PLN", "CZK", "HUF", "SEK", "NOK", "DKK", "ISK", "TRY", "RON", "BGN", "HRK",
+            "CHF", "RSD", "UAH", "BYN", "MDL", "GEL", "AMD", "AZN", "KZT", "KGS", "UZS", "TMT",
+            "ALL", "BAM", "MKD", "RUB", "LVL", "LTL", "EEK", "SKK", "SIT",
+            "BRL", "ARS", "CLP", "COP", "PEN", "UYU", "BOB", "PYG", "VES",
+            "CNY", "JPY", "KRW", "VND", "THB", "MYR", "SGD", "IDR", "PHP", "LAK", "MMK", "KHR",
+            "ZAR", "EGP", "MAD", "TND", "DZD", "NGN", "GHS", "KES", "TZS", "UGX", "RWF", "ETB",
+            "TRY", "IRR", "IQD", "JOD", "LBP", "SYP", "QAR", "AED", "OMR", "BHD", "KWD", "SAR",
+            "INR", "PKR", "BDT", "LKR", "NPR", "BTN", "AFN", "MZN", "AOA", "XAF", "XOF"
+    };
+
+    public static boolean isSuffixCurrency(String code) {
+        for (String suffixCurrency : SUFFIX_CURRENCIES) {
+            if (suffixCurrency.equals(code)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static String[] getNames() {
         String[] names = new String[values().length];
         for (int i = 0; i < values().length; i++) {
@@ -227,21 +247,8 @@ public enum Currency {
         String symbol = getSymbol(currencyCode);
         String formattedAmount = NumberFormat.getInstance().format(amount);
 
-        String[] suffixCurrencies = {
-                "EUR", "PLN", "CZK", "HUF", "SEK", "NOK", "DKK", "ISK", "TRY", "RON", "BGN", "HRK",
-                "CHF", "RSD", "UAH", "BYN", "MDL", "GEL", "AMD", "AZN", "KZT", "KGS", "UZS", "TMT",
-                "ALL", "BAM", "MKD", "RUB", "LVL", "LTL", "EEK", "SKK", "SIT",
-                "BRL", "ARS", "CLP", "COP", "PEN", "UYU", "BOB", "PYG", "VES",
-                "CNY", "JPY", "KRW", "VND", "THB", "MYR", "SGD", "IDR", "PHP", "LAK", "MMK", "KHR",
-                "ZAR", "EGP", "MAD", "TND", "DZD", "NGN", "GHS", "KES", "TZS", "UGX", "RWF", "ETB",
-                "TRY", "IRR", "IQD", "JOD", "LBP", "SYP", "QAR", "AED", "OMR", "BHD", "KWD", "SAR",
-                "INR", "PKR", "BDT", "LKR", "NPR", "BTN", "AFN", "MZN", "AOA", "XAF", "XOF"
-        };
-
-        for (String suffixCurrency : suffixCurrencies) {
-            if (suffixCurrency.equals(currencyCode)) {
-                return formattedAmount + " " + symbol;
-            }
+        if (isSuffixCurrency(currencyCode)) {
+            return formattedAmount + " " + symbol;
         }
 
         return symbol + formattedAmount;

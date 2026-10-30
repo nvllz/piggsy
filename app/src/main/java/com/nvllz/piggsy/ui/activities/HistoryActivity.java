@@ -108,6 +108,11 @@ public class HistoryActivity extends BaseActivity implements SwipeToActionCallba
         ArrayList<Transaction> transactions = transactionRepository.get(selectedSavingID);
 
         Saving saving = savingRepository.getSaving(selectedSavingID);
+        if (saving == null) {
+            finish();
+            return;
+        }
+
         currency = saving.getCurrency();
         String piggyBankName = saving.getName();
 
@@ -253,7 +258,6 @@ public class HistoryActivity extends BaseActivity implements SwipeToActionCallba
 
         if (success) {
             transactionAdapter.removeItem(position);
-            transactionAdapter.refreshSubtotals();
 
             updateSavingAmount(transaction, true);
 
@@ -262,7 +266,6 @@ public class HistoryActivity extends BaseActivity implements SwipeToActionCallba
                             Snackbar.LENGTH_LONG)
                     .setAction(getString(R.string.undo), v -> {
                         restoreTransaction(position, transaction);
-                        transactionAdapter.refreshSubtotals();
                     })
                     .show();
         } else {
@@ -280,7 +283,6 @@ public class HistoryActivity extends BaseActivity implements SwipeToActionCallba
             transaction.setID((int) newId);
 
             transactionAdapter.restoreItem(position, transaction);
-            transactionAdapter.refreshSubtotals();
 
             updateSavingAmount(transaction, false);
         } else {
@@ -403,7 +405,6 @@ public class HistoryActivity extends BaseActivity implements SwipeToActionCallba
             }
 
             transactionAdapter.updateItem(position, updatedTransaction);
-            transactionAdapter.refreshSubtotals();
 
             Snackbar.make(binding.recyclerView, getString(R.string.transaction_updated), Snackbar.LENGTH_LONG)
                     .setAction(getString(R.string.undo), v -> {
@@ -417,7 +418,6 @@ public class HistoryActivity extends BaseActivity implements SwipeToActionCallba
                         }
 
                         transactionAdapter.updateItem(position, originalTransaction);
-                        transactionAdapter.refreshSubtotals();
                     })
                     .show();
         } else {
