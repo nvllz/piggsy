@@ -113,7 +113,7 @@ public class AboutActivity extends BaseActivity {
         Dialog dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.preference_app_license)
                 .setMessage(readLicenseFromAssets())
-                .setPositiveButton(R.string.dialog_button_close, null)
+                .setPositiveButton(R.string.close, null)
                 .create();
         dialog.show();
     }

@@ -22,11 +22,9 @@ public class NotificationUtil {
     public static int CHANNEL_DEADLINE_IMPORTANCE = NotificationManager.IMPORTANCE_HIGH;
 
     public static void createChannels(Context context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            NotificationChannel deadlineChannel = new NotificationChannel(CHANNEL_DEADLINE_ID, CHANNEL_DEADLINE_NAME, CHANNEL_DEADLINE_IMPORTANCE);
-            notificationManager.createNotificationChannel(deadlineChannel);
-        }
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationChannel deadlineChannel = new NotificationChannel(CHANNEL_DEADLINE_ID, CHANNEL_DEADLINE_NAME, CHANNEL_DEADLINE_IMPORTANCE);
+        notificationManager.createNotificationChannel(deadlineChannel);
     }
 
     public static void create(Context context, Intent intent) {

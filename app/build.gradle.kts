@@ -28,6 +28,7 @@ android {
         targetSdk = 36
         versionCode = 7
         versionName = "1.12.1"
+        manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -57,6 +58,7 @@ android {
         }
         debug {
             manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher_debug"
+            resValue("string", "app_name", "Piggsy [debug]")
             isMinifyEnabled = false
             isShrinkResources = false
             applicationIdSuffix = ".debug"
@@ -70,6 +72,14 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    applicationVariants.all {
+        val variant = this
+        outputs.all {
+            (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName =
+                    "Piggsy-${variant.versionName}.apk"
+        }
     }
 }
 

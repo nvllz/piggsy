@@ -222,8 +222,8 @@ public class CreateActivity extends BaseActivity {
                 .setTitle(R.string.dialog_title_request_alarm_permission)
                 .setMessage(R.string.dialog_message_request_alarm_permission)
                 .setIcon(R.drawable.ic_bell_hero)
-                .setNegativeButton(R.string.dialog_button_cancel, null)
-                .setPositiveButton(R.string.dialog_button_grant, (dialog, which) -> {
+                .setNegativeButton(R.string.cancel, null)
+                .setPositiveButton(R.string.grant, (dialog, which) -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                         Intent intent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
                         intent.setData(Uri.parse("package:" + getPackageName()));
@@ -241,7 +241,7 @@ public class CreateActivity extends BaseActivity {
                 hasAlarmPermission();
             } else if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.POST_NOTIFICATIONS)) {
                 Snackbar.make(binding.getRoot(), getString(R.string.snack_bar_permission_notifications), Snackbar.LENGTH_SHORT)
-                        .setAction(R.string.dialog_button_grant, v -> {
+                        .setAction(R.string.grant, v -> {
                             Intent intent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
                             intent.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
                             startActivity(intent);

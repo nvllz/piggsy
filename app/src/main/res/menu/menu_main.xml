@@ -67,17 +67,17 @@
             <item
                 android:id="@+id/archive"
                 android:icon="@drawable/ic_archive_hero"
-                android:title="@string/menu_item_archive"/>
+                android:title="@string/toolbar_archive"/>
 
             <item
                 android:id="@+id/settings"
                 android:icon="@drawable/ic_settings_hero"
-                android:title="@string/menu_item_settings"/>
+                android:title="@string/toolbar_settings"/>
 
             <item
                 android:id="@+id/about"
                 android:icon="@drawable/ic_info_hero"
-                android:title="@string/menu_item_about"/>
+                android:title="@string/toolbar_about"/>
         </menu>
     </item>
 </menu>

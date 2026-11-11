@@ -117,23 +117,6 @@ public class BackupActivity extends BaseActivity {
 
         private boolean pendingFrequencyDialog;
 
-        private void clearAllData() {
-            try (Database database = new Database(requireContext())) {
-                SQLiteDatabase db = database.getWritableDatabase();
-
-                db.beginTransaction();
-                try {
-                    db.delete(Database.TABLE_TRANSACTION, null, null);
-                    db.delete(Database.TABLE_SAVING, null, null);
-                    db.setTransactionSuccessful();
-                } finally {
-                    db.endTransaction();
-                }
-
-            } catch (Exception ignored) {
-            }
-        }
-
         private void launchImportPicker() {
             Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
             intent.addCategory(Intent.CATEGORY_OPENABLE);

@@ -296,8 +296,8 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.dialog_title_delete_saving)
                 .setMessage(R.string.dialog_message_delete_saving)
-                .setNegativeButton(R.string.dialog_button_cancel, null)
-                .setPositiveButton(R.string.dialog_button_delete, (dialogInterface, i) -> {
+                .setNegativeButton(R.string.cancel, null)
+                .setPositiveButton(R.string.delete, (dialogInterface, i) -> {
                     AlarmUtil.cancel(this, saving);
 
                     savings.remove(saving);
@@ -346,8 +346,8 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.dialog_title_create_transaction)
                 .setView(transactionDialogView)
-                .setNegativeButton(R.string.dialog_button_cancel, null)
-                .setPositiveButton(R.string.dialog_button_submit, null);
+                .setNegativeButton(R.string.cancel, null)
+                .setPositiveButton(R.string.submit, null);
 
         AlertDialog dialog = builder.create();
 

@@ -87,8 +87,8 @@ public class ArchiveActivity extends BaseActivity implements SavingAdapter.Liste
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.dialog_title_delete_saving)
                 .setMessage(R.string.dialog_message_delete_saving)
-                .setNegativeButton(R.string.dialog_button_cancel, null)
-                .setPositiveButton(R.string.dialog_button_delete, (dialogInterface, i) -> {
+                .setNegativeButton(R.string.cancel, null)
+                .setPositiveButton(R.string.delete, (dialogInterface, i) -> {
                     savings.remove(saving);
                     savingAdapter.notifyDataSetChanged();
                     binding.emptyIndicator.setVisibility(savings.isEmpty() ? View.VISIBLE : View.GONE);

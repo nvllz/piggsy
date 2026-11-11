@@ -104,11 +104,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         }
     }
 
-    public void refreshSubtotals() {
-        recomputeSubtotals();
-        notifyDataSetChanged();
-    }
-
     @NonNull
     @Override
     public TransactionAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
