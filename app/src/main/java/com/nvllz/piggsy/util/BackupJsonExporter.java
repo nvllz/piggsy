@@ -18,10 +18,21 @@ import java.util.Map;
 public class BackupJsonExporter {
 
     public static final String KEY_TRANSACTIONS = "transactions";
+    public static final String KEY_SETTINGS = "settings";
 
     public static JSONObject export(Context context) throws Exception {
         SavingRepository savingRepo = new SavingRepository(context);
         TransactionRepository transactionRepo = new TransactionRepository(context);
+
+        PreferenceUtil prefs = new PreferenceUtil(context);
+
+        JSONObject settings = new JSONObject();
+        settings.put("date_format", prefs.getDateFormat());
+        settings.put("theme", prefs.getTheme());
+        settings.put("dynamic_colors", prefs.isDynamicColors());
+        settings.put("screen_privacy", prefs.isScreenPrivacyEnabled());
+        settings.put("sort_criteria", prefs.getSortCriteria());
+        settings.put("sort_order", prefs.getSortOrder());
 
         List<Saving> savings = savingRepo.getAllSavings();
         List<Transaction> transactions = transactionRepo.getAll();
@@ -63,6 +74,7 @@ public class BackupJsonExporter {
 
         JSONObject root = new JSONObject();
         root.put(Database.TABLE_SAVING, savingsArray);
+        root.put(KEY_SETTINGS, settings);
         return root;
     }
 }

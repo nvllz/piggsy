@@ -24,7 +24,7 @@ android {
 
     defaultConfig {
         applicationId = "com.nvllz.piggsy"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 36
         versionCode = 7
         versionName = "1.12.1"

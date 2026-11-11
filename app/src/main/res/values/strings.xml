@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Piggsy</string>
     <string name="app_easter_egg">You\'ve done this before, haven\'t you?</string>
-    <string name="app_license">GNU General Public License v3.0</string>
+    <string name="app_license">GPL v3.0</string>
     <string name="app_author">nvllz</string>
     <string name="app_og_creator">mowtiie</string>
 
@@ -90,6 +90,7 @@
     <string name="preference_switch_biometric_title">Biometric Lock</string>
     <string name="preference_switch_biometric_summary">Require fingerprint or screen lock to open the app</string>
     <string name="biometric_prompt_title">Unlock Piggsy</string>
+    <string name="biometric_prompt_subtitle">Confirm to access the app</string>
     <string name="biometric_prompt_use_screen_lock">Use screen lock</string>
     <string name="biometric_toast_unavailable">No fingerprint or screen lock is set up on this device</string>
 
@@ -157,4 +158,22 @@
     <string name="enter_valid_value">Please enter a valid value</string>
     <string name="cannot_open_file">Cannot open file</string>
     <string name="select_backup_location_first">Select backup location first</string>
+    <string name="backup_encryption_title">Encrypt backups</string>
+    <string name="backup_encryption_summary">Backups are written as encrypted files and restore only with the backup password</string>
+    <string name="backup_encrypted_file_title">Encrypted backup</string>
+    <string name="backup_password_hint">Backup password</string>
+    <string name="backup_password_confirm_hint">Confirm password</string>
+    <string name="backup_encryption_enable_title">Set backup password</string>
+    <string name="backup_encryption_enable_message">Keep it safe: without the password, encrypted backups cannot be restored.</string>
+    <string name="backup_encryption_disable_title">Disable encryption</string>
+    <string name="backup_encryption_disable_message">Future backups will be saved unencrypted. Existing encrypted files still require the password.</string>
+    <string name="backup_password_mismatch">Passwords do not match</string>
+    <string name="backup_password_empty">Password cannot be empty</string>
+    <string name="backup_password_wrong">Wrong password</string>
+    <string name="backup_encryption_failed">Encryption failed</string>
+    <string name="backup_encrypted_snackbar">Backups will be encrypted</string>
+    <string name="backup_password_set_button">Set password</string>
+    <string name="backup_encryption_disable_button">Disable</string>
+    <string name="backup_password_too_short">Use at least %1$d characters</string>
+    <string name="backup_file_too_large">Backup file is too large to import</string>
 </resources>

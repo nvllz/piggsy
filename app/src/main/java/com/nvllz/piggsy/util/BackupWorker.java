@@ -3,17 +3,22 @@ package com.nvllz.piggsy.util;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.UriPermission;
 import android.net.Uri;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.documentfile.provider.DocumentFile;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
+import com.nvllz.piggsy.R;
+
 import org.json.JSONObject;
 
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -45,7 +50,7 @@ public class BackupWorker extends Worker {
         }
 
         try {
-            boolean success = performBackup(uri);
+            boolean success = performBackup(uri, prefs);
 
             if (!success) {
                 prefs.setBackupPending(false);
@@ -67,7 +72,7 @@ public class BackupWorker extends Worker {
         }
     }
 
-    private boolean performBackup(Uri uri) {
+    private boolean performBackup(Uri uri, PreferenceUtil prefs) {
         Context context = getApplicationContext();
 
         try {
@@ -81,11 +86,35 @@ public class BackupWorker extends Worker {
                 Log.w(TAG, "Permission already granted or failed: " + e.getMessage());
             }
 
+            boolean accessGranted = false;
+            for (UriPermission permission : context.getContentResolver().getPersistedUriPermissions()) {
+                if (permission.getUri().equals(uri) && permission.isWritePermission()) {
+                    accessGranted = true;
+                    break;
+                }
+            }
+            if (!accessGranted) {
+                Log.e(TAG, "Backup location access was revoked");
+                prefs.setBackupLocationUri(null);
+                prefs.setBackupFrequency(0);
+                Toast.makeText(context, R.string.select_backup_location_first, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
             DocumentFile dir = DocumentFile.fromTreeUri(context, uri);
             if (dir == null || !dir.exists() || !dir.canWrite()) {
                 Log.e(TAG, "Invalid backup directory");
                 return false;
             }
+
+            JSONObject root = BackupJsonExporter.export(context);
+
+            byte[] payload = root.toString().getBytes(StandardCharsets.UTF_8);
+            if (prefs.isBackupEncrypted()) {
+                payload = BackupCrypto.encryptBackup(context, payload);
+            }
+
+            ContentResolver resolver = context.getContentResolver();
 
             String fileName = generateFileName();
 
@@ -95,17 +124,20 @@ public class BackupWorker extends Worker {
                 return false;
             }
 
-            JSONObject root = BackupJsonExporter.export(context);
-
-            ContentResolver resolver = context.getContentResolver();
-
             try (OutputStream os = resolver.openOutputStream(file.getUri())) {
                 if (os == null) {
                     Log.e(TAG, "Output stream is null");
                     return false;
                 }
-                os.write(root.toString().getBytes());
+                os.write(payload);
                 os.flush();
+            } catch (Exception writeFailure) {
+                try {
+                    file.delete();
+                } catch (Exception cleanupFailure) {
+                    Log.e(TAG, "Failed to remove incomplete backup file", cleanupFailure);
+                }
+                throw writeFailure;
             }
 
             return true;

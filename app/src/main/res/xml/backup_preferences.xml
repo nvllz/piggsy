@@ -16,13 +16,9 @@
         android:title="@string/preference_export_title"
         app:iconSpaceReserved="false">
 
-        <ListPreference
+        <Preference
             android:key="backup_frequency"
             android:title="@string/backup_frequency"
-            android:entries="@array/backup_frequency_entries"
-            android:entryValues="@array/backup_frequency_values"
-            android:defaultValue="0"
-            app:useSimpleSummaryProvider="true"
             app:icon="@drawable/ic_calendar_range_hero" />
 
         <EditTextPreference
@@ -39,6 +35,14 @@
             android:title="@string/backup_location"
             android:summary="@string/backup_location_not_set"
             app:icon="@drawable/ic_folder_hero" />
+
+        <SwitchPreferenceCompat
+            android:key="backup_encrypted"
+            android:title="@string/backup_encryption_title"
+            android:summary="@string/backup_encryption_summary"
+            android:defaultValue="false"
+            app:icon="@drawable/ic_lock_hero"
+            android:widgetLayout="@layout/view_preference_switch"/>
 
         <Preference
             android:key="manual_backup"

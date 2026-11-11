@@ -159,4 +159,36 @@ public class PreferenceUtil {
     public boolean isBackupPending() {
         return sharedPreferences.getBoolean("backup_pending", false);
     }
+
+    public boolean isBackupEncrypted() {
+        return sharedPreferences.getBoolean("backup_encrypted", false);
+    }
+
+    public void setBackupEncrypted(boolean value) {
+        sharedPreferences.edit().putBoolean("backup_encrypted", value).apply();
+    }
+
+    public void setBackupSalt(String value) {
+        sharedPreferences.edit().putString("backup_salt", value).apply();
+    }
+
+    public String getBackupSalt() {
+        return sharedPreferences.getString("backup_salt", null);
+    }
+
+    public void setBackupEncDek(String value) {
+        sharedPreferences.edit().putString("backup_enc_dek", value).apply();
+    }
+
+    public String getBackupEncDek() {
+        return sharedPreferences.getString("backup_enc_dek", null);
+    }
+
+    public void setBackupWrappedKek(String value) {
+        sharedPreferences.edit().putString("backup_wrapped_kek", value).apply();
+    }
+
+    public String getBackupWrappedKek() {
+        return sharedPreferences.getString("backup_wrapped_kek", null);
+    }
 }
