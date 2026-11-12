@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Backup Frequency -->
-    <string-array name="backup_frequency_entries">
+<string-array name="backup_frequency_entries">
         <item>Disabled</item>
         <item>Daily</item>
         <item>Every 2 days</item>

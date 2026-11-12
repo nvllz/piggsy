@@ -1,65 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary colors - using dark gray theme -->
-    <color name="md_theme_primary">#282828</color>
+<color name="md_theme_primary">#282828</color>
     <color name="md_theme_onPrimary">#FFFFFF</color>
     <color name="md_theme_primaryContainer">#F5F5F5</color>
     <color name="md_theme_onPrimaryContainer">#121212</color>
 
-    <!-- Secondary colors - using accent gray -->
-    <color name="md_theme_secondary">#575757</color>
+<color name="md_theme_secondary">#575757</color>
     <color name="md_theme_onSecondary">#FFFFFF</color>
     <color name="md_theme_secondaryContainer">#F0F0F0</color>
     <color name="md_theme_onSecondaryContainer">#282828</color>
 
-    <!-- Tertiary colors - using special gold -->
-    <color name="md_theme_tertiary">#CCAA3F</color>
+<color name="md_theme_tertiary">#CCAA3F</color>
     <color name="md_theme_onTertiary">#FFFFFF</color>
     <color name="md_theme_tertiaryContainer">#FFF8E1</color>
     <color name="md_theme_onTertiaryContainer">#8B7A00</color>
 
-    <!-- Error colors - keeping standard red -->
-    <color name="md_theme_error">#BA1A1A</color>
+<color name="md_theme_error">#BA1A1A</color>
     <color name="md_theme_onError">#FFFFFF</color>
     <color name="md_theme_errorContainer">#FFDAD6</color>
     <color name="md_theme_onErrorContainer">#93000A</color>
 
-    <!-- Background and surface colors -->
-    <color name="md_theme_background">#FFFFFF</color>
+<color name="md_theme_background">#FFFFFF</color>
     <color name="md_theme_onBackground">#121212</color>
     <color name="md_theme_surface">#FFFFFF</color>
     <color name="md_theme_onSurface">#121212</color>
     <color name="md_theme_surfaceVariant">#F5F5F5</color>
     <color name="md_theme_onSurfaceVariant">#575757</color>
 
-    <!-- Outline colors -->
-    <color name="md_theme_outline">#575757</color>
+<color name="md_theme_outline">#575757</color>
     <color name="md_theme_outlineVariant">#E0E0E0</color>
-    <color name="md_theme_scrim">#000000</color>
 
-    <!-- Inverse colors -->
-    <color name="md_theme_inverseSurface">#282828</color>
+<color name="md_theme_inverseSurface">#282828</color>
     <color name="md_theme_inverseOnSurface">#FFFFFF</color>
     <color name="md_theme_inversePrimary">#CCAA3F</color>
 
-    <!-- Fixed colors -->
-    <color name="md_theme_primaryFixed">#F5F5F5</color>
-    <color name="md_theme_onPrimaryFixed">#121212</color>
-    <color name="md_theme_primaryFixedDim">#E8E8E8</color>
-    <color name="md_theme_onPrimaryFixedVariant">#282828</color>
-
-    <color name="md_theme_secondaryFixed">#F0F0F0</color>
-    <color name="md_theme_onSecondaryFixed">#121212</color>
-    <color name="md_theme_secondaryFixedDim">#E0E0E0</color>
-    <color name="md_theme_onSecondaryFixedVariant">#575757</color>
-
-    <color name="md_theme_tertiaryFixed">#FFF8E1</color>
-    <color name="md_theme_onTertiaryFixed">#8B7A00</color>
-    <color name="md_theme_tertiaryFixedDim">#F4E6A1</color>
-    <color name="md_theme_onTertiaryFixedVariant">#CCAA3F</color>
-
-    <!-- Surface container colors -->
-    <color name="md_theme_surfaceDim">#F5F5F5</color>
+<color name="md_theme_surfaceDim">#F5F5F5</color>
     <color name="md_theme_surfaceBright">#FFFFFF</color>
     <color name="md_theme_surfaceContainerLowest">#FFFFFF</color>
     <color name="md_theme_surfaceContainerLow">#FAFAFA</color>
@@ -67,25 +42,12 @@
     <color name="md_theme_surfaceContainerHigh">#F0F0F0</color>
     <color name="md_theme_surfaceContainerHighest">#E8E8E8</color>
 
-    <!-- Legacy colors for compatibility -->
-    <color name="colorAccent">#575757</color>
-    <color name="colorPrimary">#282828</color>
-    <color name="colorOnPrimary">#FFFFFF</color>
-    <color name="colorSurface">#FFFFFF</color>
-    <color name="colorOnSurface">#121212</color>
-    <color name="colorBackground">#FFFFFF</color>
+<color name="colorAccent">#575757</color>
+    <color name="colorDialogSurface">#F4F4F4</color>
     <color name="colorSpecial">#CCAA3F</color>
 
     <color name="colorDeposit">#146C2E</color>
     <color name="colorWithdraw">#BA1A1A</color>
-
-    <!-- Widget colors -->
-    <color name="widgetPrimary">#161616</color>
-    <color name="widgetSecondary">#292929</color>
-    <color name="widgetBackground">#80FFFFFF</color>
-    <color name="widgetPrimary_default">#161616</color>
-    <color name="widgetSecondary_default">#292929</color>
-    <color name="widgetBackground_default">#80FFFFFF</color>
 
     <color name="ic_launcher_background">#FFFFFF</color>
 </resources>

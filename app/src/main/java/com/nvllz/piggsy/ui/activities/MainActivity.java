@@ -1,62 +1,56 @@
 package com.nvllz.piggsy.ui.activities;
 
-import android.annotation.SuppressLint;
+import android.Manifest;
+import android.app.AlarmManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.provider.Settings;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.graphics.Insets;
-import androidx.core.view.MenuCompat;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.nvllz.piggsy.R;
-import com.nvllz.piggsy.data.Currency;
 import com.nvllz.piggsy.data.Database;
 import com.nvllz.piggsy.data.saving.Saving;
 import com.nvllz.piggsy.data.saving.SavingOperation;
 import com.nvllz.piggsy.data.saving.SavingRepository;
 import com.nvllz.piggsy.data.saving.SavingSort;
+import com.nvllz.piggsy.data.transaction.Transaction;
+import com.nvllz.piggsy.data.transaction.TransactionRepository;
 import com.nvllz.piggsy.data.transaction.TransactionType;
-import com.nvllz.piggsy.databinding.ActivityMainBinding;
-import com.nvllz.piggsy.ui.adapters.SavingAdapter;
+import com.nvllz.piggsy.ui.ComposeMainView;
+import com.nvllz.piggsy.ui.MainDestination;
 import com.nvllz.piggsy.util.AlarmUtil;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.shape.MaterialShapeDrawable;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.nvllz.piggsy.util.BackupScheduler;
 import com.nvllz.piggsy.util.PreferenceUtil;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Objects;
+import java.util.HashMap;
 
-public class MainActivity extends BaseActivity implements SavingAdapter.Listener {
+public class MainActivity extends BaseActivity implements ComposeMainView.Listener {
 
-    private ActivityMainBinding binding;
+    private ComposeMainView mainView;
     private SavingRepository savingRepository;
-    private SavingAdapter savingAdapter;
+    private TransactionRepository transactionRepository;
     private ArrayList<Saving> savings;
 
     private String sortCriteria;
     private boolean isSortAscending;
     private boolean skipNextRefresh = false;
+
+
+    private Saving pendingDeadlineSaving;
 
     private final ActivityResultLauncher<Intent> createSavingLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -78,27 +72,20 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
                         if (deletedSaving != null) {
                             skipNextRefresh = true;
                             savings.remove(deletedSaving);
-                            savingAdapter.notifyDataSetChanged();
-                            binding.emptyIndicator.setVisibility(savings.isEmpty() ? View.VISIBLE : View.GONE);
-                            binding.savingList.setVisibility(savings.isEmpty() ? View.GONE : View.VISIBLE);
+                            pushList();
 
-                            Snackbar.make(binding.getRoot(), getString(R.string.snackbar_piggy_bank_deleted), Snackbar.LENGTH_LONG)
-                                    .setAction(getString(R.string.undo), v -> {
+                            mainView.showUndoToast(
+                                    getString(R.string.snackbar_piggy_bank_deleted),
+                                    getString(R.string.undo),
+                                    () -> {
                                         savings.add(deletedSaving);
                                         sortSavings(sortCriteria);
-                                        binding.emptyIndicator.setVisibility(View.GONE);
-                                        binding.savingList.setVisibility(View.VISIBLE);
-                                    })
-                                    .addCallback(new Snackbar.Callback() {
-                                        @Override
-                                        public void onDismissed(Snackbar snackbar, int event) {
-                                            if (event != DISMISS_EVENT_ACTION) {
-                                                savingRepository.delete(deletedSaving.getID());
-                                            }
-                                            skipNextRefresh = false;
-                                        }
-                                    })
-                                    .show();
+                                        skipNextRefresh = false;
+                                    },
+                                    () -> {
+                                        savingRepository.delete(deletedSaving.getID());
+                                        skipNextRefresh = false;
+                                    });
                         }
                     } else {
                         refreshList();
@@ -106,39 +93,47 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
                 }
             });
 
+    private final ActivityResultLauncher<String> requestNotificationPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    hasAlarmPermission();
+                } else {
+                    Toast.makeText(this, R.string.toast_notification_permission_denied, Toast.LENGTH_SHORT).show();
+                }
+            });
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        setSupportActionBar(binding.toolbar);
-        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, 0, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
-        Drawable appBarDrawable = MaterialShapeDrawable.createWithElevationOverlay(this);
-        binding.appBar.setStatusBarForeground(appBarDrawable);
 
         savings = new ArrayList<>();
         savingRepository = new SavingRepository(this);
+        transactionRepository = new TransactionRepository(this);
 
         sortCriteria = preferences.getSortCriteria();
         isSortAscending = preferences.getSortOrder();
 
         savings.addAll(savingRepository.getSavings(Saving.NOT_ARCHIVE));
-        savingAdapter = new SavingAdapter(this, this, savings);
+
+        mainView = new ComposeMainView(this, this);
+        setContentView(mainView);
+
         sortSavings(sortCriteria);
 
-        binding.emptyIndicator.setVisibility(savings.isEmpty() ? View.VISIBLE : View.GONE);
-        binding.savingList.setVisibility(savings.isEmpty() ? View.GONE : View.VISIBLE);
+        openSavingFromNotification(getIntent());
+    }
 
-        binding.savingList.setLayoutManager(new LinearLayoutManager(this));
-        binding.savingList.setAdapter(savingAdapter);
 
-        binding.createSaving.setOnClickListener(v -> createSavingLauncher.launch(new Intent(MainActivity.this, CreateActivity.class)));
+    private void openSavingFromNotification(Intent intent) {
+        if (intent == null) return;
+        String savingID = intent.getStringExtra(Database.COLUMN_SAVING_ID);
+        if (savingID == null) return;
+
+        Saving saving = savingRepository.getSaving(savingID);
+        if (saving != null) {
+            mainView.showSavingDetails(saving, transactionRepository.get(savingID));
+        }
     }
 
     @Override
@@ -147,102 +142,15 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
         if (!skipNextRefresh) {
             refreshList();
         }
-        PreferenceUtil prefs = new PreferenceUtil(this);
-        BackupScheduler.checkAndRunIfDue(this, prefs);
+        BackupScheduler.checkAndRunIfDue(this, new PreferenceUtil(this));
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        binding = null;
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
     private void refreshList() {
         savings.clear();
         savings.addAll(savingRepository.getSavings(Saving.NOT_ARCHIVE));
         sortSavings(sortCriteria);
-
-        binding.emptyIndicator.setVisibility(savings.isEmpty() ? View.VISIBLE : View.GONE);
-        binding.savingList.setVisibility(savings.isEmpty() ? View.GONE : View.VISIBLE);
-        savingAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-
-        MenuCompat.setGroupDividerEnabled(menu, true);
-        loadSortingMenu(menu);
-
-        return true;
-    }
-
-    private void loadSortingMenu(Menu menu) {
-        if (sortCriteria.equals(SavingSort.NAME.SORT)) {
-            menu.findItem(R.id.sort_name).setChecked(true);
-        } else if (sortCriteria.equals(SavingSort.VALUE.SORT)) {
-            menu.findItem(R.id.sort_value).setChecked(true);
-        } else if (sortCriteria.equals(SavingSort.GOAL.SORT)) {
-            menu.findItem(R.id.sort_goal).setChecked(true);
-        } else if (sortCriteria.equals(SavingSort.DEADLINE.SORT)) {
-            menu.findItem(R.id.sort_deadline).setChecked(true);
-        }
-
-        if (isSortAscending) {
-            menu.findItem(R.id.sort_ascending).setChecked(true);
-        } else {
-            menu.findItem(R.id.sort_descending).setChecked(true);
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.backup) startActivity(new Intent(this, BackupActivity.class));
-        if (item.getItemId() == R.id.archive) startActivity(new Intent(this, ArchiveActivity.class));
-        if (item.getItemId() == R.id.settings) startActivity(new Intent(this, SettingsActivity.class));
-        if (item.getItemId() == R.id.about) startActivity(new Intent(this, AboutActivity.class));
-
-        if (item.getItemId() == R.id.sort_name) {
-            sortCriteria = SavingSort.NAME.SORT;
-            item.setChecked(true);
-            sortSavings(sortCriteria);
-        }
-
-        if (item.getItemId() == R.id.sort_value) {
-            sortCriteria = SavingSort.VALUE.SORT;
-            item.setChecked(true);
-            sortSavings(sortCriteria);
-        }
-
-        if (item.getItemId() == R.id.sort_goal) {
-            sortCriteria = SavingSort.GOAL.SORT;
-            item.setChecked(true);
-            sortSavings(sortCriteria);
-        }
-
-        if (item.getItemId() == R.id.sort_deadline) {
-            sortCriteria = SavingSort.DEADLINE.SORT;
-            item.setChecked(true);
-            sortSavings(sortCriteria);
-        }
-
-        if (item.getItemId() == R.id.sort_ascending) {
-            isSortAscending = true;
-            item.setChecked(true);
-            sortSavings(sortCriteria);
-        }
-
-        if (item.getItemId() == R.id.sort_descending) {
-            isSortAscending = false;
-            item.setChecked(true);
-            sortSavings(sortCriteria);
-        }
-        return true;
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
     private void sortSavings(String criteria) {
         Comparator<Saving> savingComparator = null;
 
@@ -254,6 +162,12 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
             savingComparator = Saving.SORT_GOAL;
         } else if (criteria.equals(SavingSort.DEADLINE.SORT)) {
             savingComparator = Saving.SORT_DEADLINE;
+        } else if (criteria.equals(SavingSort.CREATION.SORT)) {
+
+
+            HashMap<String, Long> creationDates = transactionRepository.getCreationDates();
+            savingComparator = Comparator.comparingLong(
+                    saving -> creationDates.getOrDefault(saving.getID(), 0L));
         }
 
         if (savingComparator != null) {
@@ -263,155 +177,202 @@ public class MainActivity extends BaseActivity implements SavingAdapter.Listener
         }
 
         savings.sort(savingComparator);
-        savingAdapter.notifyDataSetChanged();
+        pushList();
 
+        mainView.updateSort(sortCriteria, isSortAscending);
         preferences.setSortCriteria(sortCriteria);
         preferences.setSortOrder(isSortAscending);
+    }
+
+    private void pushList() {
+        mainView.updateSavings(new ArrayList<>(savings));
     }
 
     private void archiveSaving(Saving saving) {
         AlarmUtil.cancel(this, saving);
 
         saving.setIsArchived(Saving.IS_ARCHIVE);
+        saving.setArchivedAt(System.currentTimeMillis());
         savingRepository.edit(saving);
 
         savings.remove(saving);
-        savingAdapter.notifyDataSetChanged();
-        binding.emptyIndicator.setVisibility(savings.isEmpty() ? View.VISIBLE : View.GONE);
-        binding.savingList.setVisibility(savings.isEmpty() ? View.GONE : View.VISIBLE);
+        pushList();
 
-        Snackbar.make(binding.getRoot(), getString(R.string.snackbar_piggy_bank_archived), Snackbar.LENGTH_LONG)
-                .setAction(getString(R.string.undo), v -> {
+        mainView.showUndoToast(
+                getString(R.string.snackbar_piggy_bank_archived),
+                getString(R.string.undo),
+                () -> {
                     saving.setIsArchived(Saving.NOT_ARCHIVE);
+                    saving.setArchivedAt(0);
                     savingRepository.edit(saving);
+
+
+                    AlarmUtil.set(this, saving);
                     savings.add(saving);
                     sortSavings(sortCriteria);
-                    binding.emptyIndicator.setVisibility(View.GONE);
-                    binding.savingList.setVisibility(View.VISIBLE);
-                })
-                .show();
-    }
-
-    private void showDeleteDialog(Saving saving) {
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.dialog_title_delete_saving)
-                .setMessage(R.string.dialog_message_delete_saving)
-                .setNegativeButton(R.string.cancel, null)
-                .setPositiveButton(R.string.delete, (dialogInterface, i) -> {
-                    AlarmUtil.cancel(this, saving);
-
-                    savings.remove(saving);
-                    savingAdapter.notifyDataSetChanged();
-                    binding.emptyIndicator.setVisibility(savings.isEmpty() ? View.VISIBLE : View.GONE);
-                    binding.savingList.setVisibility(savings.isEmpty() ? View.GONE : View.VISIBLE);
-
-                    Snackbar.make(binding.getRoot(), getString(R.string.snackbar_piggy_bank_deleted), Snackbar.LENGTH_LONG)
-                            .setAction(getString(R.string.undo), v -> {
-                                savings.add(saving);
-                                sortSavings(sortCriteria);
-                                binding.emptyIndicator.setVisibility(View.GONE);
-                                binding.savingList.setVisibility(View.VISIBLE);
-                            })
-                            .addCallback(new Snackbar.Callback() {
-                                @Override
-                                public void onDismissed(Snackbar snackbar, int event) {
-                                    if (event != DISMISS_EVENT_ACTION) {
-                                        savingRepository.delete(saving.getID());
-                                    }
-                                }
-                            })
-                            .show();
-                });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
+                },
+                null);
     }
 
     private void showTransactionDialog(Saving selectedSaving) {
-        View transactionDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_saving_transaction, null, false);
-        String currentCurrencySymbol = Currency.getSymbol(selectedSaving.getCurrency());
-
-        TextInputLayout amountLayout = transactionDialogView.findViewById(R.id.field_saving_amount_layout);
-        TextInputEditText amountInput = transactionDialogView.findViewById(R.id.field_saving_amount_text);
-
-        TextInputEditText noteInput = transactionDialogView.findViewById(R.id.field_transaction_note_text);
-
-        MaterialButton depositOption = transactionDialogView.findViewById(R.id.button_deposit);
-        MaterialButton withdrawOption = transactionDialogView.findViewById(R.id.button_withdraw);
-
-        depositOption.setChecked(true);
-
-        amountLayout.setPrefixText(currentCurrencySymbol + "  ");
-
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.dialog_title_create_transaction)
-                .setView(transactionDialogView)
-                .setNegativeButton(R.string.cancel, null)
-                .setPositiveButton(R.string.submit, null);
-
-        AlertDialog dialog = builder.create();
-
-        amountInput.requestFocus();
-        amountInput.postDelayed(() -> {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.showSoftInput(amountInput, InputMethodManager.SHOW_IMPLICIT);
-        }, 300);
-
-        dialog.setOnShowListener(dialogInterface ->
-                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
-                    String amountText = Objects.requireNonNull(amountInput.getText()).toString();
-                    String noteText = Objects.requireNonNull(noteInput.getText()).toString().trim();
-
-                    if (amountText.isEmpty()) {
-                        amountLayout.setError(getString(R.string.field_error_required));
-                        return;
-                    }
-
-                    try {
-                        double amount = Double.parseDouble(amountText);
-
-                        if (amount <= 0) {
-                            amountInput.setError(getString(R.string.error_amount_positive));
-                            return;
-                        }
-
-                        if (depositOption.isChecked()) {
-                            double addedSaving = selectedSaving.getCurrentSaving() + amount;
-                            selectedSaving.setCurrentSaving(addedSaving);
-                            savingRepository.makeTransaction(selectedSaving, amount, TransactionType.DEPOSIT, noteText);
-
-                            refreshList();
-                            dialog.dismiss();
-                        } else if (withdrawOption.isChecked()) {
-                            double deductedSaving = selectedSaving.getCurrentSaving() - amount;
-                            selectedSaving.setCurrentSaving(deductedSaving);
-                            savingRepository.makeTransaction(selectedSaving, amount, TransactionType.WITHDRAW, noteText);
-
-                            refreshList();
-                            dialog.dismiss();
-                        }
-                    } catch (NumberFormatException e) {
-                        amountLayout.setError("Invalid amount");
-                    }
-                }));
-        dialog.show();
+        mainView.showTransactionDialog(selectedSaving);
     }
 
     @Override
-    public void OnClick(int position) {
-        Saving selectedSaving = savings.get(position);
+    public void onItemClick(Saving saving) {
         Intent editIntent = new Intent(MainActivity.this, EditActivity.class);
-        editIntent.putExtra(Database.COLUMN_SAVING_ID, selectedSaving.getID());
+        editIntent.putExtra(Database.COLUMN_SAVING_ID, saving.getID());
         editSavingLauncher.launch(editIntent);
     }
 
     @Override
-    public void OnOperationClick(SavingOperation operation, int position) {
-        Saving selectedSaving = savings.get(position);
-        if (operation.equals(SavingOperation.DELETE)) showDeleteDialog(selectedSaving);
-        if (operation.equals(SavingOperation.TRANSACTION)) showTransactionDialog(selectedSaving);
-        if (operation.equals(SavingOperation.ARCHIVE)) archiveSaving(selectedSaving);
-        if (operation.equals(SavingOperation.HISTORY)) showHistoryActivity(selectedSaving);
+    public void onSavingDetails(Saving saving) {
+        ArrayList<Transaction> transactions = transactionRepository.get(saving.getID());
+        mainView.showSavingDetails(saving, transactions);
+    }
+
+    @Override
+    public void onSavingDeadlineEdit(Saving saving) {
+        pendingDeadlineSaving = saving;
+        hasNotificationPermission();
+    }
+
+    @Override
+    public void onSavingDeadlineChanged(Saving saving, long deadlineMillis) {
+        saving.setDeadline(deadlineMillis);
+        savingRepository.edit(saving);
+
+        AlarmUtil.set(this, saving);
+        refreshList();
+    }
+
+    @Override
+    public void onOpenHistory(Saving saving) {
+        showHistoryActivity(saving);
+    }
+
+    @Override
+    public void onGrantAlarmPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            Intent intent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
+            intent.setData(Uri.parse("package:" + getPackageName()));
+            startActivity(intent);
+        }
+    }
+
+
+    private void hasAlarmPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            if (alarmManager.canScheduleExactAlarms()) {
+                mainView.requestDeadlinePicker(pendingDeadlineSaving);
+            } else {
+                mainView.requestAlarmPermissionDialog();
+            }
+        } else {
+            mainView.requestDeadlinePicker(pendingDeadlineSaving);
+        }
+    }
+
+    private void hasNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+                hasAlarmPermission();
+            } else if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.POST_NOTIFICATIONS)) {
+                Snackbar.make(findViewById(android.R.id.content), getString(R.string.snack_bar_permission_notifications), Snackbar.LENGTH_SHORT)
+                        .setAction(R.string.grant, (View v) -> {
+                            Intent notificationSettingsIntent = new Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+                            notificationSettingsIntent.putExtra(Settings.EXTRA_APP_PACKAGE, getPackageName());
+                            startActivity(notificationSettingsIntent);
+                        }).show();
+            } else {
+                requestNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+            }
+        } else {
+            hasAlarmPermission();
+        }
+    }
+
+    @Override
+    public void onOperation(SavingOperation operation, Saving saving) {
+        if (operation.equals(SavingOperation.DELETE)) mainView.showDeleteDialog(saving);
+        if (operation.equals(SavingOperation.TRANSACTION)) showTransactionDialog(saving);
+        if (operation.equals(SavingOperation.ARCHIVE)) archiveSaving(saving);
+        if (operation.equals(SavingOperation.HISTORY)) showHistoryActivity(saving);
+    }
+
+    @Override
+    public void onDeleteConfirmed(Saving saving) {
+        AlarmUtil.cancel(this, saving);
+
+        savings.remove(saving);
+        pushList();
+
+        mainView.showUndoToast(
+                getString(R.string.snackbar_piggy_bank_deleted),
+                getString(R.string.undo),
+                () -> {
+                    savings.add(saving);
+                    sortSavings(sortCriteria);
+                },
+                () -> savingRepository.delete(saving.getID()));
+    }
+
+    @Override
+    public void onTransactionConfirmed(Saving saving, double amount, String type, String note) {
+        TransactionType typeEnum = TransactionType.WITHDRAW.VALUE.equals(type)
+                ? TransactionType.WITHDRAW : TransactionType.DEPOSIT;
+
+        double newAmount = TransactionType.WITHDRAW.VALUE.equals(type)
+                ? saving.getCurrentSaving() - amount
+                : saving.getCurrentSaving() + amount;
+        saving.setCurrentSaving(newAmount);
+        savingRepository.makeTransaction(saving, amount, typeEnum, note);
+
+        if (saving.getArchiveWhenCompleted()
+                && typeEnum.equals(TransactionType.DEPOSIT)
+                && saving.getGoal() > 0
+                && saving.getCurrentSaving() >= saving.getGoal()) {
+            archiveSaving(saving);
+            return;
+        }
+
+        refreshList();
+    }
+
+    @Override
+    public void onSortCriteria(String criteria) {
+        sortCriteria = criteria;
+        sortSavings(sortCriteria);
+    }
+
+    @Override
+    public void onSortOrder(boolean ascending) {
+        isSortAscending = ascending;
+        sortSavings(sortCriteria);
+    }
+
+    @Override
+    public void onDestination(MainDestination destination) {
+        switch (destination) {
+            case BACKUP:
+                startActivity(new Intent(this, BackupActivity.class));
+                break;
+            case ARCHIVE:
+                startActivity(new Intent(this, ArchiveActivity.class));
+                break;
+            case SETTINGS:
+                startActivity(new Intent(this, SettingsActivity.class));
+                break;
+            case ABOUT:
+                startActivity(new Intent(this, AboutActivity.class));
+                break;
+        }
+    }
+
+    @Override
+    public void onCreateSaving() {
+        createSavingLauncher.launch(new Intent(MainActivity.this, CreateActivity.class));
     }
 
     private void showHistoryActivity(Saving saving) {

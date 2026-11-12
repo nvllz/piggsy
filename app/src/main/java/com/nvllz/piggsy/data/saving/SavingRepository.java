@@ -47,8 +47,10 @@ public class SavingRepository extends Database {
         values.put(COLUMN_SAVING_GOAL, createdSaving.getGoal());
         values.put(COLUMN_SAVING_DESCRIPTION, createdSaving.getDescription());
         values.put(COLUMN_SAVING_IS_ARCHIVED, createdSaving.getIsArchived());
+        values.put(COLUMN_SAVING_ARCHIVED_AT, createdSaving.getArchivedAt());
         values.put(COLUMN_SAVING_DEADLINE, createdSaving.getDeadline());
         values.put(COLUMN_SAVING_CURRENCY, createdSaving.getCurrency());
+        values.put(COLUMN_SAVING_ARCHIVE_WHEN_COMPLETED, createdSaving.getArchiveWhenCompleted());
         return values;
     }
 
@@ -61,8 +63,10 @@ public class SavingRepository extends Database {
         values.put(COLUMN_SAVING_GOAL, editedSaving.getGoal());
         values.put(COLUMN_SAVING_DESCRIPTION, editedSaving.getDescription());
         values.put(COLUMN_SAVING_IS_ARCHIVED, editedSaving.getIsArchived());
+        values.put(COLUMN_SAVING_ARCHIVED_AT, editedSaving.getArchivedAt());
         values.put(COLUMN_SAVING_DEADLINE, editedSaving.getDeadline());
         values.put(COLUMN_SAVING_CURRENCY, editedSaving.getCurrency());
+        values.put(COLUMN_SAVING_ARCHIVE_WHEN_COMPLETED, editedSaving.getArchiveWhenCompleted());
 
         database.update(TABLE_SAVING, values, COLUMN_SAVING_ID + " = ?", new String[]{editedSaving.getID()});
         database.close();
@@ -120,8 +124,10 @@ public class SavingRepository extends Database {
                 queriedSaving.setGoal(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_SAVING_GOAL)));
                 queriedSaving.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SAVING_DESCRIPTION)));
                 queriedSaving.setIsArchived(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_SAVING_IS_ARCHIVED)));
+                queriedSaving.setArchivedAt(cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_SAVING_ARCHIVED_AT)));
                 queriedSaving.setDeadline(cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_SAVING_DEADLINE)));
                 queriedSaving.setCurrency(cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_SAVING_CURRENCY)));
+                queriedSaving.setArchiveWhenCompleted(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_SAVING_ARCHIVE_WHEN_COMPLETED)) == 1);
                 list.add(queriedSaving);
             } while (cursor.moveToNext());
         }
@@ -144,6 +150,7 @@ public class SavingRepository extends Database {
                 queriedSaving.setGoal(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_SAVING_GOAL)));
                 queriedSaving.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SAVING_DESCRIPTION)));
                 queriedSaving.setIsArchived(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_SAVING_IS_ARCHIVED)));
+                queriedSaving.setArchivedAt(cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_SAVING_ARCHIVED_AT)));
                 queriedSaving.setDeadline(cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_SAVING_DEADLINE)));
                 queriedSaving.setCurrency(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SAVING_CURRENCY)));
                 list.add(queriedSaving);
@@ -166,6 +173,7 @@ public class SavingRepository extends Database {
             queriedSaving.setGoal(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_SAVING_GOAL)));
             queriedSaving.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SAVING_DESCRIPTION)));
             queriedSaving.setIsArchived(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_SAVING_IS_ARCHIVED)));
+            queriedSaving.setArchivedAt(cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_SAVING_ARCHIVED_AT)));
             queriedSaving.setDeadline(cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_SAVING_DEADLINE)));
             queriedSaving.setCurrency(cursor.getString(cursor.getColumnIndexOrThrow(Database.COLUMN_SAVING_CURRENCY)));
 

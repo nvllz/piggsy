@@ -37,6 +37,23 @@ public class BackupScheduler {
         triggerOneTimeBackup(context);
     }
 
+    public static void scheduleImmediateCleanup(Context context) {
+        Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.NOT_REQUIRED)
+                .build();
+
+        OneTimeWorkRequest work = new OneTimeWorkRequest.Builder(BackupWorker.class)
+                .setConstraints(constraints)
+                .addTag("backup_and_cleanup")
+                .build();
+
+        WorkManager.getInstance(context)
+                .enqueueUniqueWork(
+                        PERIODIC_WORK_NAME + "_cleanup",
+                        ExistingWorkPolicy.REPLACE,
+                        work);
+    }
+
     private static void triggerOneTimeBackup(Context context) {
         Constraints constraints = new Constraints.Builder()
                 .setRequiredNetworkType(NetworkType.NOT_REQUIRED)

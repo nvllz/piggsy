@@ -11,8 +11,11 @@ public class Saving {
     private double goal;
     private String description;
     private int isArchived;
+    private long archivedAt;
     private long deadline;
     private String currency;
+
+    private boolean archiveWhenCompleted;
 
     public static int IS_ARCHIVE = 1;
     public static int NOT_ARCHIVE = 0;
@@ -25,6 +28,7 @@ public class Saving {
         this.description = null;
         this.isArchived = 0;
         this.deadline = 0;
+        this.archiveWhenCompleted = false;
     }
 
     public static final Comparator<Saving> SORT_NAME = Comparator.comparing(firstSaving -> firstSaving.getName().toLowerCase());
@@ -75,6 +79,15 @@ public class Saving {
         this.isArchived = isArchived;
     }
 
+
+    public long getArchivedAt() {
+        return archivedAt;
+    }
+
+    public void setArchivedAt(long archivedAt) {
+        this.archivedAt = archivedAt;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -97,5 +110,14 @@ public class Saving {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+
+    public boolean getArchiveWhenCompleted() {
+        return archiveWhenCompleted;
+    }
+
+    public void setArchiveWhenCompleted(boolean archiveWhenCompleted) {
+        this.archiveWhenCompleted = archiveWhenCompleted;
     }
 }

@@ -6,10 +6,15 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.nvllz.piggsy.data.saving.Saving;
+import com.nvllz.piggsy.util.AlarmUtil;
+
 public class Database extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "piggsy.db";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 7;
+
+    private final Context appContext;
 
     public static final String TABLE_SAVING = "savings";
     public static final String COLUMN_SAVING_ID = "id";
@@ -18,8 +23,10 @@ public class Database extends SQLiteOpenHelper {
     public static final String COLUMN_SAVING_GOAL = "goal";
     public static final String COLUMN_SAVING_DESCRIPTION = "description";
     public static final String COLUMN_SAVING_IS_ARCHIVED = "is_archived";
+    public static final String COLUMN_SAVING_ARCHIVED_AT = "archived_at";
     public static final String COLUMN_SAVING_DEADLINE = "deadline";
     public static final String COLUMN_SAVING_CURRENCY = "currency";
+    public static final String COLUMN_SAVING_ARCHIVE_WHEN_COMPLETED = "archive_when_completed";
 
     public static final String TABLE_TRANSACTION = "transactions";
     public static final String COLUMN_TRANSACTION_ID = "id";
@@ -31,6 +38,7 @@ public class Database extends SQLiteOpenHelper {
 
     public Database(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        appContext = context.getApplicationContext();
     }
 
     @Override
@@ -42,8 +50,10 @@ public class Database extends SQLiteOpenHelper {
                 COLUMN_SAVING_GOAL + " REAL NOT NULL, " +
                 COLUMN_SAVING_DESCRIPTION + " TEXT, " +
                 COLUMN_SAVING_IS_ARCHIVED + " INTEGER NOT NULL, " +
+                COLUMN_SAVING_ARCHIVED_AT + " INTEGER NOT NULL DEFAULT 0, " +
                 COLUMN_SAVING_DEADLINE + " INTEGER, " +
-                COLUMN_SAVING_CURRENCY + " TEXT NOT NULL DEFAULT 'USD');";
+                COLUMN_SAVING_CURRENCY + " TEXT NOT NULL DEFAULT 'USD', " +
+                COLUMN_SAVING_ARCHIVE_WHEN_COMPLETED + " INTEGER NOT NULL DEFAULT 0);";
 
         String createTransactionTable = "CREATE TABLE IF NOT EXISTS " + TABLE_TRANSACTION + "(" +
                 COLUMN_TRANSACTION_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -82,6 +92,44 @@ public class Database extends SQLiteOpenHelper {
                     "UPDATE " + TABLE_TRANSACTION + " SET " +
                             COLUMN_TRANSACTION_AMOUNT + " = ROUND(" + COLUMN_TRANSACTION_AMOUNT + ", 2);"
             );
+        }
+        if (oldVersion < 5) {
+            sqLiteDatabase.execSQL("ALTER TABLE " + TABLE_SAVING + " ADD COLUMN " +
+                    COLUMN_SAVING_ARCHIVED_AT + " INTEGER NOT NULL DEFAULT 0");
+        }
+        if (oldVersion < 6) {
+
+            java.util.Calendar calendar = java.util.Calendar.getInstance();
+            android.database.Cursor cursor = sqLiteDatabase.query(
+                    TABLE_SAVING, null, COLUMN_SAVING_DEADLINE + " > 0", null, null, null, null);
+            while (cursor.moveToNext()) {
+                long deadline = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_SAVING_DEADLINE));
+                calendar.setTimeInMillis(deadline);
+                if (calendar.get(java.util.Calendar.HOUR_OF_DAY) != 0
+                        || calendar.get(java.util.Calendar.MINUTE) != 0
+                        || calendar.get(java.util.Calendar.SECOND) != 0
+                        || calendar.get(java.util.Calendar.MILLISECOND) != 0) {
+                    continue;
+                }
+                calendar.add(java.util.Calendar.HOUR_OF_DAY, 12);
+
+                Saving saving = new Saving();
+                saving.setID(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SAVING_ID)));
+                saving.setName(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SAVING_NAME)));
+                saving.setIsArchived(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_SAVING_IS_ARCHIVED)));
+                saving.setDeadline(calendar.getTimeInMillis());
+
+                sqLiteDatabase.execSQL(
+                        "UPDATE " + TABLE_SAVING + " SET " + COLUMN_SAVING_DEADLINE + " = ? WHERE " +
+                                COLUMN_SAVING_ID + " = ?",
+                        new Object[]{calendar.getTimeInMillis(), saving.getID()});
+                AlarmUtil.set(appContext, saving);
+            }
+            cursor.close();
+        }
+        if (oldVersion < 7) {
+            sqLiteDatabase.execSQL("ALTER TABLE " + TABLE_SAVING + " ADD COLUMN " +
+                    COLUMN_SAVING_ARCHIVE_WHEN_COMPLETED + " INTEGER NOT NULL DEFAULT 0");
         }
     }
 }

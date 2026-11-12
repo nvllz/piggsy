@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import com.nvllz.piggsy.data.Database;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TransactionRepository extends Database {
     public TransactionRepository(@Nullable Context context) {
@@ -48,6 +49,21 @@ public class TransactionRepository extends Database {
         values.put(COLUMN_TRANSACTION_AMOUNT, amount);
         values.put(COLUMN_TRANSACTION_TYPE, type);
         values.put(COLUMN_TRANSACTION_NOTE, note);
+
+        int rowsAffected = database.update(
+                TABLE_TRANSACTION,
+                values,
+                COLUMN_TRANSACTION_ID + " = ?",
+                new String[]{String.valueOf(transactionId)}
+        );
+        database.close();
+        return rowsAffected > 0;
+    }
+
+    public boolean updateDate(int transactionId, long date) {
+        SQLiteDatabase database = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_TRANSACTION_DATE, date);
 
         int rowsAffected = database.update(
                 TABLE_TRANSACTION,
@@ -100,6 +116,26 @@ public class TransactionRepository extends Database {
         cursor.close();
         database.close();
         return list;
+    }
+
+    public HashMap<String, Long> getCreationDates() {
+        HashMap<String, Long> creationDates = new HashMap<>();
+        SQLiteDatabase database = getReadableDatabase();
+        Cursor cursor = database.rawQuery(
+                "SELECT " + COLUMN_TRANSACTION_SAVING_ID + ", MIN(" + COLUMN_TRANSACTION_DATE + ")" +
+                        " FROM " + TABLE_TRANSACTION +
+                        " WHERE " + COLUMN_TRANSACTION_TYPE + " = ?" +
+                        " GROUP BY " + COLUMN_TRANSACTION_SAVING_ID,
+                new String[]{TransactionType.CREATED.VALUE});
+
+        if (cursor.moveToFirst()) {
+            do {
+                creationDates.put(cursor.getString(0), cursor.getLong(1));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        database.close();
+        return creationDates;
     }
 
     public ArrayList<Transaction> getAll() {

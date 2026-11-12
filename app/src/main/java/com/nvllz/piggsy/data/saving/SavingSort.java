@@ -7,6 +7,7 @@ public enum SavingSort {
     VALUE("sort_value"),
     GOAL("sort_goal"),
     DEADLINE("sort_deadline"),
+    CREATION("sort_creation"),
     ASCENDING("sort_ascending"),
     DESCENDING("sort_descending");
 

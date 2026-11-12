@@ -1,40 +1,27 @@
 package com.nvllz.piggsy.ui.activities;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.nvllz.piggsy.R;
-import com.nvllz.piggsy.data.Database;
+import com.nvllz.piggsy.R;import com.nvllz.piggsy.data.Database;
 import com.nvllz.piggsy.data.saving.Saving;
 import com.nvllz.piggsy.data.saving.SavingOperation;
 import com.nvllz.piggsy.data.saving.SavingRepository;
+import com.nvllz.piggsy.data.transaction.Transaction;
 import com.nvllz.piggsy.data.transaction.TransactionRepository;
-import com.nvllz.piggsy.databinding.ActivityArchiveBinding;
-import com.nvllz.piggsy.ui.adapters.SavingAdapter;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.shape.MaterialShapeDrawable;
+import com.nvllz.piggsy.ui.ComposeArchiveView;
+import com.nvllz.piggsy.util.AlarmUtil;
 
 import java.util.ArrayList;
 
-public class ArchiveActivity extends BaseActivity implements SavingAdapter.Listener {
+public class ArchiveActivity extends BaseActivity implements ComposeArchiveView.Listener {
 
-    private ActivityArchiveBinding binding;
+    private ComposeArchiveView archiveView;
     private SavingRepository savingRepository;
-    private TransactionRepository transactionRepository;
-    private SavingAdapter savingAdapter;
     private ArrayList<Saving> savings;
 
     private final ActivityResultLauncher<Intent> editSavingLauncher =
@@ -48,103 +35,84 @@ public class ArchiveActivity extends BaseActivity implements SavingAdapter.Liste
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        binding = ActivityArchiveBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, 0, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
-        Drawable appBarDrawable = MaterialShapeDrawable.createWithElevationOverlay(this);
-        binding.appBar.setStatusBarForeground(appBarDrawable);
-
-        setSupportActionBar(binding.toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
 
         savingRepository = new SavingRepository(this);
-        transactionRepository = new TransactionRepository(this);
         savings = new ArrayList<>(savingRepository.getSavings(Saving.IS_ARCHIVE));
+        sortSavings();
 
-        binding.emptyIndicator.setVisibility(savings.isEmpty() ? View.VISIBLE : View.GONE);
-        binding.savingList.setVisibility(savings.isEmpty() ? View.GONE : View.VISIBLE);
-
-        savingAdapter = new SavingAdapter(this, this, savings);
-        binding.savingList.setLayoutManager(new LinearLayoutManager(this));
-        binding.savingList.setAdapter(savingAdapter);
-    }
-
-    private void unarchiveSaving(Saving selectedSaving) {
-        selectedSaving.setIsArchived(Saving.NOT_ARCHIVE);
-        savingRepository.edit(selectedSaving);
-        Snackbar.make(binding.getRoot(), R.string.snackbar_piggy_bank_unarchived, Snackbar.LENGTH_SHORT).show();
-        refreshList();
-    }
-
-    private void showDeleteDialog(Saving saving) {
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.dialog_title_delete_saving)
-                .setMessage(R.string.dialog_message_delete_saving)
-                .setNegativeButton(R.string.cancel, null)
-                .setPositiveButton(R.string.delete, (dialogInterface, i) -> {
-                    savings.remove(saving);
-                    savingAdapter.notifyDataSetChanged();
-                    binding.emptyIndicator.setVisibility(savings.isEmpty() ? View.VISIBLE : View.GONE);
-                    binding.savingList.setVisibility(savings.isEmpty() ? View.GONE : View.VISIBLE);
-
-                    Snackbar.make(binding.getRoot(), getString(R.string.snackbar_piggy_bank_deleted), Snackbar.LENGTH_LONG)
-                            .setAction(getString(R.string.undo), v -> {
-                                savings.add(saving);
-                                savingAdapter.notifyDataSetChanged();
-                                binding.emptyIndicator.setVisibility(View.GONE);
-                                binding.savingList.setVisibility(View.VISIBLE);
-                            })
-                            .addCallback(new Snackbar.Callback() {
-                                @Override
-                                public void onDismissed(Snackbar snackbar, int event) {
-                                    if (event != DISMISS_EVENT_ACTION) {
-                                        savingRepository.delete(saving.getID());
-                                    }
-                                }
-                            })
-                            .show();
-                });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    private void refreshList() {
-        savings.clear();
-        savings.addAll(savingRepository.getSavings(Saving.IS_ARCHIVE));
-        savingAdapter.notifyDataSetChanged();
-        binding.emptyIndicator.setVisibility(savings.isEmpty() ? View.VISIBLE : View.GONE);
-        binding.savingList.setVisibility(savings.isEmpty() ? View.GONE : View.VISIBLE);
+        archiveView = new ComposeArchiveView(this, this);
+        archiveView.updateSavings(savings);
+        setContentView(archiveView);
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        binding = null;
+    public void onBack() {
+        finish();
     }
 
     @Override
-    public void OnClick(int position) {
-        Saving selectedSaving = savings.get(position);
+    public void onEdit(Saving saving) {
         Intent editIntent = new Intent(this, EditActivity.class);
-        editIntent.putExtra(Database.COLUMN_SAVING_ID, selectedSaving.getID());
+        editIntent.putExtra(Database.COLUMN_SAVING_ID, saving.getID());
         editSavingLauncher.launch(editIntent);
     }
 
     @Override
-    public void OnOperationClick(SavingOperation operation, int position) {
-        Saving selectedSaving = savings.get(position);
-        if (operation.equals(SavingOperation.UNARCHIVE)) unarchiveSaving(selectedSaving);
-        if (operation.equals(SavingOperation.DELETE)) showDeleteDialog(selectedSaving);
-        if (operation.equals(SavingOperation.HISTORY)) showHistoryActivity(selectedSaving);
+    public void onSavingDetails(Saving saving) {
+        TransactionRepository transactionRepository = new TransactionRepository(this);
+        ArrayList<Transaction> transactions = transactionRepository.get(saving.getID());
+        archiveView.showSavingDetails(saving, transactions);
+    }
+
+    @Override
+    public void onOperation(SavingOperation operation, Saving saving) {
+        if (operation.equals(SavingOperation.UNARCHIVE)) unarchiveSaving(saving);
+        if (operation.equals(SavingOperation.DELETE)) archiveView.showDeleteDialog(saving);
+        if (operation.equals(SavingOperation.HISTORY)) showHistoryActivity(saving);
+    }
+
+    @Override
+    public void onDeleteConfirmed(Saving saving) {
+        savings.remove(saving);
+        archiveView.updateSavings(savings);
+
+        archiveView.showUndoToast(
+                getString(R.string.snackbar_piggy_bank_deleted),
+                getString(R.string.undo),
+                () -> {
+                    savings.add(saving);
+                    sortSavings();
+                    archiveView.updateSavings(savings);
+                },
+                () -> savingRepository.delete(saving.getID()));
+    }
+
+    private void unarchiveSaving(Saving selectedSaving) {
+        selectedSaving.setIsArchived(Saving.NOT_ARCHIVE);
+        selectedSaving.setArchivedAt(0);
+        savingRepository.edit(selectedSaving);
+
+        AlarmUtil.set(this, selectedSaving);
+        archiveView.showToast(getString(R.string.snackbar_piggy_bank_unarchived));
+        refreshList();
+    }
+
+    private void refreshList() {
+        savings.clear();
+        savings.addAll(savingRepository.getSavings(Saving.IS_ARCHIVE));
+        sortSavings();
+        archiveView.updateSavings(savings);
+    }
+
+    private void sortSavings() {
+        savings.sort((a, b) -> {
+            long aArchived = a.getArchivedAt();
+            long bArchived = b.getArchivedAt();
+            if ((aArchived == 0) != (bArchived == 0)) {
+                return aArchived == 0 ? -1 : 1;
+            }
+            return Long.compare(aArchived, bArchived);
+        });
     }
 
     private void showHistoryActivity(Saving saving) {

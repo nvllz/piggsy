@@ -43,9 +43,7 @@ public class BackupWorker extends Worker {
         }
 
         Uri uri = Uri.parse(uriString);
-        boolean isManual = getTags().contains("manual_export");
-
-        if (!isManual && prefs.getBackupFrequency() <= 0) {
+        if (prefs.getBackupFrequency() <= 0) {
             return Result.success();
         }
 

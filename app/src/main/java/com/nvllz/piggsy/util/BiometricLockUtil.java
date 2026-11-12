@@ -1,21 +1,24 @@
 package com.nvllz.piggsy.util;
 
-import android.app.Dialog;
 import android.app.KeyguardManager;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.SystemClock;
-import android.view.WindowManager;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
 
 import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewTreeLifecycleOwner;
+import androidx.savedstate.ViewTreeSavedStateRegistryOwner;
 
 import com.nvllz.piggsy.R;
+import com.nvllz.piggsy.ui.ComposeLockCoverView;
 import com.nvllz.piggsy.ui.activities.BaseActivity;
 
 public final class BiometricLockUtil {
@@ -28,7 +31,7 @@ public final class BiometricLockUtil {
     private static long lastBackgroundedAt = 0L;
     private static int resumedCount = 0;
     private static boolean promptShowing = false;
-    private static Dialog lockCover = null;
+    private static View lockCoverView = null;
 
     private BiometricLockUtil() {
     }
@@ -71,7 +74,7 @@ public final class BiometricLockUtil {
         applySecurityFlag(activity, preferences);
     }
 
-    public static void onActivityStopped(FragmentActivity activity) {
+    public static void onActivityStopped(FragmentActivity activity, PreferenceUtil preferences) {
         if (resumedCount > 0) {
             resumedCount--;
 
@@ -80,6 +83,9 @@ public final class BiometricLockUtil {
                 lastBackgroundedAt = SystemClock.elapsedRealtime();
                 locked = true;
                 promptShowing = false;
+
+                applySecurityFlag(activity, preferences);
+                ensureLockCover(activity, preferences);
             }
         }
     }
@@ -101,15 +107,19 @@ public final class BiometricLockUtil {
     }
 
     public static void onActivityDestroyed(FragmentActivity activity) {
-        if (lockCover != null && lockCover.getOwnerActivity() == activity) {
+        if (lockCoverView != null && lockCoverView.getContext() == activity) {
             dismissLockCover();
         }
     }
 
     public static void applySecurityFlag(FragmentActivity activity, PreferenceUtil preferences) {
-        if (preferences.isScreenPrivacyEnabled()) return;
-
         Window window = activity.getWindow();
+        if (preferences.isScreenPrivacyEnabled()) {
+
+            window.addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+            return;
+        }
+
         if (locked && preferences.isBiometricLockEnabled()) {
             window.addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         } else {
@@ -117,34 +127,38 @@ public final class BiometricLockUtil {
         }
     }
 
+
     public static void ensureLockCover(FragmentActivity activity, PreferenceUtil preferences) {
         if (!preferences.isBiometricLockEnabled() || !isLocked()) return;
-        if (lockCover != null && lockCover.isShowing()) return;
+        if (lockCoverView != null && lockCoverView.isAttachedToWindow()) return;
 
-        Dialog dialog = new Dialog(activity, R.style.Theme_Piggsy);
-        dialog.setOwnerActivity(activity);
-        dialog.setContentView(R.layout.dialog_biometric_lock);
-        dialog.setCancelable(false);
+        ViewGroup content = activity.findViewById(android.R.id.content);
+        if (content == null) {
 
-        Window window = dialog.getWindow();
-        if (window != null) {
-            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
-            window.setDimAmount(0f);
-            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            window.addFlags(WindowManager.LayoutParams.FLAG_SECURE);
-            window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            activity.getWindow().getDecorView().post(() -> ensureLockCover(activity, preferences));
+            return;
         }
 
-        dialog.show();
-        lockCover = dialog;
+        ComposeLockCoverView coverView = new ComposeLockCoverView(activity);
+
+
+        ViewTreeLifecycleOwner.set(coverView, activity);
+        ViewTreeSavedStateRegistryOwner.set(coverView, activity);
+
+        coverView.setClickable(true);
+
+        content.addView(coverView, new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        lockCoverView = coverView;
     }
 
     public static void dismissLockCover() {
-        if (lockCover != null) {
-            if (lockCover.isShowing()) {
-                lockCover.dismiss();
+        if (lockCoverView != null) {
+            ViewGroup parent = (ViewGroup) lockCoverView.getParent();
+            if (parent != null) {
+                parent.removeView(lockCoverView);
             }
-            lockCover = null;
+            lockCoverView = null;
         }
     }
 

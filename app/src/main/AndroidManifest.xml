@@ -34,10 +34,12 @@
         <activity
             android:name=".ui.activities.EditActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustResize"
             android:parentActivityName=".ui.activities.MainActivity" />
         <activity
             android:name=".ui.activities.CreateActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustResize"
             android:parentActivityName=".ui.activities.MainActivity" />
         <activity
             android:name=".ui.activities.ArchiveActivity"
