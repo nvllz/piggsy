@@ -46,6 +46,11 @@ public class ArchiveActivity extends BaseActivity implements ComposeArchiveView.
     }
 
     @Override
+    public void onLockEngaged() {
+        archiveView.dismissDialogs();
+    }
+
+    @Override
     public void onBack() {
         finish();
     }

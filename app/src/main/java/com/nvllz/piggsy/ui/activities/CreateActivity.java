@@ -58,6 +58,11 @@ public class CreateActivity extends BaseActivity implements ComposeSavingFormVie
     }
 
     @Override
+    public void onLockEngaged() {
+        formView.dismissDialogs();
+    }
+
+    @Override
     public void onSave(String name, String currencyCode, String current, String goal, String description, boolean archiveWhenCompleted) {
         Saving createdSaving = new Saving();
         createdSaving.setID(UUID.randomUUID().toString());

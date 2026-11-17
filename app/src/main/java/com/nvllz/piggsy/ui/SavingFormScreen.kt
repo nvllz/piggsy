@@ -40,6 +40,7 @@ import com.nvllz.piggsy.R
 import com.nvllz.piggsy.data.Currency
 import com.nvllz.piggsy.data.saving.Saving
 import com.nvllz.piggsy.ui.components.ChoiceDialog
+import com.nvllz.piggsy.ui.components.CloseOverlaysOnStop
 import com.nvllz.piggsy.ui.components.FormTextField
 import com.nvllz.piggsy.ui.components.PrimaryButton
 import com.nvllz.piggsy.ui.components.ScreenHeader
@@ -87,6 +88,7 @@ fun SavingFormScreen(
     var currentError by remember { mutableStateOf<String?>(null) }
     var goalError by remember { mutableStateOf<String?>(null) }
     var showCurrencyDialog by remember { mutableStateOf(false) }
+    CloseOverlaysOnStop { showCurrencyDialog = false }
     val imeVisible = WindowInsets.isImeVisible
     val scrollState = rememberScrollState()
 

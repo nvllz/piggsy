@@ -57,6 +57,11 @@ public class EditActivity extends BaseActivity implements ComposeSavingFormView.
     }
 
     @Override
+    public void onLockEngaged() {
+        formView.dismissDialogs();
+    }
+
+    @Override
     public void onSave(String name, String currencyCode, String current, String goal, String description, boolean archiveWhenCompleted) {
         Saving editedSaving = new Saving();
         editedSaving.setID(currentSaving.getID());

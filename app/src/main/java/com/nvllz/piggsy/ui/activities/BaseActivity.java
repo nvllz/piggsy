@@ -25,13 +25,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected PreferenceUtil preferences;
 
     private final ActivityResultLauncher<Intent> credentialUnlockLauncher =
-            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-                if (result.getResultCode() == RESULT_OK) {
-                    BiometricLockUtil.onUnlocked(this);
-                } else {
-                    BiometricLockUtil.onLockRejected(this);
-                }
-            });
+            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result ->
+                    BiometricLockUtil.onCredentialResult(this, result.getResultCode() == RESULT_OK));
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,8 +51,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         setTheme(R.style.Theme_Piggsy);
 
         if (preferences.isDynamicColors()) DynamicColors.applyToActivityIfAvailable(this);
+    }
 
+    @Override
+    public void onContentChanged() {
+        super.onContentChanged();
         BiometricLockUtil.ensureLockCover(this, preferences);
+    }
+
+    public void onLockEngaged() {
     }
 
     @Override
@@ -67,12 +69,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void launchCredentialUnlock(String title, String message) {
+        BiometricLockUtil.beginCredentialUnlock();
         KeyguardManager keyguard = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
 
         if (keyguard != null && keyguard.isDeviceSecure()) {
             credentialUnlockLauncher.launch(keyguard.createConfirmDeviceCredentialIntent(title, message));
         } else {
-            BiometricLockUtil.onUnlocked(this);
+            BiometricLockUtil.onCredentialResult(this, true);
         }
     }
 
@@ -86,6 +89,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         BiometricLockUtil.onActivityStopped(this, preferences);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        BiometricLockUtil.onActivityPaused(this, preferences);
     }
 
     @Override

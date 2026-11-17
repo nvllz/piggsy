@@ -137,6 +137,13 @@ class ComposeHistoryView(
         pendingDateTime = transaction
     }
 
+    fun dismissDialogs() {
+        pendingDelete = null
+        pendingEdit = null
+        pendingDateTime = null
+        pendingDateTimeTime = null
+    }
+
     private var pendingDelete by mutableStateOf<Transaction?>(null)
     private var pendingEdit by mutableStateOf<Transaction?>(null)
     private var pendingDateTime by mutableStateOf<Transaction?>(null)

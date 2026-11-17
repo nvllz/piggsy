@@ -19,6 +19,11 @@ public class SettingsActivity extends BaseActivity {
     }
 
     @Override
+    public void onLockEngaged() {
+        settingsView.dismissDialogs();
+    }
+
+    @Override
     protected void onPause() {
         settingsView.applyPendingTheme();
         super.onPause();

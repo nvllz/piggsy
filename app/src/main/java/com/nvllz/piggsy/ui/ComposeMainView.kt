@@ -147,6 +147,17 @@ class ComposeMainView(
         pendingDetails = SavingDetails(saving, transactions)
     }
 
+    fun dismissDialogs() {
+        pendingDelete = null
+        pendingTransaction = null
+        pendingDetails = null
+        pendingDeadlineSaving = null
+        showDeadlineDatePicker = false
+        showDeadlineTimePicker = false
+        pickedDeadlineDate = null
+        showAlarmPermissionDialog = false
+    }
+
 
     fun requestDeadlinePicker(saving: Saving) {
         pendingDeadlineSaving = saving

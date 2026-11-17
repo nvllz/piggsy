@@ -64,6 +64,11 @@ public class HistoryActivity extends BaseActivity implements ComposeHistoryView.
     }
 
     @Override
+    public void onLockEngaged() {
+        historyView.dismissDialogs();
+    }
+
+    @Override
     public void onBack() {
         finish();
     }

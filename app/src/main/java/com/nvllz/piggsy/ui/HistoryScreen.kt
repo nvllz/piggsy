@@ -45,6 +45,7 @@ import com.nvllz.piggsy.R
 import com.nvllz.piggsy.data.Currency
 import com.nvllz.piggsy.data.transaction.Transaction
 import com.nvllz.piggsy.data.transaction.TransactionType
+import com.nvllz.piggsy.ui.components.CloseOverlaysOnStop
 import com.nvllz.piggsy.ui.components.ScreenHeader
 import com.nvllz.piggsy.ui.components.TransactionPreviewDialog
 import com.nvllz.piggsy.ui.theme.Chivo
@@ -77,6 +78,7 @@ fun HistoryScreen(
     val subtotals = remember(transactions) { computeSubtotals(transactions) }
     val navBars = WindowInsets.navigationBars.asPaddingValues()
     var previewTransaction by remember { mutableStateOf<Transaction?>(null) }
+    CloseOverlaysOnStop { previewTransaction = null }
 
     Column(Modifier.fillMaxSize().statusBarsPadding()) {
         ScreenHeader(

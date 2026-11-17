@@ -56,6 +56,14 @@ class ComposeSettingsView(context: Context) : AbstractComposeView(context) {
         }
     }
 
+    private var showDateFormatDialog by mutableStateOf(false)
+    private var showLanguageDialog by mutableStateOf(false)
+
+    fun dismissDialogs() {
+        showDateFormatDialog = false
+        showLanguageDialog = false
+    }
+
     @Composable
     override fun Content() {
 
@@ -79,6 +87,10 @@ class ComposeSettingsView(context: Context) : AbstractComposeView(context) {
                         onThemeChange = ::setTheme,
                         dynamicColor = dynamicColorState,
                         onDynamicColorChange = ::setDynamicColors,
+                        showDateFormatDialog = showDateFormatDialog,
+                        onDateFormatDialogChange = { showDateFormatDialog = it },
+                        showLanguageDialog = showLanguageDialog,
+                        onLanguageDialogChange = { showLanguageDialog = it },
                     )
                 }
                 ToastHost(

@@ -102,6 +102,11 @@ class ComposeArchiveView(
         pendingDetails = ComposeMainView.SavingDetails(saving, transactions)
     }
 
+    fun dismissDialogs() {
+        pendingDelete = null
+        pendingDetails = null
+    }
+
     private var pendingDelete by mutableStateOf<Saving?>(null)
     private var pendingDetails by mutableStateOf<ComposeMainView.SavingDetails?>(null)
 

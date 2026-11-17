@@ -218,6 +218,11 @@ public class BackupActivity extends BaseActivity {
         validateBackupLocationAccess();
     }
 
+    @Override
+    public void onLockEngaged() {
+        backupView.dismissDialogs();
+    }
+
     private boolean hasSavings() {
         try (Database database = new Database(this)) {
             android.database.Cursor cursor = database.getReadableDatabase()

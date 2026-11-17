@@ -77,6 +77,7 @@ import com.nvllz.piggsy.data.Currency
 import com.nvllz.piggsy.data.saving.Saving
 import com.nvllz.piggsy.data.saving.SavingOperation
 import com.nvllz.piggsy.data.saving.SavingSort
+import com.nvllz.piggsy.ui.components.CloseOverlaysOnStop
 import com.nvllz.piggsy.ui.components.SavingActionsDialog
 import com.nvllz.piggsy.ui.theme.PiggsyTheme
 import com.nvllz.piggsy.util.AlarmUtil
@@ -219,6 +220,7 @@ private fun MainTopBar(
         )
 
         var sortOpen by remember { mutableStateOf(false) }
+        CloseOverlaysOnStop { sortOpen = false }
         Box {
             TopBarButton(R.drawable.ic_sort, stringResource(R.string.menu_item_sort)) {
                 sortOpen = true
@@ -264,6 +266,7 @@ private fun MainTopBar(
         }
 
         var moreOpen by remember { mutableStateOf(false) }
+        CloseOverlaysOnStop { moreOpen = false }
         Box {
             TopBarButton(R.drawable.ic_more, stringResource(R.string.menu_item_overflow)) {
                 moreOpen = true
@@ -384,6 +387,7 @@ internal fun SavingRow(
     val colorScheme = MaterialTheme.colorScheme
     val goalReached = saving.getCurrentSaving() >= saving.getGoal() && saving.getGoal() != 0.0
     var showActionsDialog by remember { mutableStateOf(false) }
+    CloseOverlaysOnStop { showActionsDialog = false }
 
 
     val dimmed: (Color) -> Color = if (isArchived) {

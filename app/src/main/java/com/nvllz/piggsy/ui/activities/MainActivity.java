@@ -164,6 +164,11 @@ public class MainActivity extends BaseActivity implements ComposeMainView.Listen
     }
 
     @Override
+    public void onLockEngaged() {
+        mainView.dismissDialogs();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         if (!skipNextRefresh) {

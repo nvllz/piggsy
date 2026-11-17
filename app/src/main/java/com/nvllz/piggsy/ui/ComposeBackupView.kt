@@ -204,6 +204,14 @@ class ComposeBackupView(
     private var showDisableEncryption by mutableStateOf(false)
     private var showImportPassword by mutableStateOf(false)
 
+    fun dismissDialogs() {
+        showImportWarning = false
+        showFrequency = false
+        showSetPassword = false
+        showDisableEncryption = false
+        showImportPassword = false
+    }
+
     private var setPassword by mutableStateOf(TextFieldValue(""))
     private var confirmPassword by mutableStateOf(TextFieldValue(""))
     private var passwordMismatch by mutableStateOf(false)
@@ -243,7 +251,7 @@ class ComposeBackupView(
                 MessageDialog(
                     title = stringResource(R.string.warning),
                     message = stringResource(R.string.import_warning_desc),
-                    confirmText = stringResource(R.string.import_data),
+                    confirmText = stringResource(R.string.preference_import_title),
                     onConfirm = {
                         showImportWarning = false
                         listener.onImportWarningConfirmed()
@@ -380,7 +388,7 @@ class ComposeBackupView(
         PiggsyDialog(
             title = stringResource(R.string.backup_encrypted_file_title),
             onDismiss = { if (!importPasswordWorking) showImportPassword = false },
-            confirmText = stringResource(R.string.import_data),
+            confirmText = stringResource(R.string.preference_import_title),
             confirmEnabled = !importPasswordWorking,
             onConfirm = {
                 val password = importPassword.text

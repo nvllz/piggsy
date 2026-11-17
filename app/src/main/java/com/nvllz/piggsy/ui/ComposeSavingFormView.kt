@@ -89,6 +89,13 @@ class ComposeSavingFormView(
         showDeadlineDatePicker = true
     }
 
+    fun dismissDialogs() {
+        showDeleteDialog = false
+        showAlarmPermissionDialog = false
+        showDeadlineDatePicker = false
+        showDeadlineTimePicker = false
+    }
+
     private var showDeleteDialog by mutableStateOf(false)
     private var showAlarmPermissionDialog by mutableStateOf(false)
 
