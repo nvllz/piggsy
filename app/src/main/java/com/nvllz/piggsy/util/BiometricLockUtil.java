@@ -21,6 +21,8 @@ import com.nvllz.piggsy.R;
 import com.nvllz.piggsy.ui.ComposeLockCoverView;
 import com.nvllz.piggsy.ui.activities.BaseActivity;
 
+import java.util.ArrayList;
+
 public final class BiometricLockUtil {
 
     public static final long GRACE_PERIOD_MS = 30_000L;
@@ -32,12 +34,34 @@ public final class BiometricLockUtil {
     private static int resumedCount = 0;
     private static boolean promptShowing = false;
     private static View lockCoverView = null;
+    private static final ArrayList<Runnable> unlockActions = new ArrayList<>();
 
     private BiometricLockUtil() {
     }
 
     public static boolean isLocked() {
         return locked;
+    }
+
+    public static void runOnUnlock(Runnable action) {
+        if (action == null) return;
+        if (!locked) {
+            action.run();
+            return;
+        }
+        unlockActions.add(action);
+    }
+
+    public static void removeUnlockAction(Runnable action) {
+        unlockActions.remove(action);
+    }
+
+    private static void runUnlockActions() {
+        ArrayList<Runnable> actions = new ArrayList<>(unlockActions);
+        unlockActions.clear();
+        for (Runnable action : actions) {
+            action.run();
+        }
     }
 
     public static boolean isSupported(Context context) {
@@ -68,6 +92,7 @@ public final class BiometricLockUtil {
             } else if (locked) {
                 locked = false;
                 dismissLockCover();
+                runUnlockActions();
             }
         }
 
@@ -96,6 +121,7 @@ public final class BiometricLockUtil {
         forceLock = false;
         dismissLockCover();
         applySecurityFlag(activity, new PreferenceUtil(activity));
+        runUnlockActions();
     }
 
     public static void onLockRejected(FragmentActivity activity) {

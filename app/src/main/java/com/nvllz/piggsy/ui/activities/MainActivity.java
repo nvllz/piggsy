@@ -31,6 +31,7 @@ import com.nvllz.piggsy.ui.ComposeMainView;
 import com.nvllz.piggsy.ui.MainDestination;
 import com.nvllz.piggsy.util.AlarmUtil;
 import com.nvllz.piggsy.util.BackupScheduler;
+import com.nvllz.piggsy.util.BiometricLockUtil;
 import com.nvllz.piggsy.util.PreferenceUtil;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -51,6 +52,9 @@ public class MainActivity extends BaseActivity implements ComposeMainView.Listen
 
 
     private Saving pendingDeadlineSaving;
+
+    private String pendingNotificationSavingID;
+    private final Runnable pendingNotificationDetailsAction = this::showPendingNotificationDetails;
 
     private final ActivityResultLauncher<Intent> createSavingLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -130,10 +134,33 @@ public class MainActivity extends BaseActivity implements ComposeMainView.Listen
         String savingID = intent.getStringExtra(Database.COLUMN_SAVING_ID);
         if (savingID == null) return;
 
+        if (preferences.isBiometricLockEnabled() && BiometricLockUtil.isLocked()) {
+            pendingNotificationSavingID = savingID;
+            BiometricLockUtil.runOnUnlock(pendingNotificationDetailsAction);
+            return;
+        }
+
         Saving saving = savingRepository.getSaving(savingID);
         if (saving != null) {
             mainView.showSavingDetails(saving, transactionRepository.get(savingID));
         }
+    }
+
+    private void showPendingNotificationDetails() {
+        String savingID = pendingNotificationSavingID;
+        if (savingID == null) return;
+        pendingNotificationSavingID = null;
+
+        Saving saving = savingRepository.getSaving(savingID);
+        if (saving != null) {
+            mainView.showSavingDetails(saving, transactionRepository.get(savingID));
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        BiometricLockUtil.removeUnlockAction(pendingNotificationDetailsAction);
+        super.onDestroy();
     }
 
     @Override
