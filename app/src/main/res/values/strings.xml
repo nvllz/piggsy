@@ -33,6 +33,11 @@
 <string name="toolbar_settings">Settings</string>
     <string name="preference_category_appearance">Appearance</string>
     <string name="preference_list_theme">Theme</string>
+    <string name="preference_list_language">App language</string>
+    <string name="preference_system">System</string>
+    <string name="preference_theme_system">System</string>
+    <string name="preference_theme_light">Light</string>
+    <string name="preference_theme_dark">Dark</string>
     <string name="preference_switch_dynamic_colors_title">Dynamic Colors</string>
     <string name="preference_switch_dynamic_colors_summary">Match the app theme to your wallpaper colors</string>
     <string name="preference_category_savings">General</string>
@@ -49,17 +54,22 @@
     <string name="biometric_toast_unavailable">No fingerprint or screen lock is set up on this device</string>
 
 <string name="menu_item_backup">Backup</string>
-    <string name="preference_category_backup">Backup</string>
     <string name="preference_import_title">Import</string>
     <string name="preference_export_title">Export</string>
     <string name="backup_frequency">Automatic backup frequency</string>
+    <string name="backup_frequency_disabled">Disabled</string>
+    <string name="backup_frequency_daily">Daily</string>
+    <string name="backup_frequency_every_2_days">Every 2 days</string>
+    <string name="backup_frequency_every_3_days">Every 3 days</string>
+    <string name="backup_frequency_weekly">Weekly</string>
+    <string name="backup_frequency_every_2_weeks">Every 2 weeks</string>
+    <string name="backup_frequency_monthly">Monthly</string>
     <string name="backup_retention_count">Number of backups to keep</string>
     <string name="backup_retention_all">All</string>
     <string name="backup_location">Backup location</string>
     <string name="backup_location_not_set">Not set</string>
     <string name="select_backup_location_first">Select backup location first</string>
     <string name="manual_backup">Manual backup</string>
-    <string name="import_data">Import</string>
     <string name="import_data_summary">Restore data from a file</string>
     <string name="warning">Warning</string>
     <string name="import_warning_desc">This will delete ALL current data and replace it with the imported backup. This action cannot be undone. Continue?</string>
@@ -154,6 +164,7 @@
     <string name="error_amount_positive">Amount must be positive</string>
     <string name="error_invalid_amount">Invalid amount format</string>
 
+<string name="notification_channel_deadline_name">Piggy bank deadline</string>
 <string name="deadline_notification_title">Goal deadline</string>
     <string name="deadline_notification_content">Deadline reached for \"%1$s\"</string>
 </resources>

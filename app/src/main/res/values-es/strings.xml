@@ -1,0 +1,163 @@
+<resources>
+
+<string name="toolbar_main">Piggsy</string>
+    <string name="empty_indicator_main">Aún no hay huchas</string>
+
+<string name="toolbar_create">Nueva hucha</string>
+    <string name="toolbar_edit">Editar hucha</string>
+    <string name="radio_button_deposit">Ingresar</string>
+    <string name="radio_button_withdraw">Retirar</string>
+    <string name="field_saving_name">Título</string>
+    <string name="field_saving_current_saving">Saldo</string>
+    <string name="field_transaction_amount">Importe</string>
+    <string name="field_saving_goal">Objetivo</string>
+    <string name="field_saving_description">Descripción (opcional)</string>
+    <string name="field_saving_deadline">Fecha límite (opcional)</string>
+    <string name="field_saving_archive_when_completed">Archivar al completar</string>
+    <string name="field_saving_archive_when_completed_summary">Mover esta hucha al archivo automáticamente al alcanzar el objetivo</string>
+    <string name="field_transaction_notes">Nota (opcional)</string>
+
+<string name="toolbar_archive">Archivo</string>
+    <string name="empty_indicator_archive">No hay huchas archivadas</string>
+
+<string name="toolbar_history">Historial</string>
+    <string name="dialog_delete_transaction_title">Eliminar transacción</string>
+    <string name="dialog_delete_transaction_message">¿Eliminar esta transacción? No se puede deshacer.</string>
+    <string name="dialog_edit_transaction_title">Editar transacción</string>
+
+<string name="toolbar_settings">Ajustes</string>
+    <string name="preference_category_appearance">Apariencia</string>
+    <string name="preference_list_theme">Tema</string>
+    <string name="preference_theme_system">Sistema</string>
+    <string name="preference_theme_light">Claro</string>
+    <string name="preference_theme_dark">Oscuro</string>
+    <string name="preference_switch_dynamic_colors_title">Colores dinámicos</string>
+    <string name="preference_switch_dynamic_colors_summary">Adaptar el tema de la app a los colores de tu fondo de pantalla</string>
+    <string name="preference_category_savings">General</string>
+    <string name="preference_list_currency">Moneda</string>
+    <string name="preference_list_date_format">Formato de fecha</string>
+    <string name="preference_category_security">Seguridad</string>
+    <string name="preference_switch_screen_privacy_title">Privacidad de pantalla</string>
+    <string name="preference_switch_screen_privacy_summary">Ocultar el contenido en apps recientes y bloquear capturas de pantalla</string>
+    <string name="preference_switch_biometric_title">Bloqueo biométrico</string>
+    <string name="preference_switch_biometric_summary">Pedir huella o bloqueo de pantalla para abrir la app</string>
+    <string name="biometric_prompt_title">Desbloquear Piggsy</string>
+    <string name="biometric_prompt_subtitle">Confirma para acceder a la app</string>
+    <string name="biometric_prompt_use_screen_lock">Usar bloqueo de pantalla</string>
+    <string name="biometric_toast_unavailable">No hay huella ni bloqueo de pantalla configurados en este dispositivo</string>
+
+<string name="menu_item_backup">Copia de seguridad</string>
+    <string name="preference_import_title">Importar</string>
+    <string name="preference_export_title">Exportar</string>
+    <string name="backup_frequency">Frecuencia de copia automática</string>
+    <string name="backup_frequency_disabled">Desactivada</string>
+    <string name="backup_frequency_daily">Diaria</string>
+    <string name="backup_frequency_every_2_days">Cada 2 días</string>
+    <string name="backup_frequency_every_3_days">Cada 3 días</string>
+    <string name="backup_frequency_weekly">Semanal</string>
+    <string name="backup_frequency_every_2_weeks">Cada 2 semanas</string>
+    <string name="backup_frequency_monthly">Mensual</string>
+    <string name="backup_retention_count">Número de copias a conservar</string>
+    <string name="backup_retention_all">Todas</string>
+    <string name="backup_location">Ubicación de la copia</string>
+    <string name="backup_location_not_set">Sin definir</string>
+    <string name="select_backup_location_first">Elige primero la ubicación de la copia</string>
+    <string name="manual_backup">Copia manual</string>
+    <string name="import_data_summary">Restaurar datos desde un archivo</string>
+    <string name="warning">Aviso</string>
+    <string name="import_warning_desc">Esto eliminará TODOS los datos actuales y los sustituirá por la copia importada. No se puede deshacer. ¿Continuar?</string>
+    <string name="cannot_open_file">No se puede abrir el archivo</string>
+    <string name="backup_encryption_title">Cifrar copias</string>
+    <string name="backup_encryption_summary">Proteger los datos exportados con una contraseña</string>
+    <string name="backup_encrypted_file_title">Copia cifrada</string>
+    <string name="backup_password_hint">Contraseña de la copia</string>
+    <string name="backup_password_confirm_hint">Confirmar contraseña</string>
+    <string name="backup_encryption_enable_title">Definir contraseña de copia</string>
+    <string name="backup_encryption_enable_message">Guárdala bien: sin la contraseña no se pueden restaurar las copias cifradas.</string>
+    <string name="backup_encryption_disable_title">Desactivar cifrado</string>
+    <string name="backup_encryption_disable_message">Las próximas copias se guardarán sin cifrar. Los archivos ya cifrados seguirán necesitando la contraseña.</string>
+    <string name="backup_password_mismatch">Las contraseñas no coinciden</string>
+    <string name="backup_password_empty">La contraseña no puede estar vacía</string>
+    <string name="backup_password_wrong">Contraseña incorrecta</string>
+    <string name="backup_encryption_failed">Error de cifrado</string>
+    <string name="backup_encrypted_snackbar">Cifrado de copias activado</string>
+    <string name="backup_encryption_disabled_snackbar">Cifrado de copias desactivado</string>
+    <string name="set">Definir</string>
+    <string name="backup_encryption_disable_button">Desactivar</string>
+    <string name="backup_password_too_short">Usa al menos %1$d caracteres</string>
+    <string name="backup_file_too_large">El archivo de copia es demasiado grande para importarlo</string>
+
+<string name="toolbar_about">Acerca de</string>
+    <string name="link_app_author">https://github.com/nvllz</string>
+    <string name="link_app_og_creator">https://github.com/mowtiie</string>
+    <string name="preference_app_version">Versión</string>
+    <string name="preference_app_license">Licencia</string>
+    <string name="preference_app_source_code_title">Código fuente</string>
+    <string name="preference_app_source_code_summary">Explora el proyecto en GitHub</string>
+    <string name="preference_app_author">Autor</string>
+    <string name="preference_app_og_creator">Creador original</string>
+    <string name="app_easter_egg">Ya has hecho esto antes, ¿verdad?</string>
+
+<string name="menu_item_overflow">Más opciones</string>
+    <string name="menu_item_sort">Ordenar</string>
+    <string name="menu_item_sort_name">Título</string>
+    <string name="menu_item_sort_current_saving">Saldo</string>
+    <string name="menu_item_sort_goal">Objetivo</string>
+    <string name="menu_item_sort_deadline">Fecha límite</string>
+    <string name="menu_item_sort_creation">Creación</string>
+    <string name="menu_item_sort_ascending">Ascendente</string>
+    <string name="menu_item_sort_descending">Descendente</string>
+
+<string name="dialog_title_request_alarm_permission">Permiso necesario</string>
+    <string name="dialog_message_request_alarm_permission">Permite las notificaciones para recibir recordatorios de fecha límite</string>
+    <string name="dialog_title_delete_saving">Eliminar hucha</string>
+    <string name="dialog_message_delete_saving">¿Eliminar esta hucha? No se puede deshacer.</string>
+    <string name="dialog_title_create_transaction">Nueva transacción</string>
+
+<string name="delete">Eliminar</string>
+    <string name="edit">Editar</string>
+    <string name="created_on">Creada: %s</string>
+    <string name="archived_on">Archivada: %s</string>
+    <string name="reached_on">Objetivo alcanzado: %s</string>
+    <string name="deadline_on">Fecha límite: %s</string>
+    <string name="dialog_select_deadline_date">Elegir fecha límite</string>
+    <string name="dialog_select_deadline_time">Elegir hora límite</string>
+    <string name="dialog_select_transaction_date">Elegir fecha de la transacción</string>
+    <string name="dialog_select_transaction_time">Elegir hora de la transacción</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save">Guardar</string>
+    <string name="undo">Deshacer</string>
+    <string name="grant">Permitir</string>
+    <string name="add">Añadir</string>
+
+    <plurals name="transaction_count">
+        <item quantity="one">%d transacción</item>
+        <item quantity="other">%d transacciones</item>
+    </plurals>
+
+<string name="desc_add">Añadir transacción</string>
+    <string name="desc_previous_month">Mes anterior</string>
+    <string name="desc_note">Nota</string>
+    <string name="desc_unarchive">Desarchivar</string>
+
+<string name="toast_notification_permission_denied">Permiso de notificaciones denegado</string>
+    <string name="snackbar_export_successful">Exportación correcta</string>
+    <string name="snackbar_import_successful">Importación correcta</string>
+    <string name="snackbar_piggy_bank_archived">Hucha archivada</string>
+    <string name="snackbar_piggy_bank_unarchived">Hucha restaurada</string>
+    <string name="snackbar_piggy_bank_deleted">Hucha eliminada</string>
+    <string name="snack_bar_permission_notifications">Permite las notificaciones para recibir recordatorios de fecha límite</string>
+    <string name="transaction_deleted">Transacción eliminada</string>
+    <string name="transaction_updated">Transacción actualizada</string>
+    <string name="error_deleting_transaction">No se pudo eliminar la transacción</string>
+    <string name="error_restoring_transaction">No se pudo restaurar la transacción</string>
+    <string name="error_updating_transaction">No se pudo actualizar la transacción</string>
+
+<string name="field_error_required">Este campo es obligatorio</string>
+    <string name="error_amount_positive">El importe debe ser positivo</string>
+    <string name="error_invalid_amount">Formato de importe no válido</string>
+
+<string name="notification_channel_deadline_name">Fecha límite de la hucha</string>
+<string name="deadline_notification_title">Fecha límite del objetivo</string>
+    <string name="deadline_notification_content">Fecha límite alcanzada para «%1$s»</string>
+</resources>

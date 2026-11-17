@@ -1,0 +1,163 @@
+<resources>
+
+<string name="toolbar_main">Piggsy</string>
+    <string name="empty_indicator_main">Ancora nessun salvadanaio</string>
+
+<string name="toolbar_create">Nuovo salvadanaio</string>
+    <string name="toolbar_edit">Modifica salvadanaio</string>
+    <string name="radio_button_deposit">Versa</string>
+    <string name="radio_button_withdraw">Preleva</string>
+    <string name="field_saving_name">Titolo</string>
+    <string name="field_saving_current_saving">Saldo</string>
+    <string name="field_transaction_amount">Importo</string>
+    <string name="field_saving_goal">Obiettivo</string>
+    <string name="field_saving_description">Descrizione (facoltativa)</string>
+    <string name="field_saving_deadline">Scadenza (facoltativa)</string>
+    <string name="field_saving_archive_when_completed">Archivia al completamento</string>
+    <string name="field_saving_archive_when_completed_summary">Sposta automaticamente questo salvadanaio nell\'archivio quando l\'obiettivo è raggiunto</string>
+    <string name="field_transaction_notes">Nota (facoltativa)</string>
+
+<string name="toolbar_archive">Archivio</string>
+    <string name="empty_indicator_archive">Nessun salvadanaio archiviato</string>
+
+<string name="toolbar_history">Cronologia</string>
+    <string name="dialog_delete_transaction_title">Elimina transazione</string>
+    <string name="dialog_delete_transaction_message">Eliminare questa transazione? L\'azione non si può annullare.</string>
+    <string name="dialog_edit_transaction_title">Modifica transazione</string>
+
+<string name="toolbar_settings">Impostazioni</string>
+    <string name="preference_category_appearance">Aspetto</string>
+    <string name="preference_list_theme">Tema</string>
+    <string name="preference_theme_system">Sistema</string>
+    <string name="preference_theme_light">Chiaro</string>
+    <string name="preference_theme_dark">Scuro</string>
+    <string name="preference_switch_dynamic_colors_title">Colori dinamici</string>
+    <string name="preference_switch_dynamic_colors_summary">Abbina il tema dell\'app ai colori dello sfondo</string>
+    <string name="preference_category_savings">Generali</string>
+    <string name="preference_list_currency">Valuta</string>
+    <string name="preference_list_date_format">Formato data</string>
+    <string name="preference_category_security">Sicurezza</string>
+    <string name="preference_switch_screen_privacy_title">Privacy dello schermo</string>
+    <string name="preference_switch_screen_privacy_summary">Nascondi il contenuto nelle app recenti e blocca gli screenshot</string>
+    <string name="preference_switch_biometric_title">Blocco biometrico</string>
+    <string name="preference_switch_biometric_summary">Richiedi impronta o blocco schermo per aprire l\'app</string>
+    <string name="biometric_prompt_title">Sblocca Piggsy</string>
+    <string name="biometric_prompt_subtitle">Conferma per accedere all\'app</string>
+    <string name="biometric_prompt_use_screen_lock">Usa blocco schermo</string>
+    <string name="biometric_toast_unavailable">Nessuna impronta o blocco schermo impostato su questo dispositivo</string>
+
+<string name="menu_item_backup">Backup</string>
+    <string name="preference_import_title">Importa</string>
+    <string name="preference_export_title">Esporta</string>
+    <string name="backup_frequency">Frequenza backup automatico</string>
+    <string name="backup_frequency_disabled">Disattivato</string>
+    <string name="backup_frequency_daily">Ogni giorno</string>
+    <string name="backup_frequency_every_2_days">Ogni 2 giorni</string>
+    <string name="backup_frequency_every_3_days">Ogni 3 giorni</string>
+    <string name="backup_frequency_weekly">Ogni settimana</string>
+    <string name="backup_frequency_every_2_weeks">Ogni 2 settimane</string>
+    <string name="backup_frequency_monthly">Ogni mese</string>
+    <string name="backup_retention_count">Numero di backup da conservare</string>
+    <string name="backup_retention_all">Tutti</string>
+    <string name="backup_location">Posizione del backup</string>
+    <string name="backup_location_not_set">Non impostata</string>
+    <string name="select_backup_location_first">Scegli prima la posizione del backup</string>
+    <string name="manual_backup">Backup manuale</string>
+    <string name="import_data_summary">Ripristina i dati da un file</string>
+    <string name="warning">Attenzione</string>
+    <string name="import_warning_desc">Verranno eliminati TUTTI i dati attuali e sostituiti con il backup importato. L\'azione non si può annullare. Continuare?</string>
+    <string name="cannot_open_file">Impossibile aprire il file</string>
+    <string name="backup_encryption_title">Cifra i backup</string>
+    <string name="backup_encryption_summary">Proteggi i dati esportati con una password</string>
+    <string name="backup_encrypted_file_title">Backup cifrato</string>
+    <string name="backup_password_hint">Password del backup</string>
+    <string name="backup_password_confirm_hint">Conferma password</string>
+    <string name="backup_encryption_enable_title">Imposta password del backup</string>
+    <string name="backup_encryption_enable_message">Conservala con cura: senza password non si possono ripristinare i backup cifrati.</string>
+    <string name="backup_encryption_disable_title">Disattiva cifratura</string>
+    <string name="backup_encryption_disable_message">I prossimi backup verranno salvati senza cifratura. I file già cifrati richiedono ancora la password.</string>
+    <string name="backup_password_mismatch">Le password non coincidono</string>
+    <string name="backup_password_empty">La password non può essere vuota</string>
+    <string name="backup_password_wrong">Password errata</string>
+    <string name="backup_encryption_failed">Cifratura non riuscita</string>
+    <string name="backup_encrypted_snackbar">Cifratura dei backup attivata</string>
+    <string name="backup_encryption_disabled_snackbar">Cifratura dei backup disattivata</string>
+    <string name="set">Imposta</string>
+    <string name="backup_encryption_disable_button">Disattiva</string>
+    <string name="backup_password_too_short">Usa almeno %1$d caratteri</string>
+    <string name="backup_file_too_large">Il file di backup è troppo grande per l\'importazione</string>
+
+<string name="toolbar_about">Info</string>
+    <string name="link_app_author">https://github.com/nvllz</string>
+    <string name="link_app_og_creator">https://github.com/mowtiie</string>
+    <string name="preference_app_version">Versione</string>
+    <string name="preference_app_license">Licenza</string>
+    <string name="preference_app_source_code_title">Codice sorgente</string>
+    <string name="preference_app_source_code_summary">Scopri il progetto su GitHub</string>
+    <string name="preference_app_author">Autore</string>
+    <string name="preference_app_og_creator">Creatore originale</string>
+    <string name="app_easter_egg">Non è la prima volta che lo fai, vero?</string>
+
+<string name="menu_item_overflow">Altre opzioni</string>
+    <string name="menu_item_sort">Ordina</string>
+    <string name="menu_item_sort_name">Titolo</string>
+    <string name="menu_item_sort_current_saving">Saldo</string>
+    <string name="menu_item_sort_goal">Obiettivo</string>
+    <string name="menu_item_sort_deadline">Scadenza</string>
+    <string name="menu_item_sort_creation">Creazione</string>
+    <string name="menu_item_sort_ascending">Crescente</string>
+    <string name="menu_item_sort_descending">Decrescente</string>
+
+<string name="dialog_title_request_alarm_permission">Autorizzazione richiesta</string>
+    <string name="dialog_message_request_alarm_permission">Consenti le notifiche per ricevere i promemoria di scadenza</string>
+    <string name="dialog_title_delete_saving">Elimina salvadanaio</string>
+    <string name="dialog_message_delete_saving">Eliminare questo salvadanaio? L\'azione non si può annullare.</string>
+    <string name="dialog_title_create_transaction">Nuova transazione</string>
+
+<string name="delete">Elimina</string>
+    <string name="edit">Modifica</string>
+    <string name="created_on">Creato il %s</string>
+    <string name="archived_on">Archiviato il %s</string>
+    <string name="reached_on">Raggiunto il %s</string>
+    <string name="deadline_on">Scadenza: %s</string>
+    <string name="dialog_select_deadline_date">Scegli la data di scadenza</string>
+    <string name="dialog_select_deadline_time">Scegli l\'ora di scadenza</string>
+    <string name="dialog_select_transaction_date">Scegli la data della transazione</string>
+    <string name="dialog_select_transaction_time">Scegli l\'ora della transazione</string>
+    <string name="cancel">Annulla</string>
+    <string name="save">Salva</string>
+    <string name="undo">Annulla</string>
+    <string name="grant">Consenti</string>
+    <string name="add">Aggiungi</string>
+
+    <plurals name="transaction_count">
+        <item quantity="one">%d transazione</item>
+        <item quantity="other">%d transazioni</item>
+    </plurals>
+
+<string name="desc_add">Aggiungi transazione</string>
+    <string name="desc_previous_month">Mese precedente</string>
+    <string name="desc_note">Nota</string>
+    <string name="desc_unarchive">Rimuovi dall\'archivio</string>
+
+<string name="toast_notification_permission_denied">Autorizzazione per le notifiche negata</string>
+    <string name="snackbar_export_successful">Esportazione riuscita</string>
+    <string name="snackbar_import_successful">Importazione riuscita</string>
+    <string name="snackbar_piggy_bank_archived">Salvadanaio archiviato</string>
+    <string name="snackbar_piggy_bank_unarchived">Salvadanaio ripristinato</string>
+    <string name="snackbar_piggy_bank_deleted">Salvadanaio eliminato</string>
+    <string name="snack_bar_permission_notifications">Consenti le notifiche per ricevere i promemoria di scadenza</string>
+    <string name="transaction_deleted">Transazione eliminata</string>
+    <string name="transaction_updated">Transazione aggiornata</string>
+    <string name="error_deleting_transaction">Impossibile eliminare la transazione</string>
+    <string name="error_restoring_transaction">Impossibile ripristinare la transazione</string>
+    <string name="error_updating_transaction">Impossibile aggiornare la transazione</string>
+
+<string name="field_error_required">Campo obbligatorio</string>
+    <string name="error_amount_positive">L\'importo deve essere positivo</string>
+    <string name="error_invalid_amount">Formato importo non valido</string>
+
+<string name="notification_channel_deadline_name">Scadenza del salvadanaio</string>
+<string name="deadline_notification_title">Scadenza dell\'obiettivo</string>
+    <string name="deadline_notification_content">Scadenza raggiunta per «%1$s»</string>
+</resources>

@@ -2,6 +2,7 @@ package com.nvllz.piggsy.ui
 
 import android.app.Activity
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,12 +20,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.os.LocaleListCompat
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.color.DynamicColors
 import com.nvllz.piggsy.R
 import com.nvllz.piggsy.data.DateFormat
 import com.nvllz.piggsy.data.Theme
 import com.nvllz.piggsy.ui.components.ChoiceDialog
+import com.nvllz.piggsy.ui.components.CloseOverlaysOnStop
 import com.nvllz.piggsy.ui.components.LocalToast
 import com.nvllz.piggsy.ui.components.PillSelector
 import com.nvllz.piggsy.ui.components.ScreenHeader
@@ -37,6 +40,8 @@ import com.nvllz.piggsy.ui.components.ToastKind
 import com.nvllz.piggsy.util.BiometricLockUtil
 import com.nvllz.piggsy.util.PreferenceUtil
 
+import java.util.Locale
+
 @Composable
 fun SettingsScreen(
     onBack: () -> Unit,
@@ -44,6 +49,10 @@ fun SettingsScreen(
     onThemeChange: (String) -> Unit,
     dynamicColor: Boolean,
     onDynamicColorChange: (Boolean) -> Unit,
+    showDateFormatDialog: Boolean,
+    onDateFormatDialogChange: (Boolean) -> Unit,
+    showLanguageDialog: Boolean,
+    onLanguageDialogChange: (Boolean) -> Unit,
 ) {
     val context = LocalContext.current
     val activity = context as? Activity
@@ -54,18 +63,38 @@ fun SettingsScreen(
     var dateFormat by remember { mutableStateOf(preferences.getDateFormat()) }
     var screenPrivacy by remember { mutableStateOf(preferences.isScreenPrivacyEnabled()) }
     var biometricLock by remember { mutableStateOf(preferences.isBiometricLockEnabled()) }
-    var showDateFormatDialog by remember { mutableStateOf(false) }
+    CloseOverlaysOnStop { onDateFormatDialogChange(false) }
+    CloseOverlaysOnStop { onLanguageDialogChange(false) }
 
     val dynamicColorsAvailable = remember { DynamicColors.isDynamicColorAvailable() }
+    val languageValue = remember {
+        val locales = AppCompatDelegate.getApplicationLocales()
+        if (locales.isEmpty) "system" else locales[0]?.toLanguageTag() ?: "system"
+    }
+    val languageNames = context.resources.getStringArray(R.array.language_names)
+    val languageValues = context.resources.getStringArray(R.array.language_values)
+    val languageSummary = languageNames.getOrNull(languageValues.indexOf(languageValue))
+        ?: languageNames.first()
+    val languageOptions = languageValues.mapIndexed { index, value -> value to languageNames[index] }
     val dateFormatOptions = remember {
         DateFormat.getPatterns().map { pattern -> pattern to DateFormat.getNameByPattern(pattern) }
     }
-    val themeOptions = remember {
+    val systemLabel = stringResource(R.string.preference_theme_system)
+    val lightLabel = stringResource(R.string.preference_theme_light)
+    val darkLabel = stringResource(R.string.preference_theme_dark)
+    val themeOptions = remember(systemLabel, lightLabel, darkLabel) {
         listOf(
-            Theme.SYSTEM.VALUE to Theme.SYSTEM.VALUE,
-            Theme.LIGHT.VALUE to Theme.LIGHT.VALUE,
-            Theme.DARK.VALUE to Theme.DARK.VALUE,
+            Theme.SYSTEM.VALUE to systemLabel,
+            Theme.LIGHT.VALUE to lightLabel,
+            Theme.DARK.VALUE to darkLabel,
         )
+    }
+    val themeLabelOf: (String) -> String = { value ->
+        when (value) {
+            Theme.SYSTEM.VALUE -> systemLabel
+            Theme.LIGHT.VALUE -> lightLabel
+            else -> darkLabel
+        }
     }
     val themeIconOf: (String) -> Int? = { value ->
         when (value) {
@@ -92,15 +121,24 @@ fun SettingsScreen(
                     title = stringResource(R.string.preference_list_date_format),
                     summary = DateFormat.getNameByPattern(dateFormat),
                     icon = R.drawable.ic_calendar,
-                    onClick = { showDateFormatDialog = true },
+                    onClick = { onDateFormatDialogChange(true) },
                 )
             }
 
             SectionLabel(stringResource(R.string.preference_category_appearance))
             SettingGroup {
                 SettingRow(
+                    title = stringResource(R.string.preference_list_language),
+                    summary = languageSummary,
+                    icon = R.drawable.ic_language,
+                    onClick = { onLanguageDialogChange(true) },
+                )
+
+                SettingDivider()
+
+                SettingRow(
                     title = stringResource(R.string.preference_list_theme),
-                    summary = theme,
+                    summary = themeLabelOf(theme),
                     icon = R.drawable.ic_theme,
                 )
                 PillSelector(
@@ -180,6 +218,23 @@ fun SettingsScreen(
         }
     }
 
+    if (showLanguageDialog) {
+        ChoiceDialog(
+            title = stringResource(R.string.preference_list_language),
+            options = languageOptions,
+            selected = languageValue,
+            onSelect = { chosen ->
+                val newLocale = if (chosen == "system") {
+                    LocaleListCompat.getEmptyLocaleList()
+                } else {
+                    LocaleListCompat.create(Locale.forLanguageTag(chosen))
+                }
+                AppCompatDelegate.setApplicationLocales(newLocale)
+            },
+            onDismiss = { onLanguageDialogChange(false) },
+        )
+    }
+
     if (showDateFormatDialog) {
         ChoiceDialog(
             title = stringResource(R.string.preference_list_date_format),
@@ -189,7 +244,7 @@ fun SettingsScreen(
                 preferences.setDateFormat(pattern)
                 dateFormat = pattern
             },
-            onDismiss = { showDateFormatDialog = false },
+            onDismiss = { onDateFormatDialogChange(false) },
         )
     }
 }

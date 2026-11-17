@@ -47,7 +47,7 @@ fun BackupScreen(
     val context = LocalContext.current
 
     Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background).statusBarsPadding()) {
-        ScreenHeader(stringResource(R.string.preference_category_backup), listener::onBack)
+        ScreenHeader(stringResource(R.string.menu_item_backup), listener::onBack)
 
         Column(
             Modifier

@@ -17,12 +17,11 @@ import java.util.Objects;
 public class NotificationUtil {
 
     public static String CHANNEL_DEADLINE_ID = "channel_deadline";
-    public static String CHANNEL_DEADLINE_NAME = "Piggy bank deadline";
     public static int CHANNEL_DEADLINE_IMPORTANCE = NotificationManager.IMPORTANCE_HIGH;
 
     public static void createChannels(Context context) {
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        NotificationChannel deadlineChannel = new NotificationChannel(CHANNEL_DEADLINE_ID, CHANNEL_DEADLINE_NAME, CHANNEL_DEADLINE_IMPORTANCE);
+        NotificationChannel deadlineChannel = new NotificationChannel(CHANNEL_DEADLINE_ID, context.getString(R.string.notification_channel_deadline_name), CHANNEL_DEADLINE_IMPORTANCE);
         notificationManager.createNotificationChannel(deadlineChannel);
     }
 

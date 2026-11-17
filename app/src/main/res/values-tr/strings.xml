@@ -1,0 +1,163 @@
+<resources>
+
+<string name="toolbar_main">Piggsy</string>
+    <string name="empty_indicator_main">Henüz kumbara yok</string>
+
+<string name="toolbar_create">Yeni kumbara</string>
+    <string name="toolbar_edit">Kumbarayı düzenle</string>
+    <string name="radio_button_deposit">Para yatır</string>
+    <string name="radio_button_withdraw">Para çek</string>
+    <string name="field_saving_name">Başlık</string>
+    <string name="field_saving_current_saving">Bakiye</string>
+    <string name="field_transaction_amount">Tutar</string>
+    <string name="field_saving_goal">Hedef</string>
+    <string name="field_saving_description">Açıklama (isteğe bağlı)</string>
+    <string name="field_saving_deadline">Son tarih (isteğe bağlı)</string>
+    <string name="field_saving_archive_when_completed">Tamamlanınca arşivle</string>
+    <string name="field_saving_archive_when_completed_summary">Hedefe ulaşıldığında bu kumbarayı otomatik olarak arşive taşı</string>
+    <string name="field_transaction_notes">Not (isteğe bağlı)</string>
+
+<string name="toolbar_archive">Arşiv</string>
+    <string name="empty_indicator_archive">Arşivlenmiş kumbara yok</string>
+
+<string name="toolbar_history">Geçmiş</string>
+    <string name="dialog_delete_transaction_title">İşlemi sil</string>
+    <string name="dialog_delete_transaction_message">Bu işlem silinsin mi? Bu geri alınamaz.</string>
+    <string name="dialog_edit_transaction_title">İşlemi düzenle</string>
+
+<string name="toolbar_settings">Ayarlar</string>
+    <string name="preference_category_appearance">Görünüm</string>
+    <string name="preference_list_theme">Tema</string>
+    <string name="preference_theme_system">Sistem</string>
+    <string name="preference_theme_light">Açık</string>
+    <string name="preference_theme_dark">Koyu</string>
+    <string name="preference_switch_dynamic_colors_title">Dinamik renkler</string>
+    <string name="preference_switch_dynamic_colors_summary">Uygulama temasını duvar kağıdı renklerine uydur</string>
+    <string name="preference_category_savings">Genel</string>
+    <string name="preference_list_currency">Para birimi</string>
+    <string name="preference_list_date_format">Tarih biçimi</string>
+    <string name="preference_category_security">Güvenlik</string>
+    <string name="preference_switch_screen_privacy_title">Ekran gizliliği</string>
+    <string name="preference_switch_screen_privacy_summary">Son uygulamalarda içeriği gizle ve ekran görüntülerini engelle</string>
+    <string name="preference_switch_biometric_title">Biyometrik kilit</string>
+    <string name="preference_switch_biometric_summary">Uygulamayı açmak için parmak izi veya ekran kilidi iste</string>
+    <string name="biometric_prompt_title">Piggsy\'nin kilidini aç</string>
+    <string name="biometric_prompt_subtitle">Uygulamaya erişmek için onayla</string>
+    <string name="biometric_prompt_use_screen_lock">Ekran kilidini kullan</string>
+    <string name="biometric_toast_unavailable">Bu cihazda parmak izi veya ekran kilidi ayarlanmamış</string>
+
+<string name="menu_item_backup">Yedekleme</string>
+    <string name="preference_import_title">İçe aktar</string>
+    <string name="preference_export_title">Dışa aktar</string>
+    <string name="backup_frequency">Otomatik yedekleme sıklığı</string>
+    <string name="backup_frequency_disabled">Kapalı</string>
+    <string name="backup_frequency_daily">Her gün</string>
+    <string name="backup_frequency_every_2_days">2 günde bir</string>
+    <string name="backup_frequency_every_3_days">3 günde bir</string>
+    <string name="backup_frequency_weekly">Haftalık</string>
+    <string name="backup_frequency_every_2_weeks">2 haftada bir</string>
+    <string name="backup_frequency_monthly">Aylık</string>
+    <string name="backup_retention_count">Saklanacak yedek sayısı</string>
+    <string name="backup_retention_all">Tümü</string>
+    <string name="backup_location">Yedekleme konumu</string>
+    <string name="backup_location_not_set">Ayarlanmadı</string>
+    <string name="select_backup_location_first">Önce yedekleme konumunu seç</string>
+    <string name="manual_backup">Manuel yedekleme</string>
+    <string name="import_data_summary">Verileri bir dosyadan geri yükle</string>
+    <string name="warning">Uyarı</string>
+    <string name="import_warning_desc">Bu işlem mevcut TÜM verileri silip içe aktarılan yedekle değiştirecek. Bu geri alınamaz. Devam edilsin mi?</string>
+    <string name="cannot_open_file">Dosya açılamıyor</string>
+    <string name="backup_encryption_title">Yedekleri şifrele</string>
+    <string name="backup_encryption_summary">Dışa aktarılan verileri parolayla koru</string>
+    <string name="backup_encrypted_file_title">Şifreli yedek</string>
+    <string name="backup_password_hint">Yedek parolası</string>
+    <string name="backup_password_confirm_hint">Parolayı onayla</string>
+    <string name="backup_encryption_enable_title">Yedek parolası belirle</string>
+    <string name="backup_encryption_enable_message">Güvenli sakla: parola olmadan şifreli yedekler geri yüklenemez.</string>
+    <string name="backup_encryption_disable_title">Şifrelemeyi kapat</string>
+    <string name="backup_encryption_disable_message">Sonraki yedekler şifresiz kaydedilecek. Mevcut şifreli dosyalar için parola yine gerekir.</string>
+    <string name="backup_password_mismatch">Parolalar eşleşmiyor</string>
+    <string name="backup_password_empty">Parola boş olamaz</string>
+    <string name="backup_password_wrong">Yanlış parola</string>
+    <string name="backup_encryption_failed">Şifreleme başarısız</string>
+    <string name="backup_encrypted_snackbar">Yedek şifreleme açıldı</string>
+    <string name="backup_encryption_disabled_snackbar">Yedek şifreleme kapatıldı</string>
+    <string name="set">Belirle</string>
+    <string name="backup_encryption_disable_button">Kapat</string>
+    <string name="backup_password_too_short">En az %1$d karakter kullan</string>
+    <string name="backup_file_too_large">Yedek dosyası içe aktarmak için çok büyük</string>
+
+<string name="toolbar_about">Hakkında</string>
+    <string name="link_app_author">https://github.com/nvllz</string>
+    <string name="link_app_og_creator">https://github.com/mowtiie</string>
+    <string name="preference_app_version">Sürüm</string>
+    <string name="preference_app_license">Lisans</string>
+    <string name="preference_app_source_code_title">Kaynak kod</string>
+    <string name="preference_app_source_code_summary">Projeyi GitHub\'da keşfet</string>
+    <string name="preference_app_author">Yazar</string>
+    <string name="preference_app_og_creator">Orijinal yapımcı</string>
+    <string name="app_easter_egg">Bunu daha önce de yapmıştın, değil mi?</string>
+
+<string name="menu_item_overflow">Daha fazla seçenek</string>
+    <string name="menu_item_sort">Sırala</string>
+    <string name="menu_item_sort_name">Başlık</string>
+    <string name="menu_item_sort_current_saving">Bakiye</string>
+    <string name="menu_item_sort_goal">Hedef</string>
+    <string name="menu_item_sort_deadline">Son tarih</string>
+    <string name="menu_item_sort_creation">Oluşturma</string>
+    <string name="menu_item_sort_ascending">Artan</string>
+    <string name="menu_item_sort_descending">Azalan</string>
+
+<string name="dialog_title_request_alarm_permission">Gerekli izin</string>
+    <string name="dialog_message_request_alarm_permission">Son tarih hatırlatmaları almak için bildirimlere izin ver</string>
+    <string name="dialog_title_delete_saving">Kumbarayı sil</string>
+    <string name="dialog_message_delete_saving">Bu kumbara silinsin mi? Bu geri alınamaz.</string>
+    <string name="dialog_title_create_transaction">Yeni işlem</string>
+
+<string name="delete">Sil</string>
+    <string name="edit">Düzenle</string>
+    <string name="created_on">Oluşturulma: %s</string>
+    <string name="archived_on">Arşivlenme: %s</string>
+    <string name="reached_on">Ulaşıldı: %s</string>
+    <string name="deadline_on">Son tarih: %s</string>
+    <string name="dialog_select_deadline_date">Son tarih için tarih seç</string>
+    <string name="dialog_select_deadline_time">Son tarih için saat seç</string>
+    <string name="dialog_select_transaction_date">İşlem tarihini seç</string>
+    <string name="dialog_select_transaction_time">İşlem saatini seç</string>
+    <string name="cancel">İptal</string>
+    <string name="save">Kaydet</string>
+    <string name="undo">Geri al</string>
+    <string name="grant">İzin ver</string>
+    <string name="add">Ekle</string>
+
+    <plurals name="transaction_count">
+        <item quantity="one">%d işlem</item>
+        <item quantity="other">%d işlem</item>
+    </plurals>
+
+<string name="desc_add">İşlem ekle</string>
+    <string name="desc_previous_month">Önceki ay</string>
+    <string name="desc_note">Not</string>
+    <string name="desc_unarchive">Arşivden çıkar</string>
+
+<string name="toast_notification_permission_denied">Bildirim izni reddedildi</string>
+    <string name="snackbar_export_successful">Dışa aktarma başarılı</string>
+    <string name="snackbar_import_successful">İçe aktarma başarılı</string>
+    <string name="snackbar_piggy_bank_archived">Kumbara arşivlendi</string>
+    <string name="snackbar_piggy_bank_unarchived">Kumbara geri yüklendi</string>
+    <string name="snackbar_piggy_bank_deleted">Kumbara silindi</string>
+    <string name="snack_bar_permission_notifications">Son tarih hatırlatmaları almak için bildirimlere izin ver</string>
+    <string name="transaction_deleted">İşlem silindi</string>
+    <string name="transaction_updated">İşlem güncellendi</string>
+    <string name="error_deleting_transaction">İşlem silinemedi</string>
+    <string name="error_restoring_transaction">İşlem geri yüklenemedi</string>
+    <string name="error_updating_transaction">İşlem güncellenemedi</string>
+
+<string name="field_error_required">Bu alan zorunlu</string>
+    <string name="error_amount_positive">Tutar pozitif olmalı</string>
+    <string name="error_invalid_amount">Geçersiz tutar biçimi</string>
+
+<string name="notification_channel_deadline_name">Kumbara son tarihi</string>
+<string name="deadline_notification_title">Hedef son tarihi</string>
+    <string name="deadline_notification_content">“%1$s” için son tarih geldi</string>
+</resources>

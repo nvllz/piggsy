@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 <string-array name="backup_frequency_entries">
-        <item>Disabled</item>
-        <item>Daily</item>
-        <item>Every 2 days</item>
-        <item>Every 3 days</item>
-        <item>Weekly</item>
-        <item>Every 2 weeks</item>
-        <item>Monthly</item>
+        <item>@string/backup_frequency_disabled</item>
+        <item>@string/backup_frequency_daily</item>
+        <item>@string/backup_frequency_every_2_days</item>
+        <item>@string/backup_frequency_every_3_days</item>
+        <item>@string/backup_frequency_weekly</item>
+        <item>@string/backup_frequency_every_2_weeks</item>
+        <item>@string/backup_frequency_monthly</item>
     </string-array>
 
     <string-array name="backup_frequency_values">
@@ -18,5 +18,31 @@
         <item>7</item>
         <item>14</item>
         <item>30</item>
+    </string-array>
+
+    <string-array name="language_names">
+        <item>@string/preference_system</item>
+        <item>Deutsch</item>
+        <item>English</item>
+        <item>Español</item>
+        <item>Français</item>
+        <item>Italiano</item>
+        <item>Polski</item>
+        <item>Português (Brasil)</item>
+        <item>Русский</item>
+        <item>Türkçe</item>
+    </string-array>
+
+    <string-array name="language_values">
+        <item>system</item>
+        <item>de</item>
+        <item>en</item>
+        <item>es</item>
+        <item>fr</item>
+        <item>it</item>
+        <item>pl</item>
+        <item>pt-BR</item>
+        <item>ru</item>
+        <item>tr</item>
     </string-array>
 </resources>

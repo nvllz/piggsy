@@ -1,0 +1,165 @@
+<resources>
+
+<string name="toolbar_main">Piggsy</string>
+    <string name="empty_indicator_main">Копилок пока нет</string>
+
+<string name="toolbar_create">Новая копилка</string>
+    <string name="toolbar_edit">Изменить копилку</string>
+    <string name="radio_button_deposit">Пополнить</string>
+    <string name="radio_button_withdraw">Снять</string>
+    <string name="field_saving_name">Название</string>
+    <string name="field_saving_current_saving">Баланс</string>
+    <string name="field_transaction_amount">Сумма</string>
+    <string name="field_saving_goal">Цель</string>
+    <string name="field_saving_description">Описание (необязательно)</string>
+    <string name="field_saving_deadline">Срок (необязательно)</string>
+    <string name="field_saving_archive_when_completed">Архивировать при достижении</string>
+    <string name="field_saving_archive_when_completed_summary">Автоматически перемещать копилку в архив, когда цель достигнута</string>
+    <string name="field_transaction_notes">Заметка (необязательно)</string>
+
+<string name="toolbar_archive">Архив</string>
+    <string name="empty_indicator_archive">Нет архивных копилок</string>
+
+<string name="toolbar_history">История</string>
+    <string name="dialog_delete_transaction_title">Удалить транзакцию</string>
+    <string name="dialog_delete_transaction_message">Удалить эту транзакцию? Это нельзя отменить.</string>
+    <string name="dialog_edit_transaction_title">Изменить транзакцию</string>
+
+<string name="toolbar_settings">Настройки</string>
+    <string name="preference_category_appearance">Оформление</string>
+    <string name="preference_list_theme">Тема</string>
+    <string name="preference_theme_system">Системная</string>
+    <string name="preference_theme_light">Светлая</string>
+    <string name="preference_theme_dark">Тёмная</string>
+    <string name="preference_switch_dynamic_colors_title">Динамические цвета</string>
+    <string name="preference_switch_dynamic_colors_summary">Подстраивать тему приложения под цвета обоев</string>
+    <string name="preference_category_savings">Общие</string>
+    <string name="preference_list_currency">Валюта</string>
+    <string name="preference_list_date_format">Формат даты</string>
+    <string name="preference_category_security">Безопасность</string>
+    <string name="preference_switch_screen_privacy_title">Защита экрана</string>
+    <string name="preference_switch_screen_privacy_summary">Скрывать содержимое в списке недавних приложений и блокировать скриншоты</string>
+    <string name="preference_switch_biometric_title">Биометрическая защита</string>
+    <string name="preference_switch_biometric_summary">Требовать отпечаток пальца или блокировку экрана для входа в приложение</string>
+    <string name="biometric_prompt_title">Разблокировать Piggsy</string>
+    <string name="biometric_prompt_subtitle">Подтверди, чтобы войти в приложение</string>
+    <string name="biometric_prompt_use_screen_lock">Использовать блокировку экрана</string>
+    <string name="biometric_toast_unavailable">На устройстве не настроены отпечаток пальца или блокировка экрана</string>
+
+<string name="menu_item_backup">Резервные копии</string>
+    <string name="preference_import_title">Импорт</string>
+    <string name="preference_export_title">Экспорт</string>
+    <string name="backup_frequency">Частота автоматических копий</string>
+    <string name="backup_frequency_disabled">Отключено</string>
+    <string name="backup_frequency_daily">Каждый день</string>
+    <string name="backup_frequency_every_2_days">Каждые 2 дня</string>
+    <string name="backup_frequency_every_3_days">Каждые 3 дня</string>
+    <string name="backup_frequency_weekly">Каждую неделю</string>
+    <string name="backup_frequency_every_2_weeks">Каждые 2 недели</string>
+    <string name="backup_frequency_monthly">Каждый месяц</string>
+    <string name="backup_retention_count">Сколько копий хранить</string>
+    <string name="backup_retention_all">Все</string>
+    <string name="backup_location">Расположение копий</string>
+    <string name="backup_location_not_set">Не выбрано</string>
+    <string name="select_backup_location_first">Сначала выбери расположение копий</string>
+    <string name="manual_backup">Копия вручную</string>
+    <string name="import_data_summary">Восстановить данные из файла</string>
+    <string name="warning">Внимание</string>
+    <string name="import_warning_desc">ВСЕ текущие данные будут удалены и заменены импортированной копией. Это нельзя отменить. Продолжить?</string>
+    <string name="cannot_open_file">Не удаётся открыть файл</string>
+    <string name="backup_encryption_title">Шифровать копии</string>
+    <string name="backup_encryption_summary">Защитить экспортируемые данные паролем</string>
+    <string name="backup_encrypted_file_title">Зашифрованная копия</string>
+    <string name="backup_password_hint">Пароль копии</string>
+    <string name="backup_password_confirm_hint">Подтверди пароль</string>
+    <string name="backup_encryption_enable_title">Задать пароль для копий</string>
+    <string name="backup_encryption_enable_message">Храни его надёжно: без пароля зашифрованные копии не восстановить.</string>
+    <string name="backup_encryption_disable_title">Отключить шифрование</string>
+    <string name="backup_encryption_disable_message">Новые копии будут сохраняться без шифрования. Для уже зашифрованных файлов пароль по-прежнему нужен.</string>
+    <string name="backup_password_mismatch">Пароли не совпадают</string>
+    <string name="backup_password_empty">Пароль не может быть пустым</string>
+    <string name="backup_password_wrong">Неверный пароль</string>
+    <string name="backup_encryption_failed">Не удалось зашифровать</string>
+    <string name="backup_encrypted_snackbar">Шифрование копий включено</string>
+    <string name="backup_encryption_disabled_snackbar">Шифрование копий отключено</string>
+    <string name="set">Задать</string>
+    <string name="backup_encryption_disable_button">Отключить</string>
+    <string name="backup_password_too_short">Минимум символов: %1$d</string>
+    <string name="backup_file_too_large">Файл копии слишком большой для импорта</string>
+
+<string name="toolbar_about">О приложении</string>
+    <string name="link_app_author">https://github.com/nvllz</string>
+    <string name="link_app_og_creator">https://github.com/mowtiie</string>
+    <string name="preference_app_version">Версия</string>
+    <string name="preference_app_license">Лицензия</string>
+    <string name="preference_app_source_code_title">Исходный код</string>
+    <string name="preference_app_source_code_summary">Загляни в проект на GitHub</string>
+    <string name="preference_app_author">Автор</string>
+    <string name="preference_app_og_creator">Создатель оригинала</string>
+    <string name="app_easter_egg">Тебе не впервой, да?</string>
+
+<string name="menu_item_overflow">Ещё</string>
+    <string name="menu_item_sort">Сортировка</string>
+    <string name="menu_item_sort_name">Название</string>
+    <string name="menu_item_sort_current_saving">Баланс</string>
+    <string name="menu_item_sort_goal">Цель</string>
+    <string name="menu_item_sort_deadline">Срок</string>
+    <string name="menu_item_sort_creation">Создание</string>
+    <string name="menu_item_sort_ascending">По возрастанию</string>
+    <string name="menu_item_sort_descending">По убыванию</string>
+
+<string name="dialog_title_request_alarm_permission">Нужно разрешение</string>
+    <string name="dialog_message_request_alarm_permission">Разреши уведомления, чтобы получать напоминания о сроках</string>
+    <string name="dialog_title_delete_saving">Удалить копилку</string>
+    <string name="dialog_message_delete_saving">Удалить эту копилку? Это нельзя отменить.</string>
+    <string name="dialog_title_create_transaction">Новая транзакция</string>
+
+<string name="delete">Удалить</string>
+    <string name="edit">Изменить</string>
+    <string name="created_on">Создана: %s</string>
+    <string name="archived_on">Заархивирована: %s</string>
+    <string name="reached_on">Цель достигнута: %s</string>
+    <string name="deadline_on">Срок: %s</string>
+    <string name="dialog_select_deadline_date">Выбери дату срока</string>
+    <string name="dialog_select_deadline_time">Выбери время срока</string>
+    <string name="dialog_select_transaction_date">Выбери дату транзакции</string>
+    <string name="dialog_select_transaction_time">Выбери время транзакции</string>
+    <string name="cancel">Отмена</string>
+    <string name="save">Сохранить</string>
+    <string name="undo">Отменить</string>
+    <string name="grant">Разрешить</string>
+    <string name="add">Добавить</string>
+
+    <plurals name="transaction_count">
+        <item quantity="one">%d транзакция</item>
+        <item quantity="few">%d транзакции</item>
+        <item quantity="many">%d транзакций</item>
+        <item quantity="other">%d транзакции</item>
+    </plurals>
+
+<string name="desc_add">Добавить транзакцию</string>
+    <string name="desc_previous_month">Предыдущий месяц</string>
+    <string name="desc_note">Заметка</string>
+    <string name="desc_unarchive">Вернуть из архива</string>
+
+<string name="toast_notification_permission_denied">Разрешение на уведомления отклонено</string>
+    <string name="snackbar_export_successful">Экспорт выполнен</string>
+    <string name="snackbar_import_successful">Импорт выполнен</string>
+    <string name="snackbar_piggy_bank_archived">Копилка заархивирована</string>
+    <string name="snackbar_piggy_bank_unarchived">Копилка восстановлена</string>
+    <string name="snackbar_piggy_bank_deleted">Копилка удалена</string>
+    <string name="snack_bar_permission_notifications">Разреши уведомления, чтобы получать напоминания о сроках</string>
+    <string name="transaction_deleted">Транзакция удалена</string>
+    <string name="transaction_updated">Транзакция обновлена</string>
+    <string name="error_deleting_transaction">Не удалось удалить транзакцию</string>
+    <string name="error_restoring_transaction">Не удалось восстановить транзакцию</string>
+    <string name="error_updating_transaction">Не удалось обновить транзакцию</string>
+
+<string name="field_error_required">Обязательное поле</string>
+    <string name="error_amount_positive">Сумма должна быть положительной</string>
+    <string name="error_invalid_amount">Неверный формат суммы</string>
+
+<string name="notification_channel_deadline_name">Срок копилки</string>
+<string name="deadline_notification_title">Срок цели</string>
+    <string name="deadline_notification_content">Наступил срок для «%1$s»</string>
+</resources>

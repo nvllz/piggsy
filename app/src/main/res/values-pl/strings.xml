@@ -1,0 +1,165 @@
+<resources>
+
+<string name="toolbar_main">Piggsy</string>
+    <string name="empty_indicator_main">Nie ma jeszcze skarbonek</string>
+
+<string name="toolbar_create">Nowa skarbonka</string>
+    <string name="toolbar_edit">Edytuj skarbonkę</string>
+    <string name="radio_button_deposit">Wpłać</string>
+    <string name="radio_button_withdraw">Wypłać</string>
+    <string name="field_saving_name">Tytuł</string>
+    <string name="field_saving_current_saving">Saldo</string>
+    <string name="field_transaction_amount">Kwota</string>
+    <string name="field_saving_goal">Cel</string>
+    <string name="field_saving_description">Opis (opcjonalnie)</string>
+    <string name="field_saving_deadline">Termin (opcjonalnie)</string>
+    <string name="field_saving_archive_when_completed">Archiwizuj po ukończeniu</string>
+    <string name="field_saving_archive_when_completed_summary">Automatycznie przenoś skarbonkę do archiwum po osiągnięciu celu</string>
+    <string name="field_transaction_notes">Notatka (opcjonalnie)</string>
+
+<string name="toolbar_archive">Archiwum</string>
+    <string name="empty_indicator_archive">Brak zarchiwizowanych skarbonek</string>
+
+<string name="toolbar_history">Historia</string>
+    <string name="dialog_delete_transaction_title">Usuń transakcję</string>
+    <string name="dialog_delete_transaction_message">Usunąć tę transakcję? Nie można tego cofnąć.</string>
+    <string name="dialog_edit_transaction_title">Edytuj transakcję</string>
+
+<string name="toolbar_settings">Ustawienia</string>
+    <string name="preference_category_appearance">Wygląd</string>
+    <string name="preference_list_theme">Motyw</string>
+    <string name="preference_theme_system">Systemowy</string>
+    <string name="preference_theme_light">Jasny</string>
+    <string name="preference_theme_dark">Ciemny</string>
+    <string name="preference_switch_dynamic_colors_title">Kolory dynamiczne</string>
+    <string name="preference_switch_dynamic_colors_summary">Dopasuj motyw aplikacji do kolorów tapety</string>
+    <string name="preference_category_savings">Ogólne</string>
+    <string name="preference_list_currency">Waluta</string>
+    <string name="preference_list_date_format">Format daty</string>
+    <string name="preference_category_security">Bezpieczeństwo</string>
+    <string name="preference_switch_screen_privacy_title">Prywatność ekranu</string>
+    <string name="preference_switch_screen_privacy_summary">Ukryj zawartość w ostatnich aplikacjach i zablokuj zrzuty ekranu</string>
+    <string name="preference_switch_biometric_title">Blokada biometryczna</string>
+    <string name="preference_switch_biometric_summary">Wymagaj odcisku palca lub blokady ekranu, aby otworzyć aplikację</string>
+    <string name="biometric_prompt_title">Odblokuj Piggsy</string>
+    <string name="biometric_prompt_subtitle">Potwierdź, aby uzyskać dostęp do aplikacji</string>
+    <string name="biometric_prompt_use_screen_lock">Użyj blokady ekranu</string>
+    <string name="biometric_toast_unavailable">Na tym urządzeniu nie skonfigurowano odcisku palca ani blokady ekranu</string>
+
+<string name="menu_item_backup">Kopia zapasowa</string>
+    <string name="preference_import_title">Import</string>
+    <string name="preference_export_title">Eksport</string>
+    <string name="backup_frequency">Częstotliwość automatycznych kopii</string>
+    <string name="backup_frequency_disabled">Wyłączona</string>
+    <string name="backup_frequency_daily">Codziennie</string>
+    <string name="backup_frequency_every_2_days">Co 2 dni</string>
+    <string name="backup_frequency_every_3_days">Co 3 dni</string>
+    <string name="backup_frequency_weekly">Co tydzień</string>
+    <string name="backup_frequency_every_2_weeks">Co 2 tygodnie</string>
+    <string name="backup_frequency_monthly">Co miesiąc</string>
+    <string name="backup_retention_count">Liczba kopii do zachowania</string>
+    <string name="backup_retention_all">Wszystkie</string>
+    <string name="backup_location">Lokalizacja kopii</string>
+    <string name="backup_location_not_set">Nie ustawiono</string>
+    <string name="select_backup_location_first">Najpierw wybierz lokalizację kopii</string>
+    <string name="manual_backup">Kopia ręczna</string>
+    <string name="import_data_summary">Przywróć dane z pliku</string>
+    <string name="warning">Uwaga</string>
+    <string name="import_warning_desc">To usunie WSZYSTKIE obecne dane i zastąpi je zaimportowaną kopią. Tego nie można cofnąć. Kontynuować?</string>
+    <string name="cannot_open_file">Nie można otworzyć pliku</string>
+    <string name="backup_encryption_title">Szyfruj kopie</string>
+    <string name="backup_encryption_summary">Chroń eksportowane dane hasłem</string>
+    <string name="backup_encrypted_file_title">Zaszyfrowana kopia</string>
+    <string name="backup_password_hint">Hasło kopii</string>
+    <string name="backup_password_confirm_hint">Potwierdź hasło</string>
+    <string name="backup_encryption_enable_title">Ustaw hasło kopii</string>
+    <string name="backup_encryption_enable_message">Nie zgub go: bez hasła nie da się przywrócić zaszyfrowanych kopii.</string>
+    <string name="backup_encryption_disable_title">Wyłącz szyfrowanie</string>
+    <string name="backup_encryption_disable_message">Przyszłe kopie będą zapisywane bez szyfrowania. Istniejące zaszyfrowane pliki nadal wymagają hasła.</string>
+    <string name="backup_password_mismatch">Hasła nie pasują do siebie</string>
+    <string name="backup_password_empty">Hasło nie może być puste</string>
+    <string name="backup_password_wrong">Nieprawidłowe hasło</string>
+    <string name="backup_encryption_failed">Szyfrowanie nie powiodło się</string>
+    <string name="backup_encrypted_snackbar">Szyfrowanie kopii włączone</string>
+    <string name="backup_encryption_disabled_snackbar">Szyfrowanie kopii wyłączone</string>
+    <string name="set">Ustaw</string>
+    <string name="backup_encryption_disable_button">Wyłącz</string>
+    <string name="backup_password_too_short">Minimalna liczba znaków: %1$d</string>
+    <string name="backup_file_too_large">Plik kopii jest zbyt duży do importu</string>
+
+<string name="toolbar_about">O aplikacji</string>
+    <string name="link_app_author">https://github.com/nvllz</string>
+    <string name="link_app_og_creator">https://github.com/mowtiie</string>
+    <string name="preference_app_version">Wersja</string>
+    <string name="preference_app_license">Licencja</string>
+    <string name="preference_app_source_code_title">Kod źródłowy</string>
+    <string name="preference_app_source_code_summary">Zobacz projekt na GitHubie</string>
+    <string name="preference_app_author">Autor</string>
+    <string name="preference_app_og_creator">Twórca oryginału</string>
+    <string name="app_easter_egg">To nie pierwszy raz, prawda?</string>
+
+<string name="menu_item_overflow">Więcej opcji</string>
+    <string name="menu_item_sort">Sortuj</string>
+    <string name="menu_item_sort_name">Tytuł</string>
+    <string name="menu_item_sort_current_saving">Saldo</string>
+    <string name="menu_item_sort_goal">Cel</string>
+    <string name="menu_item_sort_deadline">Termin</string>
+    <string name="menu_item_sort_creation">Utworzenie</string>
+    <string name="menu_item_sort_ascending">Rosnąco</string>
+    <string name="menu_item_sort_descending">Malejąco</string>
+
+<string name="dialog_title_request_alarm_permission">Wymagane uprawnienie</string>
+    <string name="dialog_message_request_alarm_permission">Zezwól na powiadomienia, aby otrzymywać przypomnienia o terminach</string>
+    <string name="dialog_title_delete_saving">Usuń skarbonkę</string>
+    <string name="dialog_message_delete_saving">Usunąć tę skarbonkę? Nie można tego cofnąć.</string>
+    <string name="dialog_title_create_transaction">Nowa transakcja</string>
+
+<string name="delete">Usuń</string>
+    <string name="edit">Edytuj</string>
+    <string name="created_on">Utworzono: %s</string>
+    <string name="archived_on">Zarchiwizowano: %s</string>
+    <string name="reached_on">Osiągnięto: %s</string>
+    <string name="deadline_on">Termin: %s</string>
+    <string name="dialog_select_deadline_date">Wybierz datę terminu</string>
+    <string name="dialog_select_deadline_time">Wybierz godzinę terminu</string>
+    <string name="dialog_select_transaction_date">Wybierz datę transakcji</string>
+    <string name="dialog_select_transaction_time">Wybierz godzinę transakcji</string>
+    <string name="cancel">Anuluj</string>
+    <string name="save">Zapisz</string>
+    <string name="undo">Cofnij</string>
+    <string name="grant">Zezwól</string>
+    <string name="add">Dodaj</string>
+
+    <plurals name="transaction_count">
+        <item quantity="one">%d transakcja</item>
+        <item quantity="few">%d transakcje</item>
+        <item quantity="many">%d transakcji</item>
+        <item quantity="other">%d transakcji</item>
+    </plurals>
+
+<string name="desc_add">Dodaj transakcję</string>
+    <string name="desc_previous_month">Poprzedni miesiąc</string>
+    <string name="desc_note">Notatka</string>
+    <string name="desc_unarchive">Przywróć z archiwum</string>
+
+<string name="toast_notification_permission_denied">Odmówiono uprawnienia do powiadomień</string>
+    <string name="snackbar_export_successful">Eksport zakończony</string>
+    <string name="snackbar_import_successful">Import zakończony</string>
+    <string name="snackbar_piggy_bank_archived">Skarbonka zarchiwizowana</string>
+    <string name="snackbar_piggy_bank_unarchived">Skarbonka przywrócona</string>
+    <string name="snackbar_piggy_bank_deleted">Skarbonka usunięta</string>
+    <string name="snack_bar_permission_notifications">Zezwól na powiadomienia, aby otrzymywać przypomnienia o terminach</string>
+    <string name="transaction_deleted">Transakcja usunięta</string>
+    <string name="transaction_updated">Transakcja zaktualizowana</string>
+    <string name="error_deleting_transaction">Nie udało się usunąć transakcji</string>
+    <string name="error_restoring_transaction">Nie udało się przywrócić transakcji</string>
+    <string name="error_updating_transaction">Nie udało się zaktualizować transakcji</string>
+
+<string name="field_error_required">To pole jest wymagane</string>
+    <string name="error_amount_positive">Kwota musi być dodatnia</string>
+    <string name="error_invalid_amount">Nieprawidłowy format kwoty</string>
+
+<string name="notification_channel_deadline_name">Termin skarbonki</string>
+<string name="deadline_notification_title">Termin celu</string>
+    <string name="deadline_notification_content">Nadszedł termin dla „%1$s”</string>
+</resources>

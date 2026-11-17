@@ -1,0 +1,164 @@
+<resources>
+
+<string name="toolbar_main">Piggsy</string>
+    <string name="empty_indicator_main">Nenhum cofrinho ainda</string>
+
+<string name="toolbar_create">Novo cofrinho</string>
+    <string name="toolbar_edit">Editar cofrinho</string>
+    <string name="radio_button_deposit">Depositar</string>
+    <string name="radio_button_withdraw">Sacar</string>
+    <string name="field_saving_name">Título</string>
+    <string name="field_saving_current_saving">Saldo</string>
+    <string name="field_transaction_amount">Valor</string>
+    <string name="field_saving_goal">Meta</string>
+    <string name="field_saving_description">Descrição (opcional)</string>
+    <string name="field_saving_deadline">Prazo (opcional)</string>
+    <string name="field_saving_archive_when_completed">Arquivar ao concluir</string>
+    <string name="field_saving_archive_when_completed_summary">Mover este cofrinho para o arquivo automaticamente ao atingir a meta</string>
+    <string name="field_transaction_notes">Nota (opcional)</string>
+
+<string name="toolbar_archive">Arquivo</string>
+    <string name="empty_indicator_archive">Nenhum cofrinho arquivado</string>
+
+<string name="toolbar_history">Histórico</string>
+    <string name="dialog_delete_transaction_title">Excluir transação</string>
+    <string name="dialog_delete_transaction_message">Excluir esta transação? Isso não pode ser desfeito.</string>
+    <string name="dialog_edit_transaction_title">Editar transação</string>
+
+<string name="toolbar_settings">Configurações</string>
+    <string name="preference_category_appearance">Aparência</string>
+    <string name="preference_list_theme">Tema</string>
+    <string name="preference_theme_system">Sistema</string>
+    <string name="preference_theme_light">Claro</string>
+    <string name="preference_theme_dark">Escuro</string>
+    <string name="preference_switch_dynamic_colors_title">Cores dinâmicas</string>
+    <string name="preference_switch_dynamic_colors_summary">Combinar o tema do app com as cores do seu papel de parede</string>
+    <string name="preference_category_savings">Geral</string>
+    <string name="preference_list_currency">Moeda</string>
+    <string name="preference_list_date_format">Formato da data</string>
+    <string name="preference_category_security">Segurança</string>
+    <string name="preference_switch_screen_privacy_title">Privacidade da tela</string>
+    <string name="preference_switch_screen_privacy_summary">Ocultar o conteúdo do app nos recentes e bloquear capturas de tela</string>
+    <string name="preference_switch_biometric_title">Bloqueio biométrico</string>
+    <string name="preference_switch_biometric_summary">Exigir impressão digital ou bloqueio de tela para abrir o app</string>
+    <string name="biometric_prompt_title">Desbloquear Piggsy</string>
+    <string name="biometric_prompt_subtitle">Confirme para acessar o app</string>
+    <string name="biometric_prompt_use_screen_lock">Usar bloqueio de tela</string>
+    <string name="biometric_toast_unavailable">Nenhuma impressão digital ou bloqueio de tela configurado neste dispositivo</string>
+
+<string name="menu_item_backup">Backup</string>
+    <string name="preference_import_title">Importar</string>
+    <string name="preference_export_title">Exportar</string>
+    <string name="backup_frequency">Frequência do backup automático</string>
+    <string name="backup_frequency_disabled">Desativado</string>
+    <string name="backup_frequency_daily">Diário</string>
+    <string name="backup_frequency_every_2_days">A cada 2 dias</string>
+    <string name="backup_frequency_every_3_days">A cada 3 dias</string>
+    <string name="backup_frequency_weekly">Semanal</string>
+    <string name="backup_frequency_every_2_weeks">A cada 2 semanas</string>
+    <string name="backup_frequency_monthly">Mensal</string>
+    <string name="backup_retention_count">Quantidade de backups a manter</string>
+    <string name="backup_retention_all">Todos</string>
+    <string name="backup_location">Local do backup</string>
+    <string name="backup_location_not_set">Não definido</string>
+    <string name="select_backup_location_first">Selecione o local do backup primeiro</string>
+    <string name="manual_backup">Backup manual</string>
+    <string name="import_data_summary">Restaurar dados de um arquivo</string>
+    <string name="warning">Aviso</string>
+    <string name="import_warning_desc">Isso vai apagar TODOS os dados atuais e substituí-los pelo backup importado. Essa ação não pode ser desfeita. Continuar?</string>
+    <string name="cannot_open_file">Não foi possível abrir o arquivo</string>
+    <string name="backup_encryption_title">Criptografar backups</string>
+    <string name="backup_encryption_summary">Proteger os dados exportados com uma senha</string>
+    <string name="backup_encrypted_file_title">Backup criptografado</string>
+    <string name="backup_password_hint">Senha do backup</string>
+    <string name="backup_password_confirm_hint">Confirmar senha</string>
+    <string name="backup_encryption_enable_title">Definir senha do backup</string>
+    <string name="backup_encryption_enable_message">Guarde bem: sem a senha, não é possível restaurar backups criptografados.</string>
+    <string name="backup_encryption_disable_title">Desativar criptografia</string>
+    <string name="backup_encryption_disable_message">Os próximos backups serão salvos sem criptografia. Arquivos já criptografados ainda exigem a senha.</string>
+    <string name="backup_password_mismatch">As senhas não coincidem</string>
+    <string name="backup_password_empty">A senha não pode ficar vazia</string>
+    <string name="backup_password_wrong">Senha incorreta</string>
+    <string name="backup_encryption_failed">Falha na criptografia</string>
+    <string name="backup_encrypted_snackbar">Criptografia de backup ativada</string>
+    <string name="backup_encryption_disabled_snackbar">Criptografia de backup desativada</string>
+    <string name="set">Definir</string>
+    <string name="backup_encryption_disable_button">Desativar</string>
+    <string name="backup_password_too_short">Use pelo menos %1$d caracteres</string>
+    <string name="backup_file_too_large">O arquivo de backup é grande demais para importar</string>
+
+<string name="toolbar_about">Sobre</string>
+    <string name="link_app_author">https://github.com/nvllz</string>
+    <string name="link_app_og_creator">https://github.com/mowtiie</string>
+    <string name="preference_app_version">Versão</string>
+    <string name="preference_app_license">Licença</string>
+    <string name="preference_app_source_code_title">Código-fonte</string>
+    <string name="preference_app_source_code_summary">Conheça o projeto no GitHub</string>
+    <string name="preference_app_author">Autor</string>
+    <string name="preference_app_og_creator">Criador original</string>
+    <string name="app_easter_egg">Você já fez isso antes, né?</string>
+
+<string name="menu_item_overflow">Mais opções</string>
+    <string name="menu_item_sort">Ordenar</string>
+    <string name="menu_item_sort_name">Título</string>
+    <string name="menu_item_sort_current_saving">Saldo</string>
+    <string name="menu_item_sort_goal">Meta</string>
+    <string name="menu_item_sort_deadline">Prazo</string>
+    <string name="menu_item_sort_creation">Criação</string>
+    <string name="menu_item_sort_ascending">Crescente</string>
+    <string name="menu_item_sort_descending">Decrescente</string>
+
+<string name="dialog_title_request_alarm_permission">Permissão necessária</string>
+    <string name="dialog_message_request_alarm_permission">Permita notificações para receber lembretes de prazo</string>
+    <string name="dialog_title_delete_saving">Excluir cofrinho</string>
+    <string name="dialog_message_delete_saving">Excluir este cofrinho? Isso não pode ser desfeito.</string>
+    <string name="dialog_title_create_transaction">Nova transação</string>
+
+<string name="delete">Excluir</string>
+    <string name="edit">Editar</string>
+    <string name="created_on">Criado em %s</string>
+    <string name="archived_on">Arquivado em %s</string>
+    <string name="reached_on">Meta atingida em %s</string>
+    <string name="deadline_on">Prazo: %s</string>
+    <string name="dialog_select_deadline_date">Selecione a data do prazo</string>
+    <string name="dialog_select_deadline_time">Selecione a hora do prazo</string>
+    <string name="dialog_select_transaction_date">Selecione a data da transação</string>
+    <string name="dialog_select_transaction_time">Selecione a hora da transação</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save">Salvar</string>
+    <string name="undo">Desfazer</string>
+    <string name="grant">Permitir</string>
+    <string name="add">Adicionar</string>
+
+    <plurals name="transaction_count">
+        <item quantity="one">%d transação</item>
+        <item quantity="many">%d de transações</item>
+        <item quantity="other">%d transações</item>
+    </plurals>
+
+<string name="desc_add">Adicionar transação</string>
+    <string name="desc_previous_month">Mês anterior</string>
+    <string name="desc_note">Nota</string>
+    <string name="desc_unarchive">Desarquivar</string>
+
+<string name="toast_notification_permission_denied">Permissão de notificações negada</string>
+    <string name="snackbar_export_successful">Exportado com sucesso</string>
+    <string name="snackbar_import_successful">Importado com sucesso</string>
+    <string name="snackbar_piggy_bank_archived">Cofrinho arquivado</string>
+    <string name="snackbar_piggy_bank_unarchived">Cofrinho restaurado</string>
+    <string name="snackbar_piggy_bank_deleted">Cofrinho excluído</string>
+    <string name="snack_bar_permission_notifications">Permita notificações para receber lembretes de prazo</string>
+    <string name="transaction_deleted">Transação excluída</string>
+    <string name="transaction_updated">Transação atualizada</string>
+    <string name="error_deleting_transaction">Falha ao excluir a transação</string>
+    <string name="error_restoring_transaction">Falha ao restaurar a transação</string>
+    <string name="error_updating_transaction">Falha ao atualizar a transação</string>
+
+<string name="field_error_required">Este campo é obrigatório</string>
+    <string name="error_amount_positive">O valor deve ser positivo</string>
+    <string name="error_invalid_amount">Formato de valor inválido</string>
+
+<string name="notification_channel_deadline_name">Prazo do cofrinho</string>
+<string name="deadline_notification_title">Prazo da meta</string>
+    <string name="deadline_notification_content">Prazo atingido para “%1$s”</string>
+</resources>
