@@ -49,7 +49,8 @@ Whether you're saving for a trip, a new gadget, or building an emergency fund, t
 <div align=center>
   <a href="https://apt.izzysoft.de/packages/com.nvllz.piggsy"><img src="images/badge_izzyondroid.png" width="31%" alt="IzzyOnDroid" /></a>
   <a href="https://f-droid.org/packages/com.nvllz.piggsy/"><img src="images/badge_fdroid.png" width="31%" alt="F-Droid" /></a>
-  <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/{"id":"com.nvllz.piggsy","url":"https://github.com/nvllz/piggsy","author":"nvllz","name":"Piggsy","additionalSettings":"{\"apkFilterRegEx\":\"^Piggsy-[0-9]+\\\\.[0-9]+\\\\.[0-9]+\\\\.apk$\",\"appName\":\"Piggsy\",\"appAuthor\":\"nvllz\",\"about\":\"Piggy banks in your pocket.\"}"}"><img src="images/badge_obtainium.png" alt="Obtainium" width="31%"></a>
+  <a href='https://apps.obtainium.imranr.dev/redirect?r=obtainium://app/{"id":"com.nvllz.piggsy","url":"https://github.com/nvllz/piggsy","author":"nvllz","name":"Piggsy","additionalSettings":"{\"apkFilterRegEx\":\"^Piggsy-.*[.]apk$\",\"appName\":\"Piggsy\",\"appAuthor\":\"nvllz\",\"about\":\"Piggy banks in your pocket.\"}"}'><img src="images/badge_obtainium.png" alt="Obtainium" width="31%"></a>
+SHA-256: <code>9242b92c7df80e474b091d6083b273be4912b4aca87e53dae7ffc8530413876e</code>
 </div>
 
 ## Dependencies
