@@ -14,7 +14,6 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
-
 android {
     namespace = "com.nvllz.piggsy"
     compileSdk = 36
@@ -28,8 +27,8 @@ android {
         applicationId = "com.nvllz.piggsy"
         minSdk = 26
         targetSdk = 36
-        versionCode = 7
-        versionName = "1.12.1"
+        versionCode = 8
+            versionName = "2.0.0"
         manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -44,7 +43,6 @@ android {
             }
         }
     }
-
 
     buildTypes {
         release {
