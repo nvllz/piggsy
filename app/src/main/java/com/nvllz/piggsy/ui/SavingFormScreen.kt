@@ -66,9 +66,9 @@ fun SavingFormScreen(
 ) {
     val context = LocalContext.current
     val dateFormat = remember { PreferenceUtil(context).getDateFormat() }
-    val currencyOptions = remember { Currency.currencies }
+    val currencyOptions = remember { Currency.getSortedCurrencies() }
 
-    var selectedCurrency by remember { mutableStateOf(initial.getCurrency() ?: "") }
+    var selectedCurrency by remember { mutableStateOf((initial.getCurrency() ?: "").trim()) }
     var name by remember { mutableStateOf(initial.getName() ?: "") }
     var current by remember { mutableStateOf("") }
     var goal by remember {
@@ -215,7 +215,7 @@ fun SavingFormScreen(
             SettingGroup(Modifier.padding(bottom = 12.dp)) {
                 SettingRow(
                     title = stringResource(R.string.preference_list_currency),
-                    summary = Currency.getName(selectedCurrency) ?: "",
+                    summary = Currency.getDisplayLabel(selectedCurrency),
                     icon = R.drawable.ic_currency,
                     onClick = { showCurrencyDialog = true },
                 )
@@ -261,7 +261,7 @@ fun SavingFormScreen(
     if (showCurrencyDialog) {
         ChoiceDialog(
             title = stringResource(R.string.preference_list_currency),
-            options = currencyOptions.map { it.CODE to "${it.NAME} (${it.SYMBOL})" },
+            options = currencyOptions.map { it.CODE.trim() to Currency.getDisplayLabel(it.CODE) },
             selected = selectedCurrency,
             onSelect = { selectedCurrency = it },
             onDismiss = { showCurrencyDialog = false },

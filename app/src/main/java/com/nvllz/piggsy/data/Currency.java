@@ -175,14 +175,20 @@ public enum Currency {
         this.SYMBOL = symbol;
     }
 
+    private static String normalizeCode(String code) {
+        return code == null ? "" : code.trim();
+    }
+
     public static boolean isRTLCurrency(String code) {
         String[] rtlCurrencies = {
                 "ILS", "SAR", "AED", "EGP", "IRR", "IQD","JOD",
                 "KWD", "LBP", "OMR", "QAR", "SYP", "YER", "PKR"
         };
 
+        String normalizedCode = normalizeCode(code);
+
         for (String rtlCurrency : rtlCurrencies) {
-            if (rtlCurrency.equals(code)) {
+            if (rtlCurrency.equals(normalizedCode)) {
                 return true;
             }
         }
@@ -190,8 +196,10 @@ public enum Currency {
     }
 
     public static String getName(String code) {
+        String normalizedCode = normalizeCode(code);
+
         for (Currency currency : currencies) {
-            if (currency.CODE.equals(code)) {
+            if (normalizeCode(currency.CODE).equals(normalizedCode)) {
                 return currency.NAME;
             }
         }
@@ -199,12 +207,35 @@ public enum Currency {
     }
 
     public static String getSymbol(String code) {
+        String normalizedCode = normalizeCode(code);
+
         for (Currency currency : currencies) {
-            if (currency.CODE.equals(code)) {
+            if (normalizeCode(currency.CODE).equals(normalizedCode)) {
                 return currency.SYMBOL;
             }
         }
         return null;
+    }
+
+    public static String getDisplayLabel(String code) {
+        String normalizedCode = normalizeCode(code);
+        String symbol = getSymbol(normalizedCode);
+
+        if (symbol == null || symbol.equals(normalizedCode)) {
+            return normalizedCode;
+        }
+
+        return String.format("%s – %s", normalizedCode, symbol);
+    }
+
+    public static Currency[] getSortedCurrencies() {
+        java.util.TreeMap<String, Currency> uniqueByCode = new java.util.TreeMap<>();
+
+        for (Currency currency : currencies) {
+            uniqueByCode.putIfAbsent(normalizeCode(currency.CODE), currency);
+        }
+
+        return uniqueByCode.values().toArray(new Currency[0]);
     }
 
     private static final String[] SUFFIX_CURRENCIES = {
@@ -219,8 +250,10 @@ public enum Currency {
     };
 
     public static boolean isSuffixCurrency(String code) {
+        String normalizedCode = normalizeCode(code);
+
         for (String suffixCurrency : SUFFIX_CURRENCIES) {
-            if (suffixCurrency.equals(code)) {
+            if (suffixCurrency.equals(normalizedCode)) {
                 return true;
             }
         }
