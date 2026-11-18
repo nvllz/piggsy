@@ -1,5 +1,9 @@
-Create multiple piggy banks for anything you’re saving for, whether it’s a trip, a new gadget, or a rainy-day fund. Each piggy bank can have its own currency, optional deadline, and short description.
+Create a piggy bank for each of your savings goals, whether it's a vacation, a new gadget, or an emergency fund. Each piggy bank can have its own currency, savings target, deadline, and notes.
 
-The biggest advantage is that the app isn't tied to your actual balance. Think of it as a detailed visualization of your goals, not a friction making it difficult to transfer money between accounts when you need to change your plans. You just get to know how much money you can spend, everything else is up to you.
+Add or withdraw money as needed and record every transaction. You can also include notes with individual transactions, which makes it easier to remember what a particular deposit or withdrawal was for.
 
-Add or subtract money as needed and keep a record of all your transactions. You can also add short notes to transactions to keep track of details. Automatic backups will keep your data safe behind the scenes.
+Piggsy isn't tied to your actual bank balance. Think of it as a tool for visualizing your savings goals and tracking how much you've set aside for each. You don't need to move money between accounts or change your banking habits to use it.
+
+Set deadlines to help you keep an eye on your goals, and receive notifications when they're reached. You will keep your data safe with automatic encrypted backups.
+
+Piggsy works entirely offline. Your savings data stays on your device.

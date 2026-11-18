@@ -1,0 +1,14 @@
+Don't forget to star the github repo if you like Piggsy!
+
+New:
+- biometric lock
+- encrypted backups (password is never stored!)
+- localization: 8 new languages
+- deadlines for specific time
+- you can now adjust past transaction date and time
+- piggy actions: tap on a card to preview or long-tap to see more options
+
+Other stuff:
+- various UI improvements
+- optional: automatically archive the piggy once goal completed
+- fixed a bunch of small inconveniences
