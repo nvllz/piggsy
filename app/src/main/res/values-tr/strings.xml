@@ -28,7 +28,8 @@
 <string name="toolbar_settings">Ayarlar</string>
     <string name="preference_category_appearance">Görünüm</string>
     <string name="preference_list_theme">Tema</string>
-    <string name="preference_theme_system">Sistem</string>
+    <string name="preference_list_language">Uygulama dili</string>
+    <string name="preference_system">Sistem</string>
     <string name="preference_theme_light">Açık</string>
     <string name="preference_theme_dark">Koyu</string>
     <string name="preference_switch_dynamic_colors_title">Dinamik renkler</string>

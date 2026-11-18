@@ -79,7 +79,7 @@ fun SettingsScreen(
     val dateFormatOptions = remember {
         DateFormat.getPatterns().map { pattern -> pattern to DateFormat.getNameByPattern(pattern) }
     }
-    val systemLabel = stringResource(R.string.preference_theme_system)
+    val systemLabel = stringResource(R.string.preference_system)
     val lightLabel = stringResource(R.string.preference_theme_light)
     val darkLabel = stringResource(R.string.preference_theme_dark)
     val themeOptions = remember(systemLabel, lightLabel, darkLabel) {

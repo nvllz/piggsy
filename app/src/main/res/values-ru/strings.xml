@@ -28,7 +28,8 @@
 <string name="toolbar_settings">Настройки</string>
     <string name="preference_category_appearance">Оформление</string>
     <string name="preference_list_theme">Тема</string>
-    <string name="preference_theme_system">Системная</string>
+    <string name="preference_list_language">Язык приложения</string>
+    <string name="preference_system">Системная</string>
     <string name="preference_theme_light">Светлая</string>
     <string name="preference_theme_dark">Тёмная</string>
     <string name="preference_switch_dynamic_colors_title">Динамические цвета</string>

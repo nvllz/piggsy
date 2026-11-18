@@ -28,7 +28,8 @@
 <string name="toolbar_settings">Ustawienia</string>
     <string name="preference_category_appearance">Wygląd</string>
     <string name="preference_list_theme">Motyw</string>
-    <string name="preference_theme_system">Systemowy</string>
+    <string name="preference_list_language">Język aplikacji</string>
+    <string name="preference_system">Systemowy</string>
     <string name="preference_theme_light">Jasny</string>
     <string name="preference_theme_dark">Ciemny</string>
     <string name="preference_switch_dynamic_colors_title">Kolory dynamiczne</string>
