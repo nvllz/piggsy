@@ -1,5 +1,9 @@
 package com.nvllz.piggsy.data;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public enum DateFormat {
     EEEE_MMMM_DD_YYYY("Monday, December 31 2012", "EEEE, MMMM dd yyyy"),
     MM_DD_YYYY("12/31/2012", "MM/dd/yyyy"),
@@ -26,10 +30,18 @@ public enum DateFormat {
     public static String getNameByPattern(String pattern) {
         for (DateFormat dateFormat : dateFormats) {
             if (dateFormat.PATTERN.equals(pattern)) {
-                return dateFormat.NAME;
+                return getExample(dateFormat.PATTERN);
             }
         }
-        return DateFormat.YYYY_MM_DD_ISO.NAME;
+        return getExample(DateFormat.YYYY_MM_DD_ISO.PATTERN);
+    }
+
+    public static String getExample(String pattern) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, Locale.getDefault());
+        Calendar calendar = Calendar.getInstance();
+        calendar.clear();
+        calendar.set(2012, Calendar.DECEMBER, 31);
+        return simpleDateFormat.format(calendar.getTime());
     }
 
     public static String[] getNames() {

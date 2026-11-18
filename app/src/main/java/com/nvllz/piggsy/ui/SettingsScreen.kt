@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -76,7 +77,8 @@ fun SettingsScreen(
     val languageSummary = languageNames.getOrNull(languageValues.indexOf(languageValue))
         ?: languageNames.first()
     val languageOptions = languageValues.mapIndexed { index, value -> value to languageNames[index] }
-    val dateFormatOptions = remember {
+    val configuration = LocalConfiguration.current
+    val dateFormatOptions = remember(configuration) {
         DateFormat.getPatterns().map { pattern -> pattern to DateFormat.getNameByPattern(pattern) }
     }
     val systemLabel = stringResource(R.string.preference_system)
